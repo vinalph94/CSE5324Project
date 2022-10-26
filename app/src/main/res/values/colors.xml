@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- signin_page colors -->
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="_bg__signin_page_color">#FFFFFF</color>
+    <color name="rectangle_12_color">#141414</color>
+    <color name="email__color">#BABABA</color>
+    <color name="email_color">#303843</color>
+    <color name="rectangle_11_color">#A9CACF</color>
+    <color name="rectangle_stroke">#A9CACF</color>
 </resources>

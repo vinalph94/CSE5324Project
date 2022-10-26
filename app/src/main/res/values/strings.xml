@@ -5,4 +5,11 @@
     <string name="email">Email<font color='#FF0000'>*</font></string>
     <string name="pwd">Password<font color='#FF0000'>*</font></string>
     <string name="retype">Retype Password<font color='#FF0000'>*</font></string>
+
+    <!-- signin_page strings -->
+    <string name="sign_in_to_your_account_string">Sign in to your account</string>
+    <string name="mandatory">*</string>
+    <string name="email_string">Email</string>
+    <string name="sign_in_string">Sign In</string>
+    <string name="password_string">Password</string>
 </resources>
