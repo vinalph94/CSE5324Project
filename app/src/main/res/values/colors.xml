@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+
+
+    <!-- signin_page colors -->
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="_bg__signin_page_color">#FFFFFF</color>
+    <color name="rectangle_12_color">#141414</color>
+    <color name="email__color">#BABABA</color>
+    <color name="email_color">#303843</color>
+    <color name="rectangle_11_color">#A9CACF</color>
+    <color name="rectangle_stroke">#A9CACF</color>
+
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF0D0D0D</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_color">#FF408E9B</color>
+</resources>

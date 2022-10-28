@@ -1,0 +1,175 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/rectangle_11_color">
+
+
+
+<RelativeLayout
+    android:id="@+id/content_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/page_signin_page_ek1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp">
+
+        <View
+            android:id="@+id/_bg__signin_page_ek2"
+            android:layout_width="400dp"
+            android:layout_height="600dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/_bg__signin_page_shape" />
+
+
+        <View
+            android:id="@+id/rectangle_12"
+            android:layout_width="400dp"
+            android:layout_height="600dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rectangle_12_shape" />
+
+
+        <TextView
+            android:id="@+id/sign_in_to_your_account"
+            android:layout_width="284dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="Inter"
+            android:gravity="center"
+            android:text="@string/sign_in_to_your_account_string"
+            android:textColor="@color/_bg__signin_page_color"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/rectangle_7"
+            android:layout_width="300dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="165dp"
+            android:background="@drawable/rectangle_7_shape" />
+
+        <View
+            android:id="@+id/rectangle_8"
+            android:layout_width="300dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="280dp"
+            android:background="@drawable/rectangle_8_shape" />
+
+
+        <TextView
+            android:id="@+id/email_"
+            android:layout_width="56dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="135dp"
+            android:fontFamily="Inter"
+            android:gravity="center"
+            android:text="@string/email_string"
+            android:textColor="@color/email__color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="71dp"
+            android:layout_marginTop="139dp"
+            android:text="@string/mandatory"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="250dp"
+            android:layout_height="31dp"
+            android:layout_gravity="fill_horizontal|left"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="175dp"
+            android:background="@null"
+            android:fontFamily="Inter"
+            android:gravity="left"
+            android:hint="email@domain.com"
+            android:textColorHint="@color/white"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+
+            />
+
+
+        <TextView
+            android:id="@+id/password_"
+            android:layout_width="86dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="250dp"
+            android:fontFamily="Inter"
+            android:gravity="center"
+            android:text="@string/password_string"
+            android:textColor="@color/email__color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginTop="254dp"
+            android:text="@string/mandatory"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="250dp"
+            android:layout_height="31dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="290dp"
+            android:background="@null"
+            android:fontFamily="Inter"
+            android:gravity="left"
+            android:hint="Pwd@123"
+            android:textColorHint="@color/white"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/sign_in"
+            android:layout_width="250dp"
+            android:layout_height="51dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="390dp"
+            android:backgroundTint="@color/rectangle_stroke"
+            android:fontFamily="Inter"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/sign_in_string"
+            android:textColor="@color/_bg__signin_page_color"
+            android:textSize="14sp"
+            android:textStyle="bold"
+
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
+</ScrollView>

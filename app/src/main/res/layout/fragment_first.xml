@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="552dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:backgroundTint="@color/black"
+    android:elevation="0dp"
+    tools:context=".WelcomeFragment">
+
+    <ImageView
+        android:id="@+id/welcomeImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-70dp"
+        android:layout_marginTop="-200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/welcome_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/welcomeCardView"
+        android:layout_width="411dp"
+        android:layout_height="424dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/black"
+        app:cardBackgroundColor="#000000"
+        app:cardCornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcomeImageView"
+        app:layout_constraintVertical_bias="0.265">
+
+        <TextView
+            android:id="@+id/welcomeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/welcome_title"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/welcomeDescrTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/welcome_descr"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/signupButtonView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="145dp"
+            android:layout_marginRight="42dp"
+            android:height="60dp"
+            android:backgroundTint="@color/black"
+            android:minWidth="250dp"
+            android:text="@string/signup"
+            android:textAllCaps="false"
+            app:cornerRadius="22dp"
+            app:strokeColor="@color/primary_color"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/signinButtonView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginRight="42dp"
+            android:height="60dp"
+            android:backgroundTint="@color/black"
+            android:minWidth="250dp"
+            android:text="@string/signin"
+            android:textAllCaps="false"
+            app:cornerRadius="22dp"
+            app:strokeColor="@color/primary_color"
+            app:strokeWidth="2dp" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
