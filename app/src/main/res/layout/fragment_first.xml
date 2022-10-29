@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/welcomeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="549dp"
+        android:layout_height="727dp"
         android:layout_marginStart="-70dp"
         android:layout_marginTop="-200dp"
         android:scaleType="fitCenter"
@@ -98,6 +98,8 @@
             app:cornerRadius="22dp"
             app:strokeColor="@color/primary_color"
             app:strokeWidth="2dp" />
+
+
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
