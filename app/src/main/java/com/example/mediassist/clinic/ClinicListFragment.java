@@ -30,13 +30,7 @@ public class ClinicListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((ClinicActivity) getActivity()).btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(ClinicListFragment.this)
-                        .navigate(R.id.action_ClinicListFragment_to_Second3Fragment);
-            }
-        });
+
 
 
     }

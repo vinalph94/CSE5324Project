@@ -35,10 +35,7 @@ public class ClinicActivity extends AppCompatActivity {
         textTitle = binding.textTitle;
         btnAdd = binding.btnAdd;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         setActionBarTitle("Clinics");
-
 
 
     }
