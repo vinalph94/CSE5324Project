@@ -38,7 +38,7 @@ public class AddClinicFragment extends Fragment {
             }
         });
 
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        ((ClinicActivity) getActivity()).setActionBarTitle("Clinics");
     }
 
     @Override
