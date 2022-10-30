@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/black"
-        android:paddingTop="10dp"
+        android:paddingTop="12dp"
         app:icon="@drawable/ic_baseline_add_circle_outline_24"
         app:iconTint="@color/primary_color"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/AddClinicFragment"
-        android:name="com.example.mediassist.clinic.Second3Fragment"
+        android:name="com.example.mediassist.clinic.AddClinicFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second3">
+        tools:layout="@layout/add_clinic">
 
         <action
             android:id="@+id/action_AddClinicFragment_to_ClinicListFragment"

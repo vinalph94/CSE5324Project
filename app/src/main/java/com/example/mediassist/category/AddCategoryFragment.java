@@ -1,4 +1,4 @@
-package com.example.mediassist.clinic;
+package com.example.mediassist.category;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
-import com.example.mediassist.databinding.FragmentSecond3Binding;
+import com.example.mediassist.databinding.AddCategoryBinding;
 
-public class Second3Fragment extends Fragment {
+public class AddCategoryFragment extends Fragment {
 
-    private FragmentSecond3Binding binding;
+    private AddCategoryBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +22,7 @@ public class Second3Fragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecond3Binding.inflate(inflater, container, false);
+        binding = AddCategoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -33,12 +33,10 @@ public class Second3Fragment extends Fragment {
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(Second3Fragment.this)
-                        .navigate(R.id.action_AddClinicFragment_to_ClinicListFragment);
+                NavHostFragment.findNavController(AddCategoryFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
     }
 
     @Override

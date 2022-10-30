@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
-import com.example.mediassist.databinding.ClinicListBinding;
+import com.example.mediassist.databinding.AddClinicBinding;
 
-public class ClinicListFragment extends Fragment {
+public class AddClinicFragment extends Fragment {
 
-    private ClinicListBinding binding;
+    private AddClinicBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,8 +22,7 @@ public class ClinicListFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = ClinicListBinding.inflate(inflater, container, false);
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        binding = AddClinicBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -31,9 +30,15 @@ public class ClinicListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(AddClinicFragment.this)
+                        .navigate(R.id.action_AddClinicFragment_to_ClinicListFragment);
+            }
+        });
 
-
-
+        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
     }
 
     @Override

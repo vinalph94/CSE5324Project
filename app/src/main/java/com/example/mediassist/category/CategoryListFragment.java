@@ -1,4 +1,4 @@
-package com.example.mediassist.clinic;
+package com.example.mediassist.category;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
-import com.example.mediassist.databinding.ClinicListBinding;
+import com.example.mediassist.databinding.CategoryListBinding;
 
-public class ClinicListFragment extends Fragment {
+public class CategoryListFragment extends Fragment {
 
-    private ClinicListBinding binding;
+    private CategoryListBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,8 +22,7 @@ public class ClinicListFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = ClinicListBinding.inflate(inflater, container, false);
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        binding = CategoryListBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -31,9 +30,13 @@ public class ClinicListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
-
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(CategoryListFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
     }
 
     @Override
