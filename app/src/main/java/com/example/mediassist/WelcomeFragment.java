@@ -11,12 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mediassist.databinding.FragmentFirstBinding;
+import com.example.mediassist.clinic.ClinicActivity;
+import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.login.LoginActivity;
 
 public class WelcomeFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private WelcomeBinding binding;
 
     @Override
     public View onCreateView(
@@ -24,12 +25,22 @@ public class WelcomeFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = WelcomeBinding.inflate(inflater, container, false);
         Button signInButton = binding.signinButtonView;
+        Button signUpButton = binding.signupButtonView;
         signInButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+        );
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Intent intent = new Intent(getActivity(), ClinicActivity.class);
                                                 startActivity(intent);
                                             }
                                         }
@@ -42,13 +53,7 @@ public class WelcomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       binding.signinButtonView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(WelcomeFragment.this)
-                        .navigate(R.id.action_WelcomeFragment_to_LoginActivity);
-            }
-        });
+
     }
 
     @Override

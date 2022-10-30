@@ -69,35 +69,19 @@
 
         <Button
             android:id="@+id/signupButtonView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="145dp"
-            android:layout_marginRight="42dp"
-            android:height="60dp"
-            android:backgroundTint="@color/black"
-            android:minWidth="250dp"
+            android:layout_marginEnd="42dp"
             android:text="@string/signup"
-            android:textAllCaps="false"
-            app:cornerRadius="22dp"
-            app:strokeColor="@color/primary_color"
-            app:strokeWidth="2dp" />
+            style="@style/default_button"/>
 
         <Button
             android:id="@+id/signinButtonView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="220dp"
-            android:layout_marginRight="42dp"
-            android:height="60dp"
-            android:backgroundTint="@color/black"
-            android:minWidth="250dp"
+            android:layout_marginEnd="42dp"
             android:text="@string/signin"
-            android:textAllCaps="false"
-            app:cornerRadius="22dp"
-            app:strokeColor="@color/primary_color"
-            app:strokeWidth="2dp" />
+            style="@style/default_button"/>
 
 
 
