@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityClinicBinding;
+
 import com.google.android.material.snackbar.Snackbar;
 
 public class ClinicActivity extends AppCompatActivity {
@@ -37,11 +38,13 @@ public class ClinicActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
         setActionBarTitle("Clinics");
 
+
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigateUp();
-                navController.navigate(R.id.action_ClinicListFragment_to_Second3Fragment);
+                navController.navigate(R.id.action_ClinicListFragment_to_AddClinicFragment);
             }
         });
 

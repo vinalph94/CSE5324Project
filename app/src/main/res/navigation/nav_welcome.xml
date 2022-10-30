@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_clinic"
+    android:id="@+id/nav_welcome"
     app:startDestination="@id/FirstFragment">
 
     <fragment
@@ -16,13 +16,22 @@
             app:destination="@id/LoginActivity" />
         <action
             android:id="@+id/action_WelcomeFragment_to_ClinicActivity"
-            app:destination="@id/ClinicListActivity" />
+            app:destination="@id/ClinicActivity" />
     </fragment>
     <activity
         android:id="@+id/LoginActivity"
         android:name="com.example.mediassist.login.LoginActivity"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/activity_login">
+
+
+    </activity>
+
+    <activity
+        android:id="@+id/ClinicActivity"
+        android:name="com.example.mediassist.clinic.ClinicActivity"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/activity_clinic">
 
 
     </activity>

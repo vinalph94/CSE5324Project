@@ -23,7 +23,7 @@ public class ClinicListFragment extends Fragment {
     ) {
 
         binding = ClinicListBinding.inflate(inflater, container, false);
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+
         return binding.getRoot();
 
     }
