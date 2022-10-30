@@ -1,27 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".clinic.AddClinicFragment">
+    >
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        tools:context=".clinic.AddClinicFragment">
+
+        <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
+
+        <TextView
+            android:id="@+id/text_view_boat1"
+            style="@style/default_label_text"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/clinic_name_text"
+            style="@style/default_edit_text"
+            android:hint="Name" />
+
+        <TextView
+            android:id="@+id/clinic_name_label"
+            style="@style/default_label_text"
+            android:text="Details" />
+
+        <EditText
+            android:id="@+id/clinic_details_text"
+            style="@style/default_edit_text"
+            android:hint="Details" />
+
+        <TextView
+            android:id="@+id/clinic_phone_number_label"
+            style="@style/default_label_text"
+            android:text="Phone Number" />
+
+        <EditText
+            android:id="@+id/clinic_phone_number_text"
+            style="@style/default_edit_text"
+            android:hint="Phone Number"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/clinic_address_label"
+            style="@style/default_label_text"
+            android:text="Address" />
+
+        <EditText
+            android:id="@+id/clinic_address_text"
+            style="@style/default_edit_text"
+            android:hint="Address" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/clinic_zipcode_label"
+            android:text="ZipCode"
+
+            style="@style/default_label_text"
+             />
+
+        </RelativeLayout>
+        <EditText
+            android:id="@+id/clinic_zipcode_text"
+            android:hint="ZipCode"
+            style="@style/default_edit_text"
+             />
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:id="@+id/clinic_save_button"
+        style="@style/default_disabled_button"
+        android:text="Save" />
+</RelativeLayout>

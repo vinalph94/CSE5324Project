@@ -23,5 +23,9 @@
     <color name="black">#FF0D0D0D</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#FF408E9B</color>
-    <color name="disabled_color">#FFA9CACF</color>
+    <color name="disabled_primary_color">#FFA9CACF</color>
+    <color name="disabled_color">#FF1D1D1D</color>
+    <color name="hint_text_color">#FF303843</color>
+    <color name="label_text_color">#FFBABABA</color>
+    <color name="error_text_color">#FFD21313</color>
 </resources>
