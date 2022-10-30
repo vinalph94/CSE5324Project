@@ -17,7 +17,7 @@
     android:layout_height="wrap_content">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:paddingTop="15dp"
@@ -31,7 +31,7 @@
         style="@style/appbar_title"
         android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/btnBack"
-        android:paddingTop="20dp"
+        android:paddingTop="22dp"
         android:text="Clinics" />
 
     <com.google.android.material.button.MaterialButton

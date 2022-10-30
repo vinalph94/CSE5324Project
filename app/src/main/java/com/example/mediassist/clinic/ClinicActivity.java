@@ -37,6 +37,15 @@ public class ClinicActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
         setActionBarTitle("Clinics");
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigateUp();
+                navController.navigate(R.id.action_ClinicListFragment_to_Second3Fragment);
+            }
+        });
+
+
 
     }
 
