@@ -1,7 +1,10 @@
 package com.example.mediassist.login;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mediassist.R;
+import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,17 +48,23 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         password.setSelection(0);
         signin = (Button) findViewById(R.id.sign_in);
+
     }
-    public void onClick(View view) {
+    public void onClickSignInButton(View view) {
 
         String mail = email.getText().toString();
         String pwd = password.getText().toString();
         if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(this, "Email and password is required", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "login succesfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "login successfully", Toast.LENGTH_SHORT).show();
         }
     }
 
+    public void onClickForgotPwdButton(View view) {
+
+       Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
 
 }
