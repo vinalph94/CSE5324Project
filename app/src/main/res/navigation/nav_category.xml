@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.mediassist.category.CategoryListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/second_fragment_label"
         tools:layout="@layout/category_list">
 
         <action

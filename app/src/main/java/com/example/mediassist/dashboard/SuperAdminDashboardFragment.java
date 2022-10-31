@@ -11,11 +11,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 
 import com.example.mediassist.R;
-import com.example.mediassist.databinding.FragmentFirstBinding;
+import com.example.mediassist.databinding.SuperAdminDashboardBinding;
+
 
 public class SuperAdminDashboardFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private SuperAdminDashboardBinding binding;
 
     @Override
     public View onCreateView(
@@ -23,7 +24,7 @@ public class SuperAdminDashboardFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = SuperAdminDashboardBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -31,13 +32,7 @@ public class SuperAdminDashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SuperAdminDashboardFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
+
     }
 
     @Override
