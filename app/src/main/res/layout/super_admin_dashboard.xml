@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:alignmentMode="alignMargins"
+    android:columnCount="2"
+    android:columnOrderPreserved="true"
+    android:rowCount="3"
+
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal"
+    tools:context=".dashboard.SuperAdminDashboardFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:minHeight="80dp"
+        app:cardBackgroundColor="@color/disabled_primary_color"
+        app:cardElevation="100dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:minHeight="80dp"
+        app:cardBackgroundColor="@color/disabled_primary_color"
+        app:cardElevation="100dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center|top"
+        android:layout_margin="20dp"
+
+        android:minHeight="80dp"
+        app:cardBackgroundColor="@color/disabled_primary_color"
+
+        app:cardElevation="100dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center|top"
+        android:layout_margin="20dp"
+
+        android:minHeight="80dp"
+        app:cardBackgroundColor="@color/disabled_primary_color"
+
+        app:cardElevation="100dp">
+
+    </androidx.cardview.widget.CardView>
+</GridLayout>
