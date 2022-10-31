@@ -46,29 +46,9 @@
             style="@style/default_edit_text"
             android:hint="Email" />
 
-        <TextView
-            android:id="@+id/clinic_admin_assign_clinic_label"
-            style="@style/default_label_text"
-            android:text="Assign Clinic" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft = "50dp"
-            android:textColor = "@color/label_text_color"
-            android:fontWeight="600"
-            android:layout_marginTop="20dp"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-            <AutoCompleteTextView
-                android:id="@+id/clinic_admin_dropdown"
-                android:layout_width="274dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Select one" />
 
 
-        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
