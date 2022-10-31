@@ -37,4 +37,11 @@
     <!-- Strings used for fragments for navigation -->
     <string name="super_admin_dashboard_fragment_label">Super Admin Dashboard Fragment</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+
+    <string-array name="programming_languages">
+        <item>Clinic 1</item>
+        <item>Clinic 2</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

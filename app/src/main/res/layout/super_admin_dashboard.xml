@@ -1,63 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alignmentMode="alignMargins"
-    android:columnCount="2"
-    android:columnOrderPreserved="true"
-    android:rowCount="3"
-
-    android:layout_gravity="center_horizontal"
-    android:orientation="horizontal"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".dashboard.SuperAdminDashboardFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:minHeight="80dp"
-        app:cardBackgroundColor="@color/disabled_primary_color"
-        app:cardElevation="100dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:text="Appointments"
+            android:textFontWeight="1000"
+            android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:minHeight="80dp"
-        app:cardBackgroundColor="@color/disabled_primary_color"
-        app:cardElevation="100dp">
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="true"
+            android:orientation="horizontal"
+            android:rowCount="3"
 
-    </androidx.cardview.widget.CardView>
+            >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center|top"
-        android:layout_margin="20dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clinic_card"
+                style="@style/dashboard_card">
 
-        android:minHeight="80dp"
-        app:cardBackgroundColor="@color/disabled_primary_color"
+                <ImageView
+                    style="@style/dashboard_menu_image_view"
+                    android:src="@drawable/hospital" />
 
-        app:cardElevation="100dp">
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="Clinic"
+                    style="@style/dashboard_menu_text"
+                     />
+            </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clinic_admin_card"
+                style="@style/dashboard_card">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center|top"
-        android:layout_margin="20dp"
+                <ImageView
+                    style="@style/dashboard_menu_image_view"
+                    android:src="@drawable/clinic_admin" />
 
-        android:minHeight="80dp"
-        app:cardBackgroundColor="@color/disabled_primary_color"
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="Clinic Admin"
+                    style="@style/dashboard_menu_text"
+                    />
+            </androidx.cardview.widget.CardView>
 
-        app:cardElevation="100dp">
+        </GridLayout>
+        <include layout="@layout/clinic_admin_layout"
+            android:id="@+id/clinic_admin_layout"/>
+    </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-</GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

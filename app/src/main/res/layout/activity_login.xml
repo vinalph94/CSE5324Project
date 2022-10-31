@@ -157,7 +157,7 @@
             android:onClick="onClickSignInButton"
             android:text="@string/sign_in_string"
             android:textColor="@color/white"
-            style="@style/disabled_button" />
+            style="@style/default_disabled_button" />
 
         <Button
             android:id="@+id/Forget_pwd"

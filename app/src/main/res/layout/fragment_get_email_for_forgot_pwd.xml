@@ -84,7 +84,7 @@
             android:layout_marginTop="515dp"
             android:text="Continue"
             android:textColor="@color/white"
-            style="@style/disabled_button" />
+            style="@style/default_disabled_button" />
     </RelativeLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

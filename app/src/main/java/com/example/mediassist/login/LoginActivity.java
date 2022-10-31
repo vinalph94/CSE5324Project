@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mediassist.R;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 
 
@@ -54,11 +55,13 @@ public class LoginActivity extends AppCompatActivity {
 
         String mail = email.getText().toString();
         String pwd = password.getText().toString();
-        if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
-            Toast.makeText(this, "Email and password is required", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "login successfully", Toast.LENGTH_SHORT).show();
-        }
+//        if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
+//            Toast.makeText(this, "Email and password is required", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "login successfully", Toast.LENGTH_SHORT).show();
+//        }
+        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(intent);
     }
 
     public void onClickForgotPwdButton(View view) {

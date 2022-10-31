@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".dashboard.DoctorDashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="true"
+            android:orientation="horizontal"
+            android:rowCount="3"
+
+            >
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clinic_pending_appointments_card"
+                style="@style/dashboard_card">
+
+                <ImageView
+                    style="@style/dashboard_menu_image_view"
+                    android:src="@drawable/view" />
+
+                <TextView
+                    style="@style/dashboard_menu_text"
+                    android:layout_marginLeft="20dp"
+                    android:text="Scheduled Appointments" />
+            </androidx.cardview.widget.CardView>
+
+
+        </GridLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

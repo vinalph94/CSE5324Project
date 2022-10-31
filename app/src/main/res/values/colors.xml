@@ -30,6 +30,7 @@
     <color name="error_text_color">#FFAD1314</color>
     <color name="asterisk_error_color">#FFE50000</color>
     <color name="secondary_error_color">#FF250E13</color>
+    <color name="search_box_color">#FF222121</color>
 
 
     <color name="light_blue_600">#FF039BE5</color>
