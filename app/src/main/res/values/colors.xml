@@ -27,5 +27,8 @@
     <color name="disabled_color">#FF1D1D1D</color>
     <color name="hint_text_color">#FF303843</color>
     <color name="label_text_color">#FFBABABA</color>
-    <color name="error_text_color">#FFD21313</color>
+    <color name="error_text_color">#FFAD1314</color>
+    <color name="asterisk_error_color">#FFE50000</color>
+    <color name="secondary_error_color">#FF250E13</color>
+
 </resources>
