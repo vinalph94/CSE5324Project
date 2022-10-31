@@ -1,5 +1,7 @@
 package com.example.mediassist;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.databinding.FragmentFirstBinding;
+import com.example.mediassist.signup.RegisterActivity;
 
 public class WelcomeFragment extends Fragment {
 
@@ -18,7 +21,7 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
+            Bundle savedInstaWelcomeFragmentnceState
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
@@ -34,6 +37,15 @@ public class WelcomeFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(WelcomeFragment.this)
                         .navigate(R.id.action_WelcomeFragment_to_LoginActivity);
+            }
+        });
+
+        binding.signupButtonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
+
             }
         });
     }

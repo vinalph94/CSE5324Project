@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">MediAssist</string>
+    <string name="app_name">Medi Assist</string>
+    <!-- signup_page strings -->
     <string name="name">Full Name<font color='#FF0000'>*</font></string>
     <string name="phone">Phone Number<font color='#FF0000'>*</font></string>
     <string name="email">Email<font color='#FF0000'>*</font></string>
