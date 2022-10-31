@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_WelcomeFragment_to_ClinicActivity"
             app:destination="@id/ClinicListActivity" />
+        <action
+            android:id="@+id/action_WelcomeFragment_to_DoctorActivity"
+            app:destination="@id/DoctorListFragment" />
     </fragment>
     <activity
         android:id="@+id/LoginActivity"
