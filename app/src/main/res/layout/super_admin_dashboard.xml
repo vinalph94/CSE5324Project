@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".dashboard.SuperAdminDashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:text="Appointments"
+            android:textFontWeight="1000"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="true"
+            android:orientation="horizontal"
+            android:rowCount="3"
+
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clinic_card"
+                style="@style/dashboard_card">
+
+                <ImageView
+                    style="@style/dashboard_menu_image_view"
+                    android:src="@drawable/hospital" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="Clinic"
+                    style="@style/dashboard_menu_text"
+                     />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clinic_admin_card"
+                style="@style/dashboard_card">
+
+                <ImageView
+                    style="@style/dashboard_menu_image_view"
+                    android:src="@drawable/clinic_admin" />
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="Clinic Admin"
+                    style="@style/dashboard_menu_text"
+                    />
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+        <include layout="@layout/clinic_admin_layout"
+            android:id="@+id/clinic_admin_layout"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,15 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="30dp"
         android:orientation="vertical"
         tools:context=".clinicadmin.AddClinicAdminFragment">
 
         <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
 
         <TextView
-            android:id="@+id/text_view_clinicadmin"
-            style="@style/default_label_text"
+            android:id="@+id/clinic_admin_name_label"
+            style="@style/mandatory_label_text"
             android:text="Name" />
 
         <EditText
@@ -27,7 +26,7 @@
 
         <TextView
             android:id="@+id/clinic_admin_phone_number_label"
-            style="@style/default_label_text"
+            style="@style/mandatory_label_text"
             android:text="Phone Number" />
 
         <EditText
@@ -38,16 +37,36 @@
 
         <TextView
             android:id="@+id/clinic_admin_email_label"
-            style="@style/default_label_text"
+            style="@style/mandatory_label_text"
             android:text="Email" />
 
         <EditText
             android:id="@+id/clinic_admin_email_text"
             style="@style/default_edit_text"
-            android:hint="Email" />
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
+        <TextView
+            android:id="@+id/clinic_admin_clinic_label"
+            style="@style/mandatory_label_text"
+            android:layout_marginLeft="45dp"
+            android:text="Assign Clinic" />
+<Spinner
+    android:id="@+id/spinner"
+    android:layout_width="350dp"
+    android:layout_gravity="center"
+    android:layout_height="50dp"
+    android:background="@drawable/default_spinner_dropdown"
+    app:boxBackgroundColor="@color/disabled_color"
+    app:boxCornerRadiusBottomStart="20dp"
+    app:boxCornerRadiusTopEnd="20dp"
+    app:boxCornerRadiusTopStart="20dp"
+    app:popupTheme="@style/spinner_menu"
+    android:overlapAnchor="false"
+    android:theme="@style/spinner"
+    >
 
-
+</Spinner>
 
 
     </LinearLayout>

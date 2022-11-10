@@ -24,6 +24,7 @@ public class ClinicActivity extends AppCompatActivity {
     private ActivityClinicBinding binding;
     private TextView textTitle;
     public Button btnAdd;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,14 @@ public class ClinicActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
         setActionBarTitle("Clinics");
 
-
+        bundle = new Bundle();
+        bundle.putString("amount", "80");
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigateUp();
-                navController.navigate(R.id.action_ClinicListFragment_to_AddClinicFragment);
+                navController.navigate(R.id.action_ClinicListFragment_to_AddClinicFragment,bundle);
             }
         });
 

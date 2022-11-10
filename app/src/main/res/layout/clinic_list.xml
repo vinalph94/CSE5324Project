@@ -28,11 +28,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:textAlignment="center"
             android:visibility="gone"
             android:text="@string/empty_clinic"
             android:textColor="@color/white" />
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRVCourse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

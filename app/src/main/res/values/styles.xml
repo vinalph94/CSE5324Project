@@ -84,11 +84,68 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="dashboard_card">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="cardBackgroundColor">@color/disabled_primary_color</item>
+        <item name="cardElevation">100dp</item>
+    </style>
+
+    <style name="doctor_specialist_card">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardBackgroundColor">@color/disabled_primary_color</item>
+        <item name="cardElevation">100dp</item>
+    </style>
+
+    <style name="dashboard_menu_image_view">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="dashboard_specialist_menu_image_view">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_margin">30dp</item>
+
+    </style>
+
+    <style name="dashboard_menu_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|center_vertical</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textStyle">bold</item>
+
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="appbar_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.Theme.MediAssist.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="spinner_menu">
+        <item name="android:padding">8dp</item>
+        <item name="android:colorBackground">@color/disabled_color</item>
+        <item name="android:radius">10dp</item>
+        <item name="minWidth">370dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="spinner" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
     </style>
 </resources>

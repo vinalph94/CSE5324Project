@@ -16,7 +16,7 @@
         android:id="@+id/gif_Clinic_admin"
         android:layout_width="307dp"
         android:layout_height="307dp"
-        android:src="@drawable/empty_clinic"
+        android:src="@drawable/empty_super_admin"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         tools:ignore="MissingConstraints" />
@@ -29,7 +29,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="50dp"
 
-            android:text="No clinic admins found! try to add by clicking on plus button at the top"
+            android:text="No clinic admins found! Try to add by clicking on plus button at the top"
             android:textAlignment="center"
             android:textColor="@color/white"
             tools:ignore="MissingConstraints" />
