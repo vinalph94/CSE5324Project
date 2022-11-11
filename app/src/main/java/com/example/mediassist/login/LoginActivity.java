@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email;
     private View rectangle_8;
     private View rectangle_11;
-    // rectangle_11 = (View) findViewById(R.id.rectangle_11);
     private Button signin;
     private TextView password_;
     private EditText password;
@@ -37,8 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _bg__signin_page_ek2 = (View) findViewById(R.id._bg__signin_page_ek2);
-        rectangle_12 = (View) findViewById(R.id.rectangle_12);
         rectangle_7 = (View) findViewById(R.id.rectangle_7);
         sign_in_to_your_account = (TextView) findViewById(R.id.sign_in_to_your_account);
         email_ = (TextView) findViewById(R.id.email_);
@@ -65,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickForgotPwdButton(View view) {
-
        Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
