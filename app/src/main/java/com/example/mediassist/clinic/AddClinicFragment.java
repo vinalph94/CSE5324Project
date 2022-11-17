@@ -2,6 +2,7 @@ package com.example.mediassist.clinic;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
@@ -60,12 +61,12 @@ public class AddClinicFragment extends Fragment {
                 String details = clinicDetails.getText().toString();
                 String phone_number = clinicPhoneNumber.getText().toString();
                 String address = clinicAddress.getText().toString();
-                int zipcode = Integer.parseInt(clinicZipcode.getText().toString());
+//                int zipcode = Integer.parseInt(clinicZipcode.getText().toString());
 
                 //Validate here. Check if anything is empty and any other kind of sanitation.
 
-//                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,zipcode);
-//                uploadClinic(clinic);
+                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,78);
+                uploadClinic(clinic);
             }
         });
 
@@ -75,7 +76,22 @@ public class AddClinicFragment extends Fragment {
 
     }
     public void uploadClinic(ClinicModel clinic) {
+        db.collection("clinics")
+                .add(clinic)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getContext(), "Data Stored Successfully !", Toast.LENGTH_SHORT).show();
 
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
     }

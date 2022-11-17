@@ -35,9 +35,9 @@ public class ClinicListFragment extends Fragment {
 
         // Here, we have created new array list and added data to it
         ArrayList<ClinicModel> courseModelArrayList = new ArrayList<ClinicModel>();
-        courseModelArrayList.add(new ClinicModel("Clinic 1", "+16823136673","1001 UTA BLVD, Arlington, Texas, 76013"));
-        courseModelArrayList.add(new ClinicModel("Clinic 2", "+14562243376","657 BLVD, Arlington, Texas, 76018"));
-        courseModelArrayList.add(new ClinicModel("Clinic 3", "+16256673345","567 BLVD, Arlington, Texas, 76024"));
+//        courseModelArrayList.add(new ClinicModel("Clinic 1", "+16823136673","1001 UTA BLVD, Arlington, Texas, 76013"));
+//        courseModelArrayList.add(new ClinicModel("Clinic 2", "+14562243376","657 BLVD, Arlington, Texas, 76018"));
+//        courseModelArrayList.add(new ClinicModel("Clinic 3", "+16256673345","567 BLVD, Arlington, Texas, 76024"));
 
 
         // we are initializing our adapter class and passing our arraylist to it.

@@ -16,7 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.login.LoginActivity;
-import com.example.mediassist.signup.RegisterActivity;
+
 
 public class WelcomeFragment extends Fragment {
 
@@ -68,8 +68,8 @@ public class WelcomeFragment extends Fragment {
         binding.signupButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+//                startActivity(intent);
 
             }
         });
