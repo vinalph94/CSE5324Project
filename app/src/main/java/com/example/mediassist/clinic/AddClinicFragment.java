@@ -64,8 +64,8 @@ public class AddClinicFragment extends Fragment {
 
                 //Validate here. Check if anything is empty and any other kind of sanitation.
 
-                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,zipcode);
-                uploadClinic(clinic);
+//                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,zipcode);
+//                uploadClinic(clinic);
             }
         });
 
