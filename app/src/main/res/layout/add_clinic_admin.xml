@@ -63,7 +63,7 @@
             app:boxCornerRadiusTopStart="20dp"
             app:popupTheme="@style/spinner_menu"
             android:overlapAnchor="false"
-            android:theme="@style/spinner"
+
             >
 
         </Spinner>

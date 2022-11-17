@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 
-public class AddClinicAdminFragment extends Fragment {
+public class AddClinicAdminFragment extends Fragment{
 
     private AddClinicAdminBinding binding;
 
@@ -33,16 +33,13 @@ public class AddClinicAdminFragment extends Fragment {
 
         Spinner spinner = (Spinner) binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.programming_languages, android.R.layout.simple_spinner_item);
+                R.array.programming_languages, R.layout.spinner_list);
         // create an array adapter and pass the required parameter
         // in our case pass the context, drop down layout , and array.
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // get reference to the autocomplete text view
         spinner.setAdapter(adapter);
-
         return binding.getRoot();
-
-
 
     }
 
@@ -52,7 +49,6 @@ public class AddClinicAdminFragment extends Fragment {
 
 
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
