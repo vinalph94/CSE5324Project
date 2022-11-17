@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".appointment.BookScheduleActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:layout_editor_absoluteX="-78dp"
+        tools:layout_editor_absoluteY="66dp">
+
+        <TextView
+            android:id="@+id/bookingName"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:drawableLeft="@drawable/img_2"
+            android:hint=" name"
+            android:paddingTop="30px"
+            android:text="  Book Appointment"
+            android:textColor="@color/white"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eventDateTV"
+            android:layout_below="@id/bookingName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:text="Date"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="145dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_rectangle_bg"
+                android:drawableLeft="@drawable/sun"
+                android:paddingTop="25px"
+                android:paddingLeft="35px"
+                android:paddingBottom="35px"
+                android:text="   Morning"
+                android:textColor="#408E9B"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_rectangle_bg"
+                android:drawableLeft="@drawable/evening"
+                android:paddingTop="25px"
+                android:paddingLeft="35px"
+                android:paddingBottom="35px"
+                android:text="   Evening"
+                android:textColor="#408E9B"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/TimeName"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="235dp"
+            android:layout_marginEnd="50dp"
+            android:hint=" name"
+            android:paddingTop="30px"
+            android:text="  Choose an Hour"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bookAptBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="575dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_rectangle_bg"
+            android:backgroundTint="#A9CACF"
+            android:padding="10dp"
+            android:text="Book Appointment"
+            android:textColorHint="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

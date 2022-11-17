@@ -13,15 +13,6 @@
         android:theme="@style/Theme.MediAssist"
         tools:targetApi="31">
         <activity
-            android:name=".SignupActivity"
-            android:exported="false"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/Theme.MediAssist.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -32,6 +23,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".signup.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointment.BookAppointmentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointment.BookScheduleActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

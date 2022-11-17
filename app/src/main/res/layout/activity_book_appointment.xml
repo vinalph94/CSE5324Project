@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".appointment.BookAppointmentActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-60dp">
+
+        <TextView
+            android:id="@+id/docName"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:drawableLeft="@drawable/img_2"
+            android:hint=" name"
+            android:text="  Dr.Smith"
+            android:paddingTop="30px"
+            android:textColor="@color/white"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/docDetails"
+            android:layout_width="389dp"
+            android:layout_height="92dp"
+            android:layout_below="@id/docName"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/img"
+            android:hint=" name"
+            android:text="      Dr.Smith"
+            android:textColor="#408E9B"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/docSpecialist"
+            android:layout_width="363dp"
+            android:layout_height="58dp"
+            android:layout_alignBottom="@+id/docDetails"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="125dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="-3dp"
+            android:hint=" name"
+            android:text="          Cardiologist"
+            android:textColor="@color/white"
+            android:textSize="13.5dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hospital"
+            android:layout_width="353dp"
+            android:layout_height="36dp"
+            android:layout_alignBottom="@+id/docSpecialist"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="2dp"
+            android:hint=" name"
+            android:text="          Texas Memorial Hospital"
+            android:textColor="@color/white"
+            android:textSize="13.5dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/workTime"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/docDetails"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
+            android:hint=" name"
+            android:text="  Working Time"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/workTimeDetails"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/workTime"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="50dp"
+            android:hint=" name"
+            android:text="  Mon-Fri 10.00 AM-10.00PM"
+            android:textColor="@color/white"
+            android:textSize="11.5dp" />
+
+        <TextView
+            android:id="@+id/appointment"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/workTimeDetails"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="50dp"
+            android:hint=" name"
+            android:text="  Make Appointment"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+
+            android:textStyle="bold" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="335dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment"
+                android:layout_weight="1"
+                android:background="@null"
+                android:onClick="previousWeekAction"
+                android:text="@string/back"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/monthYearTV"
+                android:layout_width="2dp"
+                android:layout_height="38dp"
+                android:layout_weight="2"
+                android:text="Nov 2022"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/forward"
+                android:textColor="@color/blue"
+                android:background="@null"
+                android:textStyle="bold"
+                android:onClick="nextWeekAction"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="405dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SUN"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MON"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TUE"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="WED"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="THUR"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FRI"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SAT"
+                android:textColor="#408E9B"
+                android:textAlignment="center"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="445dp"
+            android:orientation="horizontal">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
+            android:layout_width="match_parent"
+            android:background="#252525"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/bookAptBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="575dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_rectangle_bg"
+            android:backgroundTint="#A9CACF"
+            android:padding="10dp"
+            android:text="Book Appointment"
+            android:onClick="bookTimeSlotAction"
+            android:textColorHint="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
