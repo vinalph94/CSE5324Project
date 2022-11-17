@@ -19,7 +19,7 @@ import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.login.LoginActivity;
 
-import com.example.mediassist.databinding.FragmentFirstBinding;
+
 import com.example.mediassist.signup.RegisterActivity;
 
 public class WelcomeFragment extends Fragment {
