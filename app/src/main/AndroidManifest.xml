@@ -52,10 +52,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
         <activity
-            android:name=".category.CategoryActivity"
+            android:name=".doctor.DoctorActivity"
             android:exported="false"
-            android:label="@string/title_activity_category"
+            android:label="forgot_password"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"

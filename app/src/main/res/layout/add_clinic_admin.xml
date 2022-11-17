@@ -51,22 +51,22 @@
             style="@style/mandatory_label_text"
             android:layout_marginLeft="45dp"
             android:text="Assign Clinic" />
-<Spinner
-    android:id="@+id/spinner"
-    android:layout_width="350dp"
-    android:layout_gravity="center"
-    android:layout_height="50dp"
-    android:background="@drawable/default_spinner_dropdown"
-    app:boxBackgroundColor="@color/disabled_color"
-    app:boxCornerRadiusBottomStart="20dp"
-    app:boxCornerRadiusTopEnd="20dp"
-    app:boxCornerRadiusTopStart="20dp"
-    app:popupTheme="@style/spinner_menu"
-    android:overlapAnchor="false"
-    android:theme="@style/spinner"
-    >
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="350dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:background="@drawable/default_spinner_dropdown"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu"
+            android:overlapAnchor="false"
+            android:theme="@style/spinner"
+            >
 
-</Spinner>
+        </Spinner>
 
 
     </LinearLayout>

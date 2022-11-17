@@ -1,4 +1,4 @@
-package com.example.mediassist.category;
+package com.example.mediassist.doctor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
-import com.example.mediassist.databinding.AddCategoryBinding;
+import com.example.mediassist.clinic.ClinicActivity;
+import com.example.mediassist.databinding.AddDoctorBinding;
 
-public class AddCategoryFragment extends Fragment {
+public class AddDoctorFragment extends Fragment {
 
-    private AddCategoryBinding binding;
+    private AddDoctorBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +23,7 @@ public class AddCategoryFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = AddCategoryBinding.inflate(inflater, container, false);
+        binding = AddDoctorBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -30,13 +31,8 @@ public class AddCategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(AddCategoryFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
+
+        ((DoctorActivity) getActivity()).setActionBarTitle("Add Doctor");
     }
 
     @Override

@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.mediassist.category.CategoryActivity;
-import com.example.mediassist.databinding.ClinicAdminLayoutBinding;
 import com.example.mediassist.databinding.DoctorDashboardBinding;
 
 

@@ -8,8 +8,9 @@
 
     <Button
         style="@style/default_edit_text"
+        android:width="450dp"
         android:layout_gravity="top|start"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:backgroundTint="@color/search_box_color"
         android:drawableEnd="@drawable/ic_baseline_search_24"
         android:hint="Search"

@@ -25,13 +25,7 @@ public class AddClinicFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-//        Bundle bundle = getArguments();
-//        if (bundle != null) {
-//            String ip = bundle.getString("ip");
-//            String port = bundle.getString("port");
-//            String uname = bundle.getString("uname");
-//            String password = bundle.getString("password");
-//        }
+
         binding = AddClinicBinding.inflate(inflater, container, false);
         binding.clinicSaveButton.setOnClickListener(new View.OnClickListener() {
                                                         @Override

@@ -10,15 +10,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-
-import com.example.mediassist.R;
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.ClinicAdminLayoutBinding;
 import com.example.mediassist.databinding.SuperAdminDashboardBinding;
+import com.example.mediassist.doctor.DoctorActivity;
 import com.example.mediassist.login.LoginActivity;
 
 
@@ -36,6 +32,7 @@ public class SuperAdminDashboardFragment extends Fragment {
         CardView clinicAdminCard = binding.clinicAdminCard;
         CardView clinicCategoryCard = menuBinding.clinicCategoryCard;
         CardView clinicDoctorCard = menuBinding.clinicDoctorCard;
+
         clinicCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,10 +47,17 @@ public class SuperAdminDashboardFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
+//        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+        clinicDoctorCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                Intent intent = new Intent(getActivity(), DoctorActivity.class);
                 startActivity(intent);
             }
         });

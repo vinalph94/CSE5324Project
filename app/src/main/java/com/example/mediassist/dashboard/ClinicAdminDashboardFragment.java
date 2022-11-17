@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.databinding.ClinicAdminLayoutBinding;
 
 
@@ -28,13 +27,13 @@ public class ClinicAdminDashboardFragment extends Fragment {
         CardView clinicCategoryCard = binding.clinicCategoryCard;
         CardView clinicDoctorCard = binding.clinicDoctorCard;
 
-        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CategoryActivity.class);
-                startActivity(intent);
-            }
-        });
+//        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         return binding.getRoot();
 
