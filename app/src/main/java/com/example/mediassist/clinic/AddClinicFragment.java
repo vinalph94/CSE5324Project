@@ -1,4 +1,8 @@
 package com.example.mediassist.clinic;
+import com.example.mediassist.clinic.models.ClinicModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +10,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,38 +26,59 @@ import com.example.mediassist.login.LoginActivity;
 public class AddClinicFragment extends Fragment {
 
     private AddClinicBinding binding;
+    private FirebaseFirestore db;
+    private EditText clinicName;
+    private EditText clinicDetails;
+    private EditText clinicPhoneNumber;
+    private EditText clinicAddress;
+    private EditText clinicZipcode;
+    private Button save;
+    private Button edit;
+    private Button delete;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        db = FirebaseFirestore.getInstance();
 
         binding = AddClinicBinding.inflate(inflater, container, false);
-        binding.clinicSaveButton.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View view) {
+        clinicName = binding.clinicNameText;
+        clinicDetails = binding.clinicDetailsText;
+        clinicPhoneNumber = binding.clinicPhoneNumberText;
+        clinicAddress = binding.clinicAddressText;
+        clinicZipcode = binding.clinicZipcodeText;
+        save = binding.clinicSaveButton;
+        edit = binding.clinicEditButton;
+        delete = binding.clinicDeleteButton;
 
-                                                            if (TextUtils.isEmpty(binding.clinicNameText.getText())) {
-                                                                binding.clinicNameErrorText.setVisibility(View.VISIBLE);
-                                                            } else if (TextUtils.isEmpty(binding.clinicPhoneNumberText.getText())) {
-                                                                binding.clinicPhoneNumberErrorText.setVisibility(View.VISIBLE);
-                                                            } else if (TextUtils.isEmpty(binding.clinicAddressText.getText())) {
-                                                                binding.clinicAddressErrorText.setVisibility(View.VISIBLE);
-                                                            } else if (TextUtils.isEmpty(binding.clinicZipcodeText.getText())) {
-                                                                binding.clinicPhoneNumberErrorText.setVisibility(View.VISIBLE);
-                                                            }
-                                                        }
-                                                    }
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = clinicName.getText().toString();
+                String details = clinicDetails.getText().toString();
+                String phone_number = clinicPhoneNumber.getText().toString();
+                String address = clinicAddress.getText().toString();
+                int zipcode = Integer.parseInt(clinicZipcode.getText().toString());
 
+                //Validate here. Check if anything is empty and any other kind of sanitation.
 
-        );
+                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,zipcode);
+                uploadClinic(clinic);
+            }
+        });
+
 
 
         return binding.getRoot();
 
     }
+    public void uploadClinic(ClinicModel clinic) {
 
+
+
+    }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
