@@ -1,7 +1,7 @@
 package com.example.mediassist.clinicadmin;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +13,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+
+import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
+import com.example.mediassist.util.CheckForEmptyCallBack;
+import com.example.mediassist.util.CustomTextWatcher;
+import com.example.mediassist.util.CustomToast;
+import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AddClinicAdminFragment extends Fragment {
+public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCallBack {
 
     private AddClinicAdminBinding binding;
     private FirebaseFirestore db;
@@ -28,16 +38,17 @@ public class AddClinicAdminFragment extends Fragment {
     private TextView clinic_admin_name_error;
     private TextView clinic_admin_phone_number_error;
     private TextView clinic_admin_email_error;
-    //private String clinicAdminAssignClinic;
-    private Button save;
-    private Button edit;
-    private Button delete;
+
+    private Button saveButton;
+    private Button editButton;
+    private Button deleteButton;
+
+    private String name;
+    private String phone_number;
+    private String email;
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
 
@@ -52,35 +63,24 @@ public class AddClinicAdminFragment extends Fragment {
         clinic_admin_name_error = binding.clinicAdminNameErrorText;
         clinic_admin_phone_number_error = binding.clinicAdminPhoneNumberErrorText;
         clinic_admin_email_error = binding.clinicAdminEmailErrorText;
-        save = binding.clinicAdminSaveButton;
-        edit = binding.clinicAdminEditButton;
-        delete = binding.clinicAdminDeleteButton;
+        saveButton = binding.clinicAdminSaveButton;
+        editButton = binding.clinicAdminEditButton;
+        deleteButton = binding.clinicAdminDeleteButton;
 
+        clinicAdminName.addTextChangedListener(new CustomTextWatcher(clinic_admin_name_error, AddClinicAdminFragment.this));
+        clinicAdminPhoneNumber.addTextChangedListener(new CustomTextWatcher(clinic_admin_phone_number_error, AddClinicAdminFragment.this));
+        clinicAdminEmail.addTextChangedListener(new CustomTextWatcher(clinic_admin_email_error, AddClinicAdminFragment.this));
+        checkClinicData();
 
-        save.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                clinic_admin_name_error.setVisibility(View.GONE);
-                clinic_admin_phone_number_error.setVisibility(View.GONE);
-                clinic_admin_email_error.setVisibility(View.GONE);
-
-                String name = clinicAdminName.getText().toString();
-                String phone_number = clinicAdminPhoneNumber.getText().toString();
-                String email = clinicAdminEmail.getText().toString();
                 String assign_clinic = spinner.getSelectedItem().toString();
 
-                if (TextUtils.isEmpty(name)) {
-                    clinic_admin_name_error.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(phone_number)) {
-                    clinic_admin_phone_number_error.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(email)) {
-                    clinic_admin_email_error.setVisibility(View.VISIBLE);
-                } else {
-//                    ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
-//                    uploadClinicAdmin(clinicadmin);
-                }
+                ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                uploadClinicAdmin(clinicadmin);
+
             }
         });
 
@@ -90,26 +90,36 @@ public class AddClinicAdminFragment extends Fragment {
 
     }
 
-    //    public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
-//        db.collection("clinicAdmins")
-//                .add(clinicadmin)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Toast.makeText(getContext(), "Data Stored Successfully !", Toast.LENGTH_SHORT).show();
-//
-//
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(getContext(), "Error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//
-//    }
+    private void checkClinicData() {
+        name = clinicAdminName.getText().toString();
+        phone_number = clinicAdminPhoneNumber.getText().toString();
+        email = clinicAdminEmail.getText().toString();
+
+         if (!(name.isEmpty()) && !(phone_number.isEmpty()) && !(email.isEmpty())) {
+            saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
+            saveButton.setEnabled(true);
+        }
+    }
+
+    public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
+        db.collection("clinicAdmins").add(clinicadmin).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicAdminFragment_to_ClinicAdminListFragment);
+                        new CustomToast(getContext(), getActivity(),
+                                name + " Stored Successfully !", ToastStatus.SUCCESS).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+                    }
+                });
+
+
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((ClinicAdminActivity) getActivity()).setActionBarTitle("Add Clinic Admin");
@@ -123,4 +133,8 @@ public class AddClinicAdminFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void checkForEmpty() {
+        checkClinicData();
+    }
 }
