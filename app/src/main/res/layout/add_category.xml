@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--    android:alpha="0.3"-->
+    <!--    >-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        tools:context=".category.AddCategoryFragment">
+
+        <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
+
+        <TextView
+            android:id="@+id/category_name_label"
+            style="@style/mandatory_label_text"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/category_name_text"
+            style="@style/default_edit_text"
+            android:hint="Name" />
+
+        <TextView
+            android:id="@+id/category_name_error_text"
+            style="@style/default_error_text"
+            android:text="Category name is required" />
+
+        <TextView
+            android:id="@+id/category_details_label"
+            style="@style/default_label_text"
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/category_details_text"
+            style="@style/default_edit_text"
+            android:hint="Description" />
+
+
+        <TextView
+            android:id="@+id/category_phone_number_label"
+            style="@style/mandatory_label_text"
+            android:text="Icon" />
+
+        <EditText
+            android:id="@+id/category_phone_number_text"
+            style="@style/default_edit_text"
+            android:hint="Phone Number"
+            android:inputType="phone" />
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/clinic_admin_clinic_label"
+            style="@style/mandatory_label_text"
+            android:layout_marginLeft="45dp"
+            android:text="Assign Clinic" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            android:theme="@style/spinner"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu">
+
+        </Spinner>
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/category_progress_bar"
+        style="@style/default_progress_bar" />
+
+    <Button
+        android:id="@+id/category_save_button"
+        style="@style/default_disabled_button"
+        android:text="Save"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/category_save_button2"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="80dp"
+            android:maxWidth="35dp"
+            android:text="Save"
+            android:textAlignment="center"
+            app:cornerRadius="100dp" />
+
+        <Button
+            android:id="@+id/category_save_button3"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="80dp"
+            android:maxWidth="35dp"
+            android:text="Delete"
+            android:textAlignment="center"
+            android:backgroundTint="@color/secondary_error_color"
+            android:textColor="@color/error_text_color"
+            app:cornerRadius="100dp" />
+
+    </LinearLayout>
+</RelativeLayout>
