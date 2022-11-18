@@ -2,7 +2,6 @@ package com.example.mediassist.resetpassword;
 
 
 import android.os.Bundle;
-
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +43,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

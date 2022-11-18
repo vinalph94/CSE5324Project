@@ -75,8 +75,8 @@
 
         <Spinner
             android:id="@+id/Specialization_spinner"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"
             android:overlapAnchor="false"
@@ -96,8 +96,8 @@
 
         <Spinner
             android:id="@+id/Clinic_spinner"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"
             android:overlapAnchor="false"

@@ -1,6 +1,5 @@
 package com.example.mediassist.resetpassword;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.FragmentResetPasswordBinding;
-import com.example.mediassist.login.LoginActivity;
 
 public class ResetPassword extends Fragment {
 

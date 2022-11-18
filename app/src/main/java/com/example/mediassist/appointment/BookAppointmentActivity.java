@@ -3,15 +3,15 @@ package com.example.mediassist.appointment;
 import static com.example.mediassist.appointment.CalendarUtils.daysInWeekArray;
 import static com.example.mediassist.appointment.CalendarUtils.monthYearFromDate;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 
@@ -35,14 +35,12 @@ public class BookAppointmentActivity extends AppCompatActivity implements Calend
     private ListView eventListView;
 
 
-    private void initWidgets()
-    {
+    private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
 
-    private void setWeekView()
-    {
+    private void setWeekView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
@@ -54,34 +52,29 @@ public class BookAppointmentActivity extends AppCompatActivity implements Calend
     }
 
 
-    public void previousWeekAction(View view)
-    {
+    public void previousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
         setWeekView();
     }
 
-    public void nextWeekAction(View view)
-    {
+    public void nextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
     }
 
     @Override
-    public void onItemClick(int position, LocalDate date)
-    {
+    public void onItemClick(int position, LocalDate date) {
         CalendarUtils.selectedDate = date;
         setWeekView();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         //setEventAdpater();
     }
 
-    public void bookTimeSlotAction(View view)
-    {
+    public void bookTimeSlotAction(View view) {
         startActivity(new Intent(this, BookScheduleActivity.class));
     }
     /*

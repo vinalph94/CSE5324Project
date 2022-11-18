@@ -1,8 +1,6 @@
 package com.example.mediassist.login;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 
@@ -50,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         signin = (Button) findViewById(R.id.sign_in);
         login_email_error = findViewById(R.id.login_email_error_text);
         login_pwd_error = findViewById(R.id.login_pwd_error_text);
+        signin.setEnabled(true);
 
     }
 
@@ -58,16 +57,20 @@ public class LoginActivity extends AppCompatActivity {
         login_email_error.setVisibility(View.GONE);
         login_pwd_error.setVisibility(View.GONE);
 
-        String mail = email.getText().toString();
-        String pwd = password.getText().toString();
-        if (TextUtils.isEmpty(mail)) {
-            login_email_error.setVisibility(View.VISIBLE);
-        } else if (TextUtils.isEmpty(pwd)) {
-            login_pwd_error.setVisibility(View.VISIBLE);
-        } else {
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-            startActivity(intent);
-        }
+//        String mail = email.getText().toString();
+//        String pwd = password.getText().toString();
+//        if (TextUtils.isEmpty(mail)) {
+//            login_email_error.setVisibility(View.VISIBLE);
+//        } else if (TextUtils.isEmpty(pwd)) {
+//            login_pwd_error.setVisibility(View.VISIBLE);
+//        } else {
+//            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+//            startActivity(intent);
+//        }
+
+
+        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(intent);
 
     }
 

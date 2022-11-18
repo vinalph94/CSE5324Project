@@ -1,20 +1,17 @@
 package com.example.mediassist.clinicadmin;
 
 import android.os.Bundle;
-
-import com.example.mediassist.databinding.ActivityClinicAdminBinding;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityClinicAdminBinding;
 
 public class ClinicAdminActivity extends AppCompatActivity {
 
@@ -48,6 +45,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

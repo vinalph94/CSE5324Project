@@ -6,9 +6,10 @@ public class User {
     public String email;
     public String phoneNumber;
 
-    public User(){
+    public User() {
 
     }
+
     public User(String fullName, String email, String phoneNumber) {
         this.fullName = fullName;
         this.email = email;

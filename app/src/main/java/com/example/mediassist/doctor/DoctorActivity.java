@@ -1,22 +1,18 @@
 package com.example.mediassist.doctor;
 
 import android.os.Bundle;
-
-import com.example.mediassist.databinding.ActivityDoctorBinding;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityDoctorBinding;
 
 public class DoctorActivity extends AppCompatActivity {
 
@@ -51,6 +47,7 @@ public class DoctorActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

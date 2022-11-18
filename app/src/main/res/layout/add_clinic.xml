@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/clinic_name_error_text"
             style="@style/default_error_text"
-            android:visibility="gone"
+           
             android:text="Clinic name is required" />
 
         <TextView
@@ -57,7 +57,7 @@
         <TextView
             android:id="@+id/clinic_phone_number_error_text"
             style="@style/default_error_text"
-            android:visibility="gone"
+           
             android:text="Phone Number is required" />
 
         <TextView
@@ -73,7 +73,7 @@
         <TextView
             android:id="@+id/clinic_address_error_text"
             style="@style/default_error_text"
-            android:visibility="gone"
+           
             android:text="Address is required" />
 
 
@@ -91,7 +91,7 @@
         <TextView
             android:id="@+id/clinic_zipcode_error_text"
             style="@style/default_error_text"
-            android:visibility="gone"
+           
             android:text="Zipcode is required" />
 
 
@@ -114,7 +114,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:visibility="gone"
+       android:visibility="gone"
         android:orientation="horizontal">
 
         <Button

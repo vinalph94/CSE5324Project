@@ -1,12 +1,5 @@
 package com.example.mediassist.clinicadmin;
 
-import com.example.mediassist.clinic.models.ClinicModel;
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,23 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AddClinicAdminFragment extends Fragment{
+public class AddClinicAdminFragment extends Fragment {
 
     private AddClinicAdminBinding binding;
     private FirebaseFirestore db;
     private EditText clinicAdminName;
     private EditText clinicAdminPhoneNumber;
     private EditText clinicAdminEmail;
-    private TextView  clinic_admin_name_error;
+    private TextView clinic_admin_name_error;
     private TextView clinic_admin_phone_number_error;
     private TextView clinic_admin_email_error;
     //private String clinicAdminAssignClinic;
@@ -50,7 +42,7 @@ public class AddClinicAdminFragment extends Fragment{
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
 
         Spinner spinner = (Spinner) binding.spinner;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.programming_languages, R.layout.spinner_list);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -86,8 +78,8 @@ public class AddClinicAdminFragment extends Fragment{
                 } else if (TextUtils.isEmpty(email)) {
                     clinic_admin_email_error.setVisibility(View.VISIBLE);
                 } else {
-                    ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
-                    uploadClinicAdmin(clinicadmin);
+//                    ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+//                    uploadClinicAdmin(clinicadmin);
                 }
             }
         });
@@ -97,32 +89,34 @@ public class AddClinicAdminFragment extends Fragment{
 
 
     }
-    public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
-        db.collection("clinicAdmins")
-                .add(clinicadmin)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getContext(), "Data Stored Successfully !", Toast.LENGTH_SHORT).show();
 
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-    }
+    //    public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
+//        db.collection("clinicAdmins")
+//                .add(clinicadmin)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Toast.makeText(getContext(), "Data Stored Successfully !", Toast.LENGTH_SHORT).show();
+//
+//
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(getContext(), "Error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//
+//    }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((ClinicAdminActivity) getActivity()).setActionBarTitle("Add Clinic Admin");
 
 
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

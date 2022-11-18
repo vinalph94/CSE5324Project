@@ -20,7 +20,9 @@
         android:name="com.example.mediassist.clinic.AddClinicFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/add_clinic">
-
+        <action
+            android:id="@+id/action_AddClinicFragment_to_ClinicListFragment"
+            app:destination="@id/ClinicListFragment" />
 
     </fragment>
 </navigation>

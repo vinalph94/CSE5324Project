@@ -7,13 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.mediassist.R;
 
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.ClinicListBinding;
@@ -52,16 +47,12 @@ public class ClinicListFragment extends Fragment {
         courseRV.setAdapter(courseAdapter);
 
 
-
-
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
 
     }
