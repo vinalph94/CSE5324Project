@@ -1,4 +1,5 @@
 package com.example.mediassist.clinic;
+
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,10 @@ public class AddClinicFragment extends Fragment {
     private EditText clinicPhoneNumber;
     private EditText clinicAddress;
     private EditText clinicZipcode;
+    private TextView clinic_name_error;
+    private TextView clinic_phone_number_error;
+    private TextView clinic_address_error;
+    private TextView clinic_zipcode_error;
     private Button save;
     private Button edit;
     private Button delete;
@@ -50,6 +56,10 @@ public class AddClinicFragment extends Fragment {
         clinicPhoneNumber = binding.clinicPhoneNumberText;
         clinicAddress = binding.clinicAddressText;
         clinicZipcode = binding.clinicZipcodeText;
+        clinic_name_error = binding.clinicNameErrorText;
+        clinic_phone_number_error = binding.clinicPhoneNumberErrorText;
+        clinic_address_error = binding.clinicAddressErrorText;
+        clinic_zipcode_error = binding.clinicZipcodeErrorText;
         save = binding.clinicSaveButton;
         edit = binding.clinicEditButton;
         delete = binding.clinicDeleteButton;
@@ -57,24 +67,39 @@ public class AddClinicFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clinic_name_error.setVisibility(View.GONE);
+                clinic_phone_number_error.setVisibility(View.GONE);
+                clinic_address_error.setVisibility(View.GONE);
+                clinic_zipcode_error.setVisibility(View.GONE);
+
                 String name = clinicName.getText().toString();
                 String details = clinicDetails.getText().toString();
                 String phone_number = clinicPhoneNumber.getText().toString();
                 String address = clinicAddress.getText().toString();
-//                int zipcode = Integer.parseInt(clinicZipcode.getText().toString());
+                // int zipcode = Integer.parseInt(clinicZipcode.getText().toString());
 
-                //Validate here. Check if anything is empty and any other kind of sanitation.
 
-                ClinicModel clinic = new ClinicModel(name,phone_number,address,details,78);
-                uploadClinic(clinic);
+                if (TextUtils.isEmpty(name)) {
+                    clinic_name_error.setVisibility(View.VISIBLE);
+                } else if (TextUtils.isEmpty(phone_number)) {
+                    clinic_phone_number_error.setVisibility(View.VISIBLE);
+                } else if (TextUtils.isEmpty(address)) {
+                    clinic_address_error.setVisibility(View.VISIBLE);
+                } /*else if (zipcode == 0) {
+                    clinic_zipcode_error.setVisibility(View.VISIBLE);
+                } */ else {
+                    ClinicModel clinic = new ClinicModel(name, phone_number, address, details, 78);
+                    uploadClinic(clinic);
+                }
+
             }
         });
-
 
 
         return binding.getRoot();
 
     }
+
     public void uploadClinic(ClinicModel clinic) {
         db.collection("clinics")
                 .add(clinic)
@@ -95,6 +120,7 @@ public class AddClinicFragment extends Fragment {
 
 
     }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

@@ -45,6 +45,13 @@
         <item>Clinic 3</item>
         <item>Clinic 4</item>
     </string-array>
+
+    <string-array name="doctors_specializarions">
+        <item>Cardiologist</item>
+        <item>Dentist</item>
+        <item>Dermatologist</item>
+        <item>Neurologist</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

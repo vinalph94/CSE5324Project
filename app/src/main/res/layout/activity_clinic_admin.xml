@@ -16,6 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
                 android:layout_width="60dp"
@@ -42,15 +43,15 @@
                 android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/black"
                 android:paddingTop="12dp"
-                android:visibility="gone"
                 app:icon="@drawable/ic_baseline_add_circle_outline_24"
                 app:iconTint="@color/primary_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-
                 app:layout_constraintStart_toStartOf="parent" />
         </RelativeLayout>
 
+
     </com.google.android.material.appbar.AppBarLayout>
+
     <include layout="@layout/content_clinic_admin" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

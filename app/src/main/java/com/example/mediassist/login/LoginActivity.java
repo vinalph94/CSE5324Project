@@ -1,7 +1,6 @@
 package com.example.mediassist.login;
 
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 
@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private View rectangle_7;
     private TextView sign_in_to_your_account;
     private TextView email_;
+    private TextView login_email_error;
+    private TextView login_pwd_error;
     private EditText email;
     private View rectangle_8;
     private View rectangle_11;
@@ -46,23 +48,31 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         password.setSelection(0);
         signin = (Button) findViewById(R.id.sign_in);
+        login_email_error = findViewById(R.id.login_email_error_text);
+        login_pwd_error = findViewById(R.id.login_pwd_error_text);
 
     }
+
     public void onClickSignInButton(View view) {
+
+        login_email_error.setVisibility(View.GONE);
+        login_pwd_error.setVisibility(View.GONE);
 
         String mail = email.getText().toString();
         String pwd = password.getText().toString();
-//        if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
-//            Toast.makeText(this, "Email and password is required", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "login successfully", Toast.LENGTH_SHORT).show();
-//        }
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-        startActivity(intent);
+        if (TextUtils.isEmpty(mail)) {
+            login_email_error.setVisibility(View.VISIBLE);
+        } else if (TextUtils.isEmpty(pwd)) {
+            login_pwd_error.setVisibility(View.VISIBLE);
+        } else {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     public void onClickForgotPwdButton(View view) {
-       Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 
