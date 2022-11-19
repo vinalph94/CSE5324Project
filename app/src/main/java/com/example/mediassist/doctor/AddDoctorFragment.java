@@ -2,7 +2,6 @@ package com.example.mediassist.doctor;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinicadmin.AddClinicAdminFragment;
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -52,7 +49,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private Bundle bundle;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         binding = AddDoctorBinding.inflate(inflater, container, false);
 
@@ -87,8 +84,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                 doctorAssignClinic = spinner.getSelectedItem().toString();
                 doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
 
-                    DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic);
-                    uploadDoctor(doctor);
+                DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic);
+                uploadDoctor(doctor);
 
             }
         });
@@ -97,6 +94,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         return binding.getRoot();
 
     }
+
     private void checkDoctorData() {
         name = doctorName.getText().toString();
         phone_number = doctorPhoneNumber.getText().toString();
@@ -107,6 +105,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             saveButton.setEnabled(true);
         }
     }
+
     public void uploadDoctor(DoctorModel doctor) {
         db.collection("doctors")
                 .add(doctor)
@@ -141,6 +140,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         super.onDestroyView();
         binding = null;
     }
+
     @Override
     public void checkForEmpty() {
         checkDoctorData();

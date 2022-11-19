@@ -58,7 +58,7 @@
         <item name="android:layout_marginLeft">@dimen/_35sdp</item>
         <item name="android:textColor">@color/label_text_color</item>
         <item name="android:fontWeight">600</item>
-        <item name="android:layout_marginTop">@dimen/_30sdp</item>
+        <item name="android:layout_marginTop">@dimen/_20sdp</item>
     </style>
 
     <style name="mandatory_label_text" parent="@style/default_label_text">

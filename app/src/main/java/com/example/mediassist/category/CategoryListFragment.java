@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.databinding.CategoryListBinding;
 import com.google.firebase.firestore.EventListener;
@@ -31,6 +30,7 @@ public class CategoryListFragment extends Fragment {
     private String description;
     private String assignClinic;
     private CategoryAdapter courseAdapter;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -68,15 +68,12 @@ public class CategoryListFragment extends Fragment {
         });
 
 
-
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
 
     }

@@ -40,6 +40,7 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="gray">#888</color>
+    <color name="dark_gray">#FF252525</color>
     <color name="blue">#0000FF</color>
     <color name="calendarblack">#FF000000</color>
 </resources>

@@ -61,9 +61,11 @@ public class ClinicModel implements Serializable {
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
+
     public String setId() {
         return id;
     }
+
     public String getId() {
         return id;
     }

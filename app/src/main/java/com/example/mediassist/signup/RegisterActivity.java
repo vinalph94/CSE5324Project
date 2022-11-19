@@ -2,10 +2,6 @@ package com.example.mediassist.signup;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mediassist.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mediassist.R;
 import com.example.mediassist.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,10 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.ref.PhantomReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -51,9 +46,11 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore db;
     DocumentReference ref;
     boolean isUserExist = false;
+
     public void setUserExist(boolean userExist) {
         isUserExist = userExist;
     }
+
     public boolean getUserExist() {
         return isUserExist;
     }
@@ -62,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
     //ProgressDialog progressDialog;
 
     EditText editTextName, editTextPhone, editTextEmail, editTextPassword, retypePwd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         //progressDialog = new ProgressDialog(this);
 
-       //fullName.setHint(Html.fromHtml("  &nbsp; Full Name <font color =\"#cc0029\" >*</font>"));
+        //fullName.setHint(Html.fromHtml("  &nbsp; Full Name <font color =\"#cc0029\" >*</font>"));
 
         Button signUpBtn = (Button) findViewById(R.id.signUpBtn);
 
@@ -86,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // store the returned value of the dedicated function which checks
                 // whether the entered data is valid or if any fields are left blank.
-                 registerUser();
+                registerUser();
 
             }
         });
@@ -159,13 +157,13 @@ public class RegisterActivity extends AppCompatActivity {
                         for (DocumentSnapshot document : task.getResult()) {
                             if (document.exists()) {
                                 String userName = document.getString("username");
-                                if(userName.equals(email)) {
+                                if (userName.equals(email)) {
                                     setUserExist(true);
                                     System.out.println(userName + "already exists");
                                     Toast.makeText(RegisterActivity.this, "Email Already exists, please use a different email id", Toast.LENGTH_LONG).show();
                                     Log.d(TAG, "username already exists");
                                     return;
-                                }else{
+                                } else {
                                     System.out.println("Adding user details into database");
                                     //store the additional fields(signup fields) in firebase
                                     Map<String, String> user = new HashMap<>();

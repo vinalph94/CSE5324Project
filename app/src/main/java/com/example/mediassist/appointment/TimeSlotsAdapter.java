@@ -1,4 +1,4 @@
-package com.example.mediassist.clinic;
+package com.example.mediassist.appointment;
 
 import static java.util.Objects.nonNull;
 
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,14 +17,14 @@ import com.example.mediassist.clinic.models.ClinicModel;
 
 import java.util.ArrayList;
 
-public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder> {
+public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<ClinicModel> clinicModelArrayList;
+    private final ArrayList<String> clinicModelArrayList;
     private ClinicItemListener clinicItemListener;
 
     // Constructor
-    public ClinicAdapter(Context context, ArrayList<ClinicModel> ClinicModelArrayList, ClinicItemListener clinicItemListener) {
+    public TimeSlotsAdapter(Context context, ArrayList<String> ClinicModelArrayList, ClinicItemListener clinicItemListener) {
         this.context = context;
         this.clinicModelArrayList = ClinicModelArrayList;
         this.clinicItemListener = clinicItemListener;
@@ -31,26 +32,21 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
 
     @NonNull
     @Override
-    public ClinicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TimeSlotsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.time_slot_button, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClinicAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TimeSlotsAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        ClinicModel model = clinicModelArrayList.get(position);
-        if (nonNull(model.getName())) {
-            holder.clinic_name.setText(String.format("%s", model.getName()));
+        String model = clinicModelArrayList.get(position);
+        if (nonNull(model)) {
+            holder.timeSlitBtn.setText(String.format("%s", model));
         }
-        if (nonNull(model.getPhone_number())) {
-            holder.clinic_phone_number.setText(String.format("%s", model.getPhone_number()));
-        }
-        if (nonNull(model.getAddress())) {
-            holder.clinic_address.setText(String.format("%s", model.getAddress()));
-        }
+
 
         holder.itemView.setOnClickListener(view -> {
             clinicItemListener.onAdapterItemClick(clinicModelArrayList.get(position));
@@ -65,22 +61,19 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
 
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView clinic_name;
-        private final TextView clinic_phone_number;
-        private final TextView clinic_address;
-        ClinicItemListener clinicItemListener;
+        private final Button timeSlitBtn;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            clinic_name = itemView.findViewById(R.id.textview1);
-            clinic_phone_number = itemView.findViewById(R.id.textview2);
-            clinic_address = itemView.findViewById(R.id.textview3);
+            timeSlitBtn = itemView.findViewById(R.id.timeslotBtn);
+
         }
 
 
     }
 
     public interface ClinicItemListener {
-        void onAdapterItemClick(ClinicModel clinic);
+        void onAdapterItemClick(String clinic);
     }
 }

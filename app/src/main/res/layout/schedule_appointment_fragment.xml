@@ -240,12 +240,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="445dp"
             android:orientation="horizontal">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendarRecyclerView"
-            android:layout_width="match_parent"
-            android:background="#252525"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="match_parent"
+                android:background="#252525"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
 
 
         </LinearLayout>

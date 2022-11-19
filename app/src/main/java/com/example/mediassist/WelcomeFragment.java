@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.login.LoginActivity;
@@ -29,24 +30,9 @@ public class WelcomeFragment extends Fragment {
         binding = WelcomeBinding.inflate(inflater, container, false);
         Button signInButton = binding.signinButtonView;
         Button signUpButton = binding.signupButtonView;
-        signInButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
 
-        );
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                Intent intent = new Intent(getActivity(), ClinicAdminActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
 
-        );
+
         return binding.getRoot();
 
     }
@@ -66,7 +52,7 @@ public class WelcomeFragment extends Fragment {
         binding.signupButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
                 startActivity(intent);
 
             }

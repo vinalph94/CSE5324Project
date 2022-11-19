@@ -1,9 +1,7 @@
 package com.example.mediassist.category;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
@@ -60,19 +57,19 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         category_name_error = binding.categoryNameErrorText;
         saveButton = binding.categorySaveButton;
         editButton = binding.categoryEditButton;
-        deleteButton=  binding.categoryDeleteButton;
+        deleteButton = binding.categoryDeleteButton;
         categoryName.addTextChangedListener(new CustomTextWatcher(category_name_error, AddCategoryFragment.this));
         checkCategoryData();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
-                                                          @Override
-                                                          public void onClick(View view) {
-                                                              String assign_clinic = spinner.getSelectedItem().toString();
+                                          @Override
+                                          public void onClick(View view) {
+                                              String assign_clinic = spinner.getSelectedItem().toString();
 
-                                                              CategoryModel category = new CategoryModel(name, description, assign_clinic);
-                                                              uploadCategory(category);
-                                                          }
-                                                      }
+                                              CategoryModel category = new CategoryModel(name, description, assign_clinic);
+                                              uploadCategory(category);
+                                          }
+                                      }
 
 
         );
@@ -81,6 +78,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         return binding.getRoot();
 
     }
+
     private void checkCategoryData() {
         name = categoryName.getText().toString();
 
@@ -109,6 +107,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
 
     }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

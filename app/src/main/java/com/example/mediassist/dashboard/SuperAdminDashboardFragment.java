@@ -49,7 +49,7 @@ public class SuperAdminDashboardFragment extends Fragment {
         });
         clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
-           public void onClick(View view) {
+            public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryActivity.class);
                 startActivity(intent);
             }

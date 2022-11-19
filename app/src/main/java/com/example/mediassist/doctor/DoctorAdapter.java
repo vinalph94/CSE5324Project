@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.doctor.models.DoctorModel;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         if (nonNull(model.getDoctorphonenumber())) {
             holder.textview1.setText(String.format("%s", model.getDoctorphonenumber()));
         }
-        if (nonNull(model.getAssignclinic())){
+        if (nonNull(model.getAssignclinic())) {
             holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
         }
         if (nonNull(model.getAssignspecialization())) {

@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -95,7 +94,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         phone_number = clinicAdminPhoneNumber.getText().toString();
         email = clinicAdminEmail.getText().toString();
 
-         if (!(name.isEmpty()) && !(phone_number.isEmpty()) && !(email.isEmpty())) {
+        if (!(name.isEmpty()) && !(phone_number.isEmpty()) && !(email.isEmpty())) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }
