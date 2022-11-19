@@ -70,7 +70,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_FirstFragment_to_Second2Fragment);
+               // Navigation.findNavController(binding.getRoot()).navigate(R.id.action_FirstFragment_to_Second2Fragment);
 
             }
         });

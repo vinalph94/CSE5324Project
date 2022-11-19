@@ -1,5 +1,6 @@
 package com.example.mediassist.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,18 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
+        navController.navigateUp();
 
+        Intent intent = getIntent();
+        //String role = intent.getStringExtra("role");
+        String role="4";
+
+        if(role=="1"){navController.navigate(R.id.SuperAdminDashboardFragment);}
+        else if (role=="2"){navController.navigate(R.id.ClinicAdminDashboard);}
+        else if(role=="3"){navController.navigate(R.id.DoctorDashboard);}
+        else if(role=="4"){ navController.navigate(R.id.PatientDashboard);}
+        else{}
+       // navController.navigate(R.id.SuperAdminDashboardFragment_to_PatientDashboard);
 
     }
 
