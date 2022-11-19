@@ -98,7 +98,7 @@ public class ClinicListFragment extends Fragment {
         binding = null;
     }
 
-    private void navigateToAddFragment(ClinicModel clinic){
+    private void navigateToAddFragment(ClinicModel clinic) {
         bundle = new Bundle();
         bundle.putSerializable("clinic", clinic);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ClinicListFragment_to_AddClinicFragment, bundle);

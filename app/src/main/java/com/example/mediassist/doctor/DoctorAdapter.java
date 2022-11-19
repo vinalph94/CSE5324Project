@@ -12,9 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinic.models.ClinicModel;
-import com.example.mediassist.clinicadmin.ClinicAdminAdapter;
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.doctor.models.DoctorModel;
 
 import java.util.ArrayList;

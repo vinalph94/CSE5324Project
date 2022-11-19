@@ -18,7 +18,7 @@ import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 
 import java.util.ArrayList;
 
-public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.ViewHolder>  {
+public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<ClinicAdminModel> ClinicAdminModelArrayList;
     private ClinicAdminItemListener clinicadminItemListener;
@@ -44,7 +44,7 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
         if (nonNull(model.getName())) {
             holder.clinic_admin_name.setText(String.format("%s", model.getName()));
         }
-        if (nonNull(model.getPhone_number())){
+        if (nonNull(model.getPhone_number())) {
             holder.clinic_admin_phone_number.setText(String.format("%s", model.getPhone_number()));
         }
         if (nonNull(model.getAssign_clinic())) {

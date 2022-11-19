@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appointment.BookScheduleActivity">
+    tools:context=".appointment.ConfirmAppointmentFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -92,6 +92,26 @@
             android:textColor="@color/white"
             android:textSize="16dp"
             android:textStyle="bold" />
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TimeName"
+                tools:context=".MainActivity">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/idTimeSlotsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
         <Button
             android:id="@+id/bookAptBtn"

@@ -55,7 +55,7 @@ public class ClinicAdminListFragment extends Fragment {
                 for (QueryDocumentSnapshot snapshot : value) {
                     name = snapshot.getString("name");
                     phoneNumber = snapshot.getString("phone_number");
-                     email = snapshot.getString("email");
+                    email = snapshot.getString("email");
                     assignClinic = snapshot.getString("assign_clinic");
                     courseArrayList.add(new ClinicAdminModel(name, phoneNumber, email, assignClinic,snapshot.getId()));
 

@@ -18,8 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinicadmin.AddClinicAdminFragment;
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
+
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -53,7 +52,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private Bundle bundle;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         binding = AddDoctorBinding.inflate(inflater, container, false);
 
@@ -113,6 +112,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         return binding.getRoot();
 
     }
+
     private void checkDoctorData() {
         name = doctorName.getText().toString();
         phone_number = doctorPhoneNumber.getText().toString();
@@ -123,6 +123,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             saveButton.setEnabled(true);
         }
     }
+
     public void uploadDoctor(DoctorModel doctor) {
         db.collection("doctors")
                 .add(doctor)

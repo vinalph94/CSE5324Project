@@ -17,7 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 
-import com.example.mediassist.clinic.models.ClinicModel;
+
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -94,7 +94,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
             @Override
             public void onClick(View v) {
-                // assign_clinic = spinner.getSelectedItem().toString();
+                 assign_clinic = spinner.getSelectedItem().toString();
 
                 ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,"");
                 uploadClinicAdmin(clinicadmin);

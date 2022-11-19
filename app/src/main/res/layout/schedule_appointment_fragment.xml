@@ -13,17 +13,23 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-60dp">
 
+        <ImageButton
+            android:id="@+id/searchBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:padding="20dp"
+            android:src="@drawable/img_2" />
         <TextView
             android:id="@+id/docName"
             android:layout_width="304dp"
             android:layout_height="45dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="50dp"
-            android:drawableLeft="@drawable/img_2"
             android:hint=" name"
-            android:text="  Dr.Smith"
             android:paddingTop="30px"
+            android:paddingLeft="15px"
             android:textColor="@color/white"
             android:textSize="23dp"
             android:textStyle="bold" />
@@ -38,7 +44,7 @@
             android:layout_marginEnd="50dp"
             android:background="@drawable/img"
             android:hint=" name"
-            android:text="      Dr.Smith"
+            android:paddingLeft="30px"
             android:textColor="#408E9B"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -53,7 +59,7 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="-3dp"
             android:hint=" name"
-            android:text="          Cardiologist"
+            android:paddingLeft="60px"
             android:textColor="@color/white"
             android:textSize="13.5dp"
             android:textStyle="bold" />
@@ -68,7 +74,7 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="2dp"
             android:hint=" name"
-            android:text="          Texas Memorial Hospital"
+            android:paddingLeft="60px"
             android:textColor="@color/white"
             android:textSize="13.5dp"
             android:textStyle="bold" />
@@ -234,12 +240,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="445dp"
             android:orientation="horizontal">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendarRecyclerView"
-            android:layout_width="match_parent"
-            android:background="#252525"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="match_parent"
+                android:background="#252525"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
 
 
         </LinearLayout>

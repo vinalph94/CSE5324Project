@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,10 +21,14 @@ import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -57,7 +60,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         binding = AddClinicBinding.inflate(inflater, container, false);
 
         bundle = getArguments();
-        ClinicModel clinic= (ClinicModel) (bundle != null ? bundle.getSerializable("clinic") : null);
+        ClinicModel clinic = (ClinicModel) (bundle != null ? bundle.getSerializable("clinic") : null);
 
 
         nameEditText = binding.clinicNameText;
@@ -73,12 +76,12 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         editButton = binding.clinicEditButton;
         deleteButton = binding.clinicDeleteButton;
 
-        if (clinic !=null){
+        if (clinic != null) {
             nameEditText.setText(clinic.getName());
             phoneNumberEditText.setText(clinic.getPhone_number());
             addressEditText.setText(clinic.getAddress());
             zipcodeEditText.setText(String.valueOf(clinic.getZipcode()));
-            if(clinic.getDescription() !=null){
+            if (clinic.getDescription() != null) {
                 detailsEditText.setText(clinic.getDescription());
             }
             saveButton.setVisibility(View.GONE);
@@ -88,11 +91,9 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         }
 
         nameEditText.addTextChangedListener(new CustomTextWatcher(clinicNameError, AddClinicFragment.this));
-        phoneNumberEditText.addTextChangedListener(new CustomTextWatcher(phoneNumberEditTextError,AddClinicFragment.this));
-        addressEditText.addTextChangedListener(new CustomTextWatcher(addressEditTextError,AddClinicFragment.this));
-        zipcodeEditText.addTextChangedListener(new CustomTextWatcher(zipcodeEditTextError,AddClinicFragment.this));
-
-
+        phoneNumberEditText.addTextChangedListener(new CustomTextWatcher(phoneNumberEditTextError, AddClinicFragment.this));
+        addressEditText.addTextChangedListener(new CustomTextWatcher(addressEditTextError, AddClinicFragment.this));
+        zipcodeEditText.addTextChangedListener(new CustomTextWatcher(zipcodeEditTextError, AddClinicFragment.this));
 
 
         checkClinicData();
@@ -103,16 +104,61 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View v) {
 
 
-                ClinicModel clinic = new ClinicModel(name, phoneNumber, address, details, zipcode,"");
+                ClinicModel clinic = new ClinicModel(name, phoneNumber, address, details, zipcode, "");
                 uploadClinic(clinic);
 
 
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //phoneNumberEditText.setText("");
+                deleteData(phoneNumber);
+            }
+        });
+
+
 
         return binding.getRoot();
 
+    }
+
+    private void deleteData(String phoneNumber) {
+        db.collection("clinics")
+                .whereEqualTo("phone_number",phoneNumber)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful() && !task.getResult().isEmpty()){
+                            DocumentSnapshot documentSnapshot =task.getResult().getDocuments().get(0);
+                            String docId = documentSnapshot.getId();
+                            db.collection(("clinics"))
+                                    .document(docId)
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            new CustomToast(getContext(), getActivity(),
+                                                    name+" Deleted Successfully !", ToastStatus.SUCCESS).show();
+                                            // navigate to add clinic screen
+                                            nameEditText.setText("");
+                                            phoneNumberEditText.setText("");
+                                            addressEditText.setText("");
+                                            detailsEditText.setText("");
+                                            zipcodeEditText.setText("");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            new CustomToast(getContext(), getActivity(),
+                                                    name+" Failed to delete !", ToastStatus.SUCCESS).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 
     private void checkClinicData() {
@@ -129,13 +175,13 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         }
     }
 
-    public void uploadClinic(ClinicModel clinic ) {
+    public void uploadClinic(ClinicModel clinic) {
         db.collection("clinics").add(clinic).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicFragment_to_ClinicListFragment);
                 new CustomToast(getContext(), getActivity(),
-                        name+" Stored Successfully !", ToastStatus.SUCCESS).show();
+                        name + " Stored Successfully !", ToastStatus.SUCCESS).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -172,6 +218,9 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 //                    }
 //                });
     }
+
+
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

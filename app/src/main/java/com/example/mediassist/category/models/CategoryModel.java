@@ -1,13 +1,13 @@
 package com.example.mediassist.category.models;
 
-public class CategoryModel  {
+public class CategoryModel {
 
     private String name;
     private String description;
     private String assignclinic;
 
 
-    public CategoryModel(String name, String description,  String assignclinic) {
+    public CategoryModel(String name, String description, String assignclinic) {
         this.name = name;
         this.description = description;
         this.assignclinic = assignclinic;

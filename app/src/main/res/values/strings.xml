@@ -57,4 +57,8 @@
 
     <string name="back"><![CDATA[<-]]></string>
     <string name="forward"><![CDATA[->]]></string>
+    <string name="title_activity_schedule_appointment">ScheduleAppointment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="title_activity_search_doctors_list">SearchDoctorsListActivity</string>
 </resources>

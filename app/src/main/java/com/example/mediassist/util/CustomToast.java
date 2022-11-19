@@ -5,7 +5,6 @@ import static com.example.mediassist.util.ToastStatus.DELETE;
 import static com.example.mediassist.util.ToastStatus.FAILURE;
 import static com.example.mediassist.util.ToastStatus.SUCCESS;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
@@ -25,7 +24,6 @@ import com.example.mediassist.R;
  * Custom Toast class extends Toast class to customize it
  *
  * @author R
- *
  */
 public class CustomToast extends Toast {
 
@@ -50,16 +48,13 @@ public class CustomToast extends Toast {
         TextView txt = (TextView) view.findViewById(R.id.txtCustomToast);
 
 
-
         if (status.equals(SUCCESS)) {
             img.setImageResource(R.drawable.success);
             customToastLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.success));
-        }
-        else if (status.equals(DELETE)) {
+        } else if (status.equals(DELETE)) {
             img.setImageResource(R.drawable.delete);
             customToastLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.secondary_error_color));
-        }
-        else if (status.equals(FAILURE)) {
+        } else if (status.equals(FAILURE)) {
             img.setImageResource(R.drawable.error);
             customToastLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.secondary_error_color));
         }
@@ -67,7 +62,7 @@ public class CustomToast extends Toast {
 
         txt.setText(message);
 
-        setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+        setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
 
         setDuration(Toast.LENGTH_LONG);
 
