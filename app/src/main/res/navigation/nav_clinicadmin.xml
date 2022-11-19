@@ -20,6 +20,5 @@
         android:name="com.example.mediassist.clinicadmin.AddClinicAdminFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/add_clinic_admin">
-
     </fragment>
 </navigation>

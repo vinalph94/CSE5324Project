@@ -1,5 +1,7 @@
 package com.example.mediassist.clinic;
 
+import static java.util.Objects.nonNull;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,9 +39,15 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ClinicAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
         ClinicModel model = ClinicModelArrayList.get(position);
-//        holder.clinic_name.setText("" + model.getClinic_name());
-//        holder.clinic_phone_number.setText("" + model.getClinic_phone_number());
-//        holder.clinic_address.setText("" + model.getClinic_address());
+        if (nonNull(model.getName())) {
+            holder.clinic_name.setText(String.format("%s", model.getName()));
+        }
+        if (nonNull(model.getPhone_number())){
+            holder.clinic_phone_number.setText(String.format("%s", model.getPhone_number()));
+        }
+        if (nonNull(model.getAddress())) {
+            holder.clinic_address.setText(String.format("%s", model.getAddress()));
+        }
     }
 
     @Override
