@@ -3,6 +3,7 @@ package com.example.mediassist.appointment;
 import static java.util.Objects.nonNull;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.ViewHolder> {
@@ -44,6 +46,11 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.View
         if (nonNull(model)) {
             holder.timeSlitBtn.setText(String.format("%s", model));
         }
+        /*if(ConfirmAppointmentFragment.selectedTime != null &&
+                model.equals(ConfirmAppointmentFragment.selectedTime) ){
+            System.out.println("Highlighting selected time "+model);
+            holder.timeSlitBtn.setBackgroundColor(Color.rgb(64, 142, 155));
+        }*/
 
 
         holder.itemView.setOnClickListener(view -> {
