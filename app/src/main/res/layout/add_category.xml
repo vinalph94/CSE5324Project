@@ -83,7 +83,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:visibility="gone"
+
         android:orientation="horizontal">
 
         <Button
@@ -94,6 +94,7 @@
             android:maxWidth="35dp"
             android:text="Save"
             android:textAlignment="center"
+            android:visibility="gone"
             app:cornerRadius="100dp" />
 
         <Button
@@ -104,6 +105,7 @@
             android:maxWidth="35dp"
             android:text="Delete"
             android:textAlignment="center"
+            android:visibility="gone"
             android:backgroundTint="@color/secondary_error_color"
             android:textColor="@color/error_text_color"
             app:cornerRadius="100dp" />

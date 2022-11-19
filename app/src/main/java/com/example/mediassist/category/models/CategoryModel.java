@@ -1,16 +1,20 @@
 package com.example.mediassist.category.models;
 
-public class CategoryModel {
+import java.io.Serializable;
+
+public class CategoryModel implements Serializable {
 
     private String name;
     private String description;
     private String assignclinic;
+    private String id;
 
 
-    public CategoryModel(String name, String description, String assignclinic) {
+    public CategoryModel(String name, String description, String assignclinic, String id) {
         this.name = name;
         this.description = description;
         this.assignclinic = assignclinic;
+        this.id = id;
     }
 
     public CategoryModel() {
@@ -40,5 +44,12 @@ public class CategoryModel {
         this.assignclinic = assignclinic;
     }
 
+    public String setId() {
+        return id;
+    }
+
+    public String getId() {
+        return id;
+    }
 
 }

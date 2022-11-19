@@ -20,6 +20,7 @@ public class CategoryActivity extends AppCompatActivity {
     private ActivityCategoryBinding binding;
     private TextView textTitle;
     public Button btnAdd;
+    private Bundle bundle;
 
 
     @Override
@@ -35,7 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_category);
         setActionBarTitle("Categories");
 
-
+        bundle = new Bundle();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
