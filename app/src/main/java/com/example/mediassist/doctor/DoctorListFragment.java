@@ -1,27 +1,37 @@
 package com.example.mediassist.doctor;
 
-import android.app.UiAutomation;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.mediassist.clinic.ClinicAdapter;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.DoctorListBinding;
+import com.example.mediassist.doctor.models.DoctorModel;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class DoctorListFragment extends Fragment  {
+public class DoctorListFragment extends Fragment {
 
     private DoctorListBinding binding;
-    private ClinicAdapter courseAdapter;
+    private FirebaseFirestore db;
+    private ArrayList<DoctorModel> courseArrayList = new ArrayList<DoctorModel>();
+    private String doctor_name;
+    private String doctor_phone_Number;
+    private String doctor_email;
+    private String assignspecialization;
+    private String assignclinic;
+    private DoctorAdapter courseAdapter;
 
     @Override
     public View onCreateView(
@@ -29,30 +39,35 @@ public class DoctorListFragment extends Fragment  {
             Bundle savedInstanceState
     ) {
 
+        db = FirebaseFirestore.getInstance();
+
         binding = DoctorListBinding.inflate(inflater, container, false);
-        ArrayList<ClinicModel> courseModelArrayList = new ArrayList<ClinicModel>();
-//        courseModelArrayList.add(new ClinicModel("Doctor 1", "+16823136673","1001 UTA BLVD, Arlington, Texas, 76013"));
-//        courseModelArrayList.add(new ClinicModel("Doctor 2", "+14562243376","657 BLVD, Arlington, Texas, 76018"));
-//        courseModelArrayList.add(new ClinicModel("Doctor 3", "+16256673345","567 BLVD, Arlington, Texas, 76024"));
 
-        RecyclerView courseRV = binding.idRVCourse;
-        // we are initializing our adapter class and passing our arraylist to it.
-        courseAdapter = new ClinicAdapter(getContext(), courseModelArrayList, new ClinicAdapter.ClinicItemListener() {
+        RecyclerView courseRV = binding.idRVCourseDoctor;
+
+        db.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onAdapterItemClick(ClinicModel clinic) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                courseArrayList.clear();
+                for (QueryDocumentSnapshot snapshot : value) {
+                    doctor_name = snapshot.getString("name");
+                    doctor_phone_Number = snapshot.getString("phonenumber");
+                    doctor_email = snapshot.getString("email");
+                    assignspecialization = snapshot.getString("assignspecialization");
+                    assignclinic = snapshot.getString("assignclinic");
+                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
 
+                }
+                courseAdapter = new DoctorAdapter(getContext(), courseArrayList);
+                courseAdapter.notifyDataSetChanged();
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                        LinearLayoutManager.VERTICAL, false);
+
+                courseRV.setLayoutManager(linearLayoutManager);
+                courseRV.setAdapter(courseAdapter);
             }
-
         });
-
-        // below line is for setting a layout manager for our recycler view.
-        // here we are creating vertical list so we will provide orientation as vertical
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
-        // in below two lines we are setting layoutmanager and adapter to our recycler view.
-        courseRV.setLayoutManager(linearLayoutManager);
-        courseRV.setAdapter(courseAdapter);
-
 
         return binding.getRoot();
 
@@ -67,6 +82,5 @@ public class DoctorListFragment extends Fragment  {
         super.onDestroyView();
         binding = null;
     }
-
 
 }

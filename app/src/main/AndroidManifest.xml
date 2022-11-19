@@ -53,11 +53,20 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".category.CategoryActivity"
+            android:exported="false"
+            android:label="CategoryActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
 
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".doctor.DoctorActivity"
             android:exported="false"
-            android:label="forgot_password"
+            android:label="DoctorActivity"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -68,12 +77,12 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MediAssist.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

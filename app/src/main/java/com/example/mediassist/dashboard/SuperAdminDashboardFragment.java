@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.ClinicAdminLayoutBinding;
@@ -46,13 +47,13 @@ public class SuperAdminDashboardFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), CategoryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+           public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
         clinicDoctorCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

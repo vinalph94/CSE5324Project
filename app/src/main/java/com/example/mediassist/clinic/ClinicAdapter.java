@@ -73,10 +73,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            clinic_name = itemView.findViewById(R.id.clinic_name);
-            clinic_phone_number = itemView.findViewById(R.id.clinic_phone_number);
-            clinic_address = itemView.findViewById(R.id.clinic_address);
-
+            clinic_name = itemView.findViewById(R.id.textview1);
+            clinic_phone_number = itemView.findViewById(R.id.textview2);
+            clinic_address = itemView.findViewById(R.id.textview3);
         }
 
 

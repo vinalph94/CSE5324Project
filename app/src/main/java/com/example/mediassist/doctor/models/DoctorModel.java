@@ -2,58 +2,61 @@ package com.example.mediassist.doctor.models;
 
 public class DoctorModel {
     private String name;
-    private String phone_number;
-    private String address;
-    private String assign_specialization;
-    private String assign_clinic;
+    private String phonenumber;
+    private String email;
+    private String assignspecialization;
+    private String assignclinic;
 
 
-    public DoctorModel(String name, String phone_number, String address, String assign_specialization, String assign_clinic) {
+    public DoctorModel(String name, String phonenumber, String email, String assignspecialization, String assignclinic) {
         this.name = name;
-        this.phone_number = phone_number;
-        this.address = address;
-        this.assign_specialization = assign_specialization;
-        this.assign_clinic = assign_clinic;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.assignspecialization = assignspecialization;
+        this.assignclinic = assignclinic;
 
     }
 
-    public String getDoctor_name() {
+    public DoctorModel() {
+    }
+
+    public String getDoctorname() {
         return name;
     }
 
-    public String getDoctor_phone_number() {
-        return phone_number;
+    public String getDoctorphonenumber() {
+        return phonenumber;
     }
 
-    public String getDoctor_address() {
-        return address;
+    public String getDoctoremail() {
+        return email;
     }
 
-    public String getAssign_specialization() {
-        return assign_specialization;
+    public String getAssignspecialization() {
+        return assignspecialization;
     }
 
-    public String getAssign_clinic() {
-        return assign_clinic;
+    public String getAssignclinic() {
+        return assignclinic;
     }
 
-    public void setDoctor_name(String name) {
+    public void setDoctorname(String name) {
         this.name = name;
     }
 
-    public void setDoctor_phone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setDoctorphonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public void setDoctor_address(String address) {
-        this.address = address;
+    public void setDoctoremail(String email) {
+        this.email = email;
     }
 
-    public void setAssign_specialization(String assign_specialization) {
-        this.assign_specialization = assign_specialization;
+    public void setAssignspecialization(String assignspecialization) {
+        this.assignspecialization = assignspecialization;
     }
 
-    public void setAssign_clinic(String assign_clinic) {
-        this.assign_clinic = assign_clinic;
+    public void setAssignclinic(String assignclinic) {
+        this.assignclinic = assignclinic;
     }
 }

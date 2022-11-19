@@ -1,4 +1,4 @@
-package com.example.mediassist.clinicadmin;
+package com.example.mediassist.category;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
-import com.example.mediassist.databinding.ClinicAdminListBinding;
+
+import com.example.mediassist.category.models.CategoryModel;
+import com.example.mediassist.databinding.CategoryListBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -21,40 +22,39 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ClinicAdminListFragment extends Fragment {
+public class CategoryListFragment extends Fragment {
 
-    private ClinicAdminListBinding binding;
+    private CategoryListBinding binding;
     private FirebaseFirestore db;
-    private ArrayList<ClinicAdminModel> courseArrayList = new ArrayList<ClinicAdminModel>();
+    private ArrayList<CategoryModel> courseArrayList = new ArrayList<CategoryModel>();
     private String name;
-    private String phoneNumber;
-    private String email;
+    private String description;
     private String assignClinic;
-    private ClinicAdminAdapter courseAdapter;
-
+    private CategoryAdapter courseAdapter;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         db = FirebaseFirestore.getInstance();
-        binding = ClinicAdminListBinding.inflate(inflater, container, false);
-        RecyclerView courseRV = binding.idRVCourseClinicAdmin;
+        binding = CategoryListBinding.inflate(inflater, container, false);
+        RecyclerView courseRV = binding.idRVCourseCategory;
 
 
-        db.collection("clinicAdmins").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
                     name = snapshot.getString("name");
-                    phoneNumber = snapshot.getString("phone_number");
-                     email = snapshot.getString("email");
-                    assignClinic = snapshot.getString("assign_clinic");
-                    courseArrayList.add(new ClinicAdminModel(name, phoneNumber, email, assignClinic));
+                    if (snapshot.getString("description") != null) {
+                        description = snapshot.getString("description");
+                    }
+                    assignClinic = snapshot.getString("assignclinic");
+                    courseArrayList.add(new CategoryModel(name, description, assignClinic));
 
                 }
-                courseAdapter = new ClinicAdminAdapter(getContext(), courseArrayList);
+                courseAdapter = new CategoryAdapter(getContext(), courseArrayList);
                 courseAdapter.notifyDataSetChanged();
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
@@ -67,12 +67,17 @@ public class ClinicAdminListFragment extends Fragment {
             }
         });
 
+
+
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
 
     }
 
