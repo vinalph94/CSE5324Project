@@ -21,10 +21,14 @@ import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -107,9 +111,54 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //phoneNumberEditText.setText("");
+                deleteData(phoneNumber);
+            }
+        });
+
+
 
         return binding.getRoot();
 
+    }
+
+    private void deleteData(String phoneNumber) {
+        db.collection("clinics")
+                .whereEqualTo("phone_number",phoneNumber)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful() && !task.getResult().isEmpty()){
+                            DocumentSnapshot documentSnapshot =task.getResult().getDocuments().get(0);
+                            String docId = documentSnapshot.getId();
+                            db.collection(("clinics"))
+                                    .document(docId)
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            new CustomToast(getContext(), getActivity(),
+                                                    name+" Deleted Successfully !", ToastStatus.SUCCESS).show();
+                                            // navigate to add clinic screen
+                                            nameEditText.setText("");
+                                            phoneNumberEditText.setText("");
+                                            addressEditText.setText("");
+                                            detailsEditText.setText("");
+                                            zipcodeEditText.setText("");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            new CustomToast(getContext(), getActivity(),
+                                                    name+" Failed to delete !", ToastStatus.SUCCESS).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 
     private void checkClinicData() {
@@ -169,6 +218,9 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 //                    }
 //                });
     }
+
+
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
