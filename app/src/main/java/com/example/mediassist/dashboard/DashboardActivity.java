@@ -30,14 +30,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //String role = intent.getStringExtra("role");
-        String role="4";
+        //String role="4";
 
-        if(role=="1"){navController.navigate(R.id.SuperAdminDashboardFragment);}
+        /*if(role=="1"){navController.navigate(R.id.SuperAdminDashboardFragment);}
         else if (role=="2"){navController.navigate(R.id.ClinicAdminDashboard);}
         else if(role=="3"){navController.navigate(R.id.DoctorDashboard);}
         else if(role=="4"){ navController.navigate(R.id.PatientDashboard);}
-        else{}
-       // navController.navigate(R.id.SuperAdminDashboardFragment_to_PatientDashboard);
+        else{}*/
+        navController.navigate(R.id.SuperAdminDashboardFragment_to_PatientDashboard);
 
     }
 
