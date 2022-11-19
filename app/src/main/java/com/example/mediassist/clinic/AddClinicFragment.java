@@ -48,12 +48,16 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private String phoneNumber;
     private String address;
     private int zipcode;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
 
         binding = AddClinicBinding.inflate(inflater, container, false);
+
+        bundle = getArguments();
+        ClinicModel clinic= (ClinicModel) (bundle != null ? bundle.getSerializable("clinic") : null);
 
 
         nameEditText = binding.clinicNameText;
@@ -69,6 +73,19 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         editButton = binding.clinicEditButton;
         deleteButton = binding.clinicDeleteButton;
 
+        if (clinic !=null){
+            nameEditText.setText(clinic.getName());
+            phoneNumberEditText.setText(clinic.getPhone_number());
+            addressEditText.setText(clinic.getAddress());
+            zipcodeEditText.setText(String.valueOf(clinic.getZipcode()));
+            if(clinic.getDescription() !=null){
+                detailsEditText.setText(clinic.getDescription());
+            }
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+
+        }
 
         nameEditText.addTextChangedListener(new CustomTextWatcher(clinicNameError, AddClinicFragment.this));
         phoneNumberEditText.addTextChangedListener(new CustomTextWatcher(phoneNumberEditTextError,AddClinicFragment.this));
@@ -86,7 +103,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View v) {
 
 
-                ClinicModel clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+                ClinicModel clinic = new ClinicModel(name, phoneNumber, address, details, zipcode,"");
                 uploadClinic(clinic);
 
 
@@ -130,6 +147,30 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         });
 
 
+    }
+
+
+    public void updateDocument(ClinicModel clinic) {
+//        Toast.makeText(this, "updateDocument", Toast.LENGTH_SHORT).show();
+
+        final DocumentReference docRef = FirebaseFirestore.getInstance()
+                .collection("clinics")
+                .document(clinic.getId());
+
+
+//        docRef.update(clinic)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

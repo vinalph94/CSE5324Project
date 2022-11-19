@@ -38,6 +38,7 @@ public class AddDoctorFragment extends Fragment {
     private Button save;
     private Button edit;
     private Button delete;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(

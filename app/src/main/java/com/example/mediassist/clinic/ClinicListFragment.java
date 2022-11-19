@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.R;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.ClinicListBinding;
 import com.google.firebase.firestore.EventListener;
@@ -32,6 +34,7 @@ public class ClinicListFragment extends Fragment {
     private String address;
     private int zipcode;
     private ClinicAdapter courseAdapter;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(
@@ -56,10 +59,16 @@ public class ClinicListFragment extends Fragment {
                     }
                     address = snapshot.getString("address");
                     zipcode = snapshot.getLong("zipcode").intValue();
-                    courseArrayList.add(new ClinicModel(name, phoneNumber, address, details, zipcode));
+                    courseArrayList.add(new ClinicModel(name, phoneNumber, address, details, zipcode, snapshot.getId()));
 
                 }
-                courseAdapter = new ClinicAdapter(getContext(), courseArrayList);
+                courseAdapter = new ClinicAdapter(getContext(), courseArrayList, new ClinicAdapter.ClinicItemListener() {
+                    @Override
+                    public void onAdapterItemClick(ClinicModel clinic) {
+                        navigateToAddFragment(clinic);
+                    }
+
+                });
                 courseAdapter.notifyDataSetChanged();
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
@@ -89,4 +98,9 @@ public class ClinicListFragment extends Fragment {
         binding = null;
     }
 
+    private void navigateToAddFragment(ClinicModel clinic){
+        bundle = new Bundle();
+        bundle.putSerializable("clinic", clinic);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ClinicListFragment_to_AddClinicFragment, bundle);
+    }
 }

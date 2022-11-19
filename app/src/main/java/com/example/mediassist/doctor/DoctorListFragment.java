@@ -1,5 +1,6 @@
 package com.example.mediassist.doctor;
 
+import android.app.UiAutomation;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.mediassist.clinic.ClinicAdapter;
 import com.example.mediassist.clinic.models.ClinicModel;
@@ -16,9 +18,10 @@ import com.example.mediassist.databinding.DoctorListBinding;
 
 import java.util.ArrayList;
 
-public class DoctorListFragment extends Fragment {
+public class DoctorListFragment extends Fragment  {
 
     private DoctorListBinding binding;
+    private ClinicAdapter courseAdapter;
 
     @Override
     public View onCreateView(
@@ -34,7 +37,13 @@ public class DoctorListFragment extends Fragment {
 
         RecyclerView courseRV = binding.idRVCourse;
         // we are initializing our adapter class and passing our arraylist to it.
-        ClinicAdapter courseAdapter = new ClinicAdapter(getContext(), courseModelArrayList);
+        courseAdapter = new ClinicAdapter(getContext(), courseModelArrayList, new ClinicAdapter.ClinicItemListener() {
+            @Override
+            public void onAdapterItemClick(ClinicModel clinic) {
+
+            }
+
+        });
 
         // below line is for setting a layout manager for our recycler view.
         // here we are creating vertical list so we will provide orientation as vertical
@@ -58,5 +67,6 @@ public class DoctorListFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
 }

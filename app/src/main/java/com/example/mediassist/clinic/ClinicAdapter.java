@@ -19,12 +19,14 @@ import java.util.ArrayList;
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<ClinicModel> ClinicModelArrayList;
+    private final ArrayList<ClinicModel> clinicModelArrayList;
+    private ClinicItemListener clinicItemListener;
 
     // Constructor
-    public ClinicAdapter(Context context, ArrayList<ClinicModel> ClinicModelArrayList) {
+    public ClinicAdapter(Context context, ArrayList<ClinicModel> ClinicModelArrayList, ClinicItemListener clinicItemListener) {
         this.context = context;
-        this.ClinicModelArrayList = ClinicModelArrayList;
+        this.clinicModelArrayList = ClinicModelArrayList;
+        this.clinicItemListener = clinicItemListener;
     }
 
     @NonNull
@@ -32,13 +34,14 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
     public ClinicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClinicAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        ClinicModel model = ClinicModelArrayList.get(position);
+        ClinicModel model = clinicModelArrayList.get(position);
         if (nonNull(model.getName())) {
             holder.clinic_name.setText(String.format("%s", model.getName()));
         }
@@ -48,25 +51,37 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
         if (nonNull(model.getAddress())) {
             holder.clinic_address.setText(String.format("%s", model.getAddress()));
         }
+
+        holder.itemView.setOnClickListener(view -> {
+            clinicItemListener.onAdapterItemClick(clinicModelArrayList.get(position));
+        });
     }
 
     @Override
     public int getItemCount() {
         // this method is used for showing number of card items in recycler view
-        return ClinicModelArrayList.size();
+        return clinicModelArrayList.size();
     }
 
     // View holder class for initializing of your views such as TextView and Imageview
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder
+    {
         private final TextView clinic_name;
         private final TextView clinic_phone_number;
         private final TextView clinic_address;
+        ClinicItemListener clinicItemListener;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             clinic_name = itemView.findViewById(R.id.clinic_name);
             clinic_phone_number = itemView.findViewById(R.id.clinic_phone_number);
             clinic_address = itemView.findViewById(R.id.clinic_address);
+
         }
+
+
+    }
+    public interface ClinicItemListener{
+        void onAdapterItemClick(ClinicModel clinic);
     }
 }
