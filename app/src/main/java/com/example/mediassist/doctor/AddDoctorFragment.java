@@ -25,10 +25,14 @@ import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -57,7 +61,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         binding = AddDoctorBinding.inflate(inflater, container, false);
 
         bundle = getArguments();
-        DoctorModel doctor= (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
+        DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
 
         Spinner spinner = (Spinner) binding.ClinicSpinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
@@ -79,7 +83,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         doctor_phone_number_error_text = binding.doctorPhoneNumberErrorText;
         doctor_email_error_text = binding.doctorEmailErrorText;
 
-        if (doctor !=null){
+        if (doctor != null) {
             doctorName.setText(doctor.getDoctorname());
             doctorPhoneNumber.setText(doctor.getDoctorphonenumber());
             doctorEmail.setText(doctor.getDoctoremail());
@@ -102,15 +106,54 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                 doctorAssignClinic = spinner.getSelectedItem().toString();
                 doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
 
-                    DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic,"");
-                    uploadDoctor(doctor);
+                DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic, "");
+                uploadDoctor(doctor);
 
             }
         });
 
-
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //phoneNumberEditText.setText("");
+                deleteData(phone_number);
+            }
+        });
         return binding.getRoot();
 
+    }
+
+    private void deleteData(String phoneNumber) {
+        db.collection("doctors").whereEqualTo("doctorphonenumber", phoneNumber).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                    String docId = documentSnapshot.getId();
+                    db.collection(("doctors")).document(docId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            new CustomToast(getContext(), getActivity(), name + " Deleted Successfully !", ToastStatus.SUCCESS).show();
+                            // navigate to add clinic screen
+                            doctorName.setText("");
+                            doctorPhoneNumber.setText("");
+                            doctorEmail.setText("");
+                            saveButton.setVisibility(View.VISIBLE);
+                            editButton.setVisibility(View.GONE);
+                            deleteButton.setVisibility(View.GONE);
+                            doctor_name_error_text.setVisibility(View.GONE);
+                            doctor_phone_number_error_text.setVisibility(View.GONE);
+                            doctor_email_error_text.setVisibility(View.GONE);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            new CustomToast(getContext(), getActivity(), name + " Failed to delete !", ToastStatus.SUCCESS).show();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void checkDoctorData() {
@@ -125,23 +168,19 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     }
 
     public void uploadDoctor(DoctorModel doctor) {
-        db.collection("doctors")
-                .add(doctor)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorListFragment);
-                        new CustomToast(getContext(), getActivity(),
-                                name + " Stored Successfully !", ToastStatus.SUCCESS).show();
+        db.collection("doctors").add(doctor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorListFragment);
+                new CustomToast(getContext(), getActivity(), name + " Stored Successfully !", ToastStatus.SUCCESS).show();
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
-                    }
-                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+            }
+        });
 
 
     }
@@ -158,6 +197,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         super.onDestroyView();
         binding = null;
     }
+
     @Override
     public void checkForEmpty() {
         checkDoctorData();

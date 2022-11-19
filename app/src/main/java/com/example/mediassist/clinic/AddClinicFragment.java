@@ -148,6 +148,14 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
                                             addressEditText.setText("");
                                             detailsEditText.setText("");
                                             zipcodeEditText.setText("");
+                                            saveButton.setVisibility(View.VISIBLE);
+                                            editButton.setVisibility(View.GONE);
+                                            deleteButton.setVisibility(View.GONE);
+                                            clinicNameError.setVisibility(View.GONE);
+                                            phoneNumberEditTextError.setVisibility(View.GONE);
+                                            addressEditTextError.setVisibility(View.GONE);
+                                            zipcodeEditTextError.setVisibility(View.GONE);
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override

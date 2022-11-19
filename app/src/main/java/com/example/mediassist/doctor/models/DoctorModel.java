@@ -66,6 +66,7 @@ public class DoctorModel implements Serializable {
     public String setId() {
         return id;
     }
+
     public String getId() {
         return id;
     }
