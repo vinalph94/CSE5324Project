@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ScheduleAppointmentFragmentBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +36,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class ScheduleAppointmentFragment extends Fragment implements CalendarAdapter.OnItemListener{
+public class ScheduleAppointmentFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
     private ScheduleAppointmentFragmentBinding binding;
     private TextView monthYearText;

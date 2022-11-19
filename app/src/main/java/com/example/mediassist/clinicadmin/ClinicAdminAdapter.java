@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinic.ClinicAdapter;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
     private final Context context;
     private final ArrayList<ClinicAdminModel> ClinicAdminModelArrayList;
     private ClinicAdminItemListener clinicadminItemListener;
+
     // Constructor
     public ClinicAdminAdapter(Context context, ArrayList<ClinicAdminModel> ClinicAdminModelArrayList, ClinicAdminItemListener clinicadminItemListener) {
         this.context = context;
@@ -75,7 +74,7 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
         }
     }
 
-    public interface ClinicAdminItemListener{
+    public interface ClinicAdminItemListener {
         void onAdapterItemClick(ClinicAdminModel clinicadmin);
     }
 }

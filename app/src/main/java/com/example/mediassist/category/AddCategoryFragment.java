@@ -2,7 +2,6 @@ package com.example.mediassist.category;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.AddCategoryBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
@@ -90,9 +88,9 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         saveButton.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View view) {
-                                               assign_clinic = spinner.getSelectedItem().toString();
+                                              assign_clinic = spinner.getSelectedItem().toString();
                                               description = categoryDescription.getText().toString();
-                                              CategoryModel category = new CategoryModel(name, description, assign_clinic,"");
+                                              CategoryModel category = new CategoryModel(name, description, assign_clinic, "");
                                               uploadCategory(category);
                                           }
                                       }
@@ -112,14 +110,15 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         return binding.getRoot();
 
     }
+
     private void deleteData(String phoneNumber) {
         db.collection("categories")
-                .whereEqualTo("name",name)
+                .whereEqualTo("name", name)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful() && !task.getResult().isEmpty()){
-                            DocumentSnapshot documentSnapshot =task.getResult().getDocuments().get(0);
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                             String docId = documentSnapshot.getId();
                             db.collection(("categories"))
                                     .document(docId)
@@ -128,7 +127,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                                         @Override
                                         public void onSuccess(Void unused) {
                                             new CustomToast(getContext(), getActivity(),
-                                                    name+" Deleted Successfully !", ToastStatus.SUCCESS).show();
+                                                    name + " Deleted Successfully !", ToastStatus.SUCCESS).show();
                                             // navigate to add clinic screen
                                             categoryName.setText("");
                                             categoryDescription.setText("");
@@ -144,7 +143,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             new CustomToast(getContext(), getActivity(),
-                                                    name+" Failed to delete !", ToastStatus.SUCCESS).show();
+                                                    name + " Failed to delete !", ToastStatus.SUCCESS).show();
                                         }
                                     });
                         }

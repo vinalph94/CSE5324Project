@@ -12,11 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mediassist.SearchDoctors.SearchDoctorsListActivity;
-import com.example.mediassist.appointment.ScheduleAppointmentActivity;
-import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
-import com.example.mediassist.login.LoginActivity;
-import com.example.mediassist.signup.RegisterActivity;
 
 public class WelcomeFragment extends Fragment {
 
@@ -31,7 +27,6 @@ public class WelcomeFragment extends Fragment {
         binding = WelcomeBinding.inflate(inflater, container, false);
         Button signInButton = binding.signinButtonView;
         Button signUpButton = binding.signupButtonView;
-
 
 
         return binding.getRoot();

@@ -11,7 +11,7 @@ public class DoctorModel implements Serializable {
     private String id;
 
 
-    public DoctorModel(String name, String phonenumber, String email, String assignspecialization, String assignclinic,  String id) {
+    public DoctorModel(String name, String phonenumber, String email, String assignspecialization, String assignclinic, String id) {
         this.name = name;
         this.phonenumber = phonenumber;
         this.email = email;
