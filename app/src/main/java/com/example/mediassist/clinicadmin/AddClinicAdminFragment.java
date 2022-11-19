@@ -16,8 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-
-
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -28,18 +26,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -74,8 +64,8 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
 
         Spinner spinner = (Spinner) binding.spinner;
-         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
-         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
 /*
@@ -118,7 +108,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             clinicAdminName.setText(clinicadmin.getName());
             clinicAdminPhoneNumber.setText(clinicadmin.getPhone_number());
             clinicAdminEmail.setText(clinicadmin.getEmail());
-           // assign_clinic = clinicadmin.getAssign_clinic().;
+            // assign_clinic = clinicadmin.getAssign_clinic().;
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);

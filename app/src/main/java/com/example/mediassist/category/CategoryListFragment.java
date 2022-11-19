@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
-import com.example.mediassist.clinic.ClinicAdapter;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.CategoryListBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CategoryListFragment extends Fragment {
@@ -57,7 +54,7 @@ public class CategoryListFragment extends Fragment {
                         description = snapshot.getString("description");
                     }
                     assignClinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new CategoryModel(name, description, assignClinic,snapshot.getId()));
+                    courseArrayList.add(new CategoryModel(name, description, assignClinic, snapshot.getId()));
 
                 }
                 courseAdapter = new CategoryAdapter(getContext(), courseArrayList, new CategoryAdapter.CategoryItemListener() {
@@ -95,6 +92,7 @@ public class CategoryListFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     private void navigateToAddFragment(CategoryModel category) {
         bundle = new Bundle();
         bundle.putSerializable("category", category);

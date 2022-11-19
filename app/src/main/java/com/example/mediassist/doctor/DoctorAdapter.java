@@ -21,11 +21,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     private final Context context;
     private final ArrayList<DoctorModel> DoctorModelArrayList;
     private DoctorItemListener doctorItemListener;
+
     // Constructor
-    public DoctorAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList,DoctorItemListener doctorItemListener) {
+    public DoctorAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList, DoctorItemListener doctorItemListener) {
         this.context = context;
         this.DoctorModelArrayList = DoctorModelArrayList;
-        this.doctorItemListener= doctorItemListener;
+        this.doctorItemListener = doctorItemListener;
     }
 
     @NonNull
@@ -43,7 +44,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         if (nonNull(model.getDoctorname())) {
             holder.textview1.setText(String.format("%s", model.getDoctorname()));
         }
-        if (nonNull(model.getAssignclinic())){
+        if (nonNull(model.getAssignclinic())) {
             holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
         }
         if (nonNull(model.getDoctoremail())) {
@@ -74,7 +75,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             email = itemView.findViewById(R.id.textview3);
         }
     }
-    public interface DoctorItemListener{
-         void onAdapterItemClick(DoctorModel doctor);
+
+    public interface DoctorItemListener {
+        void onAdapterItemClick(DoctorModel doctor);
     }
 }

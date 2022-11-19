@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
-import com.example.mediassist.clinic.ClinicAdapter;
-import com.example.mediassist.clinic.models.ClinicModel;
 
 import java.util.ArrayList;
 
@@ -22,11 +20,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private final Context context;
     private final ArrayList<CategoryModel> CategoryModelArrayList;
     private CategoryItemListener categoryItemListener;
+
     // Constructor
-    public CategoryAdapter(Context context, ArrayList<CategoryModel> CategoryModelArrayList,CategoryItemListener categoryItemListener) {
+    public CategoryAdapter(Context context, ArrayList<CategoryModel> CategoryModelArrayList, CategoryItemListener categoryItemListener) {
         this.context = context;
         this.CategoryModelArrayList = CategoryModelArrayList;
-        this.categoryItemListener= categoryItemListener;
+        this.categoryItemListener = categoryItemListener;
     }
 
     @NonNull
@@ -74,6 +73,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             clinic_assign = itemView.findViewById(R.id.textview3);
         }
     }
+
     public interface CategoryItemListener {
         void onAdapterItemClick(CategoryModel category);
     }

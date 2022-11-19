@@ -35,6 +35,7 @@ public class ClinicListFragment extends Fragment {
     private int zipcode;
     private ClinicAdapter courseAdapter;
     private Bundle bundle;
+    private ClinicModel clinic;
 
     @Override
     public View onCreateView(
@@ -59,7 +60,9 @@ public class ClinicListFragment extends Fragment {
                     }
                     address = snapshot.getString("address");
                     zipcode = snapshot.getLong("zipcode").intValue();
-                    courseArrayList.add(new ClinicModel(name, phoneNumber, address, details, zipcode, snapshot.getId()));
+                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+                    clinic.setId(snapshot.getId());
+                    courseArrayList.add(clinic);
 
                 }
                 courseAdapter = new ClinicAdapter(getContext(), courseArrayList, new ClinicAdapter.ClinicItemListener() {

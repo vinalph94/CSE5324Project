@@ -1,8 +1,5 @@
 package com.example.mediassist.SearchDoctors;
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-import static com.example.mediassist.util.ToastStatus.SUCCESS;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -24,7 +21,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivitySearchDoctorsListBinding;
-import com.example.mediassist.util.CustomToast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;

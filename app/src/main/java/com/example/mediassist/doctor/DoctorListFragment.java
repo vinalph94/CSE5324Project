@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.clinicadmin.ClinicAdminAdapter;
-import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.DoctorListBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.google.firebase.firestore.EventListener;
@@ -60,7 +58,7 @@ public class DoctorListFragment extends Fragment {
                     doctor_email = snapshot.getString("doctoremail");
                     assignspecialization = snapshot.getString("assignspecialization");
                     assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic,snapshot.getId()));
+                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, snapshot.getId()));
 
                 }
                 courseAdapter = new DoctorAdapter(getContext(), courseArrayList, new DoctorAdapter.DoctorItemListener() {
@@ -94,7 +92,7 @@ public class DoctorListFragment extends Fragment {
         binding = null;
     }
 
-    private void navigateToAddFragment(DoctorModel doctor){
+    private void navigateToAddFragment(DoctorModel doctor) {
         bundle = new Bundle();
         bundle.putSerializable("doctor", doctor);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_DoctorListFragment_to_AddDoctorFragment, bundle);
