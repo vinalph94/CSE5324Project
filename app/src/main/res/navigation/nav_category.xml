@@ -20,6 +20,9 @@
         android:name="com.example.mediassist.category.AddCategoryFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/add_category">
+        <action
+            android:id="@+id/action_AddCategoryFragment_to_CategoryListFragment"
+            app:destination="@id/CategoryListFragment" />
 
 
     </fragment>

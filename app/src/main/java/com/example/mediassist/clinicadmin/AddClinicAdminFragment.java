@@ -70,7 +70,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicAdminName.addTextChangedListener(new CustomTextWatcher(clinic_admin_name_error, AddClinicAdminFragment.this));
         clinicAdminPhoneNumber.addTextChangedListener(new CustomTextWatcher(clinic_admin_phone_number_error, AddClinicAdminFragment.this));
         clinicAdminEmail.addTextChangedListener(new CustomTextWatcher(clinic_admin_email_error, AddClinicAdminFragment.this));
-        checkClinicData();
+        checkClinicAdminData();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -90,7 +90,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     }
 
-    private void checkClinicData() {
+    private void checkClinicAdminData() {
         name = clinicAdminName.getText().toString();
         phone_number = clinicAdminPhoneNumber.getText().toString();
         email = clinicAdminEmail.getText().toString();
@@ -135,6 +135,6 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     @Override
     public void checkForEmpty() {
-        checkClinicData();
+        checkClinicAdminData();
     }
 }
