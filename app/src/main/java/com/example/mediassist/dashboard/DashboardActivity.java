@@ -37,7 +37,8 @@ public class DashboardActivity extends AppCompatActivity {
         else if(role=="3"){navController.navigate(R.id.DoctorDashboard);}
         else if(role=="4"){ navController.navigate(R.id.PatientDashboard);}
         else{}*/
-        navController.navigate(R.id.SuperAdminDashboardFragment_to_PatientDashboard);
+        Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
+
 
     }
 

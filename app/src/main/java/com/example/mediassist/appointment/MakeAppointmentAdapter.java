@@ -44,13 +44,13 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
         // to set data to textview and imageview of each card layout
         DoctorModel model = DoctorModelArrayList.get(position);
         if (nonNull(model.getDoctorname())) {
-            holder.textview1.setText(String.format("%s", model.getDoctorname()));
+            holder.doctorname.setText(String.format("%s", model.getDoctorname()));
         }
         if (nonNull(model.getAssignclinic())){
             holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
         }
-        if (nonNull(model.getDoctoremail())) {
-            holder.email.setText(String.format("%s", model.getDoctoremail()));
+        if (nonNull(model.getAssignspecialization())) {
+            holder.assignspecialization.setText(String.format("%s", model.getAssignspecialization()));
         }
 
 
@@ -64,15 +64,15 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
 
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textview1;
+        private final TextView doctorname;
         private final TextView assignclinic;
-        private final TextView email;
+        private final TextView assignspecialization;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textview1 = itemView.findViewById(R.id.textview1);
+            doctorname = itemView.findViewById(R.id.textview1);
             assignclinic = itemView.findViewById(R.id.textview2);
-            email = itemView.findViewById(R.id.textview3);
+            assignspecialization = itemView.findViewById(R.id.textview3);
         }
     }
 }
