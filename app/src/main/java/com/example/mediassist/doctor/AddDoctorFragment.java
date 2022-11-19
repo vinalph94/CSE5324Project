@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 import com.example.mediassist.clinicadmin.AddClinicAdminFragment;
+import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -56,6 +57,9 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         db = FirebaseFirestore.getInstance();
         binding = AddDoctorBinding.inflate(inflater, container, false);
 
+        bundle = getArguments();
+        DoctorModel doctor= (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
+
         Spinner spinner = (Spinner) binding.ClinicSpinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,6 +80,18 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         doctor_phone_number_error_text = binding.doctorPhoneNumberErrorText;
         doctor_email_error_text = binding.doctorEmailErrorText;
 
+        if (doctor !=null){
+            doctorName.setText(doctor.getDoctorname());
+            doctorPhoneNumber.setText(doctor.getDoctorphonenumber());
+            doctorEmail.setText(doctor.getDoctoremail());
+            doctorAssignClinic = doctor.getAssignclinic();
+            doctorAssignSpecialization = doctor.getAssignspecialization();
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+
+        }
+
         doctorName.addTextChangedListener(new CustomTextWatcher(doctor_name_error_text, AddDoctorFragment.this));
         doctorPhoneNumber.addTextChangedListener(new CustomTextWatcher(doctor_phone_number_error_text, AddDoctorFragment.this));
         doctorEmail.addTextChangedListener(new CustomTextWatcher(doctor_email_error_text, AddDoctorFragment.this));
@@ -87,7 +103,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                 doctorAssignClinic = spinner.getSelectedItem().toString();
                 doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
 
-                    DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic);
+                    DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic,"");
                     uploadDoctor(doctor);
 
             }

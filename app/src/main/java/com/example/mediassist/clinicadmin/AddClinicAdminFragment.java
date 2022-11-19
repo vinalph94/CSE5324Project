@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 
+import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -46,11 +47,16 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private String name;
     private String phone_number;
     private String email;
+    private String assign_clinic;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
+        bundle = getArguments();
+        ClinicAdminModel clinicadmin= (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
+
 
         Spinner spinner = (Spinner) binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
@@ -61,11 +67,23 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicAdminPhoneNumber = binding.clinicAdminPhoneNumberText;
         clinicAdminEmail = binding.clinicAdminEmailText;
         clinic_admin_name_error = binding.clinicAdminNameErrorText;
+         assign_clinic = binding.spinner.getSelectedItem().toString();
         clinic_admin_phone_number_error = binding.clinicAdminPhoneNumberErrorText;
         clinic_admin_email_error = binding.clinicAdminEmailErrorText;
         saveButton = binding.clinicAdminSaveButton;
         editButton = binding.clinicAdminEditButton;
         deleteButton = binding.clinicAdminDeleteButton;
+
+        if (clinicadmin !=null){
+            clinicAdminName.setText(clinicadmin.getName());
+            clinicAdminPhoneNumber.setText(clinicadmin.getPhone_number());
+            clinicAdminEmail.setText(clinicadmin.getEmail());
+            assign_clinic = clinicadmin.getAssign_clinic();
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+
+        }
 
         clinicAdminName.addTextChangedListener(new CustomTextWatcher(clinic_admin_name_error, AddClinicAdminFragment.this));
         clinicAdminPhoneNumber.addTextChangedListener(new CustomTextWatcher(clinic_admin_phone_number_error, AddClinicAdminFragment.this));
@@ -76,9 +94,9 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
             @Override
             public void onClick(View v) {
-                String assign_clinic = spinner.getSelectedItem().toString();
+                // assign_clinic = spinner.getSelectedItem().toString();
 
-                ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,"");
                 uploadClinicAdmin(clinicadmin);
 
             }

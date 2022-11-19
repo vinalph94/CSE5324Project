@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.clinic.models.ClinicModel;
+import com.example.mediassist.clinicadmin.ClinicAdminAdapter;
+import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.doctor.models.DoctorModel;
 
 import java.util.ArrayList;
@@ -21,11 +23,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     private final Context context;
     private final ArrayList<DoctorModel> DoctorModelArrayList;
-
+    private DoctorItemListener doctorItemListener;
     // Constructor
-    public DoctorAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList) {
+    public DoctorAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList,DoctorItemListener doctorItemListener) {
         this.context = context;
         this.DoctorModelArrayList = DoctorModelArrayList;
+        this.doctorItemListener= doctorItemListener;
     }
 
     @NonNull
@@ -40,15 +43,19 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public void onBindViewHolder(@NonNull DoctorAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
         DoctorModel model = DoctorModelArrayList.get(position);
-        if (nonNull(model.getDoctorphonenumber())) {
-            holder.textview1.setText(String.format("%s", model.getDoctorphonenumber()));
+        if (nonNull(model.getDoctorname())) {
+            holder.textview1.setText(String.format("%s", model.getDoctorname()));
         }
         if (nonNull(model.getAssignclinic())){
             holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
         }
-        if (nonNull(model.getAssignspecialization())) {
-            holder.email.setText(String.format("%s", model.getAssignspecialization()));
+        if (nonNull(model.getDoctoremail())) {
+            holder.email.setText(String.format("%s", model.getDoctoremail()));
         }
+
+        holder.itemView.setOnClickListener(view -> {
+            doctorItemListener.onAdapterItemClick(DoctorModelArrayList.get(position));
+        });
     }
 
     @Override
@@ -69,5 +76,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             assignclinic = itemView.findViewById(R.id.textview2);
             email = itemView.findViewById(R.id.textview3);
         }
+    }
+    public interface DoctorItemListener{
+         void onAdapterItemClick(DoctorModel doctor);
     }
 }

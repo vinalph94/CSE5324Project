@@ -1,17 +1,21 @@
 package com.example.mediassist.clinicadmin.models;
 
-public class ClinicAdminModel {
+import java.io.Serializable;
+
+public class ClinicAdminModel implements Serializable {
     private String name;
     private String phone_number;
     private String email;
     private String assign_clinic;
+    private String id;
 
 
-    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic) {
+    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic, String id) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
         this.assign_clinic = assign_clinic;
+        this.id = id;
     }
 
     public ClinicAdminModel() {
@@ -49,5 +53,10 @@ public class ClinicAdminModel {
         this.assign_clinic = assign_clinic;
     }
 
-
+    public String setId() {
+        return id;
+    }
+    public String getId() {
+        return id;
+    }
 }

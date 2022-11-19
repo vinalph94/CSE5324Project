@@ -129,7 +129,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone">
+        >
 
         <Button
             android:id="@+id/doctor_edit_button"
@@ -137,8 +137,9 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="80dp"
             android:maxWidth="35dp"
-            android:text="Edit"
+            android:text="Save"
             android:textAlignment="center"
+            android:visibility="gone"
             app:cornerRadius="100dp" />
 
         <Button
@@ -150,6 +151,7 @@
             android:maxWidth="35dp"
             android:text="Delete"
             android:textAlignment="center"
+            android:visibility="gone"
             android:textColor="@color/error_text_color"
             app:cornerRadius="100dp" />
 

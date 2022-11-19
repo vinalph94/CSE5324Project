@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinic.ClinicAdapter;
+import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 
 import java.util.ArrayList;
@@ -19,11 +21,12 @@ import java.util.ArrayList;
 public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.ViewHolder>  {
     private final Context context;
     private final ArrayList<ClinicAdminModel> ClinicAdminModelArrayList;
-
+    private ClinicAdminItemListener clinicadminItemListener;
     // Constructor
-    public ClinicAdminAdapter(Context context, ArrayList<ClinicAdminModel> ClinicAdminModelArrayList) {
+    public ClinicAdminAdapter(Context context, ArrayList<ClinicAdminModel> ClinicAdminModelArrayList, ClinicAdminItemListener clinicadminItemListener) {
         this.context = context;
         this.ClinicAdminModelArrayList = ClinicAdminModelArrayList;
+        this.clinicadminItemListener = clinicadminItemListener;
     }
 
     @NonNull
@@ -47,6 +50,9 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
         if (nonNull(model.getAssign_clinic())) {
             holder.clinic_assign.setText(String.format("%s", model.getAssign_clinic()));
         }
+        holder.itemView.setOnClickListener(view -> {
+            clinicadminItemListener.onAdapterItemClick(ClinicAdminModelArrayList.get(position));
+        });
     }
 
     @Override
@@ -67,5 +73,9 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
             clinic_admin_phone_number = itemView.findViewById(R.id.textview2);
             clinic_assign = itemView.findViewById(R.id.textview3);
         }
+    }
+
+    public interface ClinicAdminItemListener{
+        void onAdapterItemClick(ClinicAdminModel clinicadmin);
     }
 }

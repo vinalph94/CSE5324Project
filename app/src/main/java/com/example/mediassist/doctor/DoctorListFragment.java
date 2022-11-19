@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.R;
+import com.example.mediassist.clinicadmin.ClinicAdminAdapter;
+import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.DoctorListBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.google.firebase.firestore.EventListener;
@@ -32,6 +36,7 @@ public class DoctorListFragment extends Fragment {
     private String assignspecialization;
     private String assignclinic;
     private DoctorAdapter courseAdapter;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(
@@ -50,15 +55,21 @@ public class DoctorListFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
-                    doctor_name = snapshot.getString("name");
-                    doctor_phone_Number = snapshot.getString("phonenumber");
-                    doctor_email = snapshot.getString("email");
+                    doctor_name = snapshot.getString("doctorname");
+                    doctor_phone_Number = snapshot.getString("doctorphonenumber");
+                    doctor_email = snapshot.getString("doctoremail");
                     assignspecialization = snapshot.getString("assignspecialization");
                     assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic,snapshot.getId()));
 
                 }
-                courseAdapter = new DoctorAdapter(getContext(), courseArrayList);
+                courseAdapter = new DoctorAdapter(getContext(), courseArrayList, new DoctorAdapter.DoctorItemListener() {
+                    @Override
+                    public void onAdapterItemClick(DoctorModel doctor) {
+                        navigateToAddFragment(doctor);
+                    }
+
+                });
                 courseAdapter.notifyDataSetChanged();
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
@@ -81,6 +92,12 @@ public class DoctorListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void navigateToAddFragment(DoctorModel doctor){
+        bundle = new Bundle();
+        bundle.putSerializable("doctor", doctor);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_DoctorListFragment_to_AddDoctorFragment, bundle);
     }
 
 }
