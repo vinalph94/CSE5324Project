@@ -51,19 +51,19 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/doctor_address_label"
+            android:id="@+id/doctor_email_label"
             style="@style/mandatory_label_text"
-            android:text="Address" />
+            android:text="Email" />
 
         <EditText
-            android:id="@+id/doctor_address_text"
+            android:id="@+id/doctor_email_text"
             style="@style/default_edit_text"
-            android:hint="Address" />
+            android:hint="Email" />
 
         <TextView
-            android:id="@+id/doctor_address_error_text"
+            android:id="@+id/doctor_email_error_text"
             style="@style/default_error_text"
-            android:text="Address is required"
+            android:text="Email is required"
             android:visibility="gone" />
 
 
@@ -75,8 +75,8 @@
 
         <Spinner
             android:id="@+id/Specialization_spinner"
-            android:layout_width="@dimen/_260sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"
             android:overlapAnchor="false"
@@ -89,15 +89,15 @@
         </Spinner>
 
         <TextView
-            android:id="@+id/clinic_admin_clinic_label"
+            android:id="@+id/doctor_clinic_label"
             style="@style/mandatory_label_text"
             android:layout_marginLeft="45dp"
             android:text="Assign Clinic" />
 
         <Spinner
             android:id="@+id/Clinic_spinner"
-            android:layout_width="@dimen/_260sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"
             android:overlapAnchor="false"

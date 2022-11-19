@@ -6,27 +6,66 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.databinding.CategoryListBinding;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class CategoryListFragment extends Fragment {
 
     private CategoryListBinding binding;
-
+    private FirebaseFirestore db;
+    private ArrayList<CategoryModel> courseArrayList = new ArrayList<CategoryModel>();
+    private String name;
+    private String description;
+    private String assignClinic;
+    private CategoryAdapter courseAdapter;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
+        db = FirebaseFirestore.getInstance();
         binding = CategoryListBinding.inflate(inflater, container, false);
+        RecyclerView courseRV = binding.idRVCourseCategory;
 
 
+        db.collection("categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                courseArrayList.clear();
+                for (QueryDocumentSnapshot snapshot : value) {
+                    name = snapshot.getString("name");
+                    if (snapshot.getString("description") != null) {
+                        description = snapshot.getString("description");
+                    }
+                    assignClinic = snapshot.getString("assignclinic");
+                    courseArrayList.add(new CategoryModel(name, description, assignClinic));
 
+                }
+                courseAdapter = new CategoryAdapter(getContext(), courseArrayList);
+                courseAdapter.notifyDataSetChanged();
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                        LinearLayoutManager.VERTICAL, false);
+
+
+                courseRV.setLayoutManager(linearLayoutManager);
+                courseRV.setAdapter(courseAdapter);
+
+            }
+        });
 
 
 

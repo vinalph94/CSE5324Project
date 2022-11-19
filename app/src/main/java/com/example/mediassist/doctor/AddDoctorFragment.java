@@ -36,10 +36,10 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private FirebaseFirestore db;
     private TextView doctor_name_error_text;
     private TextView doctor_phone_number_error_text;
-    private TextView doctor_address_error_text;
+    private TextView doctor_email_error_text;
     private EditText doctorName;
     private EditText doctorPhoneNumber;
-    private EditText doctorAddress;
+    private EditText doctorEmail;
     private String doctorAssignSpecialization;
     private String doctorAssignClinic;
     private Button saveButton;
@@ -48,7 +48,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
 
     private String name;
     private String phone_number;
-    private String address;
+    private String email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -67,28 +67,26 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
 
         doctorName = binding.doctorNameText;
         doctorPhoneNumber = binding.doctorPhoneNumberText;
-        doctorAddress = binding.doctorAddressText;
+        doctorEmail = binding.doctorEmailText;
         saveButton = binding.doctorSaveButton;
         editButton = binding.doctorEditButton;
         deleteButton = binding.doctorDeleteButton;
         doctor_name_error_text = binding.doctorNameErrorText;
         doctor_phone_number_error_text = binding.doctorPhoneNumberErrorText;
-        doctor_address_error_text = binding.doctorAddressErrorText;
+        doctor_email_error_text = binding.doctorEmailErrorText;
 
         doctorName.addTextChangedListener(new CustomTextWatcher(doctor_name_error_text, AddDoctorFragment.this));
         doctorPhoneNumber.addTextChangedListener(new CustomTextWatcher(doctor_phone_number_error_text, AddDoctorFragment.this));
-        doctorAddress.addTextChangedListener(new CustomTextWatcher(doctor_address_error_text, AddDoctorFragment.this));
-        checkClinicData();
+        doctorEmail.addTextChangedListener(new CustomTextWatcher(doctor_email_error_text, AddDoctorFragment.this));
+        checkDoctorData();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 doctorAssignClinic = spinner.getSelectedItem().toString();
                 doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
 
-                    DoctorModel doctor = new DoctorModel(name, phone_number, address, doctorAssignSpecialization, doctorAssignClinic);
+                    DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic);
                     uploadDoctor(doctor);
 
             }
@@ -98,12 +96,12 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         return binding.getRoot();
 
     }
-    private void checkClinicData() {
+    private void checkDoctorData() {
         name = doctorName.getText().toString();
         phone_number = doctorPhoneNumber.getText().toString();
-        address = doctorAddress.getText().toString();
+        email = doctorEmail.getText().toString();
 
-        if (!(name.isEmpty()) && !(phone_number.isEmpty()) && !(address.isEmpty())) {
+        if (!(name.isEmpty()) && !(phone_number.isEmpty()) && !(email.isEmpty())) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }
@@ -144,6 +142,6 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     }
     @Override
     public void checkForEmpty() {
-        checkClinicData();
+        checkDoctorData();
     }
 }
