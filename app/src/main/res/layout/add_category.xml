@@ -45,12 +45,21 @@
         <TextView
             android:id="@+id/category_icon_label"
             style="@style/default_label_text"
-            android:text="Icon" />
+            android:text="Select Icon" />
 
-        <EditText
-            android:id="@+id/category_icon_text"
-            style="@style/default_edit_text"
-            android:hint="Description" />
+        <Spinner
+            android:id="@+id/spinner_icon"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu">
+        </Spinner>
 
 
         <TextView
@@ -60,8 +69,8 @@
             android:text="Assign Clinic" />
 
         <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="@dimen/_269sdp"
+            android:id="@+id/spinner_clinic"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"

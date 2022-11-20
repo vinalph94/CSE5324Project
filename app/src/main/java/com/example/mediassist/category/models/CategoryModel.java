@@ -10,12 +10,14 @@ public class CategoryModel implements Serializable {
     private String name;
     private String description;
     private String clinic_id;
+    private String icon_id;
 
 
 
-    public CategoryModel(String name, String description, String clinic_id) {
+    public CategoryModel(String name, String description,String icon_id, String clinic_id) {
         this.name = name;
         this.description = description;
+        this.icon_id = icon_id;
         this.clinic_id = clinic_id;
     }
 
@@ -38,11 +40,11 @@ public class CategoryModel implements Serializable {
         this.description = description;
     }
 
-    public String getCategoryId() {
+    public String getClinicId() {
         return clinic_id;
     }
 
-    public void setCategoryId(String clinic_id) {
+    public void setClinicId(String clinic_id) {
         this.clinic_id = clinic_id;
     }
 
@@ -52,6 +54,15 @@ public class CategoryModel implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getIconId() {
+        return icon_id;
+    }
+
+    public void setIconId(String icon_id) {
+        this.icon_id = icon_id;
     }
 
 }
