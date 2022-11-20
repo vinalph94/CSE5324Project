@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
 
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_register);
+        setContentView(binding.getRoot());
      
         editTextName = binding.registerNameText;
         editTextPhone = binding.registerPhoneNumberText;
