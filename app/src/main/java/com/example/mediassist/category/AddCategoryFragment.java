@@ -4,6 +4,7 @@ import static com.example.mediassist.util.ToastStatus.SUCCESS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,7 +179,8 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         saveButton.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View view) {
-                                              description = categoryDescription.getText().toString();
+
+                                              checkCategoryData();
                                               CategoryModel category = new CategoryModel(name, description, icon_id, clinic_id);
                                               uploadCategory(category);
                                           }
@@ -186,6 +188,15 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
 
         );
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkCategoryData();
+                category = new CategoryModel(name, description, icon_id, clinic_id);
+                updateCategory(id, category);
+            }
+        });
 
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +234,24 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
     }
 
+    public void updateCategory(String categoryId, CategoryModel category) {
+
+        db.collection(("categories")).document(categoryId).set(category).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddCategoryFragment_to_CategoryActivity);
+                new CustomToast(getContext(), getActivity(), name + " Updated Successfully", ToastStatus.SUCCESS).show();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to edit " + name, ToastStatus.FAILURE).show();
+            }
+        });
+    }
+
     private void deleteData(String categoryId) {
         db.collection(("categories")).document(categoryId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -242,7 +271,11 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
     private void checkCategoryData() {
         name = categoryName.getText().toString();
-        if (!(name.isEmpty())) {
+        if (!(TextUtils.isEmpty(categoryDescription.getText().toString()))) {
+            description = categoryDescription.getText().toString();
+        }
+
+        if (!(name.isEmpty()) && !(icon_id.isEmpty()) && !(clinic_id.isEmpty())) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }
