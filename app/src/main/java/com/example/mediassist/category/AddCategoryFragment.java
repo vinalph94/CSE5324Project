@@ -4,6 +4,7 @@ import static com.example.mediassist.util.ToastStatus.SUCCESS;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
+import com.example.mediassist.category.models.IconModel;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.AddCategoryBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -41,7 +43,7 @@ import java.util.ArrayList;
 
 public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBack {
 
-    String assign_clinic;
+
     private AddCategoryBinding binding;
     private FirebaseFirestore db;
     private Button saveButton;
@@ -56,9 +58,15 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
     private String id;
     private CategoryModel category;
     private ArrayAdapter<ClinicModel> clinicSpinnerAdapter;
+    private ArrayAdapter<IconModel> iconSpinnerAdapter;
     private ArrayList<ClinicModel> clinicsList;
+    private ArrayList<IconModel> iconsList;
     private ClinicModel clinic;
-    private String category_id;
+    private IconModel icon;
+    private String clinic_id;
+    private Spinner clinicSpinner;
+    private Spinner iconSpinner;
+    private String icon_id;
 
 
     @Override
@@ -68,7 +76,8 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         bundle = getArguments();
         category = (CategoryModel) (bundle != null ? bundle.getSerializable("category") : null);
 
-        Spinner spinner = (Spinner) binding.spinnerCategory;
+        clinicSpinner = (Spinner) binding.spinnerClinic;
+        iconSpinner = (Spinner) binding.spinnerIcon;
 
 
         categoryName = binding.categoryNameText;
@@ -80,24 +89,28 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
         ((CategoryActivity) getActivity()).btnAdd.setVisibility(View.GONE);
 
-        if (category != null) {
-            id = category.getId();
-            categoryName.setText(category.getName());
-            if (category.getDescription() != null) {
-                categoryDescription.setText(category.getDescription());
-            }
-
-            // assign_clinic = spinner.getSelectedItem().toString();
-
-            saveButton.setVisibility(View.GONE);
-            editButton.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
-
-        }
-
 
         clinicsList = new ArrayList<ClinicModel>();
+        iconsList = new ArrayList<IconModel>();
+        db.collection("icons").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
+                for (QueryDocumentSnapshot snapshot : value) {
+
+                    String name = snapshot.getString("name");
+
+                    icon = new IconModel(name);
+                    icon.setId(snapshot.getId());
+                    iconsList.add(icon);
+
+                }
+                iconSpinnerAdapter = new ArrayAdapter<IconModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, iconsList);
+                iconSpinner.setAdapter(iconSpinnerAdapter);
+                getCategoryIconForEdit(iconSpinnerAdapter);
+
+            }
+        });
         db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -117,21 +130,44 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
                 }
                 clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
-                spinner.setAdapter(clinicSpinnerAdapter);
+                clinicSpinner.setAdapter(clinicSpinnerAdapter);
+                getCategoryClinicForEdit(clinicSpinnerAdapter);
 
             }
         });
 
 
+        if (category != null) {
+            id = category.getId();
+            categoryName.setText(category.getName());
+            if (category.getDescription() != null) {
+                categoryDescription.setText(category.getDescription());
+            }
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+        }
         categoryName.addTextChangedListener(new CustomTextWatcher(category_name_error, AddCategoryFragment.this));
         checkCategoryData();
 
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                category_id = clinicsList.get(i).getId();
+                icon_id = iconsList.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                clinic_id = clinicsList.get(i).getId();
             }
 
             @Override
@@ -143,14 +179,24 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         saveButton.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View view) {
-                                              description = categoryDescription.getText().toString();
-                                              CategoryModel category = new CategoryModel(name, description, category_id);
+
+                                              checkCategoryData();
+                                              CategoryModel category = new CategoryModel(name, description, icon_id, clinic_id);
                                               uploadCategory(category);
                                           }
                                       }
 
 
         );
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkCategoryData();
+                category = new CategoryModel(name, description, icon_id, clinic_id);
+                updateCategory(id, category);
+            }
+        });
 
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +209,47 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
         return binding.getRoot();
 
+    }
+
+
+    private void getCategoryIconForEdit(ArrayAdapter<IconModel> iconSpinnerAdapter) {
+
+        for (int position = 0; position < iconSpinnerAdapter.getCount(); position++) {
+            if (iconSpinner.getItemAtPosition(position).equals(category.getIconId())) {
+                iconSpinner.setSelection(position);
+            }
+        }
+
+
+    }
+
+    private void getCategoryClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
+
+        for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
+            if (clinicSpinner.getItemAtPosition(position).equals(category.getClinicId())) {
+                clinicSpinner.setSelection(position);
+            }
+        }
+
+
+    }
+
+    public void updateCategory(String categoryId, CategoryModel category) {
+
+        db.collection(("categories")).document(categoryId).set(category).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddCategoryFragment_to_CategoryActivity);
+                new CustomToast(getContext(), getActivity(), name + " Updated Successfully", ToastStatus.SUCCESS).show();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to edit " + name, ToastStatus.FAILURE).show();
+            }
+        });
     }
 
     private void deleteData(String categoryId) {
@@ -184,7 +271,11 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
     private void checkCategoryData() {
         name = categoryName.getText().toString();
-        if (!(name.isEmpty())) {
+        if (!(TextUtils.isEmpty(categoryDescription.getText().toString()))) {
+            description = categoryDescription.getText().toString();
+        }
+
+        if (!(name.isEmpty()) && !(icon_id.isEmpty()) && !(clinic_id.isEmpty())) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }

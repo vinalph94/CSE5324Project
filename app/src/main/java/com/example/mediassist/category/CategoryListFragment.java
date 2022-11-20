@@ -34,6 +34,7 @@ public class CategoryListFragment extends Fragment {
     private CategoryAdapter courseAdapter;
     private Bundle bundle;
     private CategoryModel category;
+    private String icon_id;
 
     @Override
     public View onCreateView(
@@ -56,7 +57,8 @@ public class CategoryListFragment extends Fragment {
                         description = snapshot.getString("description");
                     }
                     clinic_id = snapshot.getString("clinic_id");
-                    category = (new CategoryModel(name, description, clinic_id));
+                    icon_id = snapshot.getString("icon_id");
+                    category = (new CategoryModel(name, description,icon_id, clinic_id));
                     category.setId(snapshot.getId());
                     courseArrayList.add(category);
 
