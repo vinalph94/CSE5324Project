@@ -276,7 +276,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
             description = categoryDescription.getText().toString();
         }
 
-        if (!(name.isEmpty()) && !(icon_id.isEmpty()) && !(clinic_id.isEmpty())) {
+        if (!(name.isEmpty()) && !((icon_id != null && icon_id.isEmpty())) && !((clinic_id != null && clinic_id.isEmpty()))) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }
