@@ -89,6 +89,16 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
         ((CategoryActivity) getActivity()).btnAdd.setVisibility(View.GONE);
 
+        if (category != null) {
+            id = category.getId();
+            categoryName.setText(category.getName());
+            if (category.getDescription() != null) {
+                categoryDescription.setText(category.getDescription());
+            }
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+        }
 
         clinicsList = new ArrayList<ClinicModel>();
         iconsList = new ArrayList<IconModel>();
@@ -137,16 +147,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         });
 
 
-        if (category != null) {
-            id = category.getId();
-            categoryName.setText(category.getName());
-            if (category.getDescription() != null) {
-                categoryDescription.setText(category.getDescription());
-            }
-            saveButton.setVisibility(View.GONE);
-            editButton.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
-        }
+
         categoryName.addTextChangedListener(new CustomTextWatcher(category_name_error, AddCategoryFragment.this));
         checkCategoryData();
 
