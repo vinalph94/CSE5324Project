@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
@@ -19,9 +20,15 @@ import com.example.mediassist.util.CustomTextWatcher;
 
 import com.example.mediassist.databinding.ActivityRegisterBinding;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -95,19 +102,46 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
 
         checkRegisterData();
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+      /*  signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkRegisterData();
                 registerUserModel = new RegisterUserModel(name, phoneNumber, email, password);
                 Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
     }
 
+    public void onClickSignUpButton(View view) {
 
+        checkRegisterData();
+        mAuth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    registerUserModel = new RegisterUserModel(name,phoneNumber,email,password);
+                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(registerUserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }else {
+                    Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+    }
     private void checkRegisterData() {
         name = editTextName.getText().toString();
         phoneNumber = editTextPhone.getText().toString();
