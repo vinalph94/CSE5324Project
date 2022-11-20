@@ -121,14 +121,17 @@
 
         <Button
             android:id="@+id/signup_button"
-            android:text="Sign Up"
+            style="@style/default_disabled_button"
             android:layout_width="250dp"
             android:layout_height="51dp"
-            android:layout_marginTop="550dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="false"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="600dp"
+            android:backgroundTint="#A9CACF"
             android:onClick="onClickSignUpButton"
-            ></Button>
+            android:text="Sign Up"
+            android:textColor="@color/white" />
 
 
 </RelativeLayout>

@@ -48,7 +48,6 @@ public class GetEmailForForgotPwd extends Fragment {
             @Override
             public void onClick(View view) {
                 String email = userEmail.getText().toString();
-                new CustomToast(getContext(), getActivity(), "Error - " + email, ToastStatus.FAILURE).show();
 
                 //NavHostFragment.findNavController(GetEmailForForgotPwd.this).navigate(R.id.action_get_email_for_forgot_pwd_to_OtpForForgotPassword);
                 firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {

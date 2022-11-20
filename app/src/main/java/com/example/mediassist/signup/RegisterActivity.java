@@ -125,21 +125,21 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    registerUserModel = new RegisterUserModel(name,phoneNumber,email,password);
+                    registerUserModel = new RegisterUserModel(name,email,phoneNumber,password);
                     FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(registerUserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "user registered", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "fail to register user" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
                 }else {
-                    Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "fail to register user" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
