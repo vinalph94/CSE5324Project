@@ -90,7 +90,6 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         ((CategoryActivity) getActivity()).btnAdd.setVisibility(View.GONE);
 
 
-
         clinicsList = new ArrayList<ClinicModel>();
         iconsList = new ArrayList<IconModel>();
         db.collection("icons").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -202,18 +201,19 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
     }
 
-private void getCategoryDetails(){
-    if (category != null) {
-        id = category.getId();
-        categoryName.setText(category.getName());
-        if (category.getDescription() != null) {
-            categoryDescription.setText(category.getDescription());
+    private void getCategoryDetails() {
+        if (category != null) {
+            id = category.getId();
+            categoryName.setText(category.getName());
+            if (category.getDescription() != null) {
+                categoryDescription.setText(category.getDescription());
+            }
+            saveButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
         }
-        saveButton.setVisibility(View.GONE);
-        editButton.setVisibility(View.VISIBLE);
-        deleteButton.setVisibility(View.VISIBLE);
     }
-}
+
     private void getCategoryIconForEdit(ArrayAdapter<IconModel> iconSpinnerAdapter) {
         getCategoryDetails();
         if (category != null) {

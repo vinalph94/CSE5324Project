@@ -64,7 +64,7 @@ public class MakeAppoinmentFragment extends Fragment {
                     doctor_email = snapshot.getString("doctoremail");
                     assignspecialization = snapshot.getString("assignspecialization");
                     assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, snapshot.getId()));
+                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
 
                 }
                 courseAdapter = new MakeAppointmentAdapter(getContext(), courseArrayList, new MakeAppointmentAdapter.MakeAppointmentItemListener() {

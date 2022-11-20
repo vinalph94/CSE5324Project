@@ -3,6 +3,8 @@ package com.example.mediassist.appointment.models;
 import com.example.mediassist.appointment.ConfirmAppointmentFragment;
 import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.Exclude;
+import com.google.type.Date;
+import com.google.type.DateTime;
 
 import java.io.Serializable;
 

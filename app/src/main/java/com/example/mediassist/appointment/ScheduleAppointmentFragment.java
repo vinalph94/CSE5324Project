@@ -66,11 +66,11 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
 
         if (doctor != null) {
-            docNameText.setText(doctor.getDoctorname());
+            docNameText.setText(doctor.getDoctor_name());
             //docDetailsText =doctor.getAssignclinic();
             //docSpecialistText = doctor.getAssignspecialization();
-            docDetailsText.setText(doctor.getclinicId());
-            docSpecialistText.setText(doctor.getAssignspecialization());
+            docDetailsText.setText(doctor.getClinic_id());
+            docSpecialistText.setText(doctor.getCategory_id());
 
         }
 

@@ -98,7 +98,7 @@ public class ConfirmAppointmentFragment extends Fragment {
 
                 //store the additional fields(signup fields) in firebase
                               appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,
-                        doctor.getId(), doctor.getDoctorname(), doctor.getclinicId(), doctor.getAssignspecialization(),
+                        doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
                         eventDateTV.getText().toString(), ConfirmAppointmentFragment.selectedTime);
 
                 db.collection("appointments").add(appointmentModel)

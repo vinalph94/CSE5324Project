@@ -42,14 +42,14 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
     public void onBindViewHolder(@NonNull MakeAppointmentAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
         DoctorModel model = doctorModelArrayList.get(position);
-        if (nonNull(model.getDoctorname())) {
-            holder.doctorname.setText(String.format("%s", model.getDoctorname()));
+        if (nonNull(model.getDoctor_name())) {
+            holder.doctorname.setText(String.format("%s", model.getDoctor_name()));
         }
-        if (nonNull(model.getclinicId())) {
-            holder.assignclinic.setText(String.format("%s", model.getclinicId()));
+        if (nonNull(model.getClinic_id())) {
+            holder.assignclinic.setText(String.format("%s", model.getClinic_id()));
         }
-        if (nonNull(model.getAssignspecialization())) {
-            holder.assignspecialization.setText(String.format("%s", model.getAssignspecialization()));
+        if (nonNull(model.getCategory_id())) {
+            holder.assignspecialization.setText(String.format("%s", model.getCategory_id()));
         }
         holder.itemView.setOnClickListener(view -> {
             makeAppointmentItemListener.onAdapterItemClick(doctorModelArrayList.get(position));

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,24 +13,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+import com.example.mediassist.category.models.CategoryModel;
+import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -41,7 +47,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private EditText doctorName;
     private EditText doctorPhoneNumber;
     private EditText doctorEmail;
-    private String doctorAssignSpecialization;
+    private String category_id;
     private String clinic_id;
     private Button saveButton;
     private Button editButton;
@@ -51,6 +57,16 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private String phone_number;
     private String email;
     private Bundle bundle;
+    private Spinner clinicSpinner;
+    private   Spinner categorySpinner;
+    private ArrayList<ClinicModel> clinicsList;
+    private ArrayList<CategoryModel> categoryList;
+    private ClinicModel clinic;
+    private CategoryModel category;
+    private ArrayAdapter<ClinicModel> clinicSpinnerAdapter;
+    private ArrayAdapter<CategoryModel> categorySpinnerAdapter;
+    private DoctorModel doctor;
+    private String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,17 +74,10 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         binding = AddDoctorBinding.inflate(inflater, container, false);
 
         bundle = getArguments();
-        DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
+        doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
 
-        Spinner spinner = (Spinner) binding.ClinicSpinner;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        Spinner spinnerSpecialist = (Spinner) binding.SpecializationSpinner;
-        ArrayAdapter<CharSequence> arrAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.doctors_specializarions, R.layout.spinner_list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSpecialist.setAdapter(arrAdapter);
+        clinicSpinner = (Spinner) binding.ClinicSpinner;
+        categorySpinner = (Spinner) binding.SpecializationSpinner;
 
         doctorName = binding.doctorNameText;
         doctorPhoneNumber = binding.doctorPhoneNumberText;
@@ -80,78 +89,135 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         doctor_phone_number_error_text = binding.doctorPhoneNumberErrorText;
         doctor_email_error_text = binding.doctorEmailErrorText;
 
+        ((DoctorActivity) getActivity()).btnAddDoctor.setVisibility(View.GONE);
+
         if (doctor != null) {
-            doctorName.setText(doctor.getDoctorname());
-            doctorPhoneNumber.setText(doctor.getDoctorphonenumber());
-            doctorEmail.setText(doctor.getDoctoremail());
-            clinic_id = doctor.getclinicId();
-            doctorAssignSpecialization = doctor.getAssignspecialization();
+            id = doctor.getId();
+            doctorName.setText(doctor.getDoctor_name());
+            doctorPhoneNumber.setText(doctor.getDoctor_phone_number());
+            doctorEmail.setText(doctor.getDoctor_email());
+            clinic_id = doctor.getClinic_id();
+            category_id = doctor.getCategory_id();
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
 
         }
 
+        clinicsList = new ArrayList<ClinicModel>();
+        db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                for (QueryDocumentSnapshot snapshot : value) {
+                    String details = "";
+                    String name = snapshot.getString("name");
+                    String phoneNumber = snapshot.getString("phone_number");
+                    if (snapshot.getString("description") != null) {
+                        details = snapshot.getString("description");
+                    }
+                    String address = snapshot.getString("address");
+                    int zipcode = snapshot.getLong("zipcode").intValue();
+                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+                    clinic.setId(snapshot.getId());
+                    clinicsList.add(clinic);
+
+                }
+                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
+                clinicSpinner.setAdapter(clinicSpinnerAdapter);
+                getDoctorClinicForEdit(clinicSpinnerAdapter);
+
+            }
+        });
+
+        categoryList = new ArrayList<CategoryModel>();
+        db.collection("categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                for (QueryDocumentSnapshot snapshot : value) {
+                    String details = "";
+                    String name = snapshot.getString("name");
+                    if (snapshot.getString("description") != null) {
+                        details = snapshot.getString("description");
+                    }
+                    String clinic_id = snapshot.getString("clinic_id");
+                    String icon_id = snapshot.getString("icon_id");
+                    category = new CategoryModel(name, details, clinic_id,icon_id);
+                    category.setId(snapshot.getId());
+                    categoryList.add(category);
+
+                }
+                categorySpinnerAdapter = new ArrayAdapter<CategoryModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, categoryList);
+                categorySpinner.setAdapter(categorySpinnerAdapter);
+                getDoctorCategoryForEdit(categorySpinnerAdapter);
+
+            }
+        });
         doctorName.addTextChangedListener(new CustomTextWatcher(doctor_name_error_text, AddDoctorFragment.this));
         doctorPhoneNumber.addTextChangedListener(new CustomTextWatcher(doctor_phone_number_error_text, AddDoctorFragment.this));
         doctorEmail.addTextChangedListener(new CustomTextWatcher(doctor_email_error_text, AddDoctorFragment.this));
         checkDoctorData();
 
+        clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                clinic_id = clinicsList.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                category_id = categoryList.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clinic_id = spinner.getSelectedItem().toString();
-                doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
-
-                DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, clinic_id, "");
+                checkDoctorData();
+                  DoctorModel doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id);
                 uploadDoctor(doctor);
 
             }
         });
 
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkDoctorData();
+                doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id);
+                uploadDoctor(id, doctor);
+            }
+        });
+
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
-                deleteData(phone_number);
+                deleteData(id);
             }
         });
+
         return binding.getRoot();
 
     }
 
-    private void deleteData(String phoneNumber) {
-        db.collection("doctors").whereEqualTo("doctorphonenumber", phoneNumber).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                    DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                    String docId = documentSnapshot.getId();
-                    db.collection(("doctors")).document(docId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            new CustomToast(getContext(), getActivity(), name + " Deleted Successfully !", ToastStatus.SUCCESS).show();
-                            // navigate to add clinic screen
-                            doctorName.setText("");
-                            doctorPhoneNumber.setText("");
-                            doctorEmail.setText("");
-                            saveButton.setVisibility(View.VISIBLE);
-                            editButton.setVisibility(View.GONE);
-                            deleteButton.setVisibility(View.GONE);
-                            doctor_name_error_text.setVisibility(View.GONE);
-                            doctor_phone_number_error_text.setVisibility(View.GONE);
-                            doctor_email_error_text.setVisibility(View.GONE);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            new CustomToast(getContext(), getActivity(), name + " Failed to delete !", ToastStatus.SUCCESS).show();
-                        }
-                    });
-                }
-            }
-        });
-    }
 
     private void checkDoctorData() {
         name = doctorName.getText().toString();
@@ -168,7 +234,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         db.collection("doctors").add(doctor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorListFragment);
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
                 new CustomToast(getContext(), getActivity(), name + " Stored Successfully !", ToastStatus.SUCCESS).show();
 
             }
@@ -180,6 +246,41 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         });
 
 
+    }
+
+    public void uploadDoctor(String doctorId, DoctorModel doctor) {
+        db.collection(("doctors")).document(doctorId).set(doctor).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
+                new CustomToast(getContext(), getActivity(), name + " Updated Successfully !", ToastStatus.SUCCESS).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), "Failed to edit", ToastStatus.FAILURE).show();
+            }
+        });
+
+
+    }
+
+    private void deleteData(String doctorId) {
+        db.collection(("doctors")).document(doctorId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
+                new CustomToast(getContext(), getActivity(), name + " Deleted Successfully", ToastStatus.DELETE).show();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to delete " + name, ToastStatus.FAILURE).show();
+            }
+        });
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -195,6 +296,31 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         binding = null;
     }
 
+    private void getDoctorClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
+
+        if (doctor != null) {
+        for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
+            if (((ClinicModel) clinicSpinner.getItemAtPosition(position)).getId().equals(doctor.getClinic_id())) {
+                clinicSpinner.setSelection(position);
+            }
+        }
+        }
+
+
+    }
+
+    private void getDoctorCategoryForEdit(ArrayAdapter<CategoryModel> categorySpinnerAdapter) {
+
+        if (doctor != null) {
+            for (int position = 0; position < categorySpinnerAdapter.getCount(); position++) {
+                if (((CategoryModel) categorySpinner.getItemAtPosition(position)).getId().equals(doctor.getCategory_id())) {
+                    categorySpinner.setSelection(position);
+                }
+            }
+        }
+
+
+    }
     @Override
     public void checkForEmpty() {
         checkDoctorData();

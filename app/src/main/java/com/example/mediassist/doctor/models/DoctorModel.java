@@ -1,65 +1,66 @@
 package com.example.mediassist.doctor.models;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class DoctorModel implements Serializable {
-    private String name;
-    private String phonenumber;
-    private String email;
-    private String assignspecialization;
+    private String doctor_name;
+    private String doctor_phone_number;
+    private String doctor_email;
+    private String category_id;
     private String clinic_id;
+    @Exclude
     private String id;
 
-
-    public DoctorModel(String name, String phonenumber, String email, String assignspecialization, String clinic_id, String id) {
-        this.name = name;
-        this.phonenumber = phonenumber;
-        this.email = email;
-        this.assignspecialization = assignspecialization;
+    public DoctorModel(String doctor_name, String doctor_phone_number, String doctor_email, String category_id, String clinic_id) {
+        this.doctor_name = doctor_name;
+        this.doctor_phone_number = doctor_phone_number;
+        this.doctor_email = doctor_email;
+        this.category_id = category_id;
         this.clinic_id = clinic_id;
-        this.id = id;
     }
 
     public DoctorModel() {
     }
 
-    public String getDoctorname() {
-        return name;
+    public String getDoctor_name() {
+        return doctor_name;
     }
 
-    public void setDoctorname(String name) {
-        this.name = name;
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
     }
 
-    public String getDoctorphonenumber() {
-        return phonenumber;
+    public String getDoctor_phone_number() {
+        return doctor_phone_number;
     }
 
-    public void setDoctorphonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setDoctor_phone_number(String doctor_phone_number) {
+        this.doctor_phone_number = doctor_phone_number;
     }
 
-    public String getDoctoremail() {
-        return email;
+    public String getDoctor_email() {
+        return doctor_email;
     }
 
-    public void setDoctoremail(String email) {
-        this.email = email;
+    public void setDoctor_email(String doctor_email) {
+        this.doctor_email = doctor_email;
     }
 
-    public String getAssignspecialization() {
-        return assignspecialization;
+    public String getCategory_id() {
+        return category_id;
     }
 
-    public void setAssignspecialization(String assignspecialization) {
-        this.assignspecialization = assignspecialization;
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
-    public String getclinicId() {
+    public String getClinic_id() {
         return clinic_id;
     }
 
-    public void setclinicId(String clinic_id) {
+    public void setClinic_id(String clinic_id) {
         this.clinic_id = clinic_id;
     }
 

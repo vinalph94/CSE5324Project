@@ -22,7 +22,7 @@
         tools:layout="@layout/add_doctor">
 
         <action
-            android:id="@+id/action_AddDoctorFragment_to_DoctorListFragment"
-            app:destination="@id/DoctorListFragment" />
+            android:id="@+id/action_AddDoctorFragment_to_DoctorActivity"
+            app:destination="@id/nav_doctor" />
     </fragment>
 </navigation>

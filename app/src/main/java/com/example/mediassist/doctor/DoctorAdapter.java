@@ -34,21 +34,21 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public DoctorAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        return new ViewHolder(view);
+        return new DoctorAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DoctorAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
         DoctorModel model = DoctorModelArrayList.get(position);
-        if (nonNull(model.getDoctorname())) {
-            holder.textview1.setText(String.format("%s", model.getDoctorname()));
+        if (nonNull(model.getDoctor_name())) {
+            holder.doctor_name.setText(String.format("%s", model.getDoctor_name()));
         }
-        if (nonNull(model.getclinicId())) {
-            holder.assignclinic.setText(String.format("%s", model.getclinicId()));
+        if (nonNull(model.getClinic_id())) {
+            holder.assignclinic.setText(String.format("%s", model.getClinic_id()));
         }
-        if (nonNull(model.getDoctoremail())) {
-            holder.email.setText(String.format("%s", model.getDoctoremail()));
+        if (nonNull(model.getDoctor_email())) {
+            holder.email.setText(String.format("%s", model.getDoctor_email()));
         }
 
         holder.itemView.setOnClickListener(view -> {
@@ -68,13 +68,13 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textview1;
+        private final TextView doctor_name;
         private final TextView assignclinic;
         private final TextView email;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textview1 = itemView.findViewById(R.id.textview1);
+            doctor_name = itemView.findViewById(R.id.textview1);
             assignclinic = itemView.findViewById(R.id.textview2);
             email = itemView.findViewById(R.id.textview3);
         }
