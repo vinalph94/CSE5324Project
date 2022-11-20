@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     DocumentReference ref;
     public static String patientUsername;
+    public static String patientUid;
     private FirebaseAuth mAuth;
 
 
@@ -101,8 +102,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    patientUid = task.getResult().getUser().getUid();
                     Toast.makeText(LoginActivity.this, "Update the profile " +
                             "for better expereince", Toast.LENGTH_SHORT).show();
+
                     //navigate to dashboard and send role id in the intent so that in dashboard activity we
                     // can get that role id and check which fragment to laod
                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);

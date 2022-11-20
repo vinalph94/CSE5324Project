@@ -35,7 +35,7 @@ public class MakeAppoinmentFragment extends Fragment {
     private String doctor_email;
     private String assignspecialization;
     private String assignclinic;
-    private DoctorAdapter courseAdapter;
+    private MakeAppointmentAdapter courseAdapter;
     private Bundle bundle;
 
 
@@ -68,10 +68,11 @@ public class MakeAppoinmentFragment extends Fragment {
                     courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic,snapshot.getId()));
 
                 }
-                courseAdapter = new DoctorAdapter(getContext(), courseArrayList, new DoctorAdapter.DoctorItemListener() {
+                courseAdapter = new MakeAppointmentAdapter(getContext(), courseArrayList, new MakeAppointmentAdapter.MakeAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(DoctorModel doctor) {
                         navigateToAddFragment(doctor);
+
                     }
 
                 });
@@ -101,6 +102,11 @@ public class MakeAppoinmentFragment extends Fragment {
 
         ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Make an Appointment");
     }*/
+   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+       super.onViewCreated(view, savedInstanceState);
+
+
+   }
 
     private void navigateToAddFragment(DoctorModel doctor){
         bundle = new Bundle();

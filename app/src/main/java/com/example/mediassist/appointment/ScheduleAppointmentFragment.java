@@ -57,7 +57,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     FirebaseFirestore db1;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = ScheduleAppointmentFragmentBinding.inflate(inflater, container, false);
 
@@ -69,8 +69,8 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         setWeekView();
 
         docNameText = binding.docName;
-        docDetailsText=binding.docDetails;
-        docSpecialistText= binding.docSpecialist;
+        docDetailsText = binding.docDetails;
+        docSpecialistText = binding.docSpecialist;
 
         bundle = getArguments();
         DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
@@ -89,8 +89,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-               Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment);
-
+                navigateToAddFragment(doctor);
             }
         });
 
@@ -207,16 +206,22 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         //setEventAdpater();
     }
 
-/*
-    public void previousWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
-        setWeekView();
-    }
+    /*
+        public void previousWeekAction(View view) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+            setWeekView();
+        }
 
-    public void nextWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-        setWeekView();
-    }*/
+        public void nextWeekAction(View view) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+            setWeekView();
+        }*/
+    private void navigateToAddFragment(DoctorModel doctor) {
+        bundle = new Bundle();
+        bundle.putSerializable("doctor", doctor);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment, bundle);
+
+    }
 
     @Override
     public void onItemClick(int position, LocalDate date) {
