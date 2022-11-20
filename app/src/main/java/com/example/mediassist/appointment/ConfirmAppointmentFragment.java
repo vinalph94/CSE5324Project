@@ -60,15 +60,15 @@ public class ConfirmAppointmentFragment extends Fragment {
         courseArrayList.add("09.00 AM");
         courseArrayList.add("10.00 AM");
         courseArrayList.add("11.00 AM");
-        courseArrayList.add("13.00 AM");
-        courseArrayList.add("14.00 AM");
-        courseArrayList.add("15.00 AM");
-        courseArrayList.add("17.00 AM");
-        courseArrayList.add("18.00 AM");
-        courseArrayList.add("19.00 AM");
-        courseArrayList.add("20.00 AM");
-        courseArrayList.add("21.00 AM");
-        courseArrayList.add("22.00 AM");
+        courseArrayList.add("13.00 PM");
+        courseArrayList.add("14.00 PM");
+        courseArrayList.add("15.00 PM");
+        courseArrayList.add("17.00 PM");
+        courseArrayList.add("18.00 PM");
+        courseArrayList.add("19.00 PM");
+        courseArrayList.add("20.00 PM");
+        courseArrayList.add("21.00 PM");
+        courseArrayList.add("22.00 PM");
         /*
         courseArrayList.add("10.00 AM");
         courseArrayList.add("10.00 AM");
@@ -101,6 +101,8 @@ public class ConfirmAppointmentFragment extends Fragment {
                 System.out.println("Selected time : "+ConfirmAppointmentFragment.selectedTime);
                 System.out.println("getDoctorDetailsModel" + "docName : "+ScheduleAppointmentFragment.docName+ ", docSpec : "+ScheduleAppointmentFragment.docSpec+" , docClinic: "+ScheduleAppointmentFragment.docClinic);
                 System.out.println("Selected Date : "+eventDateTV.getText().toString());
+                System.out.println("Logged in Patient  : "+LoginActivity.patientUsername);
+
                 //store the additional fields(signup fields) in firebase
                 Map<String, String> user = new HashMap<>();
                 user.put("doctor", ScheduleAppointmentFragment.docName);
@@ -108,6 +110,7 @@ public class ConfirmAppointmentFragment extends Fragment {
                 user.put("clinic", ScheduleAppointmentFragment.docClinic);
                 user.put("slotdate",eventDateTV.getText().toString());
                 user.put("slottime",ConfirmAppointmentFragment.selectedTime);
+                user.put("patient",LoginActivity.patientUsername);
 
                 db.collection("appointments")
                         .add(user)
