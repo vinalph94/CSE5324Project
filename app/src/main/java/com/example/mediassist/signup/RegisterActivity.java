@@ -1,6 +1,7 @@
 package com.example.mediassist.signup;
 
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
 
+import com.example.mediassist.dashboard.DashboardActivity;
+import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 
@@ -128,18 +131,22 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
                     registerUserModel = new RegisterUserModel(name,email,phoneNumber,password);
                     FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(registerUserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "user registered", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(RegisterActivity.this, "fail to register user" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "failure"+e, Toast.LENGTH_SHORT).show();
                         }
                     });
 
+
                 }else {
-                    Toast.makeText(RegisterActivity.this, "fail to register user" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
