@@ -4,6 +4,7 @@ package com.example.mediassist.util;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class CustomTextWatcher implements TextWatcher {
         } else {
             this.errorText.setVisibility(View.GONE);
         }
+        Log.e("manasa0","yes");
         this.checkForEmptyCallBack.checkForEmpty();
 
     }
