@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -51,6 +52,8 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private String email;
     private String assign_clinic;
     private Bundle bundle;
+    private ClinicAdminModel clinicadmin;
+    private String id;
    /* Spinner spinner;
    DatabaseReference databaseReference;
     List<String> clinic_dropdown; */
@@ -60,7 +63,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         db = FirebaseFirestore.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
         bundle = getArguments();
-        ClinicAdminModel clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
+         clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
 
 
         Spinner spinner = (Spinner) binding.spinner;
@@ -105,6 +108,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         deleteButton = binding.clinicAdminDeleteButton;
 
         if (clinicadmin != null) {
+            id = clinicadmin.getId();
             clinicAdminName.setText(clinicadmin.getName());
             clinicAdminPhoneNumber.setText(clinicadmin.getPhone_number());
             clinicAdminEmail.setText(clinicadmin.getEmail());
@@ -118,6 +122,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicAdminName.addTextChangedListener(new CustomTextWatcher(clinic_admin_name_error, AddClinicAdminFragment.this));
         clinicAdminPhoneNumber.addTextChangedListener(new CustomTextWatcher(clinic_admin_phone_number_error, AddClinicAdminFragment.this));
         clinicAdminEmail.addTextChangedListener(new CustomTextWatcher(clinic_admin_email_error, AddClinicAdminFragment.this));
+
         checkClinicAdminData();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -126,17 +131,28 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             public void onClick(View v) {
                 assign_clinic = spinner.getSelectedItem().toString();
 
-                ClinicAdminModel clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic, "");
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
                 uploadClinicAdmin(clinicadmin);
 
+            }
+        });
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //phoneNumberEditText.setText("");
+                checkClinicAdminData();
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                updateClinicAdmin(id, clinicadmin);
             }
         });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //phoneNumberEditText.setText("");
-                deleteData(phone_number);
+                checkClinicAdminData();
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+
+                deleteData(id, clinicadmin);
             }
         });
 
@@ -145,46 +161,21 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     }
 
-    private void deleteData(String phoneNumber) {
-        db.collection("clinicAdmins")
-                .whereEqualTo("phone_number", phoneNumber)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                            String docId = documentSnapshot.getId();
-                            db.collection(("clinicAdmins"))
-                                    .document(docId)
-                                    .delete()
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            new CustomToast(getContext(), getActivity(),
-                                                    name + " Deleted Successfully !", ToastStatus.SUCCESS).show();
-                                            // navigate to add clinic screen
+    private void deleteData(String clinicadminId, ClinicAdminModel clinicadmin) {
+        db.collection(("clinicAdmins")).document(clinicadminId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicAdminFragment_to_ClinicAdminListFragment);
+                new CustomToast(getContext(), getActivity(), name + " Deleted Successfully", ToastStatus.DELETE).show();
 
-                                            clinicAdminName.setText("");
-                                            clinicAdminPhoneNumber.setText("");
-                                            clinicAdminEmail.setText("");
-                                            saveButton.setVisibility(View.VISIBLE);
-                                            editButton.setVisibility(View.GONE);
-                                            deleteButton.setVisibility(View.GONE);
-                                            clinic_admin_name_error.setVisibility(View.GONE);
-                                            clinic_admin_phone_number_error.setVisibility(View.GONE);
-                                            clinic_admin_email_error.setVisibility(View.GONE);
 
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            new CustomToast(getContext(), getActivity(),
-                                                    name + " Failed to delete !", ToastStatus.SUCCESS).show();
-                                        }
-                                    });
-                        }
-                    }
-                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to delete " + name, ToastStatus.FAILURE).show();
+            }
+        });
     }
 
     private void checkClinicAdminData() {
@@ -215,6 +206,24 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
                 });
 
 
+    }
+
+    public void updateClinicAdmin(String clinicadminId, ClinicAdminModel clinicadmin) {
+
+        db.collection(("clinicAdmins")).document(clinicadminId).set(clinicadmin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicAdminFragment_to_ClinicAdminListFragment);
+                new CustomToast(getContext(), getActivity(), name + " Updated Successfully", ToastStatus.SUCCESS).show();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to edit " + name, ToastStatus.FAILURE).show();
+            }
+        });
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

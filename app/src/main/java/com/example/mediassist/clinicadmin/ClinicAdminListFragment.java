@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
+
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.ClinicAdminListBinding;
 import com.google.firebase.firestore.EventListener;
@@ -35,6 +36,7 @@ public class ClinicAdminListFragment extends Fragment {
     private ClinicAdminAdapter courseAdapter;
     private Bundle bundle;
 
+    private ClinicAdminModel clinicadmin;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -54,7 +56,9 @@ public class ClinicAdminListFragment extends Fragment {
                     phoneNumber = snapshot.getString("phone_number");
                     email = snapshot.getString("email");
                     assignClinic = snapshot.getString("assign_clinic");
-                    courseArrayList.add(new ClinicAdminModel(name, phoneNumber, email, assignClinic, snapshot.getId()));
+                    clinicadmin= new ClinicAdminModel(name, phoneNumber, email, assignClinic);
+                    clinicadmin.setId(snapshot.getId());
+                    courseArrayList.add(clinicadmin);
 
                 }
                 courseAdapter = new ClinicAdminAdapter(getContext(), courseArrayList, new ClinicAdminAdapter.ClinicAdminItemListener() {

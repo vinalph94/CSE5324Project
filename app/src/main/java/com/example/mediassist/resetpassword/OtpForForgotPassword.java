@@ -33,8 +33,8 @@ public class OtpForForgotPassword extends Fragment {
         binding.otpContinueBtnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(OtpForForgotPassword.this)
-                        .navigate(R.id.action_otp_for_forgot_password_to_ResetPassword);
+             //   NavHostFragment.findNavController(OtpForForgotPassword.this)
+                //        .navigate(R.id.action_otp_for_forgot_password_to_ResetPassword);
             }
         });
 

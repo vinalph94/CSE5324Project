@@ -1,21 +1,24 @@
 package com.example.mediassist.clinicadmin.models;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 
 public class ClinicAdminModel implements Serializable {
+    @Exclude private String id;
     private String name;
     private String phone_number;
     private String email;
     private String assign_clinic;
-    private String id;
 
 
-    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic, String id) {
+
+    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
         this.assign_clinic = assign_clinic;
-        this.id = id;
+
     }
 
     public ClinicAdminModel() {
@@ -53,11 +56,11 @@ public class ClinicAdminModel implements Serializable {
         this.assign_clinic = assign_clinic;
     }
 
-    public String setId() {
+    public String getId() {
         return id;
     }
 
-    public String getId() {
-        return id;
+    public void setId(String id) {
+        this.id = id;
     }
 }

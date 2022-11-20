@@ -5,44 +5,14 @@
     android:id="@+id/nav_forgotpwd"
     app:startDestination="@id/GetEmailForForgotPwd">
 
-    <fragment
+  <fragment
         android:id="@+id/GetEmailForForgotPwd"
         android:name="com.example.mediassist.resetpassword.GetEmailForForgotPwd"
         android:label="Get Email For Forgot Pwd"
         tools:layout="@layout/fragment_get_email_for_forgot_pwd">
 
-        <action
-            android:id="@+id/action_get_email_for_forgot_pwd_to_OtpForForgotPassword"
-            app:destination="@id/otpForgotPwd" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/otpForgotPwd"
-        android:name="com.example.mediassist.resetpassword.OtpForForgotPassword"
-        android:label="Otp Page for Forgot Password"
-        tools:layout="@layout/fragment_otp_for_forgot_password">
-
-        <action
-            android:id="@+id/action_otp_for_forgot_password_to_ResetPassword"
-            app:destination="@id/resetpassword" />
-    </fragment>
-    <fragment
-        android:id="@+id/resetpassword"
-        android:name="com.example.mediassist.resetpassword.ResetPassword"
-        android:label="Reset Password"
-        tools:layout="@layout/fragment_reset_password">
-        <action
-            android:id="@+id/action_ResetPassword_to_SuccessfulResetPassword"
-            app:destination="@id/successfulresetpassword" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/successfulresetpassword"
-        android:name="com.example.mediassist.resetpassword.SuccessfulResetPassword"
-        android:label="Successful Reset Password"
-        tools:layout="@layout/fragment_successful_reset_password">
 
-
-    </fragment>
 </navigation>

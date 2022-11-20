@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
+import com.example.mediassist.appointment.MakeAppoinmentFragment;
+import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

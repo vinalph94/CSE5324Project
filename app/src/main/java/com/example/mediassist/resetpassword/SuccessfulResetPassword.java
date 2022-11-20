@@ -35,8 +35,8 @@ public class SuccessfulResetPassword extends Fragment {
         binding.HomePageButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SuccessfulResetPassword.this)
-                        .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
+                //NavHostFragment.findNavController(SuccessfulResetPassword.this)
+                  //      .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
             }
         });
 
