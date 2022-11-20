@@ -12,17 +12,26 @@
         tools:layout="@layout/fragment_make_appoinment">
 
         <action
-            android:id="@+id/action_ScheduleAppointment_to_MakeAppointment"
+            android:id="@+id/action_MakeAppointment_to_ScheduleAppointment"
             app:destination="@id/ScheduleAppointment" />
     </fragment>
     <fragment
         android:id="@+id/ScheduleAppointment"
         android:name="com.example.mediassist.appointment.ScheduleAppointmentFragment"
-        android:label="Make Appointment"
+        android:label="Schedule Appointment"
         tools:layout="@layout/schedule_appointment_fragment">
 
         <action
-            android:id="@+id/action_Second2Fragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_ScheduleAppointment_to_ConfirmAppointment"
+            app:destination="@id/ConfirmAppointment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ConfirmAppointment"
+        android:name="com.example.mediassist.appointment.ConfirmAppointmentFragment"
+        android:label="Confirm Appointment"
+        tools:layout="@layout/confirm_appointment_fragment">
+
+
     </fragment>
 </navigation>

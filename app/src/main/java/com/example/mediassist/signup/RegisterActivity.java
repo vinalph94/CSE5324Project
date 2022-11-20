@@ -108,17 +108,6 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
         editTextEmail.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
 
         checkRegisterData();
-
-      /*  signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkRegisterData();
-                registerUserModel = new RegisterUserModel(name, phoneNumber, email, password);
-                Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
     }
 
     public void onClickSignUpButton(View view) {
@@ -129,10 +118,12 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     registerUserModel = new RegisterUserModel(name,email,phoneNumber,password);
-                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(registerUserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
+                    DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                            @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "user registered", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -140,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegisterActivity.this, "failure"+e, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "fail to register user"+e, Toast.LENGTH_SHORT).show();
                         }
                     });
 

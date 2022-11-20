@@ -27,12 +27,9 @@ public class ScheduleAppointmentActivity extends AppCompatActivity {
         binding = ActivityScheduleAppointmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
-        setSupportActionBar(binding.toolbar);
+
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_schedule_appointment);
-        //setActionBarTitle("Make an Appoinment");
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
     }

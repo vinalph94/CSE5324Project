@@ -57,7 +57,7 @@ public class FirstFragment extends Fragment implements LocationListener {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_ScheduleAppointment_to_MakeAppointment);
+                NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment);
             }
         });
     }

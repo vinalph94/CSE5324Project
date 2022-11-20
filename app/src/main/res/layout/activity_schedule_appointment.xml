@@ -12,9 +12,11 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:theme="@style/Theme.MediAssist.AppBarOverlay">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             android:layout_width="60dp"
@@ -32,15 +34,9 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@+id/btnBack"
             android:paddingTop="22dp"
-            android:text="Clinics" />
+            android:text="Make an Appointment" />
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/black"
-            app:popupTheme="@style/Theme.MediAssist.PopupOverlay" />
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,3 +44,10 @@
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+<!--<androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:popupTheme="@style/Theme.MediAssist.PopupOverlay" />-->

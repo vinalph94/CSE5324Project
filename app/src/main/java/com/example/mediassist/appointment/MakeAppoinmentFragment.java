@@ -2,6 +2,7 @@ package com.example.mediassist.appointment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.databinding.DoctorListBinding;
 import com.example.mediassist.doctor.DoctorAdapter;
 import com.example.mediassist.doctor.models.DoctorModel;
@@ -94,9 +96,15 @@ public class MakeAppoinmentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_make_appoinment, container, false);
     }*/
 
+   /* public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Make an Appointment");
+    }*/
+
     private void navigateToAddFragment(DoctorModel doctor){
         bundle = new Bundle();
         bundle.putSerializable("doctor", doctor);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_DoctorListFragment_to_AddDoctorFragment, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);
     }
 }

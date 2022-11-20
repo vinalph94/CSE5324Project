@@ -103,6 +103,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Schedule Appointment");
 
 
     }
@@ -116,7 +117,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     private void initWidgets() {
         calendarRecyclerView = binding.calendarRecyclerView;
         monthYearText = binding.monthYearTV;
-        ImageButton searchBackButn = (ImageButton) binding.searchBackButton;
+       /* ImageButton searchBackButn = (ImageButton) binding.searchBackButton;
         searchBackButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +128,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
 
             }
-        });
+        });*/
     }
 
     private void setDoctorDetails() {

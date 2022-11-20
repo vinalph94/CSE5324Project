@@ -65,7 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickSignInButton(View view) {
-
+        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(intent);
         String mail = email.getText().toString().trim();
         patientUsername = mail;
         String pwd = password.getText().toString().trim();
@@ -75,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
         } else {
-            loginUser(mail, pwd);
+            //loginUser(mail, pwd);
         }
 
 
