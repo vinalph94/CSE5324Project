@@ -3,16 +3,26 @@ package com.example.mediassist.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,15 +31,17 @@ public class LoginActivity extends AppCompatActivity {
     private View rectangle_7;
     private TextView sign_in_to_your_account;
     private TextView email_;
-    private TextView login_email_error;
-    private TextView login_pwd_error;
     private EditText email;
     private View rectangle_8;
     private View rectangle_11;
     private Button signin;
     private TextView password_;
     private EditText password;
+    FirebaseFirestore firebaseFirestore;
+    DocumentReference ref;
     public static String patientUsername;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,38 +58,54 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         password.setSelection(0);
         signin = (Button) findViewById(R.id.sign_in);
-        login_email_error = findViewById(R.id.login_email_error_text);
-        login_pwd_error = findViewById(R.id.login_pwd_error_text);
-        signin.setEnabled(true);
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
 
     public void onClickSignInButton(View view) {
 
-        login_email_error.setVisibility(View.GONE);
-        login_pwd_error.setVisibility(View.GONE);
-
-       String mail = email.getText().toString();
-       patientUsername = mail;
-       String pwd = password.getText().toString();
-//        if (TextUtils.isEmpty(mail)) {
-//            login_email_error.setVisibility(View.VISIBLE);
-//        } else if (TextUtils.isEmpty(pwd)) {
-//            login_pwd_error.setVisibility(View.VISIBLE);
-//        } else {
-//            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-//            startActivity(intent);
-//        }
+        String mail = email.getText().toString().trim();
+        patientUsername = mail;
+        String pwd = password.getText().toString().trim();
+        mAuth = FirebaseAuth.getInstance();
 
 
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-        startActivity(intent);
+        if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
+            Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
+        } else {
+            loginUser(mail, pwd);
+        }
+
 
     }
 
     public void onClickForgotPwdButton(View view) {
         Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
+    }
+
+    private void loginUser(String email, String password) {
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Update the profile " +
+                            "for better expereince", Toast.LENGTH_SHORT).show();
+                    //navigate to dashboard and send role id in the intent so that in dashboard activity we
+                    // can get that role id and check which fragment to laod
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

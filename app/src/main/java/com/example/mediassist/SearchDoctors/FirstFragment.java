@@ -117,7 +117,7 @@ public class FirstFragment extends Fragment implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
         try {
             Geocoder geocoder = new Geocoder(getContext(), Locale.US);
-            geocoder.getFromLocationName("123 Testing Rd City State zip",1);
+            geocoder.getFromLocationName("123 Testing Rd City State zip", 1);
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             t.setText(addresses.get(0).getPostalCode());
         } catch (IOException e) {

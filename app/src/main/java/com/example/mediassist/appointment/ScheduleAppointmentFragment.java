@@ -160,7 +160,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
                             docDetailsText.setText(docname);
                             docSpecialistText.setText(docspec);
                             hospitalText.setText(docclinic);
-                            setDoctorDetailsModel(docname,docspec,docclinic);
+                            setDoctorDetailsModel(docname, docspec, docclinic);
                         }
                     }
                 } else {
@@ -177,7 +177,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         docName = docname;
         docSpec = docspec;
         docClinic = docclinic;
-        System.out.println("setDoctorDetailsModel" + "docName : "+docName+ ", docSpec : "+docSpec+" , docClinic: "+docClinic);
+        System.out.println("setDoctorDetailsModel" + "docName : " + docName + ", docSpec : " + docSpec + " , docClinic: " + docClinic);
 
     }
 

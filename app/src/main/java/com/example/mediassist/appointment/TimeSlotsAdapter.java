@@ -3,7 +3,6 @@ package com.example.mediassist.appointment;
 import static java.util.Objects.nonNull;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.ViewHolder> {

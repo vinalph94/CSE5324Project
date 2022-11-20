@@ -16,7 +16,6 @@ public class CustomTextWatcher implements TextWatcher {
     public CustomTextWatcher(TextView error, CheckForEmptyCallBack checkForEmptyCallBack) {
         this.checkForEmptyCallBack = checkForEmptyCallBack;
         this.errorText = error;
-
     }
 
     @Override
@@ -30,7 +29,6 @@ public class CustomTextWatcher implements TextWatcher {
         } else {
             this.errorText.setVisibility(View.GONE);
         }
-
         this.checkForEmptyCallBack.checkForEmpty();
 
     }

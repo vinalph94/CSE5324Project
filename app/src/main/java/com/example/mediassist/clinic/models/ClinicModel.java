@@ -5,15 +5,13 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class ClinicModel implements Serializable {
-    @Exclude private String id;
+    @Exclude
+    private String id;
     private String name;
     private String phone_number;
     private String address;
     private String description;
     private int zipcode;
-
-
-
 
 
     public ClinicModel(String name, String phone_number, String address, String description, int zipcode) {
