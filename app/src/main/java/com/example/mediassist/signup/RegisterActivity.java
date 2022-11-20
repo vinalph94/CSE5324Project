@@ -113,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        registerUserModel = new RegisterUserModel(name, email, phoneNumber, password);
+                        registerUserModel = new RegisterUserModel(name, email, phoneNumber, password,"4");
                         DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
 

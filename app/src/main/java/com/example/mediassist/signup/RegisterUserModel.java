@@ -6,16 +6,18 @@ public class RegisterUserModel {
     private String email;
     private String phoneNumber;
     private String password;
+    private String role;
 
     public RegisterUserModel() {
 
     }
 
-    public RegisterUserModel(String fullName, String email, String phoneNumber,String password) {
+    public RegisterUserModel(String fullName, String email, String phoneNumber,String password,String role) {
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.role =role;
     }
 
     public String getFullName() {
@@ -50,4 +52,11 @@ public class RegisterUserModel {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
