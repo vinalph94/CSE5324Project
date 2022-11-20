@@ -9,69 +9,74 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/forget_pwd_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        tools:ignore="MissingConstraints">
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/forget_pwd_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            tools:ignore="MissingConstraints">
 
+            <View
+                android:id="@+id/rectangle_7"
+                android:layout_width="300dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="65dp"
+                android:background="@drawable/rectangle_7_shape" />
 
+            <TextView
+                android:id="@+id/email_"
+                android:layout_width="200dp"
+                android:layout_height="31dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="45dp"
+                android:fontFamily="Inter"
+                android:text="Please enter you email id"
+                android:textColor="@color/email__color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/emailForgotPwd"
+                android:layout_width="260dp"
+                android:layout_height="31dp"
+                android:layout_gravity="fill_horizontal|left"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="75dp"
+                android:background="@null"
+                android:fontFamily="Inter"
+                android:gravity="left"
+                android:hint="email@domain.com"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:textColorHint="#303843"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <View
-            android:id="@+id/rectangle_7"
-            android:layout_width="300dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="165dp"
-            android:background="@drawable/rectangle_7_shape" />
-
-        <TextView
-            android:id="@+id/email_"
-            android:layout_width="200dp"
-            android:layout_height="31dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="135dp"
-            android:fontFamily="Inter"
-            android:text="Please enter you email id"
-            android:textColor="@color/email__color"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="260dp"
-            android:layout_height="31dp"
-            android:layout_gravity="fill_horizontal|left"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="175dp"
-            android:background="@null"
-            android:fontFamily="Inter"
-            android:gravity="left"
-            android:hint="email@domain.com"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:textColorHint="#303843"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            />
-
-        <Button
-            android:id="@+id/continueButtonView"
-            android:layout_width="240dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="515dp"
-            android:text="Continue"
-            android:textColor="@color/white"
-            style="@style/default_disabled_button" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/continueButtonView"
+                android:layout_width="240dp"
+                android:layout_height="51dp"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="false"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="300dp"
+                android:backgroundTint="#A9CACF"
+                android:text="Send Password Link"
+                style="@style/default_disabled_button"
+                android:clickable="true"
+                android:enabled="true"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout><!-- android:layout_marginStart="85dp"
+    style="@style/default_disabled_button"
+               android:layout_marginTop="515dp"-->

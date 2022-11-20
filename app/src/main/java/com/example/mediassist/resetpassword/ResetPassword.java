@@ -37,8 +37,8 @@ public class ResetPassword extends Fragment {
         binding.SavePwdButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(ResetPassword.this)
-                        .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
+               // NavHostFragment.findNavController(ResetPassword.this)
+                     //   .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
             }
         });
 
