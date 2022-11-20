@@ -1,6 +1,7 @@
 package com.example.mediassist.signup;
 
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
 
+import com.example.mediassist.dashboard.DashboardActivity;
+import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 
@@ -126,17 +129,22 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     registerUserModel = new RegisterUserModel(name,phoneNumber,email,password);
-                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(registerUserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(RegisterActivity.this, "succesfull", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "failure"+e, Toast.LENGTH_SHORT).show();
                         }
                     });
+
 
                 }else {
                     Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
