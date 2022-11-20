@@ -16,6 +16,7 @@
             tools:context=".signup.RegisterActivity">
 
                 <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
+
                 <TextView
                     android:id="@+id/signup"
                     android:layout_width="261dp"
@@ -46,6 +47,7 @@
                     android:text="Name is required" />
 
 
+
                 <TextView
                     android:id="@+id/register_phone_number_label"
                     style="@style/mandatory_label_text"
@@ -62,6 +64,11 @@
                     style="@style/default_error_text"
                     android:visibility="gone"
                     android:text="Phone Number is required" />
+                <TextView
+                    android:id="@+id/register_phone_number_error_text2"
+                    style="@style/default_error_text"
+                    android:visibility="gone"
+                    android:text="Invalid phone number" />
 
                 <TextView
                     android:id="@+id/register_email_label"
@@ -78,6 +85,12 @@
                     style="@style/default_error_text"
                     android:visibility="gone"
                     android:text="Email is required" />
+
+                <TextView
+                    android:id="@+id/register_email_error_text2"
+                    style="@style/default_error_text"
+                    android:visibility="gone"
+                    android:text="Invalid Email" />
 
 
                 <TextView
@@ -112,6 +125,7 @@
                     style="@style/default_error_text"
                     android:visibility="gone"
                     android:text="Passwords must match" />
+
 
         </LinearLayout>
 

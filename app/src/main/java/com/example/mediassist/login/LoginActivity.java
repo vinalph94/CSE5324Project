@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private View rectangle_7;
     private TextView sign_in_to_your_account;
     private TextView email_;
+    private TextView emailError;
+    private TextView pwdError;
     private EditText email;
     private View rectangle_8;
     private View rectangle_11;
@@ -61,22 +63,28 @@ public class LoginActivity extends AppCompatActivity {
         password.setSelection(0);
         signin = (Button) findViewById(R.id.sign_in);
         firebaseFirestore = FirebaseFirestore.getInstance();
-
+        emailError= findViewById(R.id.login_email_error_text);
+        pwdError= findViewById(R.id.login_pwd_error_text);
     }
 
     public void onClickSignInButton(View view) {
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-        startActivity(intent);
+       //Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+      // startActivity(intent);
         String mail = email.getText().toString().trim();
         patientUsername = mail;
         String pwd = password.getText().toString().trim();
         mAuth = FirebaseAuth.getInstance();
 
 
-        if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(pwd)) {
-            Toast.makeText(LoginActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
-        } else {
-            //loginUser(mail, pwd);
+        if (TextUtils.isEmpty(mail)) {
+            emailError.setVisibility(View.VISIBLE);
+        } else if(TextUtils.isEmpty(pwd)){
+            pwdError.setVisibility(View.VISIBLE);
+            emailError.setVisibility(View.GONE);
+        }else{
+            pwdError.setVisibility(View.GONE);
+            emailError.setVisibility(View.GONE);
+            loginUser(mail, pwd);
         }
 
 
