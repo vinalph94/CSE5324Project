@@ -31,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //String role = intent.getStringExtra("role");
-        String role = "1";
+        String role = "4";
 
         if (role == "1") {
             navController.navigate(R.id.SuperAdminDashboardFragment);

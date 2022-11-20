@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
+import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,10 +38,9 @@ public class ConfirmAppointmentFragment extends Fragment {
     private ArrayList<String> courseArrayList = new ArrayList<String>();
     private TimeSlotsAdapter timeSlotsAdapter;
     private TextView eventDateTV;
-    Button appoitnmentButton;
-    public static String selectedTime;
+
     private Bundle bundle;
-    FirebaseFirestore db;
+
     private AppointmentModel appointmentModel;
 
     @Override
@@ -97,7 +98,7 @@ public class ConfirmAppointmentFragment extends Fragment {
 
                 //store the additional fields(signup fields) in firebase
                               appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,
-                        doctor.getId(), doctor.getDoctorname(), doctor.getAssignclinic(), doctor.getAssignspecialization(),
+                        doctor.getId(), doctor.getDoctorname(), doctor.getclinicId(), doctor.getAssignspecialization(),
                         eventDateTV.getText().toString(), ConfirmAppointmentFragment.selectedTime);
 
                 db.collection("appointments").add(appointmentModel)

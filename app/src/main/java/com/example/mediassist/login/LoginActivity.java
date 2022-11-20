@@ -42,9 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button signin;
     private TextView password_;
     private EditText password;
-    FirebaseFirestore firebaseFirestore;
-    DocumentReference ref;
-    public static String patientUsername;
     public static String patientUid;
     private FirebaseAuth mAuth;
 

@@ -7,95 +7,95 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class AppointmentModel implements Serializable {
-    private String patientId;
-    private String patientName;
-    private String doctorId;
-    private String doctorName;
-    private String clinic;
-    private String specialization;
-    private String slotdate;
-    private String slottime;
+    private String patient_id;
+    private String patient_name;
+    private String doctor_id;
+    private String doctor_name;
+    private String clinic_id;
+    private String category_id;
+    private String slot_date;
+    private String slot_time;
     @Exclude
       private String id;
 
 
-    public AppointmentModel(String patientId, String patientName, String doctorId, String doctorName, String clinic, String specialization, String slotdate, String slottime) {
-        this.patientId = patientId;
-        this.patientName = patientName;
-        this.doctorId = doctorId;
-        this.doctorName = doctorName;
-        this.clinic = clinic;
-        this.specialization = specialization;
-        this.slotdate = slotdate;
-        this.slottime = slottime;
+    public AppointmentModel(String patient_id, String patient_name, String doctor_id, String doctor_name, String clinic_id, String category_id, String slotdate, String slottime) {
+        this.patient_id = patient_id;
+        this.patient_name = patient_name;
+        this.doctor_id = doctor_id;
+        this.doctor_name = doctor_name;
+        this.clinic_id = clinic_id;
+        this.category_id = category_id;
+        this.slot_date = slot_date;
+        this.slot_time = slot_time;
 
     }
 
     public AppointmentModel() {
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getPatient_id() {
+        return patient_id;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatient_id(String patient_id) {
+        this.patient_id = patient_id;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public String getPatient_name() {
+        return patient_name;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
     }
 
-    public String getDoctorId() {
-        return doctorId;
+    public String getDoctor_id() {
+        return doctor_id;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctor_id(String doctor_id) {
+        this.doctor_id = doctor_id;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public String getDoctor_name() {
+        return doctor_name;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setDoctor_name(String doctor_name) {
+        this.doctor_name = doctor_name;
     }
 
-    public String getClinic() {
-        return clinic;
+    public String getClinic_id() {
+        return clinic_id;
     }
 
-    public void setClinic(String clinic) {
-        this.clinic = clinic;
+    public void setClinic_id(String clinic_id) {
+        this.clinic_id = clinic_id;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public String getCategory_id() {
+        return category_id;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
-    public String getSlotdate() {
-        return slotdate;
+    public String getSlot_date() {
+        return slot_date;
     }
 
-    public void setSlotdate(String slotdate) {
-        this.slotdate = slotdate;
+    public void setSlot_date(String slot_date) {
+        this.slot_date = slot_date;
     }
 
-    public String getSlottime() {
-        return slottime;
+    public String getSlot_time() {
+        return slot_time;
     }
 
-    public void setSlottime(String slottime) {
-        this.slottime = slottime;
+    public void setSlot_time(String slot_time) {
+        this.slot_time = slot_time;
     }
 
     public String getId() {
