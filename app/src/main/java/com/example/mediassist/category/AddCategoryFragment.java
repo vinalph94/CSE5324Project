@@ -89,16 +89,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
         ((CategoryActivity) getActivity()).btnAdd.setVisibility(View.GONE);
 
-        if (category != null) {
-            id = category.getId();
-            categoryName.setText(category.getName());
-            if (category.getDescription() != null) {
-                categoryDescription.setText(category.getDescription());
-            }
-            saveButton.setVisibility(View.GONE);
-            editButton.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
-        }
+
 
         clinicsList = new ArrayList<ClinicModel>();
         iconsList = new ArrayList<IconModel>();
@@ -145,7 +136,6 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
             }
         });
-
 
 
         categoryName.addTextChangedListener(new CustomTextWatcher(category_name_error, AddCategoryFragment.this));
@@ -212,12 +202,25 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
     }
 
-
+private void getCategoryDetails(){
+    if (category != null) {
+        id = category.getId();
+        categoryName.setText(category.getName());
+        if (category.getDescription() != null) {
+            categoryDescription.setText(category.getDescription());
+        }
+        saveButton.setVisibility(View.GONE);
+        editButton.setVisibility(View.VISIBLE);
+        deleteButton.setVisibility(View.VISIBLE);
+    }
+}
     private void getCategoryIconForEdit(ArrayAdapter<IconModel> iconSpinnerAdapter) {
-
-        for (int position = 0; position < iconSpinnerAdapter.getCount(); position++) {
-            if (iconSpinner.getItemAtPosition(position).equals(category.getIconId())) {
-                iconSpinner.setSelection(position);
+        getCategoryDetails();
+        if (category != null) {
+            for (int position = 0; position < iconSpinnerAdapter.getCount(); position++) {
+                if (((IconModel) iconSpinner.getItemAtPosition(position)).getId().equals(category.getIconId())) {
+                    iconSpinner.setSelection(position);
+                }
             }
         }
 
@@ -225,10 +228,12 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
     }
 
     private void getCategoryClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
-
-        for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
-            if (clinicSpinner.getItemAtPosition(position).equals(category.getClinicId())) {
-                clinicSpinner.setSelection(position);
+        getCategoryDetails();
+        if (category != null) {
+            for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
+                if (((ClinicModel) clinicSpinner.getItemAtPosition(position)).getId().equals(category.getClinicId())) {
+                    clinicSpinner.setSelection(position);
+                }
             }
         }
 
