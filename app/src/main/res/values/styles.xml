@@ -76,8 +76,8 @@
         <item name="android:minWidth">@dimen/_260sdp</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:clickable">false</item>
-        <item name="android:enabled">false</item>
+<!--        <item name="android:clickable">false</item>-->
+<!--        <item name="android:enabled">false</item>-->
     </style>
 
     <style name="default_progress_bar">

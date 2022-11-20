@@ -47,6 +47,13 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     private TextView docSpecialistText;
     private TextView hospitalText;
     Button appoitnmentButton;
+    Button prevDateButton;
+    Button nextDateButton;
+    public static String docName;
+    public static String docSpec;
+    public static String docClinic;
+
+
     FirebaseFirestore db1;
 
     @Override
@@ -71,6 +78,23 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
             public void onClick(View v) {
                // Navigation.findNavController(binding.getRoot()).navigate(R.id.action_FirstFragment_to_Second2Fragment);
 
+            }
+        });
+
+        prevDateButton = binding.previousWeekAction;
+        prevDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+                setWeekView();
+            }
+        });
+        nextDateButton = binding.nextWeekAction;
+        nextDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+                setWeekView();
             }
         });
         return binding.getRoot();
@@ -136,6 +160,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
                             docDetailsText.setText(docname);
                             docSpecialistText.setText(docspec);
                             hospitalText.setText(docclinic);
+                            setDoctorDetailsModel(docname, docspec, docclinic);
                         }
                     }
                 } else {
@@ -146,6 +171,14 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
                 }
             }
         });
+    }
+
+    private void setDoctorDetailsModel(String docname, String docspec, String docclinic) {
+        docName = docname;
+        docSpec = docspec;
+        docClinic = docclinic;
+        System.out.println("setDoctorDetailsModel" + "docName : " + docName + ", docSpec : " + docSpec + " , docClinic: " + docClinic);
+
     }
 
     private void setWeekView() {
@@ -159,7 +192,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         //setEventAdpater();
     }
 
-
+/*
     public void previousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
         setWeekView();
@@ -168,7 +201,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     public void nextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
-    }
+    }*/
 
     @Override
     public void onItemClick(int position, LocalDate date) {

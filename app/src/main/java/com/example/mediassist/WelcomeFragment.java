@@ -29,7 +29,6 @@ public class WelcomeFragment extends Fragment {
         Button signInButton = binding.signinButtonView;
         Button signUpButton = binding.signupButtonView;
 
-
         return binding.getRoot();
 
     }

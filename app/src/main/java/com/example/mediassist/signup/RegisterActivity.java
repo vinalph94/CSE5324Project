@@ -4,6 +4,7 @@ package com.example.mediassist.signup;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +62,10 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
     //ProgressDialog progressDialog;
 
     private EditText editTextName, editTextPhone, editTextEmail, editTextPassword, editTextRetypePwd;
-    private TextView userNameError, userEmailError,userPhoneError, userPwdError, userRePwdError;
+    private TextView userNameError;
+    private TextView userEmailError;
+    private TextView userPhoneError;
+    private TextView userRePwdError;
     private Button signUpBtn;
     private String name;
     private String phoneNumber;
@@ -86,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
         userNameError = binding.registerNameErrorText;
         userEmailError = binding.registerEmailErrorText;
         userPhoneError = binding.registerPhoneNumberErrorText;
-        userPwdError = binding.registerPwdErrorText;
+        TextView userPwdError = binding.registerPwdErrorText;
         userRePwdError = binding.registerRepwdErrorText;
        
         mAuth = FirebaseAuth.getInstance();
@@ -148,6 +152,9 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
         email = editTextEmail.getText().toString();
         password =editTextPassword.getText().toString();
         retypepassword = editTextRetypePwd.getText().toString();
+
+
+
         if (!(name.isEmpty()) && !(phoneNumber.isEmpty()) && !(email.isEmpty()) && !(password.isEmpty()) && !(retypepassword.isEmpty())) {
             signUpBtn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             signUpBtn.setEnabled(true);

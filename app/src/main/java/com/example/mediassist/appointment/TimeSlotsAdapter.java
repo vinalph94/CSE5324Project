@@ -44,6 +44,11 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.View
         if (nonNull(model)) {
             holder.timeSlitBtn.setText(String.format("%s", model));
         }
+        /*if(ConfirmAppointmentFragment.selectedTime != null &&
+                model.equals(ConfirmAppointmentFragment.selectedTime) ){
+            System.out.println("Highlighting selected time "+model);
+            holder.timeSlitBtn.setBackgroundColor(Color.rgb(64, 142, 155));
+        }*/
 
 
         holder.itemView.setOnClickListener(view -> {
