@@ -3,14 +3,12 @@ package com.example.mediassist.appointment;
 import static com.example.mediassist.appointment.CalendarUtils.daysInWeekArray;
 import static com.example.mediassist.appointment.CalendarUtils.monthYearFromDate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ScheduleAppointmentFragmentBinding;
+import com.example.mediassist.doctor.models.DoctorModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -52,15 +50,14 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     public static String docName;
     public static String docSpec;
     public static String docClinic;
+    private Bundle bundle;
+    private DoctorModel doctor;
 
 
     FirebaseFirestore db1;
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         binding = ScheduleAppointmentFragmentBinding.inflate(inflater, container, false);
 
@@ -68,15 +65,31 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         CalendarUtils.selectedDate = LocalDate.now();
 
         initWidgets();
-        setDoctorDetails();
+        //setDoctorDetails();
         setWeekView();
+
+        docNameText = binding.docName;
+        docDetailsText=binding.docDetails;
+        docSpecialistText= binding.docSpecialist;
+
+        bundle = getArguments();
+        DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
+
+        if (doctor != null) {
+            docNameText.setText(doctor.getDoctorname());
+            //docDetailsText =doctor.getAssignclinic();
+            //docSpecialistText = doctor.getAssignspecialization();
+            docDetailsText.setText(doctor.getAssignclinic());
+            docSpecialistText.setText(doctor.getAssignspecialization());
+
+        }
 
         appoitnmentButton = binding.bookAptBtn;
         appoitnmentButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-               // Navigation.findNavController(binding.getRoot()).navigate(R.id.action_FirstFragment_to_Second2Fragment);
+               Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment);
 
             }
         });
@@ -131,16 +144,16 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         });*/
     }
 
-    private void setDoctorDetails() {
+   /* private void setDoctorDetails() {
         docNameText = binding.docName;
         docDetailsText = binding.docDetails;
         docSpecialistText = binding.docSpecialist;
-        hospitalText = binding.hospital;
+        //hospitalText = binding.hospital;
 
        /* Intent intent = getIntent();
         String docId = intent.getStringExtra("id");
         System.out.println(" doctor id "+docId);*/
-        String docid = "vin561@gmail.com";
+      /*  String docid = "vin561@gmail.com";
 
         CollectionReference allUsersRefs = db1.collection("user");
         Query userPhoneQuery = allUsersRefs.whereEqualTo("username", docid);
@@ -174,13 +187,14 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         });
     }
 
-    private void setDoctorDetailsModel(String docname, String docspec, String docclinic) {
+  private void setDoctorDetailsModel(String docname, String docspec, String docclinic) {
         docName = docname;
         docSpec = docspec;
         docClinic = docclinic;
         System.out.println("setDoctorDetailsModel" + "docName : " + docName + ", docSpec : " + docSpec + " , docClinic: " + docClinic);
 
     }
+    */
 
     private void setWeekView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));

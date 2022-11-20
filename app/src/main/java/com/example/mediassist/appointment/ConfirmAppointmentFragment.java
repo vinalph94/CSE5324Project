@@ -137,6 +137,7 @@ public class ConfirmAppointmentFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Book Appointment");
 
 
     }

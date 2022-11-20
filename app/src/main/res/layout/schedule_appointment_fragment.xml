@@ -21,67 +21,53 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="50dp"
-            android:hint=" name"
+            android:background="@drawable/img"
             android:paddingTop="30px"
             android:paddingLeft="15px"
-            android:textColor="@color/white"
-            android:textSize="23dp"
+            android:textColor="#408E9B"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/docDetails"
-            android:layout_width="389dp"
-            android:layout_height="92dp"
+            android:layout_width="304dp"
+            android:layout_height="30dp"
             android:layout_below="@id/docName"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="1dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/img"
-            android:hint=" name"
             android:paddingLeft="30px"
-            android:textColor="#408E9B"
+            android:paddingTop="15px"
+            android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/docSpecialist"
-            android:layout_width="363dp"
-            android:layout_height="58dp"
+            android:layout_width="304dp"
+            android:layout_height="30dp"
             android:layout_alignBottom="@+id/docDetails"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="-2dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="-3dp"
-            android:hint=" name"
-            android:paddingLeft="60px"
+            android:layout_marginBottom="-32dp"
+            android:background="@drawable/img"
+            android:paddingLeft="30px"
+            android:paddingTop="15px"
             android:textColor="@color/white"
-            android:textSize="13.5dp"
+            android:textSize="14dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/hospital"
-            android:layout_width="353dp"
-            android:layout_height="36dp"
-            android:layout_alignBottom="@+id/docSpecialist"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="2dp"
-            android:hint=" name"
-            android:paddingLeft="60px"
-            android:textColor="@color/white"
-            android:textSize="13.5dp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/workTime"
             android:layout_width="304dp"
             android:layout_height="45dp"
             android:layout_below="@id/docDetails"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="87dp"
             android:layout_marginEnd="50dp"
-            android:hint=" name"
             android:text="  Working Time"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -92,29 +78,27 @@
             android:layout_width="304dp"
             android:layout_height="45dp"
             android:layout_below="@id/workTime"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="50dp"
-            android:hint=" name"
             android:text="  Mon-Fri 10.00 AM-10.00PM"
             android:textColor="@color/white"
             android:textSize="11.5dp" />
+
 
         <TextView
             android:id="@+id/appointment"
             android:layout_width="304dp"
             android:layout_height="45dp"
             android:layout_below="@id/workTimeDetails"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="50dp"
-            android:hint=" name"
             android:text="  Make Appointment"
             android:textColor="@color/white"
             android:textSize="15dp"
 
             android:textStyle="bold" />
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
