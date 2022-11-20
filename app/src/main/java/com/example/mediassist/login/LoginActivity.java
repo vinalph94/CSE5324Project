@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button signin;
     private TextView password_;
     private EditText password;
+    public static String patientUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         login_email_error.setVisibility(View.GONE);
         login_pwd_error.setVisibility(View.GONE);
 
-//        String mail = email.getText().toString();
-//        String pwd = password.getText().toString();
+       String mail = email.getText().toString();
+       patientUsername = mail;
+       String pwd = password.getText().toString();
 //        if (TextUtils.isEmpty(mail)) {
 //            login_email_error.setVisibility(View.VISIBLE);
 //        } else if (TextUtils.isEmpty(pwd)) {

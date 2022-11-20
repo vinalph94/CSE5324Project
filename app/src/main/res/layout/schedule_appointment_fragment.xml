@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appointment.BookAppointmentActivity">
+    tools:context=".appointment.ScheduleAppointmentFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -130,6 +130,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/previousWeekAction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/appointment"
@@ -152,6 +153,7 @@
                 android:textSize="20sp" />
 
             <Button
+                android:id="@+id/nextWeekAction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -255,7 +257,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="575dp"
+            android:layout_marginTop="515dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_rectangle_bg"
             android:backgroundTint="#A9CACF"
