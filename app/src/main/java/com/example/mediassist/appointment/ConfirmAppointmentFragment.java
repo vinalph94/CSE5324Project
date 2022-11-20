@@ -13,10 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediassist.appointment.models.AppointmentModel;
-
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
-import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +29,9 @@ import java.util.Map;
 
 public class ConfirmAppointmentFragment extends Fragment {
 
+    public static String selectedTime;
+    Button appoitnmentButton;
+    FirebaseFirestore db;
     private ConfirmAppointmentFragmentBinding binding;
     private ArrayList<String> courseArrayList = new ArrayList<String>();
     private TimeSlotsAdapter timeSlotsAdapter;

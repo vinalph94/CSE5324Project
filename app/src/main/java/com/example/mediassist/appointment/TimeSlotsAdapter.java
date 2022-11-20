@@ -62,6 +62,10 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.View
         return clinicModelArrayList.size();
     }
 
+    public interface ClinicItemListener {
+        void onAdapterItemClick(String clinic);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final Button timeSlitBtn;
@@ -74,9 +78,5 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.View
         }
 
 
-    }
-
-    public interface ClinicItemListener {
-        void onAdapterItemClick(String clinic);
     }
 }

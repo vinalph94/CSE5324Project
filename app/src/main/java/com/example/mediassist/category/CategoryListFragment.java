@@ -30,9 +30,10 @@ public class CategoryListFragment extends Fragment {
     private ArrayList<CategoryModel> courseArrayList = new ArrayList<CategoryModel>();
     private String name;
     private String description;
-    private String assignClinic;
+    private String clinic_id;
     private CategoryAdapter courseAdapter;
     private Bundle bundle;
+    private CategoryModel category;
 
     @Override
     public View onCreateView(
@@ -43,6 +44,7 @@ public class CategoryListFragment extends Fragment {
         binding = CategoryListBinding.inflate(inflater, container, false);
         RecyclerView courseRV = binding.idRVCourseCategory;
 
+//        ((CategoryActivity) getActivity()).setActionBarTitle("Categories");
 
         db.collection("categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -53,8 +55,10 @@ public class CategoryListFragment extends Fragment {
                     if (snapshot.getString("description") != null) {
                         description = snapshot.getString("description");
                     }
-                    assignClinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new CategoryModel(name, description, assignClinic, snapshot.getId()));
+                    clinic_id = snapshot.getString("clinic_id");
+                    category = (new CategoryModel(name, description, clinic_id));
+                    category.setId(snapshot.getId());
+                    courseArrayList.add(category);
 
                 }
                 courseAdapter = new CategoryAdapter(getContext(), courseArrayList, new CategoryAdapter.CategoryItemListener() {

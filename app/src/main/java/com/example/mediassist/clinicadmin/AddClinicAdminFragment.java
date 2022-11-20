@@ -16,21 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -63,7 +58,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         db = FirebaseFirestore.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
         bundle = getArguments();
-         clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
+        clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
 
 
         Spinner spinner = (Spinner) binding.spinner;

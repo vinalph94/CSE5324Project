@@ -42,7 +42,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private EditText doctorPhoneNumber;
     private EditText doctorEmail;
     private String doctorAssignSpecialization;
-    private String doctorAssignClinic;
+    private String clinic_id;
     private Button saveButton;
     private Button editButton;
     private Button deleteButton;
@@ -84,7 +84,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             doctorName.setText(doctor.getDoctorname());
             doctorPhoneNumber.setText(doctor.getDoctorphonenumber());
             doctorEmail.setText(doctor.getDoctoremail());
-            doctorAssignClinic = doctor.getAssignclinic();
+            clinic_id = doctor.getclinicId();
             doctorAssignSpecialization = doctor.getAssignspecialization();
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
@@ -100,10 +100,10 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doctorAssignClinic = spinner.getSelectedItem().toString();
+                clinic_id = spinner.getSelectedItem().toString();
                 doctorAssignSpecialization = spinnerSpecialist.getSelectedItem().toString();
 
-                DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, doctorAssignClinic, "");
+                DoctorModel doctor = new DoctorModel(name, phone_number, email, doctorAssignSpecialization, clinic_id, "");
                 uploadDoctor(doctor);
 
             }

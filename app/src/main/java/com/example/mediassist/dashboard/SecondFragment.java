@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mediassist.R;
 import com.example.mediassist.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {
@@ -34,7 +32,7 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //NavHostFragment.findNavController(SecondFragment.this)
-                   //     .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                //     .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
     }

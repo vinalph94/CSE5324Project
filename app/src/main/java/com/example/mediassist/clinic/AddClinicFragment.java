@@ -3,7 +3,6 @@ package com.example.mediassist.clinic;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +127,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
                 //phoneNumberEditText.setText("");
                 checkClinicData();
                 clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
-                deleteData(id, clinic);
+                deleteData(id);
             }
         });
 
@@ -189,7 +188,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         });
     }
 
-    private void deleteData(String clinicId, ClinicModel clinic) {
+    private void deleteData(String clinicId) {
 
         db.collection(("clinics")).document(clinicId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

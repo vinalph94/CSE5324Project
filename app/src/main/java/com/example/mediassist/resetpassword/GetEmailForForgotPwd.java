@@ -5,15 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.widget.EditText;
-
-import com.example.mediassist.R;
-import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.FragmentGetEmailForForgotPwdBinding;
 import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.CustomToast;
@@ -24,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class GetEmailForForgotPwd extends Fragment {
 
+    FirebaseAuth firebaseAuth;
     private FragmentGetEmailForForgotPwdBinding binding;
     private EditText userEmail;
-    FirebaseAuth firebaseAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

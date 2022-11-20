@@ -33,34 +33,24 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements CheckForEmptyCallBack {
 
-    private ActivityRegisterBinding binding;
-
     boolean isAllFieldsChecked = false;
-    private FirebaseAuth mAuth;
     FirebaseUser mUser;
     FirebaseFirestore db;
     DocumentReference ref;
     boolean isUserExist = false;
-
-    public void setUserExist(boolean userExist) {
-        isUserExist = userExist;
-    }
-
-    public boolean getUserExist() {
-        return isUserExist;
-    }
+    private ActivityRegisterBinding binding;
+    private FirebaseAuth mAuth;
+    private EditText editTextName, editTextPhone, editTextEmail, editTextPassword, editTextRetypePwd;
+    private TextView userNameError;
 
 
     //ProgressDialog progressDialog;
-
-    private EditText editTextName, editTextPhone, editTextEmail, editTextPassword, editTextRetypePwd;
-    private TextView userNameError;
     private TextView userEmailError;
     private TextView userEmailError2;
     private TextView userPhoneError;
     private TextView userPhoneError2;
     private TextView userRePwdError;
-   private TextView userPwdError;
+    private TextView userPwdError;
     private Button signUpBtn;
     private String name;
     private String phoneNumber;
@@ -69,51 +59,57 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
     private String retypepassword;
     private RegisterUserModel registerUserModel;
 
+    public boolean getUserExist() {
+        return isUserExist;
+    }
+
+    public void setUserExist(boolean userExist) {
+        isUserExist = userExist;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-     
+
         editTextName = binding.registerNameText;
         editTextPhone = binding.registerPhoneNumberText;
         editTextEmail = binding.registerEmailText;
         editTextPassword = binding.registerPwdText;
-        editTextRetypePwd =  binding.registerRepwdText;
+        editTextRetypePwd = binding.registerRepwdText;
         signUpBtn = binding.signupButton;
 
         userNameError = binding.registerNameErrorText;
         userEmailError = binding.registerEmailErrorText;
-        userEmailError2= binding.registerEmailErrorText2;
+        userEmailError2 = binding.registerEmailErrorText2;
         userPhoneError = binding.registerPhoneNumberErrorText;
         userPhoneError2 = binding.registerPhoneNumberErrorText2;
         userPwdError = binding.registerPwdErrorText;
         userRePwdError = binding.registerRepwdErrorText;
-       
+
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
 
+        // editTextName.addTextChangedListener(new CustomTextWatcher(userNameError, this));
+        // editTextPhone.addTextChangedListener(new CustomTextWatcher(userPhoneError, this));
+        // editTextEmail.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
 
-
-       // editTextName.addTextChangedListener(new CustomTextWatcher(userNameError, this));
-       // editTextPhone.addTextChangedListener(new CustomTextWatcher(userPhoneError, this));
-       // editTextEmail.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
-
-       // checkRegisterData();
+        // checkRegisterData();
     }
 
     public void onClickSignUpButton(View view) {
-        boolean validateData= registerUser();
-        if(validateData) {
+        boolean validateData = registerUser();
+        if (validateData) {
             checkRegisterData();
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        registerUserModel = new RegisterUserModel(name, email, phoneNumber, password,"4");
+                        registerUserModel = new RegisterUserModel(name, email, phoneNumber, password, "4");
                         DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
 
@@ -138,18 +134,17 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
 
                 }
             });
-        }
-        else
-        {
+        } else {
             Toast.makeText(RegisterActivity.this, "please check data again", Toast.LENGTH_SHORT).show();
         }
 
     }
+
     private void checkRegisterData() {
         name = editTextName.getText().toString();
         phoneNumber = editTextPhone.getText().toString();
         email = editTextEmail.getText().toString();
-        password =editTextPassword.getText().toString();
+        password = editTextPassword.getText().toString();
         retypepassword = editTextRetypePwd.getText().toString();
 
         if (!(name.isEmpty()) && !(phoneNumber.isEmpty()) && !(email.isEmpty()) && !(password.isEmpty()) && !(retypepassword.isEmpty())) {
@@ -173,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
             userPhoneError.setVisibility(View.VISIBLE);
             userNameError.setVisibility(View.GONE);
             return false;
-        } else if (editTextPhone.getText().toString().length() != 10||(!mobilePattern.matcher(editTextPhone.getText().toString()).find())) {
+        } else if (editTextPhone.getText().toString().length() != 10 || (!mobilePattern.matcher(editTextPhone.getText().toString()).find())) {
             userPhoneError2.setVisibility(View.VISIBLE);
             userPhoneError.setVisibility(View.GONE);
             userNameError.setVisibility(View.GONE);
@@ -213,7 +208,8 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
         }
 
     }
-            @Override
+
+    @Override
     public void checkForEmpty() {
         checkRegisterData();
     }

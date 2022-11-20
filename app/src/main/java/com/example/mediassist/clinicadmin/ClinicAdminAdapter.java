@@ -60,6 +60,10 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
         return ClinicAdminModelArrayList.size();
     }
 
+    public interface ClinicAdminItemListener {
+        void onAdapterItemClick(ClinicAdminModel clinicadmin);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView clinic_admin_name;
@@ -72,9 +76,5 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
             clinic_admin_phone_number = itemView.findViewById(R.id.textview2);
             clinic_assign = itemView.findViewById(R.id.textview3);
         }
-    }
-
-    public interface ClinicAdminItemListener {
-        void onAdapterItemClick(ClinicAdminModel clinicadmin);
     }
 }

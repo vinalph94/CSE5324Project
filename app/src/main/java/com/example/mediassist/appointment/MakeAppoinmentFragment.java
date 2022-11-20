@@ -1,20 +1,17 @@
 package com.example.mediassist.appointment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.mediassist.R;
-import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.databinding.DoctorListBinding;
 import com.example.mediassist.doctor.DoctorAdapter;
 import com.example.mediassist.doctor.models.DoctorModel;
@@ -44,6 +41,7 @@ public class MakeAppoinmentFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -65,7 +63,7 @@ public class MakeAppoinmentFragment extends Fragment {
                     doctor_email = snapshot.getString("doctoremail");
                     assignspecialization = snapshot.getString("assignspecialization");
                     assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic,snapshot.getId()));
+                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, snapshot.getId()));
 
                 }
                 courseAdapter = new MakeAppointmentAdapter(getContext(), courseArrayList, new MakeAppointmentAdapter.MakeAppointmentItemListener() {
@@ -108,7 +106,7 @@ public class MakeAppoinmentFragment extends Fragment {
 
    }
 
-    private void navigateToAddFragment(DoctorModel doctor){
+    private void navigateToAddFragment(DoctorModel doctor) {
         bundle = new Bundle();
         bundle.putSerializable("doctor", doctor);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);

@@ -16,10 +16,10 @@ import com.example.mediassist.databinding.ActivityDoctorBinding;
 
 public class DoctorActivity extends AppCompatActivity {
 
+    public Button btnAddDoctor;
     private AppBarConfiguration appBarConfiguration;
     private ActivityDoctorBinding binding;
     private TextView textTitle;
-    public Button btnAddDoctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

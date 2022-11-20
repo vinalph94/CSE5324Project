@@ -16,10 +16,10 @@ import com.example.mediassist.databinding.ActivityCategoryBinding;
 
 public class CategoryActivity extends AppCompatActivity {
 
+    public Button btnAdd;
     private AppBarConfiguration appBarConfiguration;
     private ActivityCategoryBinding binding;
     private TextView textTitle;
-    public Button btnAdd;
     private Bundle bundle;
 
 
@@ -36,11 +36,13 @@ public class CategoryActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_category);
         setActionBarTitle("Categories");
 
+
+
         bundle = new Bundle();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigateUp();
+//                navController.navigateUp();
                 navController.navigate(R.id.action_CategoryListFragment_to_AddCategoryFragment);
             }
         });

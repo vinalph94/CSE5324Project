@@ -12,9 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private final ArrayList<LocalDate> days;
     public final View parentView;
     public final TextView dayOfMonth;
+    private final ArrayList<LocalDate> days;
     private final CalendarAdapter.OnItemListener onItemListener;
 
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener, ArrayList<LocalDate> days) {

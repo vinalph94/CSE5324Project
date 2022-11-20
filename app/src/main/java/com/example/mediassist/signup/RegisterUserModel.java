@@ -12,12 +12,12 @@ public class RegisterUserModel {
 
     }
 
-    public RegisterUserModel(String fullName, String email, String phoneNumber,String password,String role) {
+    public RegisterUserModel(String fullName, String email, String phoneNumber, String password, String role) {
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.role =role;
+        this.role = role;
     }
 
     public String getFullName() {

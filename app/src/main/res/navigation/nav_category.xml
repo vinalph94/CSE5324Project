@@ -21,8 +21,8 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/add_category">
         <action
-            android:id="@+id/action_AddCategoryFragment_to_CategoryListFragment"
-            app:destination="@id/CategoryListFragment" />
+            android:id="@+id/action_AddCategoryFragment_to_CategoryActivity"
+            app:destination="@id/nav_category" />
 
 
     </fragment>

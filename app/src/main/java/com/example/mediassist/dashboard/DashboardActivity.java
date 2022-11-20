@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityDashboardBinding;
 
+
 public class DashboardActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -30,13 +31,18 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //String role = intent.getStringExtra("role");
-        String role="4";
+        String role = "1";
 
-        if(role=="1"){navController.navigate(R.id.SuperAdminDashboardFragment);}
-        else if (role=="2"){navController.navigate(R.id.ClinicAdminDashboard);}
-        else if(role=="3"){navController.navigate(R.id.DoctorDashboard);}
-        else if(role=="4"){ navController.navigate(R.id.PatientDashboard);}
-        else{}
+        if (role == "1") {
+            navController.navigate(R.id.SuperAdminDashboardFragment);
+        } else if (role == "2") {
+            navController.navigate(R.id.ClinicAdminDashboard);
+        } else if (role == "3") {
+            navController.navigate(R.id.DoctorDashboard);
+        } else if (role == "4") {
+            navController.navigate(R.id.PatientDashboard);
+        } else {
+        }
         //Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
 
 

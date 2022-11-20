@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.MakeAppoinmentFragment;
-import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class LoginActivity extends AppCompatActivity {
+    public static String patientUsername;
+    FirebaseFirestore firebaseFirestore;
+    DocumentReference ref;
     private View _bg__signin_page_ek2;
     private View rectangle_12;
     private View rectangle_7;
@@ -64,13 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         password.setSelection(0);
         signin = (Button) findViewById(R.id.sign_in);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        emailError= findViewById(R.id.login_email_error_text);
-        pwdError= findViewById(R.id.login_pwd_error_text);
+        emailError = findViewById(R.id.login_email_error_text);
+        pwdError = findViewById(R.id.login_pwd_error_text);
     }
 
     public void onClickSignInButton(View view) {
-       //Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-      // startActivity(intent);
+        //Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        // startActivity(intent);
         String mail = email.getText().toString().trim();
         patientUsername = mail;
         String pwd = password.getText().toString().trim();
@@ -79,10 +80,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(mail)) {
             emailError.setVisibility(View.VISIBLE);
-        } else if(TextUtils.isEmpty(pwd)){
+        } else if (TextUtils.isEmpty(pwd)) {
             pwdError.setVisibility(View.VISIBLE);
             emailError.setVisibility(View.GONE);
-        }else{
+        } else {
             pwdError.setVisibility(View.GONE);
             emailError.setVisibility(View.GONE);
             loginUser(mail, pwd);

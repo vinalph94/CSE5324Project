@@ -1,7 +1,6 @@
 package com.example.mediassist.appointment;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityScheduleAppointmentBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ScheduleAppointmentActivity extends AppCompatActivity {
 
@@ -40,6 +38,7 @@ public class ScheduleAppointmentActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }
