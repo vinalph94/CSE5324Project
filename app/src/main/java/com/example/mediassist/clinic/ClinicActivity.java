@@ -41,7 +41,6 @@ public class ClinicActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigateUp();
                 navController.navigate(R.id.action_ClinicListFragment_to_AddClinicFragment, bundle);
             }
         });
