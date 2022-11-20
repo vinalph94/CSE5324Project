@@ -56,10 +56,12 @@ public class CategoryListFragment extends Fragment {
                     if (snapshot.getString("description") != null) {
                         description = snapshot.getString("description");
                     }
-                    clinic_id = snapshot.getString("clinic_id");
-                    icon_id = snapshot.getString("icon_id");
+                    clinic_id = snapshot.getString("clinicId");
+                    icon_id = snapshot.getString("iconId");
                     category = (new CategoryModel(name, description,icon_id, clinic_id));
                     category.setId(snapshot.getId());
+                    category.setIconId(icon_id);
+                    category.setClinicId(clinic_id);
                     courseArrayList.add(category);
 
                 }
