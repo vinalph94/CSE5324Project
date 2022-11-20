@@ -137,7 +137,6 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     }
 
 
-
     private void checkClinicData() {
         name = nameEditText.getText().toString();
         details = detailsEditText.getText().toString();
