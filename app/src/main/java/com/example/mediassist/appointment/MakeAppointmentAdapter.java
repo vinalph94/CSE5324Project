@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.doctor.DoctorAdapter;
 import com.example.mediassist.doctor.models.DoctorModel;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
     }
 
 
-
     @NonNull
     @Override
     public MakeAppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,8 +44,8 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
         if (nonNull(model.getDoctorname())) {
             holder.doctorname.setText(String.format("%s", model.getDoctorname()));
         }
-        if (nonNull(model.getAssignclinic())){
-            holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
+        if (nonNull(model.getclinicId())) {
+            holder.assignclinic.setText(String.format("%s", model.getclinicId()));
         }
         if (nonNull(model.getAssignspecialization())) {
             holder.assignspecialization.setText(String.format("%s", model.getAssignspecialization()));

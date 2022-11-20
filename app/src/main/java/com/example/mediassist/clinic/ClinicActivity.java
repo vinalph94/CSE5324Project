@@ -16,10 +16,10 @@ import com.example.mediassist.databinding.ActivityClinicBinding;
 
 public class ClinicActivity extends AppCompatActivity {
 
+    public Button btnAdd;
     private AppBarConfiguration appBarConfiguration;
     private ActivityClinicBinding binding;
     private TextView textTitle;
-    public Button btnAdd;
     private Bundle bundle;
 
     @Override

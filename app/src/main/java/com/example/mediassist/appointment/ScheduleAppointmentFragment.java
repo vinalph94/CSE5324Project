@@ -4,14 +4,12 @@ import static com.example.mediassist.appointment.CalendarUtils.daysInWeekArray;
 import static com.example.mediassist.appointment.CalendarUtils.monthYearFromDate;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,13 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ScheduleAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,6 +28,13 @@ import java.util.ArrayList;
 
 public class ScheduleAppointmentFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
+    public static String docName;
+    public static String docSpec;
+    public static String docClinic;
+    Button appoitnmentButton;
+    Button prevDateButton;
+    Button nextDateButton;
+    FirebaseFirestore db1;
     private ScheduleAppointmentFragmentBinding binding;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -44,20 +43,11 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     private TextView docDetailsText;
     private TextView docSpecialistText;
     private TextView hospitalText;
-    Button appoitnmentButton;
-    Button prevDateButton;
-    Button nextDateButton;
-    public static String docName;
-    public static String docSpec;
-    public static String docClinic;
     private Bundle bundle;
     private DoctorModel doctor;
 
-
-    FirebaseFirestore db1;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = ScheduleAppointmentFragmentBinding.inflate(inflater, container, false);
 
@@ -69,8 +59,8 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         setWeekView();
 
         docNameText = binding.docName;
-        docDetailsText=binding.docDetails;
-        docSpecialistText= binding.docSpecialist;
+        docDetailsText = binding.docDetails;
+        docSpecialistText = binding.docSpecialist;
 
         bundle = getArguments();
         DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
@@ -79,7 +69,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
             docNameText.setText(doctor.getDoctorname());
             //docDetailsText =doctor.getAssignclinic();
             //docSpecialistText = doctor.getAssignspecialization();
-            docDetailsText.setText(doctor.getAssignclinic());
+            docDetailsText.setText(doctor.getclinicId());
             docSpecialistText.setText(doctor.getAssignspecialization());
 
         }
@@ -89,7 +79,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-               Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment);
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment);
 
             }
         });

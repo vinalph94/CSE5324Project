@@ -29,13 +29,13 @@ import java.util.Map;
 
 public class ConfirmAppointmentFragment extends Fragment {
 
+    public static String selectedTime;
+    Button appoitnmentButton;
+    FirebaseFirestore db;
     private ConfirmAppointmentFragmentBinding binding;
     private ArrayList<String> courseArrayList = new ArrayList<String>();
     private TimeSlotsAdapter timeSlotsAdapter;
     private TextView eventDateTV;
-    Button appoitnmentButton;
-    public static String selectedTime;
-    FirebaseFirestore db;
 
     @Override
     public View onCreateView(

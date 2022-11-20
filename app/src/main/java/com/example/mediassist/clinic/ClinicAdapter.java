@@ -63,6 +63,10 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
         return clinicModelArrayList.size();
     }
 
+    public interface ClinicItemListener {
+        void onAdapterItemClick(ClinicModel clinic);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView clinic_name;
@@ -78,9 +82,5 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
         }
 
 
-    }
-
-    public interface ClinicItemListener {
-        void onAdapterItemClick(ClinicModel clinic);
     }
 }

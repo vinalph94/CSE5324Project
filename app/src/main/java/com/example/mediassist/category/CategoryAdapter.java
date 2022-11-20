@@ -46,8 +46,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         if (nonNull(model.getDescription())) {
             holder.category_description.setText(String.format("%s", model.getDescription()));
         }
-        if (nonNull(model.getAssignclinic())) {
-            holder.clinic_assign.setText(String.format("%s", model.getAssignclinic()));
+        if (nonNull(model.getCategoryId())) {
+            holder.clinic_assign.setText(String.format("%s", model.getCategoryId()));
         }
         holder.itemView.setOnClickListener(view -> {
             categoryItemListener.onAdapterItemClick(CategoryModelArrayList.get(position));
@@ -58,6 +58,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public int getItemCount() {
         // this method is used for showing number of card items in recycler view
         return CategoryModelArrayList.size();
+    }
+
+    public interface CategoryItemListener {
+        void onAdapterItemClick(CategoryModel category);
     }
 
     // View holder class for initializing of your views such as TextView and Imageview
@@ -72,9 +76,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             category_description = itemView.findViewById(R.id.textview2);
             clinic_assign = itemView.findViewById(R.id.textview3);
         }
-    }
-
-    public interface CategoryItemListener {
-        void onAdapterItemClick(CategoryModel category);
     }
 }

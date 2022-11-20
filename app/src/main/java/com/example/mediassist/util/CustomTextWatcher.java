@@ -30,7 +30,7 @@ public class CustomTextWatcher implements TextWatcher {
         } else {
             this.errorText.setVisibility(View.GONE);
         }
-        Log.e("manasa0","yes");
+        Log.e("manasa0", "yes");
         this.checkForEmptyCallBack.checkForEmpty();
 
     }

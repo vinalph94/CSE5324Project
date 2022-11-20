@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mediassist.SearchDoctors.SearchDoctorsListActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.signup.RegisterActivity;
 
@@ -40,7 +39,7 @@ public class WelcomeFragment extends Fragment {
         binding.signinButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               NavHostFragment.findNavController(WelcomeFragment.this)
+                NavHostFragment.findNavController(WelcomeFragment.this)
                         .navigate(R.id.action_WelcomeFragment_to_LoginActivity);
             }
         });

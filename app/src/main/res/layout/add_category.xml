@@ -42,6 +42,16 @@
             style="@style/default_edit_text"
             android:hint="Description" />
 
+        <TextView
+            android:id="@+id/category_icon_label"
+            style="@style/default_label_text"
+            android:text="Icon" />
+
+        <EditText
+            android:id="@+id/category_icon_text"
+            style="@style/default_edit_text"
+            android:hint="Description" />
+
 
         <TextView
             android:id="@+id/category_clinic_label"
@@ -51,7 +61,7 @@
 
         <Spinner
             android:id="@+id/spinner_category"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_269sdp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"

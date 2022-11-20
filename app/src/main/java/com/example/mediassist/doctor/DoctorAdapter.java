@@ -44,8 +44,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         if (nonNull(model.getDoctorname())) {
             holder.textview1.setText(String.format("%s", model.getDoctorname()));
         }
-        if (nonNull(model.getAssignclinic())) {
-            holder.assignclinic.setText(String.format("%s", model.getAssignclinic()));
+        if (nonNull(model.getclinicId())) {
+            holder.assignclinic.setText(String.format("%s", model.getclinicId()));
         }
         if (nonNull(model.getDoctoremail())) {
             holder.email.setText(String.format("%s", model.getDoctoremail()));
@@ -62,6 +62,10 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         return DoctorModelArrayList.size();
     }
 
+    public interface DoctorItemListener {
+        void onAdapterItemClick(DoctorModel doctor);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textview1;
@@ -74,9 +78,5 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             assignclinic = itemView.findViewById(R.id.textview2);
             email = itemView.findViewById(R.id.textview3);
         }
-    }
-
-    public interface DoctorItemListener {
-        void onAdapterItemClick(DoctorModel doctor);
     }
 }

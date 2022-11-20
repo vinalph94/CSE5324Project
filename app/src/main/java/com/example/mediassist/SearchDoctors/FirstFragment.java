@@ -35,8 +35,8 @@ import java.util.Locale;
 
 public class FirstFragment extends Fragment implements LocationListener {
 
-    private FragmentFirstBinding binding;
     LocationManager locationManager;
+    private FragmentFirstBinding binding;
     private TextView t;
 
     @Override

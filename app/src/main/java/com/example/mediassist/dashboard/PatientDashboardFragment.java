@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import com.example.mediassist.R;
 import com.example.mediassist.appointment.ScheduleAppointmentActivity;
-import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.databinding.FragmentPatientDashboardBinding;
-
 
 
 public class PatientDashboardFragment extends Fragment {
@@ -25,8 +21,6 @@ public class PatientDashboardFragment extends Fragment {
     public PatientDashboardFragment() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -45,8 +39,8 @@ public class PatientDashboardFragment extends Fragment {
         makeappoinment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_dashboard);
-               // navController.navigate(R.id.MakeAppointment);
+                // NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_dashboard);
+                // navController.navigate(R.id.MakeAppointment);
                 Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
                 startActivity(intent);
 

@@ -25,6 +25,11 @@ public class ClinicModel implements Serializable {
     public ClinicModel() {
     }
 
+    @Override
+    public String toString() {
+        return this.name; // What to display in the Spinner list.
+    }
+
     public String getName() {
         return name;
     }
