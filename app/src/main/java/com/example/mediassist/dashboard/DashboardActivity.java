@@ -55,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 String role = "";
                 for (QueryDocumentSnapshot snapshot : value) {
-                    if  (Objects.equals(snapshot.getId(),userId) ){
+                    if (Objects.equals(snapshot.getId(), userId)) {
                         role = snapshot.get("role").toString();
                         if (Objects.equals(role, "1")) {
                             navController.navigate(R.id.SuperAdminDashboardFragment);
@@ -64,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity {
                         } else if (Objects.equals(role, "3")) {
                             navController.navigate(R.id.DoctorDashboard);
                         } else if (Objects.equals(role, "4")) {
-                            navController.navigate(R.id.DoctorDashboard);
+                            navController.navigate(R.id.PatientDashboard);
                         }
                     }
 

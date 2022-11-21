@@ -191,7 +191,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="Inter"
             android:onClick="onClickForgotPwdButton"
-            android:text="Forget the Password?"
+            android:text="Forgot the Password?"
             android:textAllCaps="false"
             android:textColor="#408E9B"
             android:textSize="14sp" />

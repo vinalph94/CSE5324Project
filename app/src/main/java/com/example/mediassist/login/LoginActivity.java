@@ -2,6 +2,7 @@ package com.example.mediassist.login;
 
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,7 +20,11 @@ import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.dashboard.DashboardActivity;
+
+import com.example.mediassist.databinding.ActivityLoginBinding;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
+import com.example.mediassist.util.CheckForEmptyCallBack;
+import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,7 +40,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements CheckForEmptyCallBack {
     public static String patientUsername;
     FirebaseFirestore firebaseFirestore;
     DocumentReference ref;
@@ -55,12 +60,14 @@ public class LoginActivity extends AppCompatActivity {
     public static String patientUid;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private ActivityLoginBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         rectangle_7 = (View) findViewById(R.id.rectangle_7);
         sign_in_to_your_account = (TextView) findViewById(R.id.sign_in_to_your_account);
@@ -76,26 +83,16 @@ public class LoginActivity extends AppCompatActivity {
         emailError = findViewById(R.id.login_email_error_text);
         pwdError = findViewById(R.id.login_pwd_error_text);
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        email.addTextChangedListener(new CustomTextWatcher(emailError, this));
+        password.addTextChangedListener(new CustomTextWatcher(pwdError, this));
     }
 
     public void onClickSignInButton(View view) {
-        //Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-        // startActivity(intent);
-        String mail = email.getText().toString().trim();
-        patientUsername = mail;
-        String pwd = password.getText().toString().trim();
-        mAuth = FirebaseAuth.getInstance();
 
-
-        if (TextUtils.isEmpty(mail)) {
-            emailError.setVisibility(View.VISIBLE);
-        } else if (TextUtils.isEmpty(pwd)) {
-            pwdError.setVisibility(View.VISIBLE);
-            emailError.setVisibility(View.GONE);
-        } else {
-            pwdError.setVisibility(View.GONE);
-            emailError.setVisibility(View.GONE);
-            loginUser(mail, pwd);
+        if (checkForData()){
+            loginUser( email.getText().toString().trim(), password.getText().toString().trim());
         }
 
 
@@ -131,4 +128,24 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void checkForEmpty() {
+        checkForData();
+    }
+
+
+    private boolean checkForData(){
+        String mail = email.getText().toString().trim();
+        patientUsername = mail;
+        String pwd = password.getText().toString().trim();
+
+
+        if (!(mail.isEmpty()) && !(pwd.isEmpty())) {
+            signin.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
+            signin.setEnabled(true);
+            return true;
+        }
+
+        return false;
+    }
 }

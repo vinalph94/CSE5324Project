@@ -74,6 +74,7 @@
             android:layout_marginTop="145dp"
             android:layout_marginEnd="42dp"
             android:text="@string/signup"
+            android:textColor="@color/white"
             style="@style/default_button"/>
 
         <Button
@@ -81,6 +82,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="220dp"
             android:layout_marginEnd="42dp"
+            android:textColor="@color/white"
             android:text="@string/signin"
             style="@style/default_button"/>
 

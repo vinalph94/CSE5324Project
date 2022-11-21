@@ -243,7 +243,6 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     }
 
     public void uploadDoctor(DoctorModel doctor) {
-
         String password = doctor.getDoctor_email()+doctor.getDoctor_phone_number();
         mAuth.createUserWithEmailAndPassword(doctor.getDoctor_email(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
