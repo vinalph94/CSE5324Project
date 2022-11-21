@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityDashboardBinding;
+import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.NavigationUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
@@ -51,21 +52,24 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 String role = "";
-                for (QueryDocumentSnapshot snapshot : value) {
-                    if (Objects.equals(snapshot.getId(), userId)) {
-                        role = snapshot.get("role").toString();
-                        if (Objects.equals(role, "1")) {
-                            navController.navigate(R.id.SuperAdminDashboardFragment);
-                        } else if (Objects.equals(role, "2")) {
-                            navController.navigate(R.id.ClinicAdminDashboard);
-                        } else if (Objects.equals(role, "3")) {
-                            navController.navigate(R.id.DoctorDashboard);
-                        } else if (Objects.equals(role, "4")) {
-                            navController.navigate(R.id.PatientDashboard);
+                if (value!=null){
+                    for (QueryDocumentSnapshot snapshot : value) {
+                        if (Objects.equals(snapshot.getId(), userId)) {
+                            role = snapshot.get("role").toString();
+                            if (Objects.equals(role, "1")) {
+                                navController.navigate(R.id.SuperAdminDashboardFragment);
+                            } else if (Objects.equals(role, "2")) {
+                                navController.navigate(R.id.ClinicAdminDashboard);
+                            } else if (Objects.equals(role, "3")) {
+                                navController.navigate(R.id.DoctorDashboard);
+                            } else if (Objects.equals(role, "4")) {
+                                navController.navigate(R.id.PatientDashboard);
+                            }
                         }
-                    }
 
+                    }
                 }
+
             }
         });
 
@@ -77,8 +81,9 @@ public class DashboardActivity extends AppCompatActivity {
 
                 FirebaseAuth.getInstance().signOut();
 
+                Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
 
-                NavigationUtil.navigateSafe(navController, R.id.PatientDashboardFragment_to_welcomeFragment, null);
+                startActivity(intent);
                 ;
 
             }

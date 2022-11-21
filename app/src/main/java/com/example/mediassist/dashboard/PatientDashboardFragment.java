@@ -84,6 +84,7 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
     private double longitude;
     private LinearLayout linearLayout;
     private TextView categoryPageBtn;
+    private    GridLayoutManager layoutManager;
     private List<CategoryModel> filteredCategories;
     //clinic_doctor_card
 
@@ -125,44 +126,47 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 doctorList.clear();
-                for (QueryDocumentSnapshot snapshot : value) {
-                    doctor_name = snapshot.getString("doctor_name");
-                    doctor_phone_Number = snapshot.getString("doctor_phone_number");
-                    doctor_email = snapshot.getString("doctor_email");
-                    assignspecialization = snapshot.getString("category_id");
-                    assignclinic = snapshot.getString("clinic_id");
-                    doctor = (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
-                    doctor.setId(snapshot.getId());
-                    doctor.setClinic_id(assignclinic);
-                    doctor.setCategory_id(assignspecialization);
+                if(value!=null){
+                    for (QueryDocumentSnapshot snapshot : value) {
+                        doctor_name = snapshot.getString("doctor_name");
+                        doctor_phone_Number = snapshot.getString("doctor_phone_number");
+                        doctor_email = snapshot.getString("doctor_email");
+                        assignspecialization = snapshot.getString("category_id");
+                        assignclinic = snapshot.getString("clinic_id");
+                        doctor = (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                        doctor.setId(snapshot.getId());
+                        doctor.setClinic_id(assignclinic);
+                        doctor.setCategory_id(assignspecialization);
 
-                    if (longitude != 0 && latitude == 0) {
-
-
-                        try {
-                            ArrayList<Address> adresses = (ArrayList<Address>) geocoder.getFromLocationName("Arlington, Texas", 1);
-                            for (Address add : adresses) {
-
-                                double clinicLongitude = add.getLongitude();
-                                double clinicLatitude = add.getLatitude();
-
-                                double theta = clinicLongitude - longitude;
-                                double dist = Math.sin((clinicLatitude * Math.PI / 180.0)) * Math.sin((latitude * Math.PI / 180.0)) + Math.cos((clinicLatitude * Math.PI / 180.0)) * Math.cos((latitude * Math.PI / 180.0)) * Math.cos((theta * Math.PI / 180.0));
-                                dist = Math.acos(dist);
-                                dist = (dist * 180.0 / Math.PI);
-                                dist = dist * 60 * 1.1515;
-                                doctor.setDistance(dist);
+                        if (longitude != 0 && latitude == 0) {
 
 
+                            try {
+                                ArrayList<Address> adresses = (ArrayList<Address>) geocoder.getFromLocationName("Arlington, Texas", 1);
+                                for (Address add : adresses) {
+
+                                    double clinicLongitude = add.getLongitude();
+                                    double clinicLatitude = add.getLatitude();
+
+                                    double theta = clinicLongitude - longitude;
+                                    double dist = Math.sin((clinicLatitude * Math.PI / 180.0)) * Math.sin((latitude * Math.PI / 180.0)) + Math.cos((clinicLatitude * Math.PI / 180.0)) * Math.cos((latitude * Math.PI / 180.0)) * Math.cos((theta * Math.PI / 180.0));
+                                    dist = Math.acos(dist);
+                                    dist = (dist * 180.0 / Math.PI);
+                                    dist = dist * 60 * 1.1515;
+                                    doctor.setDistance(dist);
+
+
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    doctorList.add(doctor);
-                    getCategories();
+                        doctorList.add(doctor);
+                        getCategories();
+                    }
                 }
+
 
             }
         });
@@ -233,31 +237,32 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 categoriesList.clear();
-                for (QueryDocumentSnapshot snapshot : value) {
-                    String description = "";
-                    String clinic_id;
-                    String icon_id;
-                    String name = snapshot.getString("name");
-                    if (snapshot.getString("description") != null) {
-                        description = snapshot.getString("description");
-                    }
-                    clinic_id = snapshot.getString("clinicId");
-                    icon_id = snapshot.getString("iconId");
-                    category = (new CategoryModel(name, description, icon_id, clinic_id));
-                    category.setId(snapshot.getId());
-                    category.setIconId(icon_id);
-                    category.setClinicId(clinic_id);
-                    categoriesList.add(category);
-
-
-                    categoryCardAdapter = new CategoryCardAdapter(getContext(), categoriesList, new CategoryCardAdapter.CategoryItemListener() {
-                        @Override
-                        public void onAdapterItemClick(CategoryModel category) {
-//                        navigateToAddFragment(doctor);
+                if (value!=null){
+                    for (QueryDocumentSnapshot snapshot : value) {
+                        String description = "";
+                        String clinic_id;
+                        String icon_id;
+                        String name = snapshot.getString("name");
+                        if (snapshot.getString("description") != null) {
+                            description = snapshot.getString("description");
                         }
+                        clinic_id = snapshot.getString("clinicId");
+                        icon_id = snapshot.getString("iconId");
+                        category = (new CategoryModel(name, description, icon_id, clinic_id));
+                        category.setId(snapshot.getId());
+                        category.setIconId(icon_id);
+                        category.setClinicId(clinic_id);
+                        categoriesList.add(category);
 
-                    });
-                    categoryCardAdapter.notifyDataSetChanged();
+
+                        categoryCardAdapter = new CategoryCardAdapter(getContext(), categoriesList, new CategoryCardAdapter.CategoryItemListener() {
+                            @Override
+                            public void onAdapterItemClick(CategoryModel category) {
+//                        navigateToAddFragment(doctor);
+                            }
+
+                        });
+                        categoryCardAdapter.notifyDataSetChanged();
 
 //                   filteredCategories = categoriesList.stream()
 //                            .filter(category -> doctorList.stream()
@@ -267,11 +272,14 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
 //                    categoriesList.add((CategoryModel) filteredCategories);
 
 
+                    }
+                    layoutManager = new GridLayoutManager(getContext(), categoriesList.size());
+                    layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+                    categoriesrv.setLayoutManager(layoutManager);
+                    categoriesrv.setAdapter(categoryCardAdapter);
                 }
-                GridLayoutManager layoutManager = new GridLayoutManager(getContext(), categoriesList.size());
-                layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-                categoriesrv.setLayoutManager(layoutManager);
-                categoriesrv.setAdapter(categoryCardAdapter);
+
+
 
             }
         });
