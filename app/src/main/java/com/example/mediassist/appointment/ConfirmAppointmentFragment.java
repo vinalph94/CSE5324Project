@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.dashboard.PatientDashboardFragment;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
