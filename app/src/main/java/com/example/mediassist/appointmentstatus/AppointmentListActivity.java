@@ -2,6 +2,7 @@ package com.example.mediassist.appointmentstatus;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityAppointmentListBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 public class AppointmentListActivity extends AppCompatActivity {
 
@@ -27,8 +27,14 @@ public class AppointmentListActivity extends AppCompatActivity {
         binding = ActivityAppointmentListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
+        Button btnBack = binding.btnBack;
 
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_appointment_list);
 
 

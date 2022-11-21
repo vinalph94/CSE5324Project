@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:backgroundTint="@color/black"
+    android:id="@+id/welcome_fragment"
     android:elevation="0dp"
     tools:context=".WelcomeFragment">
 

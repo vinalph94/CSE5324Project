@@ -14,14 +14,20 @@
         <action
             android:id="@+id/SuperAdminDashboardFragment_to_PatientDashboard"
             app:destination="@id/PatientDashboard" />
+
     </fragment>
+
+
+
 
     <fragment
         android:id="@+id/PatientDashboard"
         android:name="com.example.mediassist.dashboard.PatientDashboardFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_patient_dashboard">
-
+        <action
+            android:id="@+id/PatientDashboardFragment_to_welcomeFragment"
+            app:destination="@id/FirstFragment" />
 
     </fragment>
     <fragment
@@ -43,5 +49,6 @@
         <action
             android:id="@+id/action_DoctorDashboard_to_SuperAdminDashboardFragment"
             app:destination="@id/SuperAdminDashboardFragment" />
+
     </fragment>
 </navigation>

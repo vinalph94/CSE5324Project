@@ -28,9 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.PendingAppointmentFragment;
+
 import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.appointmentstatus.AppointmentListActivity;
+import com.example.mediassist.appointmentstatus.PendingAppointmentFragment;
 import com.example.mediassist.databinding.FragmentPatientDashboardBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;

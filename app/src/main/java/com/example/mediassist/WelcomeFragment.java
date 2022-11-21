@@ -48,7 +48,7 @@ public class WelcomeFragment extends Fragment {
         binding.signupButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchDoctorsListActivity.class);
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(intent);
 
             }

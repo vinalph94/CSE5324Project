@@ -24,7 +24,7 @@
         <activity
             android:name=".appointmentstatus.AppointmentListActivity"
             android:exported="false"
-            android:label="@string/title_activity_appointment_list"
+            android:label="appointment_list"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"

@@ -1,5 +1,6 @@
 package com.example.mediassist.doctor;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,12 +24,19 @@ import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
+import com.example.mediassist.login.LoginActivity;
+import com.example.mediassist.signup.RegisterActivity;
+import com.example.mediassist.signup.RegisterUserModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -67,6 +76,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private ArrayAdapter<CategoryModel> categorySpinnerAdapter;
     private DoctorModel doctor;
     private String id;
+    private FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,6 +98,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         doctor_name_error_text = binding.doctorNameErrorText;
         doctor_phone_number_error_text = binding.doctorPhoneNumberErrorText;
         doctor_email_error_text = binding.doctorEmailErrorText;
+
+        mAuth = FirebaseAuth.getInstance();
 
         ((DoctorActivity) getActivity()).btnAddDoctor.setVisibility(View.GONE);
 
@@ -201,7 +213,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View view) {
                 checkDoctorData();
                 doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id);
-                uploadDoctor(id, doctor);
+                updateDoctor(id, doctor);
             }
         });
 
@@ -231,9 +243,40 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     }
 
     public void uploadDoctor(DoctorModel doctor) {
+
+        String password = doctor.getDoctor_email()+doctor.getDoctor_phone_number();
+        mAuth.createUserWithEmailAndPassword(doctor.getDoctor_email(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    RegisterUserModel registerUserModel = new RegisterUserModel(doctor.getDoctor_name(), doctor.getDoctor_email(), doctor.getDoctor_phone_number(), password, "3");
+                    DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+                } else {
+
+                }
+
+            }
+        });
+
+
         db.collection("doctors").add(doctor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+
                 Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
                 new CustomToast(getContext(), getActivity(), name + " Stored Successfully !", ToastStatus.SUCCESS).show();
 
@@ -248,7 +291,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
 
     }
 
-    public void uploadDoctor(String doctorId, DoctorModel doctor) {
+    public void updateDoctor(String doctorId, DoctorModel doctor) {
+
         db.collection(("doctors")).document(doctorId).set(doctor).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

@@ -11,9 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
+import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 import com.example.mediassist.util.CustomToast;
@@ -24,7 +28,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
@@ -107,27 +114,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     patientUid = task.getResult().getUser().getUid();
-                    db.collection("users")
-                            .whereEqualTo("id", patientUid)//looks for the corresponding value with the field
-                            // in the database
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (DocumentSnapshot document : task.getResult()) {
-                                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                                            intent.putExtra("role_id", document.get("roleId").toString());
-                                            startActivity(intent);
-                                            finish();
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    intent.putExtra("userId", patientUid);
+                    startActivity(intent);
+                    finish();
 
 
-                                        }
-                                    }
-
-
-                                }
-                            });
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
