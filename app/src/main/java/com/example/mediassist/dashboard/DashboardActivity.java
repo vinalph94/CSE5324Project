@@ -62,7 +62,7 @@ public class DashboardActivity extends AppCompatActivity {
                         } else if (Objects.equals(role, "3")) {
                             navController.navigate(R.id.DoctorDashboard);
                         } else if (Objects.equals(role, "4")) {
-                            navController.navigate(R.id.DoctorDashboard);
+                            navController.navigate(R.id.PatientDashboard);
                         }
                     }
 
