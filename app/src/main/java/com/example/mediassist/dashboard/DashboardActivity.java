@@ -15,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityDashboardBinding;
 import com.example.mediassist.login.LoginActivity;
-import com.example.mediassist.util.NavigationUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,29 +52,52 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 String role = "";
-                if (value!=null){
+                if (value != null) {
                     for (QueryDocumentSnapshot snapshot : value) {
                         if (Objects.equals(snapshot.getId(), userId)) {
                             role = snapshot.get("role").toString();
                             if (Objects.equals(role, "1")) {
                                 navController.navigate(R.id.SuperAdminDashboardFragment);
                             } else if (Objects.equals(role, "2")) {
-                                navController.navigate(R.id.ClinicAdminDashboard);
+                                String user_id = snapshot.getId();
+                                db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        String id = "";
+                                        String clinic_id = "";
+                                        if (value != null) {
+                                            for (QueryDocumentSnapshot snapshot : value) {
+                                                if (Objects.equals(snapshot.get("id"), userId)) {
+                                                    id = snapshot.get("id").toString();
+                                                    if (Objects.equals(id, user_id)) {
+                                                        clinic_id = snapshot.getId().toString();
+                                                        bundle = new Bundle();
+                                                        bundle.putString("clinic_id", clinic_id);
+                                                        navController.navigate(R.id.ClinicAdminDashboard, bundle);
+                                                    }
+                                                }
+
+                                            }
+                                        }
+
+                                    }
+                                });
+
                             } else if (Objects.equals(role, "3")) {
-                                String user_id=snapshot.getId();
+                                String user_id = snapshot.getId();
                                 db.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                         String id = "";
                                         String doctor_id = "";
-                                        if (value!=null){
+                                        if (value != null) {
                                             for (QueryDocumentSnapshot snapshot : value) {
                                                 if (Objects.equals(snapshot.get("id"), userId)) {
                                                     id = snapshot.get("id").toString();
                                                     if (Objects.equals(id, user_id)) {
-                                                       doctor_id = snapshot.getId().toString();
-                                                        bundle= new Bundle();
-                                                        bundle.putString("doctor_id",doctor_id);
+                                                        doctor_id = snapshot.getId().toString();
+                                                        bundle = new Bundle();
+                                                        bundle.putString("doctor_id", doctor_id);
                                                         navController.navigate(R.id.DoctorDashboard, bundle);
                                                     }
                                                 }
