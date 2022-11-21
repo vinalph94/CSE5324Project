@@ -20,6 +20,15 @@
         android:theme="@style/Theme.MediAssist"
         tools:targetApi="31">
         <activity
+            android:name=".scheduleappointmentdoctor.ScheduledAppointmentForDoctorMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scheduled_appointment_for_doctor_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".category.CategoriesByDoctorActivity"
             android:exported="false"
             android:label="@string/title_activity_categories_by_doctor"
