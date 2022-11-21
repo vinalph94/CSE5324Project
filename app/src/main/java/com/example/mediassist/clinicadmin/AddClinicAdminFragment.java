@@ -260,7 +260,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
                 if (task.isSuccessful()) {
                     RegisterUserModel registerUserModel = new RegisterUserModel(clinicadmin.getName(), clinicadmin.getEmail(), clinicadmin.getPhone_number(), password, "2");
                     DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    clinicadmin.setId(documentReference.getId());
+
                     documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {

@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.AddDoctorBinding;
@@ -126,12 +125,12 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                         details = snapshot.getString("description");
                     }
                     String street = snapshot.getString("street");
-                    String city= snapshot.getString("city");
-                    String county= snapshot.getString("county");
-                    String country= snapshot.getString("country");
+                    String city = snapshot.getString("city");
+                    String county = snapshot.getString("county");
+                    String country = snapshot.getString("country");
                     int zipcode = snapshot.getLong("zipcode").intValue();
 
-                    clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                    clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                     clinic.setId(snapshot.getId());
                     clinicsList.add(clinic);
 
@@ -244,7 +243,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     }
 
     public void uploadDoctor(DoctorModel doctor) {
-        String password = doctor.getDoctor_name().substring(0,4) + doctor.getDoctor_phone_number().substring(doctor.getDoctor_phone_number().length() - 4);
+        String password = doctor.getDoctor_name().substring(0, 4) + doctor.getDoctor_phone_number().substring(doctor.getDoctor_phone_number().length() - 4);
         mAuth.createUserWithEmailAndPassword(doctor.getDoctor_email(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
