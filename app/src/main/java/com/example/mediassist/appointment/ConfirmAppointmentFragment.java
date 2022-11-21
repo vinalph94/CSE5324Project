@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
@@ -93,10 +95,9 @@ public class ConfirmAppointmentFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-
                                 Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
-                                System.out.println("Appointment booked successfully");
-                                // navigate to appointment list screen
+                                Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
+
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

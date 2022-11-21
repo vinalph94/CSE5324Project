@@ -28,9 +28,9 @@ public class MakeAppoinmentFragment extends Fragment {
     private DoctorListBinding binding;
     private FirebaseFirestore db;
     private ArrayList<DoctorModel> courseArrayList = new ArrayList<DoctorModel>();
-    private String doctor_name;
-    private String doctor_phone_Number;
-    private String doctor_email;
+    private String doctorname;
+    private String doctorphoneNumber;
+    private String doctoremail;
     private String assignspecialization;
     private String assignclinic;
     private MakeAppointmentAdapter courseAdapter;
@@ -60,12 +60,12 @@ public class MakeAppoinmentFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
-                    doctor_name = snapshot.getString("doctor_name");
-                    doctor_phone_Number = snapshot.getString("doctor_phone_number");
-                    doctor_email = snapshot.getString("doctor_email");
+                    doctorname = snapshot.getString("doctor_name");
+                    doctorphoneNumber = snapshot.getString("doctor_phone_number");
+                    doctoremail = snapshot.getString("doctor_email");
                     assignspecialization = snapshot.getString("category_id");
                     assignclinic = snapshot.getString("clinic_id");
-                    doctor= (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                    doctor= (new DoctorModel(doctorname, doctorphoneNumber, doctoremail, assignspecialization, assignclinic));
                     doctor.setId(snapshot.getId());
                     courseArrayList.add(doctor);
 

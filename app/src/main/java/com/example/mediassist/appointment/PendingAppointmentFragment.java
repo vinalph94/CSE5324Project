@@ -1,0 +1,115 @@
+package com.example.mediassist.appointment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mediassist.R;
+import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.databinding.PendingAppointmentFragmentBinding;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+public class PendingAppointmentFragment extends Fragment {
+
+    private PendingAppointmentFragmentBinding binding;
+    private FirebaseFirestore db;
+    private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
+    private String patient_id;
+    private String patient_name;
+    private String doctor_id;
+    private String doctor_name;
+    private String clinic_id;
+    private String category_id;
+    private String slot_date;
+    private String slot_time;
+    private String status;
+    private AppointmentModel appointment;
+    private PendingAppointmentAdapter courseAdapter;
+    private Bundle bundle;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        db = FirebaseFirestore.getInstance();
+        binding = PendingAppointmentFragmentBinding.inflate(inflater, container, false);
+
+        RecyclerView courseRV = binding.idRVCoursePendingAppointment;
+        // Inflate the layout for this fragment
+
+
+
+        db.collection("appointments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                courseArrayList.clear();
+                for (QueryDocumentSnapshot snapshot : value) {
+                    patient_id = snapshot.getString("patient_id");
+                    patient_name = snapshot.getString("patient_name");
+                    doctor_id = snapshot.getString("doctor_id");
+                    doctor_name = snapshot.getString("doctor_name");
+                    clinic_id = snapshot.getString("clinic_id");
+                    category_id = snapshot.getString("category_id");
+                    slot_date = snapshot.getString("slot_date");
+                    slot_time = snapshot.getString("slot_time");
+                    status = snapshot.getString("status");
+                    appointment= (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id,category_id,slot_date,slot_time,status));
+                    appointment.setId(snapshot.getId());
+                    courseArrayList.add(appointment);
+
+                }
+                courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
+                    @Override
+                    public void onAdapterItemClick(AppointmentModel appointment) {
+                        navigateToAddFragment(appointment);
+
+                    }
+
+                });
+                courseAdapter.notifyDataSetChanged();
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                        LinearLayoutManager.VERTICAL, false);
+
+                courseRV.setLayoutManager(linearLayoutManager);
+                courseRV.setAdapter(courseAdapter);
+            }
+        });
+
+
+        return inflater.inflate(R.layout.pending_appointment_fragment, container, false);
+    }
+
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    private void navigateToAddFragment(AppointmentModel appointment) {
+        bundle = new Bundle();
+        bundle.putSerializable("appointment", appointment);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);
+    }
+}
