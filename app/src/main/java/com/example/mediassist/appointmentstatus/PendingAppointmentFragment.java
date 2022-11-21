@@ -1,4 +1,4 @@
-package com.example.mediassist.appointment;
+package com.example.mediassist.appointmentstatus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -60,7 +60,7 @@ public class PendingAppointmentFragment extends Fragment {
 
 
 
-        db.collection("appointments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status","Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -98,7 +98,7 @@ public class PendingAppointmentFragment extends Fragment {
         });
 
 
-        return inflater.inflate(R.layout.pending_appointment_fragment, container, false);
+        return binding.getRoot();
     }
 
 
@@ -110,6 +110,6 @@ public class PendingAppointmentFragment extends Fragment {
     private void navigateToAddFragment(AppointmentModel appointment) {
         bundle = new Bundle();
         bundle.putSerializable("appointment", appointment);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_PendingAppointment_to_CancelAppointmentFragment, bundle);
     }
 }

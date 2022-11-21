@@ -37,12 +37,4 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/PendingAppointment"
-        android:name="com.example.mediassist.appointment.PendingAppointmentFragment"
-        android:label="Pending Appointment"
-        tools:layout="@layout/pending_appointment_fragment">
-
-
-    </fragment>
 </navigation>

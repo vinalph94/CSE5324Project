@@ -23,9 +23,6 @@
         tools:layout="@layout/fragment_patient_dashboard">
 
 
-        <action
-            android:id="@+id/action_PatientDashboard_to_PendingAppointmentFragment"
-            app:destination="@id/PendingAppointment" />
     </fragment>
     <fragment
         android:id="@+id/ClinicAdminDashboard"

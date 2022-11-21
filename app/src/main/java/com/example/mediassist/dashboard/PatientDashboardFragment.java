@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.PendingAppointmentFragment;
 import com.example.mediassist.appointment.ScheduleAppointmentActivity;
+import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.databinding.FragmentPatientDashboardBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -160,6 +161,10 @@ public class PatientDashboardFragment extends Fragment implements CheckForEmptyC
         pendingappointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                 //NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_appointment_list);
+               //  navController.navigate(R.id.action_PendingAppointment_to_Second3Fragment);
+                Intent intent = new Intent(getActivity(), AppointmentListActivity.class);
+                startActivity(intent);
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.PatientDashboard, new PendingAppointmentFragment()).commit();
                 // Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
