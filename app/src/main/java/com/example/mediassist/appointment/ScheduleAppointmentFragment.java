@@ -69,8 +69,8 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
             docNameText.setText(doctor.getDoctor_name());
             //docDetailsText =doctor.getAssignclinic();
             //docSpecialistText = doctor.getAssignspecialization();
-            docDetailsText.setText(doctor.getClinic_id());
-            docSpecialistText.setText(doctor.getCategory_id());
+//            docDetailsText.setText(doctor.getClinic_id());
+//            docSpecialistText.setText(doctor.getCategory_id());
 
         }
 
