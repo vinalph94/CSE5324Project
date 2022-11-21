@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.databinding.AcceptAppointmentFragmentBinding;
+import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -59,7 +60,7 @@ public class AcceptAppointmentFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-        db.collection("appointments").whereEqualTo("status", "Accepted").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status", "Accepted").whereEqualTo("patient_id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
