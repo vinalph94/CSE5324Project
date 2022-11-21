@@ -1,4 +1,4 @@
-package com.example.mediassist.appointment;
+package com.example.mediassist.clinicadmin;
 
 import static java.util.Objects.nonNull;
 
@@ -16,28 +16,28 @@ import com.example.mediassist.appointment.models.AppointmentModel;
 
 import java.util.ArrayList;
 
-public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppointmentAdapter.ViewHolder> {
+public class AcceptAppointmentAdapter  extends RecyclerView.Adapter<AcceptAppointmentAdapter.ViewHolder> {
 
     private final Context context;
     private final ArrayList<AppointmentModel> appointmentModelArrayList;
-    private PendingAppointmentItemListener pendingAppointmentItemListener;
+    private AcceptAppointmentItemListener acceptAppointmentItemListener;
 
 
-    public PendingAppointmentAdapter(Context context, ArrayList<AppointmentModel> appointmentModelArrayList, PendingAppointmentItemListener pendingAppointmentItemListener) {
+    public AcceptAppointmentAdapter(Context context, ArrayList<AppointmentModel> appointmentModelArrayList, AcceptAppointmentItemListener pendingAppointmentItemListener) {
         this.context = context;
         this.appointmentModelArrayList = appointmentModelArrayList;
-        this.pendingAppointmentItemListener = pendingAppointmentItemListener;
+        this.acceptAppointmentItemListener = acceptAppointmentItemListener;
     }
     @NonNull
     @Override
-    public PendingAppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AcceptAppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        return new PendingAppointmentAdapter.ViewHolder(view);
+        return new AcceptAppointmentAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PendingAppointmentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AcceptAppointmentAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
         AppointmentModel model = appointmentModelArrayList.get(position);
         if (nonNull(model.getDoctor_name())) {
@@ -50,7 +50,7 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppoi
             holder.appointmenttime.setText(String.format("%s", model.getSlot_time()));
         }
         holder.itemView.setOnClickListener(view -> {
-            pendingAppointmentItemListener.onAdapterItemClick(appointmentModelArrayList.get(position));
+            acceptAppointmentItemListener.onAdapterItemClick(appointmentModelArrayList.get(position));
         });
 
     }
@@ -74,7 +74,7 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppoi
             appointmenttime = itemView.findViewById(R.id.textview3);
         }
     }
-    public interface PendingAppointmentItemListener {
+    public interface AcceptAppointmentItemListener {
         void onAdapterItemClick(AppointmentModel appointment);
     }
 }
