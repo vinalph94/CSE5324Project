@@ -15,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityDashboardBinding;
-import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.NavigationUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
@@ -51,27 +50,27 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String userId = intent.getStringExtra("userId");
-
-        db.collection("users").whereEqualTo("id", userId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 String role = "";
                 for (QueryDocumentSnapshot snapshot : value) {
-                    role = snapshot.getString("roleId");
-                }
-                if (Objects.equals(role, "1")) {
-                    navController.navigate(R.id.SuperAdminDashboardFragment);
-                } else if (Objects.equals(role, "2")) {
-                    navController.navigate(R.id.ClinicAdminDashboard);
-                } else if (Objects.equals(role, "3")) {
-                    navController.navigate(R.id.DoctorDashboard);
-                } else if (Objects.equals(role, "4")) {
-                    navController.navigate(R.id.PatientDashboard);
-                } else {
+                    if  (Objects.equals(snapshot.getId(),userId) ){
+                        role = snapshot.get("role").toString();
+                        if (Objects.equals(role, "1")) {
+                            navController.navigate(R.id.SuperAdminDashboardFragment);
+                        } else if (Objects.equals(role, "2")) {
+                            navController.navigate(R.id.ClinicAdminDashboard);
+                        } else if (Objects.equals(role, "3")) {
+                            navController.navigate(R.id.DoctorDashboard);
+                        } else if (Objects.equals(role, "4")) {
+                            navController.navigate(R.id.DoctorDashboard);
+                        }
+                    }
+
                 }
             }
         });
-
 
 
         //Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
