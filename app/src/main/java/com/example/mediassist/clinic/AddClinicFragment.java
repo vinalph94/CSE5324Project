@@ -228,7 +228,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+                new CustomToast(getContext(), getActivity(), "Error - "+e, ToastStatus.FAILURE).show();
             }
         });
 

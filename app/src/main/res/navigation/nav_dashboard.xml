@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard"
-    app:startDestination="@id/SuperAdminDashboardFragment">
+    app:startDestination="@id/PatientDashboard">
 
     <fragment
         android:id="@+id/SuperAdminDashboardFragment"
@@ -22,9 +22,7 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_patient_dashboard">
 
-        <action
-            android:id="@+id/action_PatientDashboard_to_ClinicAdminDashboard"
-            app:destination="@id/ClinicAdminDashboard" />
+
         <action
             android:id="@+id/action_PatientDashboard_to_PendingAppointmentFragment"
             app:destination="@id/PendingAppointment" />

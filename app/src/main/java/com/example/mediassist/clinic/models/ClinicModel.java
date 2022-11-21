@@ -83,13 +83,6 @@ public class ClinicModel implements Serializable {
         this.phone_number = phone_number;
     }
 
-    public String getstreet() {
-        return street;
-    }
-
-    public void setstreet(String street) {
-        this.street = street;
-    }
 
     public String getDescription() {
         return description;

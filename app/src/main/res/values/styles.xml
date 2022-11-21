@@ -75,7 +75,9 @@
         <item name="backgroundTint">@color/disabled_primary_color</item>
         <item name="android:minWidth">@dimen/_260sdp</item>
         <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginTop">@dimen/_20sdp</item>
         <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_gravity">center</item>
 <!--        <item name="android:clickable">false</item>-->
 <!--        <item name="android:enabled">false</item>-->
     </style>

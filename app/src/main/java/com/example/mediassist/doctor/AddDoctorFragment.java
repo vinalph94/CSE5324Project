@@ -118,9 +118,9 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                     }
                     String address = snapshot.getString("address");
                     int zipcode = snapshot.getLong("zipcode").intValue();
-                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
-                    clinic.setId(snapshot.getId());
-                    clinicsList.add(clinic);
+//                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+//                    clinic.setId(snapshot.getId());
+//                    clinicsList.add(clinic);
 
                 }
                 clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);

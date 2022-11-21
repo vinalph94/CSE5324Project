@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.mediassist.SearchDoctors.SearchDoctorsListActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.signup.RegisterActivity;
 
@@ -47,7 +48,7 @@ public class WelcomeFragment extends Fragment {
         binding.signupButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                Intent intent = new Intent(getActivity(), SearchDoctorsListActivity.class);
                 startActivity(intent);
 
             }
