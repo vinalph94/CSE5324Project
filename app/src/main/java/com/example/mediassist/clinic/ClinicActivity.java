@@ -32,6 +32,7 @@ public class ClinicActivity extends AppCompatActivity {
 
         textTitle = binding.textTitle;
         btnAdd = binding.btnAdd;
+        Button btnBack = binding.btnBack;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
         setActionBarTitle("Clinics");
 
@@ -44,6 +45,12 @@ public class ClinicActivity extends AppCompatActivity {
                 navController.navigate(R.id.action_ClinicListFragment_to_AddClinicFragment, bundle);
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
     }
@@ -51,8 +58,7 @@ public class ClinicActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_clinic);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
     public void setActionBarTitle(String title) {

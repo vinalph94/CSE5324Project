@@ -31,7 +31,10 @@ public class ClinicListFragment extends Fragment {
     private String name;
     private String details;
     private String phoneNumber;
-    private String address;
+    private String street;
+    private String city;
+    private String county;
+    private String country;
     private int zipcode;
     private ClinicAdapter courseAdapter;
     private Bundle bundle;
@@ -52,18 +55,24 @@ public class ClinicListFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
-                for (QueryDocumentSnapshot snapshot : value) {
-                    name = snapshot.getString("name");
-                    phoneNumber = snapshot.getString("phone_number");
-                    if (snapshot.getString("description") != null) {
-                        details = snapshot.getString("description");
-                    }
-                    address = snapshot.getString("address");
-                    zipcode = snapshot.getLong("zipcode").intValue();
-                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
-                    clinic.setId(snapshot.getId());
-                    courseArrayList.add(clinic);
+                if (value != null) {
+                    for (QueryDocumentSnapshot snapshot : value) {
+                        name = snapshot.getString("name");
+                        phoneNumber = snapshot.getString("phone_number");
+                        if (snapshot.getString("description") != null) {
+                            details = snapshot.getString("description");
+                        }
+                        street = snapshot.getString("street");
+                        city = snapshot.getString("city");
+                        county = snapshot.getString("county");
+                        country = snapshot.getString("country");
 
+                        zipcode = snapshot.getLong("zipcode").intValue();
+                        clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
+                        clinic.setId(snapshot.getId());
+                        courseArrayList.add(clinic);
+
+                    }
                 }
                 courseAdapter = new ClinicAdapter(getContext(), courseArrayList, new ClinicAdapter.ClinicItemListener() {
                     @Override

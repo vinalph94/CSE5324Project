@@ -122,9 +122,13 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                     if (snapshot.getString("description") != null) {
                         details = snapshot.getString("description");
                     }
-                    String address = snapshot.getString("address");
+                    String street = snapshot.getString("street");
+                    String city= snapshot.getString("city");
+                    String county= snapshot.getString("county");
+                    String country= snapshot.getString("country");
+
                     int zipcode = snapshot.getLong("zipcode").intValue();
-                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+                    clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
                     clinic.setId(snapshot.getId());
                     clinicsList.add(clinic);
 

@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/PatientDashboard"
     android:orientation="vertical"
     tools:context=".dashboard.PatientDashboardFragment">
 
-    <Button
+    <EditText
         style="@style/default_edit_text"
+        android:id="@+id/search_text"
         android:width="450dp"
         android:layout_gravity="top|start"
         android:layout_marginTop="15dp"
@@ -16,7 +18,21 @@
         android:hint="Search"
         android:textAlignment="textStart" />
 
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
+        android:id="@+id/patient_dashboard_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

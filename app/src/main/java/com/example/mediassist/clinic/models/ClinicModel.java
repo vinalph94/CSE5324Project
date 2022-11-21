@@ -9,16 +9,21 @@ public class ClinicModel implements Serializable {
     private String id;
     private String name;
     private String phone_number;
-    private String address;
+    private String street;
+    private String city;
+    private String county;
+    private String country;
     private String description;
     private int zipcode;
 
 
-    public ClinicModel(String name, String phone_number, String address, String description, int zipcode) {
+    public ClinicModel(String name, String description, String phone_number, String street,String city,String county,String country,int zipcode) {
         this.name = name;
-        this.phone_number = phone_number;
-        this.address = address;
         this.description = description;
+        this.phone_number = phone_number;
+        this.street = street;
+        this.city =city;
+        this.country=country;
         this.zipcode = zipcode;
     }
 
@@ -28,6 +33,38 @@ public class ClinicModel implements Serializable {
     @Override
     public String toString() {
         return this.name; // What to display in the Spinner list.
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getName() {
@@ -46,13 +83,6 @@ public class ClinicModel implements Serializable {
         this.phone_number = phone_number;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getDescription() {
         return description;

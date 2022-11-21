@@ -24,9 +24,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
+
 import com.example.mediassist.databinding.FragmentFirstBinding;
+import com.google.android.libraries.places.api.Places;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,16 +40,23 @@ public class FirstFragment extends Fragment implements LocationListener {
 
     LocationManager locationManager;
     private FragmentFirstBinding binding;
+    private RecyclerView searchRv;
     private TextView t;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
-        t = binding.textviewFirst;
+        searchRv = binding.rvSearch;
+        t=binding.t;
+
+
         grantPermission();
         checkLocationIsEnabledOrNot();
         getLocation();
+
+//        Places.initialize(getContext(),getResources(),getResources().getString());
+
         return binding.getRoot();
 
     }
@@ -54,12 +64,7 @@ public class FirstFragment extends Fragment implements LocationListener {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment);
-            }
-        });
+
     }
 
     private void grantPermission() {
@@ -117,7 +122,7 @@ public class FirstFragment extends Fragment implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
         try {
             Geocoder geocoder = new Geocoder(getContext(), Locale.US);
-            geocoder.getFromLocationName("123 Testing Rd City State zip", 1);
+//            geocoder.getFromLocationName("123 Testing Rd City State zip", 1);
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             t.setText(addresses.get(0).getPostalCode());
         } catch (IOException e) {

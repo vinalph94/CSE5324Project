@@ -10,6 +10,7 @@ public class DoctorModel implements Serializable {
     private String doctor_email;
     private String category_id;
     private String clinic_id;
+    private double dist;
     @Exclude
     private String id;
 
@@ -67,7 +68,9 @@ public class DoctorModel implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
+    public void setDistance(double dist) {
+        this.dist = dist;
+    }
 
     public String getId() {
         return id;
