@@ -17,6 +17,8 @@ import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.databinding.PendingAppointmentClinicSpecificFragmentBinding;
 import com.example.mediassist.login.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -24,6 +26,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PendingAppointmentClinicSpecificFragment extends Fragment {
 
@@ -61,33 +64,69 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
         RecyclerView courseRV = binding.idRVCoursePendingAppointmentClinicSpecific;
         // Inflate the layout for this fragment
 
-        db.collection("clinicAdmins").whereEqualTo("id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                         @Override
-                                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                             for (QueryDocumentSnapshot snapshot : value) {
-                                                 clinicAdminClinic_id = snapshot.getString("assign_clinic");
-                                             }
-                                         }
-                                     }
-                );
+        /*db.collection("clinicAdmins").whereEqualTo("id", LoginActivity.patientUid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                System.out.println("value1 :"+LoginActivity.patientUid+" :-----"+task.isSuccessful());
+                System.out.println("value1 :"+task.getResult().size());
+                if(task.isSuccessful()) {
+                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                        System.out.println("snapshot value : "+snapshot);
+                        System.out.println("snapshot value exists: "+snapshot.exists());
+                        System.out.println("email : " + snapshot.getString("email"));
+                        System.out.println("snapshot : " + snapshot.getString("assign_clinic"));
+                        clinicAdminClinic_id = snapshot.getString("assign_clinic");
+                        System.out.println("snapshot clinicAdminClinic_id : " + clinicAdminClinic_id);
+                    }
+                }
+            }
+        });*/
 
-        db.collection("appointments").whereEqualTo("status", "Pending").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("clinicAdmins").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (QueryDocumentSnapshot snapshot : value) {
+                    System.out.println("snapshotid : "+snapshot.getString("id"));
+                    System.out.println("LoginActivity.patientUid : "+LoginActivity.patientUid);
+                    if (LoginActivity.patientUid.equals(snapshot.getString("id")) ){
+                        clinicAdminClinic_id = snapshot.getString("assign_clinic");
+                    }
+                }
+            }
+        }
+        );
+
+        db.collection("appointments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                System.out.println("clinicAdminClinic_id value :"+value+":---"+clinicAdminClinic_id+" :-----"+value.getDocuments());
+                System.out.println("appointments value2 :"+value.size());
+                String clinicId = "";
+                String status = "";
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
-                    patient_id = snapshot.getString("patient_id");
-                    patient_name = snapshot.getString("patient_name");
-                    doctor_id = snapshot.getString("doctor_id");
-                    doctor_name = snapshot.getString("doctor_name");
-                    clinic_id = snapshot.getString("clinic_id");
-                    category_id = snapshot.getString("category_id");
-                    slot_date = snapshot.getString("slot_date");
-                    slot_time = snapshot.getString("slot_time");
-                    status = snapshot.getString("status");
-                    appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
-                    appointment.setId(snapshot.getId());
-                    courseArrayList.add(appointment);
+                        clinicId = snapshot.get("clinic_id").toString();
+                        status = snapshot.get("status").toString();
+                        System.out.println("clinicId value2 :"+clinicId);
+                        if (clinicId.equals(clinicAdminClinic_id) && status.equals("Pending")){
+                            System.out.println("clinic exist");
+                            patient_id = snapshot.getString("patient_id");
+                            patient_name = snapshot.getString("patient_name");
+                            doctor_id = snapshot.getString("doctor_id");
+                            doctor_name = snapshot.getString("doctor_name");
+                            clinic_id = snapshot.getString("clinic_id");
+                            category_id = snapshot.getString("category_id");
+                            slot_date = snapshot.getString("slot_date");
+                            slot_time = snapshot.getString("slot_time");
+                            status = snapshot.getString("status");
+                            appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
+                            appointment.setId(snapshot.getId());
+                            courseArrayList.add(appointment);
+                        } else {
+                            System.out.println("Doesmt exist");
+                        }
+
+
 
                 }
                 courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
@@ -111,6 +150,55 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
 
         return binding.getRoot();
     }
+
+/*
+        db.collection("appointments").whereEqualTo("status", "Pending").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    System.out.println("clinicAdminClinic_id value :"+clinicAdminClinic_id+" :-----"+task.isSuccessful());
+                    System.out.println("appointments value2 :"+task.getResult().size());
+                    if(task.isSuccessful()) {
+                        courseArrayList.clear();
+                        for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                            System.out.println("snapshot value 2 : "+snapshot);
+                            System.out.println("snapshot value exists 2: "+snapshot.exists());
+                            patient_id = snapshot.getString("patient_id");
+                            patient_name = snapshot.getString("patient_name");
+                            doctor_id = snapshot.getString("doctor_id");
+                            doctor_name = snapshot.getString("doctor_name");
+                            clinic_id = snapshot.getString("clinic_id");
+                            category_id = snapshot.getString("category_id");
+                            slot_date = snapshot.getString("slot_date");
+                            slot_time = snapshot.getString("slot_time");
+                            status = snapshot.getString("status");
+                            System.out.println("conetents:--> "  +patient_id+patient_name+doctor_id+doctor_name
+                                    +clinic_id+category_id+slot_date+slot_time+status);
+                            appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
+                            appointment.setId(snapshot.getId());
+                            courseArrayList.add(appointment);
+                        }
+                    }
+                    courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
+                        @Override
+                        public void onAdapterItemClick(AppointmentModel appointment) {
+                            navigateToAddFragment(appointment);
+
+                        }
+
+                    });
+                    courseAdapter.notifyDataSetChanged();
+
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                            LinearLayoutManager.VERTICAL, false);
+
+                    courseRV.setLayoutManager(linearLayoutManager);
+                    courseRV.setAdapter(courseAdapter);
+                }
+            });
+
+
+        return binding.getRoot();
+    }*/
 
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
