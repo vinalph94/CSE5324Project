@@ -6,8 +6,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
+
 public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack {
 
     private AddClinicBinding binding;
@@ -33,11 +40,15 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private EditText nameEditText;
     private EditText detailsEditText;
     private EditText phoneNumberEditText;
-    private EditText addressEditText;
+    private EditText streetEditText;
+    private TextView cityEditText;
+    private TextView countyEditText;
     private EditText zipcodeEditText;
     private TextView clinicNameError;
     private TextView phoneNumberEditTextError;
-    private TextView addressEditTextError;
+    private TextView streetEditTextError;
+    private TextView cityEditTextError;
+    private TextView countyEditTextError;
     private TextView zipcodeEditTextError;
     private Button saveButton;
     private Button editButton;
@@ -45,11 +56,20 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private String name;
     private String details;
     private String phoneNumber;
-    private String address;
+    private String street;
     private int zipcode;
     private Bundle bundle;
     private ClinicModel clinic;
     private String id;
+    private Locale locale;
+    private Spinner countrySpinner;
+    private ArrayAdapter<String> countrySpinnerAdapter;
+    private ArrayList<String> countriesNamesList;
+    private String country;
+    private String city;
+    private String county;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,21 +84,29 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         nameEditText = binding.clinicNameText;
         detailsEditText = binding.clinicDetailsText;
         phoneNumberEditText = binding.clinicPhoneNumberText;
-        addressEditText = binding.clinicAddressText;
+        streetEditText = binding.clinicStreetText;
+        cityEditText = binding.clinicCityText;
+        countyEditText = binding.clinicCountyText;
         zipcodeEditText = binding.clinicZipcodeText;
         clinicNameError = binding.clinicNameErrorText;
         phoneNumberEditTextError = binding.clinicPhoneNumberErrorText;
-        addressEditTextError = binding.clinicAddressErrorText;
+        streetEditTextError = binding.clinicStreetErrorText;
+        cityEditTextError = binding.clinicCityErrorText;
+        countyEditTextError = binding.clinicCountyErrorText;
         zipcodeEditTextError = binding.clinicZipcodeErrorText;
         saveButton = binding.clinicSaveButton;
         editButton = binding.clinicEditButton;
         deleteButton = binding.clinicDeleteButton;
+        countrySpinner = (Spinner) binding.spinnerCountry;
+
 
         if (clinic != null) {
             id = clinic.getId();
             nameEditText.setText(clinic.getName());
             phoneNumberEditText.setText(clinic.getPhone_number());
-            addressEditText.setText(clinic.getAddress());
+            streetEditText.setText(clinic.getStreet());
+            cityEditText.setText(clinic.getCity());
+            countyEditText.setText(clinic.getCounty());
             zipcodeEditText.setText(String.valueOf(clinic.getZipcode()));
             if (clinic.getDescription() != null) {
                 detailsEditText.setText(clinic.getDescription());
@@ -91,11 +119,42 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 
         nameEditText.addTextChangedListener(new CustomTextWatcher(clinicNameError, AddClinicFragment.this));
         phoneNumberEditText.addTextChangedListener(new CustomTextWatcher(phoneNumberEditTextError, AddClinicFragment.this));
-        addressEditText.addTextChangedListener(new CustomTextWatcher(addressEditTextError, AddClinicFragment.this));
+        streetEditText.addTextChangedListener(new CustomTextWatcher(streetEditTextError, AddClinicFragment.this));
+        cityEditText.addTextChangedListener(new CustomTextWatcher(streetEditTextError, AddClinicFragment.this));
+        countyEditTextError.addTextChangedListener(new CustomTextWatcher(streetEditTextError, AddClinicFragment.this));
         zipcodeEditText.addTextChangedListener(new CustomTextWatcher(zipcodeEditTextError, AddClinicFragment.this));
 
 
         checkClinicData();
+        countriesNamesList = new ArrayList<String>();
+
+
+        String[] isoCountryCodes = Locale.getISOCountries();
+        for (String countryCode : isoCountryCodes) {
+
+            locale = new Locale("", countryCode);
+            countriesNamesList.add(locale.getDisplayCountry());
+        }
+        Collections.sort(countriesNamesList);
+        countrySpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, countriesNamesList);
+        countrySpinner.setAdapter(countrySpinnerAdapter);
+
+
+        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                country = countriesNamesList.get(i);
+                checkClinicData();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +162,8 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View v) {
 
                 checkClinicData();
-                clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+
+                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
                 uploadClinic(clinic);
 
 
@@ -116,7 +176,8 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
                 checkClinicData();
-                clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+
+                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
                 updateClinic(id, clinic);
             }
         });
@@ -126,7 +187,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
                 checkClinicData();
-                clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
                 deleteData(id);
             }
         });
@@ -141,11 +202,16 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         name = nameEditText.getText().toString();
         details = detailsEditText.getText().toString();
         phoneNumber = phoneNumberEditText.getText().toString();
-        address = addressEditText.getText().toString();
+        street = streetEditText.getText().toString();
+        city = cityEditText.getText().toString();
+        county = countyEditText.getText().toString();
+
         if (!(TextUtils.isEmpty(zipcodeEditText.getText().toString()))) {
             zipcode = Integer.parseInt(zipcodeEditText.getText().toString());
         }
-        if (!(name.isEmpty()) && !(phoneNumber.isEmpty()) && !(address.isEmpty()) && !(TextUtils.isEmpty(zipcodeEditText.getText().toString()))) {
+        if (!(name.isEmpty()) && !(phoneNumber.isEmpty()) && !(street.isEmpty()) &&
+                !(city.isEmpty())&& !(county.isEmpty()) &&
+                !(TextUtils.isEmpty(zipcodeEditText.getText().toString()))) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
         }

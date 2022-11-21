@@ -60,22 +60,57 @@
            
             android:text="Phone Number is required" />
 
+
         <TextView
-            android:id="@+id/clinic_address_label"
+            android:id="@+id/clinic_street_label"
             style="@style/mandatory_label_text"
-            android:text="Address" />
+            android:text="Street" />
 
         <EditText
-            android:id="@+id/clinic_address_text"
+            android:id="@+id/clinic_street_text"
             style="@style/default_edit_text"
-            android:hint="Address" />
+            android:hint="Street" />
 
         <TextView
-            android:id="@+id/clinic_address_error_text"
+            android:id="@+id/clinic_street_error_text"
             style="@style/default_error_text"
-           
-            android:text="Address is required" />
+            android:text="Street is required" />
 
+
+
+        <TextView
+            android:id="@+id/clinic_city_label"
+            style="@style/mandatory_label_text"
+            android:text="City" />
+
+
+        <EditText
+            android:id="@+id/clinic_city_text"
+            style="@style/default_edit_text"
+            android:hint="City" />
+
+        <TextView
+            android:id="@+id/clinic_city_error_text"
+            style="@style/default_error_text"
+
+            android:text="City is required" />
+
+        <TextView
+            android:id="@+id/clinic_county_label"
+            style="@style/mandatory_label_text"
+            android:text="County" />
+
+
+        <EditText
+            android:id="@+id/clinic_county_text"
+            style="@style/default_edit_text"
+            android:hint="ZipCode" />
+
+        <TextView
+            android:id="@+id/clinic_county_error_text"
+            style="@style/default_error_text"
+
+            android:text="Zipcode is required" />
 
         <TextView
             android:id="@+id/clinic_zipcode_label"
@@ -91,8 +126,38 @@
         <TextView
             android:id="@+id/clinic_zipcode_error_text"
             style="@style/default_error_text"
-           
+
             android:text="Zipcode is required" />
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/category_country_label"
+            style="@style/mandatory_label_text"
+            android:text="Select country" />
+
+        <Spinner
+            android:id="@+id/spinner_country"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu">
+        </Spinner>
+
+
+
+
+
 
 
     </LinearLayout>
