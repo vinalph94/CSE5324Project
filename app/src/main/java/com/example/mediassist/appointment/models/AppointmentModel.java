@@ -1,10 +1,6 @@
 package com.example.mediassist.appointment.models;
 
-import com.example.mediassist.appointment.ConfirmAppointmentFragment;
-import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.Exclude;
-import com.google.type.Date;
-import com.google.type.DateTime;
 
 import java.io.Serializable;
 
@@ -19,7 +15,7 @@ public class AppointmentModel implements Serializable {
     private String slot_time;
     private String status;
     @Exclude
-      private String id;
+    private String id;
 
 
     public AppointmentModel(String patient_id, String patient_name, String doctor_id, String doctor_name, String clinic_id, String category_id, String slot_date, String slot_time, String status) {
@@ -31,7 +27,7 @@ public class AppointmentModel implements Serializable {
         this.category_id = category_id;
         this.slot_date = slot_date;
         this.slot_time = slot_time;
-        this.status= status;
+        this.status = status;
 
     }
 
@@ -50,16 +46,16 @@ public class AppointmentModel implements Serializable {
         return patient_name;
     }
 
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setPatient_name(String patient_name) {
-        this.patient_name = patient_name;
     }
 
     public String getDoctor_id() {

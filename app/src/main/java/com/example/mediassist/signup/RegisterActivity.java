@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mediassist.R;
-
 import com.example.mediassist.databinding.ActivityRegisterBinding;
 import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
@@ -96,13 +95,13 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
         db = FirebaseFirestore.getInstance();
 
 
-         editTextName.addTextChangedListener(new CustomTextWatcher(userNameError, this));
-         editTextPhone.addTextChangedListener(new CustomTextWatcher(userPhoneError, this));
-         editTextEmail.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
+        editTextName.addTextChangedListener(new CustomTextWatcher(userNameError, this));
+        editTextPhone.addTextChangedListener(new CustomTextWatcher(userPhoneError, this));
+        editTextEmail.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
         editTextPassword.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
         editTextRetypePwd.addTextChangedListener(new CustomTextWatcher(userEmailError, this));
 
-         checkRegisterData();
+        checkRegisterData();
     }
 
     public void onClickSignUpButton(View view) {

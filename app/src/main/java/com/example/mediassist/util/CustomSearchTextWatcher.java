@@ -7,15 +7,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 
-public class CustomTextWatcher implements TextWatcher {
+public class CustomSearchTextWatcher implements TextWatcher {
 
-    private CheckForEmptyCallBack checkForEmptyCallBack;
     private EnteredTextCallBack enteredTextCallBack;
     private TextView errorText;
 
 
-    public CustomTextWatcher(TextView error, CheckForEmptyCallBack checkForEmptyCallBack) {
-        this.checkForEmptyCallBack = checkForEmptyCallBack;
+    public CustomSearchTextWatcher(TextView error, EnteredTextCallBack enteredTextCallBack) {
+        this.enteredTextCallBack = enteredTextCallBack;
         this.errorText = error;
     }
 
@@ -30,7 +29,7 @@ public class CustomTextWatcher implements TextWatcher {
         } else {
             this.errorText.setVisibility(View.GONE);
         }
-        this.checkForEmptyCallBack.checkForEmpty();
+        this.enteredTextCallBack.enteredText(s);
 
     }
 

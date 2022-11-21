@@ -23,13 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediassist.R;
-
 import com.example.mediassist.databinding.FragmentFirstBinding;
-import com.google.android.libraries.places.api.Places;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,7 +44,7 @@ public class FirstFragment extends Fragment implements LocationListener {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         searchRv = binding.rvSearch;
-        t=binding.t;
+        t = binding.t;
 
 
         grantPermission();

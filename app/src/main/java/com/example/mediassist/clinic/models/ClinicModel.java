@@ -17,13 +17,13 @@ public class ClinicModel implements Serializable {
     private int zipcode;
 
 
-    public ClinicModel(String name, String description, String phone_number, String street,String city,String county,String country,int zipcode) {
+    public ClinicModel(String name, String description, String phone_number, String street, String city, String county, String country, int zipcode) {
         this.name = name;
         this.description = description;
         this.phone_number = phone_number;
         this.street = street;
-        this.city =city;
-        this.country=country;
+        this.city = city;
+        this.country = country;
         this.zipcode = zipcode;
     }
 

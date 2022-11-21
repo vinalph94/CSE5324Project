@@ -59,7 +59,7 @@ public class DoctorListFragment extends Fragment {
                     doctor_email = snapshot.getString("doctor_email");
                     assignspecialization = snapshot.getString("category_id");
                     assignclinic = snapshot.getString("clinic_id");
-                    doctor= (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                    doctor = (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
                     doctor.setId(snapshot.getId());
                     doctor.setClinic_id(assignclinic);
                     doctor.setCategory_id(assignspecialization);

@@ -73,7 +73,7 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_260sdp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/default_spinner_dropdown"
@@ -82,6 +82,7 @@
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
             app:boxCornerRadiusTopStart="20dp"
+
             app:popupTheme="@style/spinner_menu"
 
             >

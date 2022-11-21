@@ -60,7 +60,7 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-        db.collection("appointments").whereEqualTo("status","Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status", "Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -74,7 +74,7 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
                     slot_date = snapshot.getString("slot_date");
                     slot_time = snapshot.getString("slot_time");
                     status = snapshot.getString("status");
-                    appointment= (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id,category_id,slot_date,slot_time,status));
+                    appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
                     appointment.setId(snapshot.getId());
                     courseArrayList.add(appointment);
 

@@ -28,6 +28,7 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppoi
         this.appointmentModelArrayList = appointmentModelArrayList;
         this.pendingAppointmentItemListener = pendingAppointmentItemListener;
     }
+
     @NonNull
     @Override
     public PendingAppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,6 +62,10 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppoi
         return appointmentModelArrayList.size();
     }
 
+    public interface PendingAppointmentItemListener {
+        void onAdapterItemClick(AppointmentModel appointment);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView doctorname;
@@ -73,9 +78,6 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<PendingAppoi
             appointmentdate = itemView.findViewById(R.id.textview2);
             appointmenttime = itemView.findViewById(R.id.textview3);
         }
-    }
-    public interface PendingAppointmentItemListener {
-        void onAdapterItemClick(AppointmentModel appointment);
     }
 }
 

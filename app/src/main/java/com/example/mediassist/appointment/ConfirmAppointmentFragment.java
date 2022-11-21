@@ -27,8 +27,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ConfirmAppointmentFragment extends Fragment {
@@ -46,7 +44,7 @@ public class ConfirmAppointmentFragment extends Fragment {
     private AppointmentModel appointmentModel;
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         binding = ConfirmAppointmentFragmentBinding.inflate(inflater, container, false);
@@ -74,7 +72,7 @@ public class ConfirmAppointmentFragment extends Fragment {
         timeSlotsAdapter = new TimeSlotsAdapter(getContext(), courseArrayList, new TimeSlotsAdapter.ClinicItemListener() {
             @Override
             public void onAdapterItemClick(String selectedSlot) {
-               selectedTime = selectedSlot;
+                selectedTime = selectedSlot;
             }
 
         });
@@ -88,7 +86,7 @@ public class ConfirmAppointmentFragment extends Fragment {
 
 
                 //store the additional fields(signup fields) in firebase
-               appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
+                appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername, doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
                         eventDateTV.getText().toString(), selectedTime, "Pending");
 
                 db.collection("appointments").add(appointmentModel)

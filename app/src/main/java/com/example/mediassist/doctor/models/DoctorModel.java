@@ -65,14 +65,15 @@ public class DoctorModel implements Serializable {
         this.clinic_id = clinic_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
     public void setDistance(double dist) {
         this.dist = dist;
     }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ActivityClinicBinding;
 
+
 public class ClinicActivity extends AppCompatActivity {
 
     public Button btnAdd;

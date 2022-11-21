@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
-import com.example.mediassist.category.models.CategoryModel;
+import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
+import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
@@ -34,7 +37,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,6 +48,7 @@ import java.util.ArrayList;
 
 public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCallBack {
 
+    Spinner spinner;
     private AddClinicAdminBinding binding;
     private FirebaseFirestore db;
     private EditText clinicAdminName;
@@ -68,73 +71,28 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private ClinicAdminModel clinicadmin;
     private String id;
     private FirebaseAuth mAuth;
-    Spinner spinner;
     private Spinner clinicSpinner;
     private String clinic_id;
+    private ClinicModel clinic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
         bundle = getArguments();
         clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
 
 
-        Spinner spinner = (Spinner) binding.spinner;
+
+        clinicSpinner = (Spinner) binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        clinicSpinner.setAdapter(adapter);
+        ((ClinicAdminActivity) getActivity()).addBtn.setVisibility(View.GONE);
 
 
-     /*  spinner = (Spinner) binding.spinner;
-        clinic_dropdown = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("clinicAdmins").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                clinic_dropdown.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String spinnerName = String.valueOf(ds.child(snapshot.getKey()).child("name"));
-                   // String spinnerName = ds.child("name").getValue().toString();
-                    clinic_dropdown.add(spinnerName);
-                }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_list, clinic_dropdown);
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(arrayAdapter);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
-       /* clinicsList = new ArrayList<ClinicModel>();
-        db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                for (QueryDocumentSnapshot snapshot : value) {
-                    String details = "";
-                    String name = snapshot.getString("name");
-                    String phoneNumber = snapshot.getString("phone_number");
-                    if (snapshot.getString("description") != null) {
-                        details = snapshot.getString("description");
-                    }
-                    String address = snapshot.getString("address");
-                    int zipcode = snapshot.getLong("zipcode").intValue();
-//                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
-//                    clinic.setId(snapshot.getId());
-//                    clinicsList.add(clinic);
-
-                }
-                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
-                clinicSpinner.setAdapter(clinicSpinnerAdapter);
-                getDoctorClinicForEdit(clinicSpinnerAdapter);
-
-            }
-        });*/
 
 
 
@@ -167,28 +125,46 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
         checkClinicAdminData();
 
-      /*  clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        clinicsList = new ArrayList<ClinicModel>();
+        db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                clinic_id = clinicsList.get(i).getId();
+                for (QueryDocumentSnapshot snapshot : value) {
+                    String details = "";
+                    String name = snapshot.getString("name");
+                    String phoneNumber = snapshot.getString("phone_number");
+                    if (snapshot.getString("description") != null) {
+                        details = snapshot.getString("description");
+                    }
+                    String street = snapshot.getString("street");
+                    String city= snapshot.getString("city");
+                    String county= snapshot.getString("county");
+                    String country= snapshot.getString("country");
+                    int zipcode = snapshot.getLong("zipcode").intValue();
+
+
+
+
+
+                    clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                    clinic.setId(snapshot.getId());
+                    clinicsList.add(clinic);
+
+                }
+                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getActivity(), R.layout.spinner_items, clinicsList);
+                clinicSpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
+                clinicSpinner.setAdapter(clinicSpinnerAdapter);
+                getDoctorClinicForEdit(clinicSpinnerAdapter);
+
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
-
-
+        });
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                assign_clinic = spinner.getSelectedItem().toString();
 
                 clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
                 uploadClinicAdmin(clinicadmin);
@@ -215,10 +191,24 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             }
         });
 
+        clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                assign_clinic = clinicsList.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         return binding.getRoot();
 
 
     }
+
     private void getDoctorClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
 
         if (doctor != null) {
@@ -231,6 +221,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
 
     }
+
     private void deleteData(String clinicadminId, ClinicAdminModel clinicadmin) {
         db.collection(("clinicAdmins")).document(clinicadminId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -261,7 +252,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
 
-        String password = clinicadmin.getEmail() + clinicadmin.getPhone_number();
+        String password = clinicadmin.getName().substring(0,4) + clinicadmin.getPhone_number().substring(clinicadmin.getPhone_number().length() - 4);
 
         mAuth.createUserWithEmailAndPassword(clinicadmin.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -301,14 +292,14 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
 
                 } else {
-
+                    new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
                 }
 
             }
         });
     }
 
-        public void updateClinicAdmin(String clinicadminId, ClinicAdminModel clinicadmin) {
+    public void updateClinicAdmin(String clinicadminId, ClinicAdminModel clinicadmin) {
 
         db.collection(("clinicAdmins")).document(clinicadminId).set(clinicadmin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -328,7 +319,11 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((ClinicAdminActivity) getActivity()).setActionBarTitle("Add Clinic Admin");
+        if (clinicadmin == null) {
+            ((ClinicAdminActivity) getActivity()).setActionBarTitle("Add Clinic Admin");
+        } else {
+            ((ClinicAdminActivity) getActivity()).setActionBarTitle("Edit Clinic Admin");
+        }
 
 
     }

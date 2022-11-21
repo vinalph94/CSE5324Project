@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mediassist.SearchDoctors.SearchDoctorsListActivity;
 import com.example.mediassist.databinding.WelcomeBinding;
 import com.example.mediassist.signup.RegisterActivity;
 

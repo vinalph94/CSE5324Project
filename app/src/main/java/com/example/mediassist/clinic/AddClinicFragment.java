@@ -18,7 +18,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.models.ClinicModel;
+import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.AddClinicBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
@@ -70,7 +72,6 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private String county;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
@@ -99,7 +100,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         deleteButton = binding.clinicDeleteButton;
         countrySpinner = (Spinner) binding.spinnerCountry;
 
-
+        ((ClinicActivity) getActivity()).btnAdd.setVisibility(View.GONE);
         if (clinic != null) {
             id = clinic.getId();
             nameEditText.setText(clinic.getName());
@@ -163,7 +164,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 
                 checkClinicData();
 
-                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                 uploadClinic(clinic);
 
 
@@ -177,7 +178,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
                 //phoneNumberEditText.setText("");
                 checkClinicData();
 
-                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                 updateClinic(id, clinic);
             }
         });
@@ -187,7 +188,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
                 checkClinicData();
-                clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                 deleteData(id);
             }
         });
@@ -210,7 +211,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             zipcode = Integer.parseInt(zipcodeEditText.getText().toString());
         }
         if (!(name.isEmpty()) && !(phoneNumber.isEmpty()) && !(street.isEmpty()) &&
-                !(city.isEmpty())&& !(county.isEmpty()) &&
+                !(city.isEmpty()) && !(county.isEmpty()) &&
                 !(TextUtils.isEmpty(zipcodeEditText.getText().toString()))) {
             saveButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary_color)));
             saveButton.setEnabled(true);
@@ -228,7 +229,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                new CustomToast(getContext(), getActivity(), "Error - "+e, ToastStatus.FAILURE).show();
+                new CustomToast(getContext(), getActivity(), "Error - " + e, ToastStatus.FAILURE).show();
             }
         });
 
@@ -277,9 +278,11 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        if (clinic == null) {
+            ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        } else {
+            ((ClinicActivity) getActivity()).setActionBarTitle("Edit Clinic");
+        }
     }
 
     @Override

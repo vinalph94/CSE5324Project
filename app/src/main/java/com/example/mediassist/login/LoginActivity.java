@@ -4,7 +4,6 @@ package com.example.mediassist.login;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,36 +11,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.models.AppointmentModel;
-import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.dashboard.DashboardActivity;
-
 import com.example.mediassist.databinding.ActivityLoginBinding;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
-import com.example.mediassist.util.CustomToast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class LoginActivity extends AppCompatActivity implements CheckForEmptyCallBack {
     public static String patientUsername;
+    public static String patientUid;
     FirebaseFirestore firebaseFirestore;
     DocumentReference ref;
     private View _bg__signin_page_ek2;
@@ -57,7 +46,6 @@ public class LoginActivity extends AppCompatActivity implements CheckForEmptyCal
     private Button signin;
     private TextView password_;
     private EditText password;
-    public static String patientUid;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private ActivityLoginBinding binding;
@@ -91,8 +79,8 @@ public class LoginActivity extends AppCompatActivity implements CheckForEmptyCal
 
     public void onClickSignInButton(View view) {
 
-        if (checkForData()){
-            loginUser( email.getText().toString().trim(), password.getText().toString().trim());
+        if (checkForData()) {
+            loginUser(email.getText().toString().trim(), password.getText().toString().trim());
         }
 
 
@@ -134,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements CheckForEmptyCal
     }
 
 
-    private boolean checkForData(){
+    private boolean checkForData() {
         String mail = email.getText().toString().trim();
         patientUsername = mail;
         String pwd = password.getText().toString().trim();

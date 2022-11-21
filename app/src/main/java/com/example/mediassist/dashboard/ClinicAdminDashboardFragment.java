@@ -30,18 +30,18 @@ public class ClinicAdminDashboardFragment extends Fragment {
 
         CardView clinicCategoryCard = binding.clinicCategoryCard;
         CardView clinicDoctorCard = binding.clinicDoctorCard;
-        CardView clinicPendingAppointmentCard =binding.clinicPendingAppointmentsCard;
+        CardView clinicPendingAppointmentCard = binding.clinicPendingAppointmentsCard;
         CardView clinicAcceptedAppointmentsCard = binding.clinicAcceptedAppointmentsCard;
-CardView clinicCancelledAppointmentsCard = binding.clinicCancelledAppointmentsCard;
-       clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
+        CardView clinicCancelledAppointmentsCard = binding.clinicCancelledAppointmentsCard;
+        clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
-           public void onClick(View view) {
-               Intent intent = new Intent(getActivity(), CategoryActivity.class);
-               startActivity(intent);
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                startActivity(intent);
             }
         });
 
-       clinicDoctorCard.setOnClickListener(new View.OnClickListener() {
+        clinicDoctorCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DoctorActivity.class);

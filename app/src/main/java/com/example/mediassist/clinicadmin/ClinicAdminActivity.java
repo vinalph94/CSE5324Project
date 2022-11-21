@@ -2,6 +2,7 @@ package com.example.mediassist.clinicadmin;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityClinicAdminBinding binding;
     private TextView textTitle;
+    public Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
         binding = ActivityClinicAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textTitle = binding.textTitleClinicAdmin;
+        addBtn=binding.btnAddForClinicAdmin;
 
         NavController navController = Navigation.findNavController(ClinicAdminActivity.this, R.id.nav_host_fragment_content_clinic_admin);
         setActionBarTitle("Clinic Admins");
@@ -33,7 +36,6 @@ public class ClinicAdminActivity extends AppCompatActivity {
         binding.btnAddForClinicAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigateUp();
                 navController.navigate(R.id.action_ClinicAdminListFragment_to_AddClinicAdminFragment);
             }
         });

@@ -7,26 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.appointment.models.AppointmentModel;
-import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.databinding.CancelAppointmentFragmentBinding;
-import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -51,15 +42,15 @@ public class CancelAppointmentFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         binding = CancelAppointmentFragmentBinding.inflate(inflater, container, false);
         docNameText = binding.label1value;
-        DateText=binding.label2value;
-        TimeText=binding.label3value;
+        DateText = binding.label2value;
+        TimeText = binding.label3value;
 
         bundle = getArguments();
-         appointment = (AppointmentModel) (bundle != null ? bundle.getSerializable("appointment") : null);
+        appointment = (AppointmentModel) (bundle != null ? bundle.getSerializable("appointment") : null);
 
         if (appointment != null) {
 
-            id=appointment.getId();
+            id = appointment.getId();
             docNameText.setText(appointment.getDoctor_name());
             DateText.setText(appointment.getSlot_date());
             TimeText.setText(appointment.getSlot_time());
@@ -70,9 +61,9 @@ public class CancelAppointmentFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-               updateAppointmentStatus(id,appointment);
-                    }
-                });
+                updateAppointmentStatus(id, appointment);
+            }
+        });
 
         return binding.getRoot();
 
@@ -92,18 +83,18 @@ public class CancelAppointmentFragment extends Fragment {
 
     public void updateAppointmentStatus(String appointmentId, AppointmentModel appointment) {
 
-        db.collection(("appointments")).document(appointmentId).update("status","Cancelled").addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(("appointments")).document(appointmentId).update("status", "Cancelled").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Navigation.findNavController(binding.getRoot()).navigate(R.id.action_CancelAppointmentFragment_to_navappointmentlist);
-                new CustomToast(getContext(), getActivity(),  " Appointment Cancelled", ToastStatus.SUCCESS).show();
+                new CustomToast(getContext(), getActivity(), " Appointment Cancelled", ToastStatus.SUCCESS).show();
 
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                new CustomToast(getContext(), getActivity(), " Failed to cancel appointment " , ToastStatus.FAILURE).show();
+                new CustomToast(getContext(), getActivity(), " Failed to cancel appointment ", ToastStatus.FAILURE).show();
             }
         });
     }

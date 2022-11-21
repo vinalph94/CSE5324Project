@@ -16,7 +16,7 @@ import com.example.mediassist.appointment.models.AppointmentModel;
 
 import java.util.ArrayList;
 
-public class AcceptAppointmentAdapter  extends RecyclerView.Adapter<AcceptAppointmentAdapter.ViewHolder> {
+public class AcceptAppointmentAdapter extends RecyclerView.Adapter<AcceptAppointmentAdapter.ViewHolder> {
 
     private final Context context;
     private final ArrayList<AppointmentModel> appointmentModelArrayList;
@@ -26,8 +26,9 @@ public class AcceptAppointmentAdapter  extends RecyclerView.Adapter<AcceptAppoin
     public AcceptAppointmentAdapter(Context context, ArrayList<AppointmentModel> appointmentModelArrayList, AcceptAppointmentItemListener pendingAppointmentItemListener) {
         this.context = context;
         this.appointmentModelArrayList = appointmentModelArrayList;
-        this.acceptAppointmentItemListener = acceptAppointmentItemListener;
+        this.acceptAppointmentItemListener = pendingAppointmentItemListener;
     }
+
     @NonNull
     @Override
     public AcceptAppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,6 +62,10 @@ public class AcceptAppointmentAdapter  extends RecyclerView.Adapter<AcceptAppoin
         return appointmentModelArrayList.size();
     }
 
+    public interface AcceptAppointmentItemListener {
+        void onAdapterItemClick(AppointmentModel appointment);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView doctorname;
@@ -73,9 +78,6 @@ public class AcceptAppointmentAdapter  extends RecyclerView.Adapter<AcceptAppoin
             appointmentdate = itemView.findViewById(R.id.textview2);
             appointmenttime = itemView.findViewById(R.id.textview3);
         }
-    }
-    public interface AcceptAppointmentItemListener {
-        void onAdapterItemClick(AppointmentModel appointment);
     }
 }
 

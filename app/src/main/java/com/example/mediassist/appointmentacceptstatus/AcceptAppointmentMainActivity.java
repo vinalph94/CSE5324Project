@@ -1,22 +1,16 @@
 package com.example.mediassist.appointmentacceptstatus;
 
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mediassist.databinding.ActivityAcceptAppointmentMainBinding;
-
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityAcceptAppointmentMainBinding;
 
 public class AcceptAppointmentMainActivity extends AppCompatActivity {
 
@@ -35,7 +29,6 @@ public class AcceptAppointmentMainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_accept_appointment_main);
 
 
-
     }
 
     @Override
@@ -44,6 +37,7 @@ public class AcceptAppointmentMainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

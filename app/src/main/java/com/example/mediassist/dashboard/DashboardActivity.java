@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -60,7 +59,6 @@ public class DashboardActivity extends AppCompatActivity {
                         } else if (Objects.equals(role, "2")) {
                             navController.navigate(R.id.ClinicAdminDashboard);
                         } else if (Objects.equals(role, "3")) {
-
                             navController.navigate(R.id.DoctorDashboard);
                         } else if (Objects.equals(role, "4")) {
                             navController.navigate(R.id.PatientDashboard);

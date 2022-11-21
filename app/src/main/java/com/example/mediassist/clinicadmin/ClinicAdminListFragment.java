@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
+import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
+import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.ClinicAdminListBinding;
 import com.google.firebase.firestore.EventListener;
@@ -59,6 +62,7 @@ public class ClinicAdminListFragment extends Fragment {
                     clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic);
                     clinicadmin.setId(snapshot.getId());
                     courseArrayList.add(clinicadmin);
+
 
                 }
                 courseAdapter = new ClinicAdminAdapter(getContext(), courseArrayList, new ClinicAdminAdapter.ClinicAdminItemListener() {

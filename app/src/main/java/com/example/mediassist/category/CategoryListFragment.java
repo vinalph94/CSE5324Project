@@ -58,7 +58,7 @@ public class CategoryListFragment extends Fragment {
                     }
                     clinic_id = snapshot.getString("clinicId");
                     icon_id = snapshot.getString("iconId");
-                    category = (new CategoryModel(name, description,icon_id, clinic_id));
+                    category = (new CategoryModel(name, description, icon_id, clinic_id));
                     category.setId(snapshot.getId());
                     category.setIconId(icon_id);
                     category.setClinicId(clinic_id);

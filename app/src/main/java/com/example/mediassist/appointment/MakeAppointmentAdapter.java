@@ -26,7 +26,7 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
     public MakeAppointmentAdapter(Context context, ArrayList<DoctorModel> doctorModelArrayList, MakeAppointmentItemListener makeAppointmentItemListener) {
         this.context = context;
         this.doctorModelArrayList = doctorModelArrayList;
-        this.makeAppointmentItemListener =makeAppointmentItemListener;
+        this.makeAppointmentItemListener = makeAppointmentItemListener;
     }
 
 
@@ -63,6 +63,10 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
         return doctorModelArrayList.size();
     }
 
+    public interface MakeAppointmentItemListener {
+        void onAdapterItemClick(DoctorModel doctor);
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView doctorname;
@@ -75,9 +79,6 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
             assignclinic = itemView.findViewById(R.id.textview2);
             assignspecialization = itemView.findViewById(R.id.textview3);
         }
-    }
-    public interface MakeAppointmentItemListener {
-        void onAdapterItemClick(DoctorModel doctor);
     }
 }
 

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.DoctorListBinding;
-import com.example.mediassist.doctor.DoctorAdapter;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class MakeAppoinmentFragment extends Fragment {
+    DoctorModel doctor;
     private DoctorListBinding binding;
     private FirebaseFirestore db;
     private ArrayList<DoctorModel> courseArrayList = new ArrayList<DoctorModel>();
@@ -35,8 +35,6 @@ public class MakeAppoinmentFragment extends Fragment {
     private String assignclinic;
     private MakeAppointmentAdapter courseAdapter;
     private Bundle bundle;
-    DoctorModel doctor;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class MakeAppoinmentFragment extends Fragment {
                     doctoremail = snapshot.getString("doctor_email");
                     assignspecialization = snapshot.getString("category_id");
                     assignclinic = snapshot.getString("clinic_id");
-                    doctor= (new DoctorModel(doctorname, doctorphoneNumber, doctoremail, assignspecialization, assignclinic));
+                    doctor = (new DoctorModel(doctorname, doctorphoneNumber, doctoremail, assignspecialization, assignclinic));
                     doctor.setId(snapshot.getId());
                     courseArrayList.add(doctor);
 
@@ -99,16 +97,16 @@ public class MakeAppoinmentFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_make_appoinment, container, false);
     }*/
 
-   /* public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    /* public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+         super.onViewCreated(view, savedInstanceState);
+
+         ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Make an Appointment");
+     }*/
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Make an Appointment");
-    }*/
-   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-       super.onViewCreated(view, savedInstanceState);
 
-
-   }
+    }
 
     private void navigateToAddFragment(DoctorModel doctor) {
         bundle = new Bundle();

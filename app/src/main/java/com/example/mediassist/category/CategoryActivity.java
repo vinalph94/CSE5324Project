@@ -37,7 +37,6 @@ public class CategoryActivity extends AppCompatActivity {
         setActionBarTitle("Categories");
 
 
-
         bundle = new Bundle();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,10 +11,10 @@ public class CategoryModel implements Serializable {
     private String description;
     private String clinic_id;
     private String icon_id;
+    private int count;
 
 
-
-    public CategoryModel(String name, String description,String icon_id, String clinic_id) {
+    public CategoryModel(String name, String description, String icon_id, String clinic_id) {
         this.name = name;
         this.description = description;
         this.icon_id = icon_id;
@@ -71,4 +71,12 @@ public class CategoryModel implements Serializable {
         this.icon_id = icon_id;
     }
 
+
+    public int getIDoctorsCount() {
+        return count;
+    }
+
+    public void setDoctorsCount(int count) {
+        this.count = count;
+    }
 }

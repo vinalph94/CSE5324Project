@@ -15,15 +15,16 @@ import com.example.mediassist.R;
 import com.example.mediassist.doctor.models.DoctorModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<DoctorModel> DoctorModelArrayList;
+    private final List<DoctorModel> DoctorModelArrayList;
     private DoctorItemListener doctorItemListener;
 
     // Constructor
-    public SearchAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList, DoctorItemListener doctorItemListener) {
+    public SearchAdapter(Context context, List<DoctorModel> DoctorModelArrayList, DoctorItemListener doctorItemListener) {
         this.context = context;
         this.DoctorModelArrayList = DoctorModelArrayList;
         this.doctorItemListener = doctorItemListener;

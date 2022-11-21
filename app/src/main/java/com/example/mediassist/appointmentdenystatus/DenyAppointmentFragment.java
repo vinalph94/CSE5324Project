@@ -60,8 +60,7 @@ public class DenyAppointmentFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-
-        db.collection("appointments").whereEqualTo("status","Declined").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status", "Declined").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -75,7 +74,7 @@ public class DenyAppointmentFragment extends Fragment {
                     slot_date = snapshot.getString("slot_date");
                     slot_time = snapshot.getString("slot_time");
                     status = snapshot.getString("status");
-                    appointment= (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id,category_id,slot_date,slot_time,status));
+                    appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
                     appointment.setId(snapshot.getId());
                     courseArrayList.add(appointment);
 
@@ -83,7 +82,7 @@ public class DenyAppointmentFragment extends Fragment {
                 courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(AppointmentModel appointment) {
-                       // navigateToAddFragment(appointment);
+                        // navigateToAddFragment(appointment);
 
                     }
 
