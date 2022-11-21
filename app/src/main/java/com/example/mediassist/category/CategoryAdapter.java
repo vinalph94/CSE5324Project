@@ -46,9 +46,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         if (nonNull(model.getDescription())) {
             holder.category_description.setText(String.format("%s", model.getDescription()));
         }
-        if (nonNull(model.getClinicId())) {
-            holder.clinic_assign.setText(String.format("%s", model.getClinicId()));
-        }
+//        if (nonNull(model.getClinicId())) {
+//            holder.clinic_assign.setText(String.format("%s", model.getClinicId()));
+//        }
         holder.itemView.setOnClickListener(view -> {
             categoryItemListener.onAdapterItemClick(CategoryModelArrayList.get(position));
         });

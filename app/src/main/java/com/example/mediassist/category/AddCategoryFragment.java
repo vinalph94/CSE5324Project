@@ -105,9 +105,12 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                     iconsList.add(icon);
 
                 }
-                iconSpinnerAdapter = new ArrayAdapter<IconModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, iconsList);
+
+
+                iconSpinnerAdapter = new ArrayAdapter<IconModel>(getActivity(), R.layout.spinner_items, iconsList);
+                iconSpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
                 iconSpinner.setAdapter(iconSpinnerAdapter);
-                getCategoryIconForEdit(iconSpinnerAdapter);
+
 
             }
         });
@@ -133,7 +136,9 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                     clinicsList.add(clinic);
 
                 }
-                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
+
+                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getActivity(), R.layout.spinner_items, clinicsList);
+                clinicSpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
                 clinicSpinner.setAdapter(clinicSpinnerAdapter);
                 getCategoryClinicForEdit(clinicSpinnerAdapter);
 

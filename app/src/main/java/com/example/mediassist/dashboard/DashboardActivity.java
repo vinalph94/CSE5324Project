@@ -82,6 +82,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                                     }
                                 });
+                                navController.navigate(R.id.ClinicAdminDashboard, bundle);
 
                             } else if (Objects.equals(role, "3")) {
                                 String user_id = snapshot.getId();
@@ -107,7 +108,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                                     }
                                 });
-
+                                navController.navigate(R.id.DoctorDashboard, bundle);
 
                             } else if (Objects.equals(role, "4")) {
                                 navController.navigate(R.id.PatientDashboard);
