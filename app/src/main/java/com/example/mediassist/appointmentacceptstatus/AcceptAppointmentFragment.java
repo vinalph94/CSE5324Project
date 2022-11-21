@@ -1,4 +1,4 @@
-package com.example.mediassist.clinicadmin;
+package com.example.mediassist.appointmentacceptstatus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.databinding.AcceptAppointmentFragmentBinding;
-import com.example.mediassist.databinding.DenyAppointmentFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -24,9 +23,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class DenyAppointmentFragment extends Fragment {
+public class AcceptAppointmentFragment extends Fragment {
 
-    private DenyAppointmentFragmentBinding binding;
+    private AcceptAppointmentFragmentBinding binding;
     private FirebaseFirestore db;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
     private String patient_id;
@@ -54,14 +53,14 @@ public class DenyAppointmentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         db = FirebaseFirestore.getInstance();
-        binding = DenyAppointmentFragmentBinding.inflate(inflater, container, false);
+        binding = AcceptAppointmentFragmentBinding.inflate(inflater, container, false);
 
-        RecyclerView courseRV = binding.idRVCourseDenyAppointment;
+        RecyclerView courseRV = binding.idRVCourseAcceptAppointment;
         // Inflate the layout for this fragment
 
 
 
-        db.collection("appointments").whereEqualTo(status,"Declined").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status","Accepted").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -83,7 +82,7 @@ public class DenyAppointmentFragment extends Fragment {
                 courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(AppointmentModel appointment) {
-                        navigateToAddFragment(appointment);
+                        //navigateToAddFragment(appointment);
 
                     }
 
@@ -99,7 +98,7 @@ public class DenyAppointmentFragment extends Fragment {
         });
 
 
-        return inflater.inflate(R.layout.deny_appointment_fragment, container, false);
+        return binding.getRoot();
     }
 
 
@@ -111,6 +110,6 @@ public class DenyAppointmentFragment extends Fragment {
     private void navigateToAddFragment(AppointmentModel appointment) {
         bundle = new Bundle();
         bundle.putSerializable("appointment", appointment);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AcceptAppointmentFragmentnt_to_nav_appointmentaccept, bundle);
     }
 }

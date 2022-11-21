@@ -1,4 +1,4 @@
-package com.example.mediassist.clinicadmin;
+package com.example.mediassist.appointmentacceptstatus;
 
 import static java.util.Objects.nonNull;
 

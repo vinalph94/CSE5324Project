@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.ScheduleAppointmentActivity;
+import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentMainActivity;
+import com.example.mediassist.appointmentdenystatus.DenyAppointmentMainActivity;
 import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.databinding.FragmentPatientDashboardBinding;
 
@@ -40,12 +42,13 @@ public class PatientDashboardFragment extends Fragment {
 
         CardView makeappointment = binding.clinicDoctorCard;
         CardView pendingappointment = binding.clinicPendingAppointmentsCard;
+        CardView acceptedappointment = binding.clinicAcceptedAppointmentsCard;
+        CardView denyappointment = binding.clinicCancelledAppointmentsCard;
 
         makeappointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_dashboard);
-                // navController.navigate(R.id.MakeAppointment);
+
                 Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
                 startActivity(intent);
 
@@ -55,14 +58,30 @@ public class PatientDashboardFragment extends Fragment {
         pendingappointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 //NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_appointment_list);
-               //  navController.navigate(R.id.action_PendingAppointment_to_Second3Fragment);
+
                 Intent intent = new Intent(getActivity(), AppointmentListActivity.class);
                 startActivity(intent);
 
+            }
+        });
 
-                // Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
-                //startActivity(intent);
+        acceptedappointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), AcceptAppointmentMainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        denyappointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), DenyAppointmentMainActivity.class);
+                startActivity(intent);
+
             }
         });
 

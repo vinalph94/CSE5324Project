@@ -17,6 +17,33 @@
         android:theme="@style/Theme.MediAssist"
         tools:targetApi="31">
         <activity
+            android:name=".acceptdenyappointment.AcceptDenyAppointmentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_accept_deny_appointment"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointmentdenystatus.DenyAppointmentMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_deny_appointment_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointmentacceptstatus.AcceptAppointmentMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_accept_appointment_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".appointmentstatus.AppointmentListActivity"
             android:exported="false"
             android:label="@string/title_activity_appointment_list"

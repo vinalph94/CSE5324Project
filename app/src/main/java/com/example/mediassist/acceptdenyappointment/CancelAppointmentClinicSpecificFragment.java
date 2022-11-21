@@ -1,4 +1,4 @@
-package com.example.mediassist.appointmentstatus;
+package com.example.mediassist.acceptdenyappointment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,32 +7,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.ScheduleAppointmentActivity;
 import com.example.mediassist.appointment.models.AppointmentModel;
-import com.example.mediassist.clinic.models.ClinicModel;
-import com.example.mediassist.databinding.CancelAppointmentFragmentBinding;
-import com.example.mediassist.doctor.models.DoctorModel;
+import com.example.mediassist.appointmentstatus.AppointmentListActivity;
+import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
+import com.example.mediassist.databinding.CancelAppointmentClinicSpecificFragmentBinding;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class CancelAppointmentFragment extends Fragment {
+public class CancelAppointmentClinicSpecificFragment extends Fragment {
 
-    private CancelAppointmentFragmentBinding binding;
+    private CancelAppointmentClinicSpecificFragmentBinding binding;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
     private TextView docNameText;
     private TextView DateText;
@@ -49,7 +42,7 @@ public class CancelAppointmentFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         db = FirebaseFirestore.getInstance();
-        binding = CancelAppointmentFragmentBinding.inflate(inflater, container, false);
+        binding = CancelAppointmentClinicSpecificFragmentBinding.inflate(inflater, container, false);
         docNameText = binding.label1value;
         DateText=binding.label2value;
         TimeText=binding.label3value;
@@ -70,17 +63,23 @@ public class CancelAppointmentFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-               updateAppointmentStatus(id,appointment);
+               updateAppointmentDeclinedStatus(id,appointment);
                     }
                 });
 
+        binding.acceptAppointmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAppointmentAcceptStatus(id,appointment);
+            }
+        });
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((AppointmentListActivity) getActivity()).setActionBarTitle("Cancel Appointment");
+        ((AcceptDenyAppointmentActivity) getActivity()).setActionBarTitle("Cancel Appointment");
 
     }
 
@@ -90,20 +89,37 @@ public class CancelAppointmentFragment extends Fragment {
         binding = null;
     }
 
-    public void updateAppointmentStatus(String appointmentId, AppointmentModel appointment) {
+    public void updateAppointmentDeclinedStatus(String appointmentId, AppointmentModel appointment) {
 
-        db.collection(("appointments")).document(appointmentId).update("status","Cancelled").addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection(("appointments")).document(appointmentId).update("status","Declined").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_CancelAppointmentFragment_to_navappointmentlist);
-                new CustomToast(getContext(), getActivity(),  " Appointment Cancelled", ToastStatus.SUCCESS).show();
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_clinic_specific_fragment_to_nav_acceptdenyappointment);
+                new CustomToast(getContext(), getActivity(),  " Appointment Declined", ToastStatus.SUCCESS).show();
 
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                new CustomToast(getContext(), getActivity(), " Failed to cancel appointment " , ToastStatus.FAILURE).show();
+                new CustomToast(getContext(), getActivity(), " Failed to decline appointment " , ToastStatus.FAILURE).show();
+            }
+        });
+    }
+    public void updateAppointmentAcceptStatus(String appointmentId, AppointmentModel appointment) {
+
+        db.collection(("appointments")).document(appointmentId).update("status","Accepted").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_clinic_specific_fragment_to_nav_acceptdenyappointment);
+                new CustomToast(getContext(), getActivity(),  " Appointment Accepted", ToastStatus.SUCCESS).show();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new CustomToast(getContext(), getActivity(), " Failed to accept appointment " , ToastStatus.FAILURE).show();
             }
         });
     }

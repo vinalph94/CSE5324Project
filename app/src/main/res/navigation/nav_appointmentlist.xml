@@ -20,7 +20,9 @@
         android:name="com.example.mediassist.appointmentstatus.CancelAppointmentFragment"
         android:label="Cancel Appointment"
         tools:layout="@layout/cancel_appointment_fragment">
-
+        <action
+            android:id="@+id/action_CancelAppointmentFragment_to_navappointmentlist"
+            app:destination="@id/nav_appointmentlist" />
 
     </fragment>
 </navigation>

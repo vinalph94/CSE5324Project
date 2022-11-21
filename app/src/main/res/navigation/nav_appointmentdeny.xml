@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_appointmentdeny"
+    app:startDestination="@id/denyAppointmentFragment">
+
+    <fragment
+        android:id="@+id/denyAppointmentFragment"
+        android:name="com.example.mediassist.appointmentdenystatus.DenyAppointmentFragment"
+        android:label="Deny Appointment Fragment"
+        tools:layout="@layout/deny_appointment_fragment">
+
+        <action
+            android:id="@+id/action_DenyAppointmentFragment_to_nav_appointmentdeny"
+            app:destination="@id/nav_appointmentdeny" />
+    </fragment>
+
+</navigation>
