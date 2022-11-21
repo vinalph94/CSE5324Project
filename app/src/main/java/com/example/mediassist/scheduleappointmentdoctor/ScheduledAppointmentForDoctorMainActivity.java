@@ -1,5 +1,6 @@
 package com.example.mediassist.scheduleappointmentdoctor;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -23,12 +24,17 @@ public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity
     private AppBarConfiguration appBarConfiguration;
     private ActivityScheduledAppointmentForDoctorMainBinding binding;
     private TextView textTitle;
+    public static String doctor_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityScheduledAppointmentForDoctorMainBinding.inflate(getLayoutInflater());
+        Intent intent = getIntent();
+        doctor_id = intent.getStringExtra("doctorId");
+
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
 

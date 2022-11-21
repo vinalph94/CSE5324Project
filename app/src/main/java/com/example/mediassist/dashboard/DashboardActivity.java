@@ -32,6 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ActivityDashboardBinding binding;
     private NavController navController;
     private FirebaseFirestore db;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,22 +62,21 @@ public class DashboardActivity extends AppCompatActivity {
                             } else if (Objects.equals(role, "2")) {
                                 navController.navigate(R.id.ClinicAdminDashboard);
                             } else if (Objects.equals(role, "3")) {
+                                String user_id=snapshot.getId();
                                 db.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                        String role = "";
+                                        String id = "";
+                                        String doctor_id = "";
                                         if (value!=null){
                                             for (QueryDocumentSnapshot snapshot : value) {
-                                                if (Objects.equals(snapshot.getId(), userId)) {
-                                                    role = snapshot.get("role").toString();
-                                                    if (Objects.equals(role, "1")) {
-                                                        navController.navigate(R.id.SuperAdminDashboardFragment);
-                                                    } else if (Objects.equals(role, "2")) {
-                                                        navController.navigate(R.id.ClinicAdminDashboard);
-                                                    } else if (Objects.equals(role, "3")) {
-                                                        navController.navigate(R.id.DoctorDashboard);
-                                                    } else if (Objects.equals(role, "4")) {
-                                                        navController.navigate(R.id.PatientDashboard);
+                                                if (Objects.equals(snapshot.get("id"), userId)) {
+                                                    id = snapshot.get("id").toString();
+                                                    if (Objects.equals(id, user_id)) {
+                                                       doctor_id = snapshot.getId().toString();
+                                                        bundle= new Bundle();
+                                                        bundle.putString("doctor_id",doctor_id);
+                                                        navController.navigate(R.id.DoctorDashboard, bundle);
                                                     }
                                                 }
 
@@ -85,7 +85,8 @@ public class DashboardActivity extends AppCompatActivity {
 
                                     }
                                 });
-                                navController.navigate(R.id.DoctorDashboard);
+
+
                             } else if (Objects.equals(role, "4")) {
                                 navController.navigate(R.id.PatientDashboard);
                             }

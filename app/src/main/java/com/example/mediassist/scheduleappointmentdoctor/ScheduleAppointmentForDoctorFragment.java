@@ -57,7 +57,7 @@ public class ScheduleAppointmentForDoctorFragment extends Fragment {
 
 
      //   DocumentReference documentReference = db.collection("doctors").whereEqualTo("id",LoginActivity.patientUid).getFirestore().document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-   //docid= documentReference.getId();
+        docid= ScheduledAppointmentForDoctorMainActivity.doctor_id;
 
         db.collection("appointments").whereEqualTo("status", "Accepted").whereEqualTo("doctor_id", docid).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
