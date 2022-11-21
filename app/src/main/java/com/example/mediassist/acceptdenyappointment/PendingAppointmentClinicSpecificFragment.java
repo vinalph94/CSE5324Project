@@ -16,6 +16,7 @@ import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.databinding.PendingAppointmentClinicSpecificFragmentBinding;
+import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -41,6 +42,7 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
     private AppointmentModel appointment;
     private PendingAppointmentAdapter courseAdapter;
     private Bundle bundle;
+    private String clinicAdminClinic_id;
 
 
     @Override
@@ -59,8 +61,17 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
         RecyclerView courseRV = binding.idRVCoursePendingAppointmentClinicSpecific;
         // Inflate the layout for this fragment
 
+        db.collection("clinicAdmins").whereEqualTo("id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                         @Override
+                                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                             for (QueryDocumentSnapshot snapshot : value) {
+                                                 clinicAdminClinic_id = snapshot.getString("assign_clinic");
+                                             }
+                                         }
+                                     }
+                );
 
-        db.collection("appointments").whereEqualTo("status", "Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status", "Pending").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
