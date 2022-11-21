@@ -17,11 +17,12 @@ public class AppointmentModel implements Serializable {
     private String category_id;
     private String slot_date;
     private String slot_time;
+    private String status;
     @Exclude
       private String id;
 
 
-    public AppointmentModel(String patient_id, String patient_name, String doctor_id, String doctor_name, String clinic_id, String category_id, String slotdate, String slottime) {
+    public AppointmentModel(String patient_id, String patient_name, String doctor_id, String doctor_name, String clinic_id, String category_id, String slot_date, String slot_time, String status) {
         this.patient_id = patient_id;
         this.patient_name = patient_name;
         this.doctor_id = doctor_id;
@@ -30,6 +31,7 @@ public class AppointmentModel implements Serializable {
         this.category_id = category_id;
         this.slot_date = slot_date;
         this.slot_time = slot_time;
+        this.status= status;
 
     }
 
@@ -46,6 +48,14 @@ public class AppointmentModel implements Serializable {
 
     public String getPatient_name() {
         return patient_name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setPatient_name(String patient_name) {

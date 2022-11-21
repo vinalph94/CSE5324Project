@@ -68,22 +68,11 @@ public class ConfirmAppointmentFragment extends Fragment {
         courseArrayList.add("20.00 PM");
         courseArrayList.add("21.00 PM");
         courseArrayList.add("22.00 PM");
-        /*
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("16.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");*/
+
         timeSlotsAdapter = new TimeSlotsAdapter(getContext(), courseArrayList, new TimeSlotsAdapter.ClinicItemListener() {
             @Override
             public void onAdapterItemClick(String selectedSlot) {
-                System.out.print("--------booked slot : " + selectedSlot);
-                selectedTime = selectedSlot;
+               selectedTime = selectedSlot;
             }
 
         });
@@ -97,16 +86,13 @@ public class ConfirmAppointmentFragment extends Fragment {
 
 
                 //store the additional fields(signup fields) in firebase
-                              appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,
-                        doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
-                        eventDateTV.getText().toString(), ConfirmAppointmentFragment.selectedTime);
+               appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
+                        eventDateTV.getText().toString(), selectedTime, "Pending");
 
                 db.collection("appointments").add(appointmentModel)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-
-
 
                                 Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
                                 System.out.println("Appointment booked successfully");
