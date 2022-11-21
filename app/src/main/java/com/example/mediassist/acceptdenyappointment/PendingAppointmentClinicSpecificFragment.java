@@ -60,7 +60,6 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-
         db.collection("appointments").whereEqualTo("status","Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
