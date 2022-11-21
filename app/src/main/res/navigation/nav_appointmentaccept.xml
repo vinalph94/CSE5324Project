@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_appointmentaccept"
+    app:startDestination="@id/AcceptAppointmentFragment">
+
+    <fragment
+        android:id="@+id/AcceptAppointmentFragment"
+        android:name="com.example.mediassist.appointmentacceptstatus.AcceptAppointmentFragment"
+        android:label="Accept Appointment Fragment"
+        tools:layout="@layout/accept_appointment_fragment">
+
+        <action
+            android:id="@+id/action_AcceptAppointmentFragmentnt_to_nav_appointmentaccept"
+            app:destination="@id/nav_appointmentaccept" />
+    </fragment>
+
+</navigation>

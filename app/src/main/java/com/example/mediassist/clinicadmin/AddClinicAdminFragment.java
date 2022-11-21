@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,20 +13,36 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+import com.example.mediassist.category.models.CategoryModel;
+import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
+import com.example.mediassist.doctor.models.DoctorModel;
+import com.example.mediassist.signup.RegisterUserModel;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCallBack {
 
@@ -37,11 +54,12 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private TextView clinic_admin_name_error;
     private TextView clinic_admin_phone_number_error;
     private TextView clinic_admin_email_error;
-
+    private DoctorModel doctor;
     private Button saveButton;
     private Button editButton;
     private Button deleteButton;
-
+    private ArrayAdapter<ClinicModel> clinicSpinnerAdapter;
+    private ArrayList<ClinicModel> clinicsList;
     private String name;
     private String phone_number;
     private String email;
@@ -49,13 +67,15 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private Bundle bundle;
     private ClinicAdminModel clinicadmin;
     private String id;
-   /* Spinner spinner;
-   DatabaseReference databaseReference;
-    List<String> clinic_dropdown; */
+    private FirebaseAuth mAuth;
+    Spinner spinner;
+    private Spinner clinicSpinner;
+    private String clinic_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
+        mAuth= FirebaseAuth.getInstance();
         binding = AddClinicAdminBinding.inflate(inflater, container, false);
         bundle = getArguments();
         clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
@@ -66,8 +86,8 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-/*
-       spinner = (Spinner) binding.spinner;
+
+     /*  spinner = (Spinner) binding.spinner;
         clinic_dropdown = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("clinicAdmins").addValueEventListener(new ValueEventListener() {
@@ -88,8 +108,35 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-*/
+        });*/
+
+       /* clinicsList = new ArrayList<ClinicModel>();
+        db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                for (QueryDocumentSnapshot snapshot : value) {
+                    String details = "";
+                    String name = snapshot.getString("name");
+                    String phoneNumber = snapshot.getString("phone_number");
+                    if (snapshot.getString("description") != null) {
+                        details = snapshot.getString("description");
+                    }
+                    String address = snapshot.getString("address");
+                    int zipcode = snapshot.getLong("zipcode").intValue();
+//                    clinic = new ClinicModel(name, phoneNumber, address, details, zipcode);
+//                    clinic.setId(snapshot.getId());
+//                    clinicsList.add(clinic);
+
+                }
+                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
+                clinicSpinner.setAdapter(clinicSpinnerAdapter);
+                getDoctorClinicForEdit(clinicSpinnerAdapter);
+
+            }
+        });*/
+
+
 
         clinicAdminName = binding.clinicAdminNameText;
         clinicAdminPhoneNumber = binding.clinicAdminPhoneNumberText;
@@ -119,6 +166,23 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicAdminEmail.addTextChangedListener(new CustomTextWatcher(clinic_admin_email_error, AddClinicAdminFragment.this));
 
         checkClinicAdminData();
+
+      /*  clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                clinic_id = clinicsList.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });*/
+
+
+
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -155,7 +219,18 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
 
     }
+    private void getDoctorClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
 
+        if (doctor != null) {
+            for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
+                if (((ClinicModel) clinicSpinner.getItemAtPosition(position)).getId().equals(doctor.getClinic_id())) {
+                    clinicSpinner.setSelection(position);
+                }
+            }
+        }
+
+
+    }
     private void deleteData(String clinicadminId, ClinicAdminModel clinicadmin) {
         db.collection(("clinicAdmins")).document(clinicadminId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -185,25 +260,55 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     }
 
     public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
-        db.collection("clinicAdmins").add(clinicadmin).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicAdminFragment_to_ClinicAdminListFragment);
-                        new CustomToast(getContext(), getActivity(),
-                                name + " Stored Successfully !", ToastStatus.SUCCESS).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
-                    }
-                });
+
+        String password = clinicadmin.getEmail() + clinicadmin.getPhone_number();
+
+        mAuth.createUserWithEmailAndPassword(clinicadmin.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    RegisterUserModel registerUserModel = new RegisterUserModel(clinicadmin.getName(), clinicadmin.getEmail(), clinicadmin.getPhone_number(), password, "2");
+                    DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    clinicadmin.setId(documentReference.getId());
+                    documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+
+                            db.collection("clinicAdmins").add(clinicadmin).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddClinicAdminFragment_to_ClinicAdminListFragment);
+                                            new CustomToast(getContext(), getActivity(),
+                                                    name + " Stored Successfully !", ToastStatus.SUCCESS).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+                                        }
+                                    });
 
 
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+
+                        }
+                    });
+
+
+                } else {
+
+                }
+
+            }
+        });
     }
 
-    public void updateClinicAdmin(String clinicadminId, ClinicAdminModel clinicadmin) {
+        public void updateClinicAdmin(String clinicadminId, ClinicAdminModel clinicadmin) {
 
         db.collection(("clinicAdmins")).document(clinicadminId).set(clinicadmin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

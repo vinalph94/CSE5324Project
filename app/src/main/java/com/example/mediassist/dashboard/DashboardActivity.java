@@ -43,10 +43,8 @@ public class DashboardActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_dashboard);
-        navController = navHostFragment.getNavController();
-
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
+        navController.navigateUp();
 
         Intent intent = getIntent();
         String userId = intent.getStringExtra("userId");
@@ -62,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity {
                         } else if (Objects.equals(role, "2")) {
                             navController.navigate(R.id.ClinicAdminDashboard);
                         } else if (Objects.equals(role, "3")) {
+
                             navController.navigate(R.id.DoctorDashboard);
                         } else if (Objects.equals(role, "4")) {
                             navController.navigate(R.id.PatientDashboard);

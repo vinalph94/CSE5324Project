@@ -1,4 +1,4 @@
-package com.example.mediassist.clinicadmin;
+package com.example.mediassist.acceptdenyappointment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
-import com.example.mediassist.databinding.AcceptAppointmentFragmentBinding;
-import com.example.mediassist.databinding.PendingAppointmentFragmentBinding;
+import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
+import com.example.mediassist.databinding.PendingAppointmentClinicSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -24,9 +24,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class AcceptAppointmentFragment extends Fragment {
+public class PendingAppointmentClinicSpecificFragment extends Fragment {
 
-    private AcceptAppointmentFragmentBinding binding;
+    private PendingAppointmentClinicSpecificFragmentBinding binding;
     private FirebaseFirestore db;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
     private String patient_id;
@@ -39,7 +39,7 @@ public class AcceptAppointmentFragment extends Fragment {
     private String slot_time;
     private String status;
     private AppointmentModel appointment;
-    private AcceptAppointmentAdapter courseAdapter;
+    private PendingAppointmentAdapter courseAdapter;
     private Bundle bundle;
 
 
@@ -54,14 +54,13 @@ public class AcceptAppointmentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         db = FirebaseFirestore.getInstance();
-        binding = AcceptAppointmentFragmentBinding.inflate(inflater, container, false);
+        binding = PendingAppointmentClinicSpecificFragmentBinding.inflate(inflater, container, false);
 
-        RecyclerView courseRV = binding.idRVCourseAcceptAppointment;
+        RecyclerView courseRV = binding.idRVCoursePendingAppointmentClinicSpecific;
         // Inflate the layout for this fragment
 
 
-
-        db.collection("appointments").whereEqualTo(status,"Accepted").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status","Pending").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -80,7 +79,7 @@ public class AcceptAppointmentFragment extends Fragment {
                     courseArrayList.add(appointment);
 
                 }
-                courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
+                courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(AppointmentModel appointment) {
                         navigateToAddFragment(appointment);
@@ -99,7 +98,7 @@ public class AcceptAppointmentFragment extends Fragment {
         });
 
 
-        return inflater.inflate(R.layout.accept_appointment_fragment, container, false);
+        return binding.getRoot();
     }
 
 
@@ -111,6 +110,6 @@ public class AcceptAppointmentFragment extends Fragment {
     private void navigateToAddFragment(AppointmentModel appointment) {
         bundle = new Bundle();
         bundle.putSerializable("appointment", appointment);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_MakeAppointment_to_ScheduleAppointment, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_PendingAppointmentClinicSpecificFragment_to_CancelAppointmentClinicSpecificFragment, bundle);
     }
 }
