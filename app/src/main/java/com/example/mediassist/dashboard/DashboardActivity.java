@@ -61,6 +61,30 @@ public class DashboardActivity extends AppCompatActivity {
                             } else if (Objects.equals(role, "2")) {
                                 navController.navigate(R.id.ClinicAdminDashboard);
                             } else if (Objects.equals(role, "3")) {
+                                db.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        String role = "";
+                                        if (value!=null){
+                                            for (QueryDocumentSnapshot snapshot : value) {
+                                                if (Objects.equals(snapshot.getId(), userId)) {
+                                                    role = snapshot.get("role").toString();
+                                                    if (Objects.equals(role, "1")) {
+                                                        navController.navigate(R.id.SuperAdminDashboardFragment);
+                                                    } else if (Objects.equals(role, "2")) {
+                                                        navController.navigate(R.id.ClinicAdminDashboard);
+                                                    } else if (Objects.equals(role, "3")) {
+                                                        navController.navigate(R.id.DoctorDashboard);
+                                                    } else if (Objects.equals(role, "4")) {
+                                                        navController.navigate(R.id.PatientDashboard);
+                                                    }
+                                                }
+
+                                            }
+                                        }
+
+                                    }
+                                });
                                 navController.navigate(R.id.DoctorDashboard);
                             } else if (Objects.equals(role, "4")) {
                                 navController.navigate(R.id.PatientDashboard);
