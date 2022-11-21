@@ -250,11 +250,25 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                 if (task.isSuccessful()) {
                     RegisterUserModel registerUserModel = new RegisterUserModel(doctor.getDoctor_name(), doctor.getDoctor_email(), doctor.getDoctor_phone_number(), password, "3");
                     DocumentReference documentReference = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    doctor.setId(documentReference.getId());
                     documentReference.set(registerUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
 
                         @Override
                         public void onSuccess(Void unused) {
+                            db.collection("doctors").add(doctor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
 
+                                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
+                                    new CustomToast(getContext(), getActivity(), name + " Stored Successfully !", ToastStatus.SUCCESS).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
+                                }
+                            });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -272,20 +286,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         });
 
 
-        db.collection("doctors").add(doctor).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
 
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AddDoctorFragment_to_DoctorActivity);
-                new CustomToast(getContext(), getActivity(), name + " Stored Successfully !", ToastStatus.SUCCESS).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                new CustomToast(getContext(), getActivity(), "Error - ", ToastStatus.FAILURE).show();
-            }
-        });
 
 
     }

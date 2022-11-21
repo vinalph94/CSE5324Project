@@ -95,7 +95,9 @@
             android:textFontWeight="1000"
             android:textStyle="bold" />
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -165,6 +167,7 @@
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
+</ScrollView>
     </LinearLayout>
 
 </LinearLayout>

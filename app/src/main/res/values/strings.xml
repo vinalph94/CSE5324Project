@@ -62,4 +62,7 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="title_activity_search_doctors_list">SearchDoctorsListActivity</string>
     <string name="title_activity_categories_by_doctor">CategoriesByDoctorActivity</string>
+    <string name="title_activity_scheduled_appointment_for_doctor_main">
+        ScheduledAppointmentForDoctorMainActivity
+    </string>
 </resources>
