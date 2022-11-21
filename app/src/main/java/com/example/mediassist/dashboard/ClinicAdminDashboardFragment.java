@@ -21,6 +21,8 @@ import com.example.mediassist.doctor.DoctorActivity;
 public class ClinicAdminDashboardFragment extends Fragment {
 
     private ClinicAdminLayoutBinding binding;
+    private Bundle bundle;
+    private String clinic_id;
 
 
     @Override
@@ -28,15 +30,18 @@ public class ClinicAdminDashboardFragment extends Fragment {
 
         binding = ClinicAdminLayoutBinding.inflate(inflater, container, false);
 
+        clinic_id = (bundle != null ? bundle.getString("clinic_id") : null);
         CardView clinicCategoryCard = binding.clinicCategoryCard;
         CardView clinicDoctorCard = binding.clinicDoctorCard;
         CardView clinicPendingAppointmentCard = binding.clinicPendingAppointmentsCard;
         CardView clinicAcceptedAppointmentsCard = binding.clinicAcceptedAppointmentsCard;
         CardView clinicCancelledAppointmentsCard = binding.clinicCancelledAppointmentsCard;
+
         clinicCategoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CategoryActivity.class);
+//                intent.putExtra("clinic_id",clinic_id);
                 startActivity(intent);
             }
         });
@@ -53,6 +58,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AcceptDenyAppointmentActivity.class);
+                intent.putExtra("clinic_id",clinic_id);
                 startActivity(intent);
             }
         });
@@ -62,6 +68,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AcceptAppointmentMainActivity.class);
+                intent.putExtra("clinic_id",clinic_id);
                 startActivity(intent);
 
             }
@@ -72,6 +79,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), DenyAppointmentMainActivity.class);
+                intent.putExtra("clinic_id",clinic_id);
                 startActivity(intent);
 
             }
