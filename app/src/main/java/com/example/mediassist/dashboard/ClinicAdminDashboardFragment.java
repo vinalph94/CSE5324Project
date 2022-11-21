@@ -50,7 +50,6 @@ public class ClinicAdminDashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DoctorActivity.class);
-                intent.putExtra("clinic_id",clinic_id);
                 startActivity(intent);
             }
         });

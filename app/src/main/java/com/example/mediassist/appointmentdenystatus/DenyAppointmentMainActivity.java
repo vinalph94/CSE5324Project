@@ -1,5 +1,6 @@
 package com.example.mediassist.appointmentdenystatus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class DenyAppointmentMainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityDenyAppointmentMainBinding binding;
     private TextView textTitle;
+    public static String doctor_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class DenyAppointmentMainActivity extends AppCompatActivity {
         binding = ActivityDenyAppointmentMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
+        Intent intent = getIntent();
+        doctor_id = intent.getStringExtra("doctor_id");
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_deny_appointment_main);
