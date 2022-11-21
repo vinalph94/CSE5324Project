@@ -24,7 +24,7 @@
         <activity
             android:name=".acceptdenyappointment.AcceptDenyAppointmentActivity"
             android:exported="false"
-            android:label="@string/title_activity_accept_deny_appointment"
+            android:label="Accept_Deny_AppointmentActivity"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -33,7 +33,7 @@
         <activity
             android:name=".appointmentdenystatus.DenyAppointmentMainActivity"
             android:exported="false"
-            android:label="@string/title_activity_deny_appointment_main"
+            android:label="Deny_Appointment_MainActivity"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -42,7 +42,7 @@
         <activity
             android:name=".appointmentacceptstatus.AcceptAppointmentMainActivity"
             android:exported="false"
-            android:label="@string/title_activity_accept_appointment_main"
+            android:label="Accept_Appointment_MainActivity"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
