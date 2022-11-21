@@ -1,5 +1,6 @@
 package com.example.mediassist.appointment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.dashboard.PatientDashboardFragment;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.login.LoginActivity;
@@ -94,8 +96,9 @@ public class ConfirmAppointmentFragment extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
-                                Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
-
+                                //Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
+                                Intent intent= new Intent(getActivity(), PatientDashboardFragment.class);
+                                startActivity(intent);
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
