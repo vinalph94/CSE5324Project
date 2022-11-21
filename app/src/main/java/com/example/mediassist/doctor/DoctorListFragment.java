@@ -35,6 +35,7 @@ public class DoctorListFragment extends Fragment {
     private String assignclinic;
     private DoctorAdapter courseAdapter;
     private Bundle bundle;
+    private DoctorModel doctor;
 
     @Override
     public View onCreateView(
@@ -53,13 +54,16 @@ public class DoctorListFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
-                    doctor_name = snapshot.getString("doctorname");
-                    doctor_phone_Number = snapshot.getString("doctorphonenumber");
-                    doctor_email = snapshot.getString("doctoremail");
-                    assignspecialization = snapshot.getString("assignspecialization");
-                    assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, snapshot.getId()));
-
+                    doctor_name = snapshot.getString("doctor_name");
+                    doctor_phone_Number = snapshot.getString("doctor_phone_number");
+                    doctor_email = snapshot.getString("doctor_email");
+                    assignspecialization = snapshot.getString("category_id");
+                    assignclinic = snapshot.getString("clinic_id");
+                    doctor= (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                    doctor.setId(snapshot.getId());
+                    doctor.setClinic_id(assignclinic);
+                    doctor.setCategory_id(assignspecialization);
+                    courseArrayList.add(doctor);
                 }
                 courseAdapter = new DoctorAdapter(getContext(), courseArrayList, new DoctorAdapter.DoctorItemListener() {
                     @Override

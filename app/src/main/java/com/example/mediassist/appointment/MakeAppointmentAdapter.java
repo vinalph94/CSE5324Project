@@ -19,13 +19,14 @@ import java.util.ArrayList;
 public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointmentAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<DoctorModel> DoctorModelArrayList;
+    private final ArrayList<DoctorModel> doctorModelArrayList;
+    private MakeAppointmentItemListener makeAppointmentItemListener;
 
     // Constructor
-    public MakeAppointmentAdapter(Context context, ArrayList<DoctorModel> DoctorModelArrayList) {
+    public MakeAppointmentAdapter(Context context, ArrayList<DoctorModel> doctorModelArrayList, MakeAppointmentItemListener makeAppointmentItemListener) {
         this.context = context;
-        this.DoctorModelArrayList = DoctorModelArrayList;
-
+        this.doctorModelArrayList = doctorModelArrayList;
+        this.makeAppointmentItemListener =makeAppointmentItemListener;
     }
 
 
@@ -40,24 +41,26 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
     @Override
     public void onBindViewHolder(@NonNull MakeAppointmentAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        DoctorModel model = DoctorModelArrayList.get(position);
-        if (nonNull(model.getDoctorname())) {
-            holder.doctorname.setText(String.format("%s", model.getDoctorname()));
+        DoctorModel model = doctorModelArrayList.get(position);
+        if (nonNull(model.getDoctor_name())) {
+            holder.doctorname.setText(String.format("%s", model.getDoctor_name()));
         }
-        if (nonNull(model.getclinicId())) {
-            holder.assignclinic.setText(String.format("%s", model.getclinicId()));
+        if (nonNull(model.getClinic_id())) {
+            holder.assignclinic.setText(String.format("%s", model.getClinic_id()));
         }
-        if (nonNull(model.getAssignspecialization())) {
-            holder.assignspecialization.setText(String.format("%s", model.getAssignspecialization()));
+        if (nonNull(model.getCategory_id())) {
+            holder.assignspecialization.setText(String.format("%s", model.getCategory_id()));
         }
-
+        holder.itemView.setOnClickListener(view -> {
+            makeAppointmentItemListener.onAdapterItemClick(doctorModelArrayList.get(position));
+        });
 
     }
 
     @Override
     public int getItemCount() {
         // this method is used for showing number of card items in recycler view
-        return DoctorModelArrayList.size();
+        return doctorModelArrayList.size();
     }
 
     // View holder class for initializing of your views such as TextView and Imageview
@@ -72,6 +75,9 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
             assignclinic = itemView.findViewById(R.id.textview2);
             assignspecialization = itemView.findViewById(R.id.textview3);
         }
+    }
+    public interface MakeAppointmentItemListener {
+        void onAdapterItemClick(DoctorModel doctor);
     }
 }
 

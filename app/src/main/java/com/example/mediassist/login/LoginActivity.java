@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button signin;
     private TextView password_;
     private EditText password;
+    public static String patientUid;
     private FirebaseAuth mAuth;
 
 
@@ -94,27 +95,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-        startActivity(intent);
-//        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if (task.isSuccessful()) {
-//                    Toast.makeText(LoginActivity.this, "Update the profile " +
-//                            "for better expereince", Toast.LENGTH_SHORT).show();
-//                    //navigate to dashboard and send role id in the intent so that in dashboard activity we
-//                    // can get that role id and check which fragment to laod
-//                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    patientUid = task.getResult().getUser().getUid();
+                    Toast.makeText(LoginActivity.this, "Update the profile " +
+                            "for better expereince", Toast.LENGTH_SHORT).show();
+
+                    //navigate to dashboard and send role id in the intent so that in dashboard activity we
+                    // can get that role id and check which fragment to laod
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -27,13 +28,14 @@ public class MakeAppoinmentFragment extends Fragment {
     private DoctorListBinding binding;
     private FirebaseFirestore db;
     private ArrayList<DoctorModel> courseArrayList = new ArrayList<DoctorModel>();
-    private String doctor_name;
-    private String doctor_phone_Number;
-    private String doctor_email;
+    private String doctorname;
+    private String doctorphoneNumber;
+    private String doctoremail;
     private String assignspecialization;
     private String assignclinic;
-    private DoctorAdapter courseAdapter;
+    private MakeAppointmentAdapter courseAdapter;
     private Bundle bundle;
+    DoctorModel doctor;
 
 
     @Override
@@ -58,18 +60,21 @@ public class MakeAppoinmentFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
-                    doctor_name = snapshot.getString("doctorname");
-                    doctor_phone_Number = snapshot.getString("doctorphonenumber");
-                    doctor_email = snapshot.getString("doctoremail");
-                    assignspecialization = snapshot.getString("assignspecialization");
-                    assignclinic = snapshot.getString("assignclinic");
-                    courseArrayList.add(new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, snapshot.getId()));
+                    doctorname = snapshot.getString("doctor_name");
+                    doctorphoneNumber = snapshot.getString("doctor_phone_number");
+                    doctoremail = snapshot.getString("doctor_email");
+                    assignspecialization = snapshot.getString("category_id");
+                    assignclinic = snapshot.getString("clinic_id");
+                    doctor= (new DoctorModel(doctorname, doctorphoneNumber, doctoremail, assignspecialization, assignclinic));
+                    doctor.setId(snapshot.getId());
+                    courseArrayList.add(doctor);
 
                 }
-                courseAdapter = new DoctorAdapter(getContext(), courseArrayList, new DoctorAdapter.DoctorItemListener() {
+                courseAdapter = new MakeAppointmentAdapter(getContext(), courseArrayList, new MakeAppointmentAdapter.MakeAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(DoctorModel doctor) {
                         navigateToAddFragment(doctor);
+
                     }
 
                 });
@@ -99,6 +104,11 @@ public class MakeAppoinmentFragment extends Fragment {
 
         ((ScheduleAppointmentActivity) getActivity()).setActionBarTitle("Make an Appointment");
     }*/
+   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+       super.onViewCreated(view, savedInstanceState);
+
+
+   }
 
     private void navigateToAddFragment(DoctorModel doctor) {
         bundle = new Bundle();

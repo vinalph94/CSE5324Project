@@ -66,11 +66,11 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
 
         if (doctor != null) {
-            docNameText.setText(doctor.getDoctorname());
+            docNameText.setText(doctor.getDoctor_name());
             //docDetailsText =doctor.getAssignclinic();
             //docSpecialistText = doctor.getAssignspecialization();
-            docDetailsText.setText(doctor.getclinicId());
-            docSpecialistText.setText(doctor.getAssignspecialization());
+            docDetailsText.setText(doctor.getClinic_id());
+            docSpecialistText.setText(doctor.getCategory_id());
 
         }
 
@@ -79,8 +79,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment);
-
+                navigateToAddFragment(doctor);
             }
         });
 
@@ -197,16 +196,22 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         //setEventAdpater();
     }
 
-/*
-    public void previousWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
-        setWeekView();
-    }
+    /*
+        public void previousWeekAction(View view) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+            setWeekView();
+        }
 
-    public void nextWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-        setWeekView();
-    }*/
+        public void nextWeekAction(View view) {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+            setWeekView();
+        }*/
+    private void navigateToAddFragment(DoctorModel doctor) {
+        bundle = new Bundle();
+        bundle.putSerializable("doctor", doctor);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_ScheduleAppointment_to_ConfirmAppointment, bundle);
+
+    }
 
     @Override
     public void onItemClick(int position, LocalDate date) {

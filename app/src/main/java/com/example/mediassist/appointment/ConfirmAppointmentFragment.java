@@ -10,10 +10,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.R;
+import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
+import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,11 +41,12 @@ public class ConfirmAppointmentFragment extends Fragment {
     private TimeSlotsAdapter timeSlotsAdapter;
     private TextView eventDateTV;
 
+    private Bundle bundle;
+
+    private AppointmentModel appointmentModel;
+
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView( LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState ) {
 
 
         binding = ConfirmAppointmentFragmentBinding.inflate(inflater, container, false);
@@ -49,6 +54,8 @@ public class ConfirmAppointmentFragment extends Fragment {
         eventDateTV = binding.eventDateTV;
         eventDateTV.setText(CalendarUtils.selectedDate.getDayOfWeek().name() + ", " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         db = FirebaseFirestore.getInstance();
+        bundle = getArguments();
+        DoctorModel doctor = (DoctorModel) (bundle != null ? bundle.getSerializable("doctor") : null);
 
 //        has to be dynamically loaded
         courseArrayList.add("09.00 AM");
@@ -63,22 +70,11 @@ public class ConfirmAppointmentFragment extends Fragment {
         courseArrayList.add("20.00 PM");
         courseArrayList.add("21.00 PM");
         courseArrayList.add("22.00 PM");
-        /*
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("16.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");
-        courseArrayList.add("10.00 AM");*/
+
         timeSlotsAdapter = new TimeSlotsAdapter(getContext(), courseArrayList, new TimeSlotsAdapter.ClinicItemListener() {
             @Override
             public void onAdapterItemClick(String selectedSlot) {
-                System.out.print("--------booked slot : " + selectedSlot);
-                selectedTime = selectedSlot;
+               selectedTime = selectedSlot;
             }
 
         });
@@ -90,30 +86,18 @@ public class ConfirmAppointmentFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Navigation.findNavController(binding.getRoot()).navigate(R.id.action_FirstFragment_to_Second2Fragment);
-                System.out.println("Adding booking details into database");
-                System.out.println("Selected time : " + ConfirmAppointmentFragment.selectedTime);
-                System.out.println("getDoctorDetailsModel" + "docName : " + ScheduleAppointmentFragment.docName + ", docSpec : " + ScheduleAppointmentFragment.docSpec + " , docClinic: " + ScheduleAppointmentFragment.docClinic);
-                System.out.println("Selected Date : " + eventDateTV.getText().toString());
-                System.out.println("Logged in Patient  : " + LoginActivity.patientUsername);
 
                 //store the additional fields(signup fields) in firebase
-                Map<String, String> user = new HashMap<>();
-                user.put("doctor", ScheduleAppointmentFragment.docName);
-                user.put("specialization", ScheduleAppointmentFragment.docSpec);
-                user.put("clinic", ScheduleAppointmentFragment.docClinic);
-                user.put("slotdate", eventDateTV.getText().toString());
-                user.put("slottime", ConfirmAppointmentFragment.selectedTime);
-                user.put("patient", LoginActivity.patientUsername);
+               appointmentModel = new AppointmentModel(LoginActivity.patientUid, LoginActivity.patientUsername,doctor.getId(), doctor.getDoctor_name(), doctor.getClinic_id(), doctor.getCategory_id(),
+                        eventDateTV.getText().toString(), selectedTime, "Pending");
 
-                db.collection("appointments")
-                        .add(user)
+                db.collection("appointments").add(appointmentModel)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
-                                System.out.println("Appointment booked successfully");
-                                // navigate to appointment list screen
+                                Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
+
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
