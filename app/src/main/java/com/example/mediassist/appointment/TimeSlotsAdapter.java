@@ -3,6 +3,7 @@ package com.example.mediassist.appointment;
 import static java.util.Objects.nonNull;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,13 @@ public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsAdapter.View
 
 
         holder.itemView.setOnClickListener(view -> {
+            
+            //holder.timeSlitBtn.setBackgroundColor(Color.GRAY);
+            holder.timeSlitBtn.setTextColor(Color.WHITE);
+            holder.timeSlitBtn.setBackgroundColor(Color.rgb(64, 142, 155));
+            //view.findViewById(R.id.timeslotBtn).setBackgroundColor(Color.rgb(64, 142, 155));
             clinicItemListener.onAdapterItemClick(clinicModelArrayList.get(position));
+            System.out.println("clinicModelArrayList.get(position) "+clinicModelArrayList.get(position));
         });
     }
 
