@@ -24,7 +24,7 @@ public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity
     private AppBarConfiguration appBarConfiguration;
     private ActivityScheduledAppointmentForDoctorMainBinding binding;
     private TextView textTitle;
-    public static String doctor_id;
+  //  public static String doctor_id;
 
 
     @Override
@@ -33,7 +33,7 @@ public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity
 
         binding = ActivityScheduledAppointmentForDoctorMainBinding.inflate(getLayoutInflater());
         Intent intent = getIntent();
-        doctor_id = intent.getStringExtra("doctor_id");
+     ///   doctor_id = intent.getStringExtra("doctor_id");
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
 

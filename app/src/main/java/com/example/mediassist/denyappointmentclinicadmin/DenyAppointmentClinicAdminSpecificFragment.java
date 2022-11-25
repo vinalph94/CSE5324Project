@@ -1,9 +1,10 @@
-package com.example.mediassist.scheduleappointmentdoctor;
+package com.example.mediassist.denyappointmentclinicadmin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +18,7 @@ import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
 import com.example.mediassist.dashboard.DashboardActivity;
-import com.example.mediassist.databinding.SchduledAppointmentForDoctorFragmentBinding;
-import com.example.mediassist.login.LoginActivity;
-import com.example.mediassist.signup.RegisterUserModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
+import com.example.mediassist.databinding.DenyAppointmentClinicAdminSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -30,10 +27,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ScheduleAppointmentForDoctorFragment extends Fragment {
+public class DenyAppointmentClinicAdminSpecificFragment extends Fragment {
+
+    private DenyAppointmentClinicAdminSpecificFragmentBinding binding;
     private FirebaseFirestore db;
-    private SchduledAppointmentForDoctorFragmentBinding binding;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
+    private Bundle bundle;
     private String patient_id;
     private String patient_name;
     private String doctor_id;
@@ -43,24 +42,20 @@ public class ScheduleAppointmentForDoctorFragment extends Fragment {
     private String slot_date;
     private String slot_time;
     private String status;
-    private String docid;
     private AppointmentModel appointment;
     private AcceptAppointmentAdapter courseAdapter;
-    private Bundle bundle;
+    private String clinicAdminClinic_id;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         db = FirebaseFirestore.getInstance();
-        binding = SchduledAppointmentForDoctorFragmentBinding.inflate(inflater, container, false);
-        RecyclerView courseRV = binding.idRVCourseAcceptAppointmentDoctor;
-
-
-     //   DocumentReference documentReference = db.collection("doctors").whereEqualTo("id",LoginActivity.patientUid).getFirestore().document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        docid= DashboardActivity.doctor_id;
-
-        db.collection("appointments").whereEqualTo("status", "Accepted").whereEqualTo("doctor_id", docid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        binding = DenyAppointmentClinicAdminSpecificFragmentBinding.inflate(inflater, container, false);
+        RecyclerView courseRV = binding.idRVCourseDenyAppointmentClinicAdmin;
+        clinicAdminClinic_id = DashboardActivity.clinic_id;
+        db.collection("appointments").whereEqualTo("status", "Declined").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -97,7 +92,6 @@ public class ScheduleAppointmentForDoctorFragment extends Fragment {
             }
         });
 
-
         return binding.getRoot();
 
     }
@@ -113,10 +107,11 @@ public class ScheduleAppointmentForDoctorFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     private void navigateToAddFragment(AppointmentModel appointment) {
         bundle = new Bundle();
         bundle.putSerializable("appointment", appointment);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AcceptAppointmentFragmentnt_to_nav_appointmentaccept, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AcceptAppointmentClinicAdminSpecificFragment_to_nav_clinicadminacceptappointment, bundle);
     }
 
 }
