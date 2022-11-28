@@ -20,6 +20,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
     private ActivityClinicAdminBinding binding;
     private TextView textTitle;
     public Button addBtn;
+    public Button bck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         textTitle = binding.textTitleClinicAdmin;
         addBtn=binding.btnAddForClinicAdmin;
+        bck = binding.btnBack;
 
         NavController navController = Navigation.findNavController(ClinicAdminActivity.this, R.id.nav_host_fragment_content_clinic_admin);
         setActionBarTitle("Clinic Admins");
