@@ -97,9 +97,9 @@ public class ConfirmAppointmentFragment extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
-                                //Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
-                                Intent intent= new Intent(getActivity(), PatientDashboardFragment.class);
-                                startActivity(intent);
+                               // Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
+                               Intent intent= new Intent(getActivity(), AppointmentListActivity.class);
+                               startActivity(intent);
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

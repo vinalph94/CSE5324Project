@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.PendingAppointmentClinicSpecificFragmentBinding;
 import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.EventListener;
@@ -61,7 +62,7 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
         RecyclerView courseRV = binding.idRVCoursePendingAppointmentClinicSpecific;
         // Inflate the layout for this fragment
 
-        db.collection("clinicAdmins").whereEqualTo("id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+       /* db.collection("clinicAdmins").whereEqualTo("id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
                                          @Override
                                          public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                              for (QueryDocumentSnapshot snapshot : value) {
@@ -69,7 +70,8 @@ public class PendingAppointmentClinicSpecificFragment extends Fragment {
                                              }
                                          }
                                      }
-                );
+                );*/
+        clinicAdminClinic_id = DashboardActivity.clinic_id;
 
         db.collection("appointments").whereEqualTo("status", "Pending").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

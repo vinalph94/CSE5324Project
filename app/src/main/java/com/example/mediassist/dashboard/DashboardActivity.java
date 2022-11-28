@@ -32,6 +32,8 @@ public class DashboardActivity extends AppCompatActivity {
     private NavController navController;
     private FirebaseFirestore db;
     private Bundle bundle;
+   public static String doctor_id = "";
+    public static  String clinic_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +61,18 @@ public class DashboardActivity extends AppCompatActivity {
                             if (Objects.equals(role, "1")) {
                                 navController.navigate(R.id.SuperAdminDashboardFragment);
                             } else if (Objects.equals(role, "2")) {
-                                String user_id = snapshot.getId();
-                                db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                String user_id = snapshot.getId();//U5zlEy1xUbVlcc5ooBe5cHX2iGh2
+                                db.collection("clinicAdmins").addSnapshotListener(new EventListener<QuerySnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                        String id = "";
-                                        String clinic_id = "";
+
+
                                         if (value != null) {
                                             for (QueryDocumentSnapshot snapshot : value) {
-                                                if (Objects.equals(snapshot.get("id"), userId)) {
-                                                    id = snapshot.get("id").toString();
-                                                    if (Objects.equals(id, user_id)) {
-                                                        clinic_id = snapshot.getId().toString();
-                                                        bundle = new Bundle();
-                                                        bundle.putString("clinic_id", clinic_id);
-                                                        navController.navigate(R.id.ClinicAdminDashboard, bundle);
-                                                    }
+                                                if (Objects.equals(snapshot.get("id"), user_id)) {
+                                                    clinic_id = snapshot.get("assign_clinic").toString();//9gOZFM9TuqdKJqqSE8eN
+                                                    navController.navigate(R.id.ClinicAdminDashboard, bundle);
+
                                                 }
 
                                             }
@@ -90,15 +88,15 @@ public class DashboardActivity extends AppCompatActivity {
                                     @Override
                                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                         String id = "";
-                                        String doctor_id = "";
+
                                         if (value != null) {
                                             for (QueryDocumentSnapshot snapshot : value) {
                                                 if (Objects.equals(snapshot.get("id"), userId)) {
                                                     id = snapshot.get("id").toString();
                                                     if (Objects.equals(id, user_id)) {
                                                         doctor_id = snapshot.getId().toString();
-                                                        bundle = new Bundle();
-                                                        bundle.putString("doctor_id", doctor_id);
+                                                       // bundle = new Bundle();
+                                                       // bundle.putString("doctor_id", doctor_id);
                                                         navController.navigate(R.id.DoctorDashboard, bundle);
                                                     }
                                                 }

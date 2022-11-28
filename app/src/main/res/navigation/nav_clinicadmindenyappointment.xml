@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_clinicadmindenyappointment"
+    app:startDestination="@id/DenyAppointmentClinicAdminSpecificFragment">
+
+    <fragment
+        android:id="@+id/DenyAppointmentClinicAdminSpecificFragment"
+        android:name="com.example.mediassist.denyappointmentclinicadmin.DenyAppointmentClinicAdminSpecificFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/deny_appointment_clinic_admin_specific_fragment">
+
+
+    </fragment>
+
+</navigation>

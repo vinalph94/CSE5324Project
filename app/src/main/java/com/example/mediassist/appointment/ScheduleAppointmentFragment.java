@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -79,7 +80,13 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-                navigateToAddFragment(doctor);
+                if(CalendarUtils.selectedDate.compareTo(LocalDate.now())>=0) {
+                    System.out.println("Selected date is greater than or equal to today");
+                    navigateToAddFragment(doctor);
+                }else{
+                    System.out.println("Selected date is before day");
+                    Toast.makeText(getContext(), "Selected date should be today or latter", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

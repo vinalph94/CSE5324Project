@@ -48,8 +48,11 @@
             android:backgroundTint="#A9CACF"
             android:layout_width="300dp"
             android:layout_height="51dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="100dp"
+            android:textColor="#408E9B"
+            android:clickable="true"
+            android:enabled="true"
             style="@style/default_disabled_button"
             />
 
@@ -58,9 +61,12 @@
             style="@style/default_disabled_button"
             android:layout_width="300dp"
             android:layout_height="51dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="50dp"
             android:backgroundTint="#A9CACF"
+            android:textColor="#408E9B"
+            android:clickable="true"
+            android:enabled="true"
             android:text="Accept Appointment" />
     </LinearLayout>
 </RelativeLayout>

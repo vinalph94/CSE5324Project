@@ -65,4 +65,10 @@
     <string name="title_activity_scheduled_appointment_for_doctor_main">
         ScheduledAppointmentForDoctorMainActivity
     </string>
+    <string name="title_activity_accept_appointment_clinic_admin_specific">
+        AcceptAppointmentClinicAdminSpecificActivity
+    </string>
+    <string name="title_activity_deny_apoointment_clinic_admin_specific_main">
+        DenyApoointmentClinicAdminSpecificMainActivity
+    </string>
 </resources>
