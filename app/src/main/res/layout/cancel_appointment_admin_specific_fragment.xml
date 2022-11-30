@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@color/black"
+        tools:context=".acceptdenyappointmentadmin.CancelAppointmentAdminSpecificFragment">
+
+        <TextView
+            android:id="@+id/label1"
+            style="@style/default_label_text"
+            android:text="Doctor Name" />
+
+        <TextView
+            android:id="@+id/label1value"
+            style="@style/default_edit_text"
+            />
+
+        <TextView
+            android:id="@+id/label2"
+            style="@style/default_label_text"
+            android:text="Scheduled Date" />
+
+        <TextView
+            android:id="@+id/label2value"
+            style="@style/default_edit_text"
+            />
+
+        <TextView
+            android:id="@+id/label3"
+            style="@style/default_label_text"
+            android:text="Scheduled Time" />
+
+        <TextView
+            android:id="@+id/label3value"
+            style="@style/default_edit_text"
+            />
+        <Button
+            android:id="@+id/cancelAppointmentButton"
+            android:text="Cancel Appointment"
+            android:backgroundTint="#A9CACF"
+            android:layout_width="300dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="100dp"
+            android:textColor="#408E9B"
+            android:clickable="true"
+            android:enabled="true"
+            style="@style/default_disabled_button"
+            />
+
+        <Button
+            android:id="@+id/acceptAppointmentButton"
+            style="@style/default_disabled_button"
+            android:layout_width="300dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#A9CACF"
+            android:textColor="#408E9B"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Accept Appointment" />
+    </LinearLayout>
+</RelativeLayout>

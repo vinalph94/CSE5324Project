@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mediassist.acceptappointmentadmin.AcceptAppointmentAdminMainActivity;
+import com.example.mediassist.acceptdenyappointmentadmin.AcceptDenyAppointmentAdminMainActivity;
 import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
@@ -34,6 +35,8 @@ public class SuperAdminDashboardFragment extends Fragment {
         CardView clinicCategoryCard = menuBinding.clinicCategoryCard;
         CardView clinicDoctorCard = menuBinding.clinicDoctorCard;
         CardView clinicAcceptCard = menuBinding.clinicAcceptedAppointmentsCard;
+        CardView clinicPendingCard = menuBinding.clinicPendingAppointmentsCard;
+        CardView clinicCancelCard = menuBinding.clinicCancelledAppointmentsCard;
 
         clinicCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +68,21 @@ public class SuperAdminDashboardFragment extends Fragment {
         });
 
         clinicAcceptCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AcceptAppointmentAdminMainActivity.class);
+                startActivity(intent);
+            }
+        });
+        clinicPendingCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AcceptDenyAppointmentAdminMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        clinicCancelCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AcceptAppointmentAdminMainActivity.class);

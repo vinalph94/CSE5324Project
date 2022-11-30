@@ -1,4 +1,4 @@
-package com.example.mediassist.acceptdenyappointment;
+package com.example.mediassist.acceptdenyappointmentadmin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.acceptdenyappointmentadmin.AcceptDenyAppointmentAdminMainActivity;
+import com.example.mediassist.acceptappointmentadmin.AcceptAppointmentAdminMainActivity;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
-import com.example.mediassist.databinding.CancelAppointmentClinicSpecificFragmentBinding;
+import com.example.mediassist.databinding.CancelAppointmentAdminSpecificFragmentBinding;
 import com.example.mediassist.util.CustomToast;
 import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,9 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class CancelAppointmentClinicSpecificFragment extends Fragment {
+public class CancelAppointmentAdminSpecificFragment extends Fragment {
 
-    private CancelAppointmentClinicSpecificFragmentBinding binding;
+    private CancelAppointmentAdminSpecificFragmentBinding binding;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
     private TextView docNameText;
     private TextView DateText;
@@ -42,7 +42,7 @@ public class CancelAppointmentClinicSpecificFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         db = FirebaseFirestore.getInstance();
-        binding = CancelAppointmentClinicSpecificFragmentBinding.inflate(inflater, container, false);
+        binding = CancelAppointmentAdminSpecificFragmentBinding.inflate(inflater, container, false);
         docNameText = binding.label1value;
         DateText = binding.label2value;
         TimeText = binding.label3value;
@@ -94,7 +94,7 @@ public class CancelAppointmentClinicSpecificFragment extends Fragment {
         db.collection(("appointments")).document(appointmentId).update("status", "Declined").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_clinic_specific_fragment_to_nav_acceptdenyappointment);
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_admin_specific_fragment_to_nav_acceptdenyappointmentadmin);
                 new CustomToast(getContext(), getActivity(), " Appointment Declined", ToastStatus.SUCCESS).show();
 
 
@@ -112,7 +112,7 @@ public class CancelAppointmentClinicSpecificFragment extends Fragment {
         db.collection(("appointments")).document(appointmentId).update("status", "Accepted").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_clinic_specific_fragment_to_nav_acceptdenyappointment);
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_cancel_appointment_admin_specific_fragment_to_nav_acceptdenyappointmentadmin);
                 new CustomToast(getContext(), getActivity(), " Appointment Accepted", ToastStatus.SUCCESS).show();
 
 

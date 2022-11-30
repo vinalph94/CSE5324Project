@@ -73,4 +73,7 @@
     </string>
     <string name="title_activity_accept_appointment_admin_main">AcceptAppointmentAdminMainActivity
     </string>
+    <string name="title_activity_accept_deny_appointment_admin_main">
+        AcceptDenyAppointmentAdminMainActivity
+    </string>
 </resources>
