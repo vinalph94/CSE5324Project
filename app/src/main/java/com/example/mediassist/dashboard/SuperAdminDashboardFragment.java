@@ -17,6 +17,7 @@ import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.ClinicAdminLayoutBinding;
 import com.example.mediassist.databinding.SuperAdminDashboardBinding;
+import com.example.mediassist.denyappointmentadmin.DenyAppointmentAdminSpecificMainActivity;
 import com.example.mediassist.doctor.DoctorActivity;
 
 
@@ -85,7 +86,7 @@ public class SuperAdminDashboardFragment extends Fragment {
         clinicCancelCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AcceptAppointmentAdminMainActivity.class);
+                Intent intent = new Intent(getActivity(), DenyAppointmentAdminSpecificMainActivity.class);
                 startActivity(intent);
             }
         });

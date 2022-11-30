@@ -76,4 +76,7 @@
     <string name="title_activity_accept_deny_appointment_admin_main">
         AcceptDenyAppointmentAdminMainActivity
     </string>
+    <string name="title_activity_deny_appointment_admin_specific_main">
+        DenyAppointmentAdminSpecificMainActivity
+    </string>
 </resources>
