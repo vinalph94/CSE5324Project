@@ -63,8 +63,6 @@ public class ClinicAdminListFragment extends Fragment {
                     clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic);
                     clinicadmin.setId(snapshot.getId());
                     courseArrayList.add(clinicadmin);
-
-
                 }
                 courseAdapter = new ClinicAdminAdapter(getContext(), courseArrayList, new ClinicAdminAdapter.ClinicAdminItemListener() {
                     @Override

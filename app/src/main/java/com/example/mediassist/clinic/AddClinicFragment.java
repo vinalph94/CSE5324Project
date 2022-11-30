@@ -137,7 +137,8 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             countriesNamesList.add(locale.getDisplayCountry());
         }
         Collections.sort(countriesNamesList);
-        countrySpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, countriesNamesList);
+        countrySpinnerAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_items, countriesNamesList);
+        countrySpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
         countrySpinner.setAdapter(countrySpinnerAdapter);
 
 
