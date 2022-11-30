@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.mediassist.acceptappointmentadmin.AcceptAppointmentAdminMainActivity;
 import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinicadmin.ClinicAdminActivity;
@@ -32,6 +33,7 @@ public class SuperAdminDashboardFragment extends Fragment {
         CardView clinicAdminCard = binding.clinicAdminCard;
         CardView clinicCategoryCard = menuBinding.clinicCategoryCard;
         CardView clinicDoctorCard = menuBinding.clinicDoctorCard;
+        CardView clinicAcceptCard = menuBinding.clinicAcceptedAppointmentsCard;
 
         clinicCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,14 @@ public class SuperAdminDashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DoctorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        clinicAcceptCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AcceptAppointmentAdminMainActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.mediassist.appointmentdenystatus;
+package com.example.mediassist.acceptappointmentadmin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
-import com.example.mediassist.databinding.DenyAppointmentFragmentBinding;
-import com.example.mediassist.login.LoginActivity;
+import com.example.mediassist.dashboard.DashboardActivity;
+import com.example.mediassist.databinding.AcceptAppointmentAdminFragmentBinding;
+import com.example.mediassist.databinding.AcceptAppointmentClinicAdminSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -24,13 +26,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class DenyAppointmentFragment extends Fragment {
+public class AcceptAppointmentAdminFragment extends Fragment {
 
-    private DenyAppointmentFragmentBinding binding;
+    private AcceptAppointmentAdminFragmentBinding binding;
     private FirebaseFirestore db;
     private ArrayList<AppointmentModel> courseArrayList = new ArrayList<AppointmentModel>();
+    private Bundle bundle;
     private String patient_id;
     private String patient_name;
     private String doctor_id;
@@ -42,27 +44,19 @@ public class DenyAppointmentFragment extends Fragment {
     private String status;
     private AppointmentModel appointment;
     private AcceptAppointmentAdapter courseAdapter;
-    private Bundle bundle;
-
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
 
         db = FirebaseFirestore.getInstance();
-        binding = DenyAppointmentFragmentBinding.inflate(inflater, container, false);
+        binding = AcceptAppointmentAdminFragmentBinding.inflate(inflater, container, false);
 
-        RecyclerView courseRV = binding.idRVCourseDenyAppointment;
-        // Inflate the layout for this fragment
+        RecyclerView courseRV = binding.idRVCourseAcceptAppointmentAdmin;
 
-
-        db.collection("appointments").whereEqualTo("patient_id", LoginActivity.patientUid).whereIn("status", Arrays.asList("Cancelled", "Declined")).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("appointments").whereEqualTo("status", "Accepted").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 courseArrayList.clear();
@@ -84,7 +78,7 @@ public class DenyAppointmentFragment extends Fragment {
                 courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
                     @Override
                     public void onAdapterItemClick(AppointmentModel appointment) {
-                        // navigateToAddFragment(appointment);
+                        //navigateToAddFragment(appointment);
 
                     }
 
@@ -99,18 +93,29 @@ public class DenyAppointmentFragment extends Fragment {
             }
         });
 
+
         return binding.getRoot();
+
     }
+
 
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void navigateToAddFragment(AppointmentModel appointment) {
         bundle = new Bundle();
         bundle.putSerializable("appointment", appointment);
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_DenyAppointmentFragment_to_nav_appointmentdeny, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_AcceptAppointmentAdminFragment_to_nav_adminacceptappointment, bundle);
     }
+
 }

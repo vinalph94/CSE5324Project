@@ -20,6 +20,15 @@
         android:theme="@style/Theme.MediAssist"
         tools:targetApi="31">
         <activity
+            android:name=".acceptappointmentadmin.AcceptAppointmentAdminMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_accept_appointment_admin_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".denyappointmentclinicadmin.DenyAppointmentClinicAdminSpecificMainActivity"
             android:exported="false"
             android:label="DenyAppointmentClinicAdminSpecificMainActivity"
