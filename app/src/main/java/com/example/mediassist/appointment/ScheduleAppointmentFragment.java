@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,7 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ScheduleAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,10 +73,10 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
         if (doctor != null) {
             docNameText.setText(doctor.getDoctor_name());
-            //docDetailsText =doctor.getAssignclinic();
-            //docSpecialistText = doctor.getAssignspecialization();
-//            docDetailsText.setText(doctor.getClinic_id());
-//            docSpecialistText.setText(doctor.getCategory_id());
+            System.out.println("doctor.getCategory : "+doctor.getCategory_id());
+            System.out.println("doctor.getClinic_id() : "+doctor.getClinic_id());
+            setDocCategoryName(doctor.getCategory_id());
+            setClinicName(doctor.getClinic_id());
 
         }
 
@@ -140,57 +145,34 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         });*/
     }
 
-   /* private void setDoctorDetails() {
-        docNameText = binding.docName;
-        docDetailsText = binding.docDetails;
-        docSpecialistText = binding.docSpecialist;
-        //hospitalText = binding.hospital;
-
-       /* Intent intent = getIntent();
-        String docId = intent.getStringExtra("id");
-        System.out.println(" doctor id "+docId);*/
-      /*  String docid = "vin561@gmail.com";
-
-        CollectionReference allUsersRefs = db1.collection("user");
-        Query userPhoneQuery = allUsersRefs.whereEqualTo("username", docid);
-        userPhoneQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private void setClinicName(String clinicid){
+        System.out.println("setClinicName id : "+clinicid);
+        DocumentReference allClinicRefs = db1.collection("clinics").document(clinicid);
+        System.out.println("allClinicRefs.getId() : " +allClinicRefs.getId());
+        allClinicRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            String docname = document.getString("name");
-                            String docspec = document.getString("specialization");
-                            String docclinic = document.getString("clinic");
-                            System.out.println("docName : " + docname);
-                            System.out.println("docSpec : " + docspec);
-                            System.out.println("docClinic : " + docclinic);
-
-                            docNameText.setText(docname);
-                            docDetailsText.setText(docname);
-                            docSpecialistText.setText(docspec);
-                            hospitalText.setText(docclinic);
-                            setDoctorDetailsModel(docname, docspec, docclinic);
-                        }
-                    }
-                } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
-                    Toast.makeText(getContext(), "User Registered successfully", Toast.LENGTH_SHORT).show();
-                    // Toast.makeText(BookAppointmentActivity.this, "Error in booking. Please try again", Toast.LENGTH_LONG).show();
-                    return;
-                }
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    String clinicName = value.getString("name");
+                    System.out.println("clinicName : " + clinicName);
+                    docSpecialistText.setText(clinicName);
             }
         });
     }
 
-  private void setDoctorDetailsModel(String docname, String docspec, String docclinic) {
-        docName = docname;
-        docSpec = docspec;
-        docClinic = docclinic;
-        System.out.println("setDoctorDetailsModel" + "docName : " + docName + ", docSpec : " + docSpec + " , docClinic: " + docClinic);
-
+    private void setDocCategoryName(String catid){
+        DocumentReference allCategoriesRefs = db1.collection("categories").document(catid);
+        System.out.println("allCategoriesRefs.getId() : " +allCategoriesRefs.getId());
+        allCategoriesRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String description = value.getString("description");
+                System.out.println("description : " + description);
+                docDetailsText.setText(description);
+            }
+        });
     }
-    */
+
+
 
     private void setWeekView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
