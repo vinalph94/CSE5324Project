@@ -135,9 +135,11 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                     clinicsList.add(clinic);
 
                 }
-                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, clinicsList);
+                clinicSpinnerAdapter = new ArrayAdapter<ClinicModel>(getContext(), R.layout.spinner_items, clinicsList);
+                clinicSpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
                 clinicSpinner.setAdapter(clinicSpinnerAdapter);
                 getDoctorClinicForEdit(clinicSpinnerAdapter);
+
 
             }
         });
@@ -160,7 +162,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
                     categoryList.add(category);
 
                 }
-                categorySpinnerAdapter = new ArrayAdapter<CategoryModel>(getContext(), android.R.layout.simple_spinner_dropdown_item, categoryList);
+                categorySpinnerAdapter = new ArrayAdapter<CategoryModel>(getContext(), R.layout.spinner_items, categoryList);
+                categorySpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
                 categorySpinner.setAdapter(categorySpinnerAdapter);
                 getDoctorCategoryForEdit(categorySpinnerAdapter);
 

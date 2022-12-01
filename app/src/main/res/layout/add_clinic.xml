@@ -163,11 +163,9 @@
 
 
 
-
-
-
     <ProgressBar
         android:id="@+id/clinic_progress_bar"
+
         style="@style/default_progress_bar" />
 
     <Button

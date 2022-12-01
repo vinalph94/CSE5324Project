@@ -1,9 +1,12 @@
 package com.example.mediassist.clinic;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +42,8 @@ public class ClinicListFragment extends Fragment {
     private ClinicAdapter courseAdapter;
     private Bundle bundle;
     private ClinicModel clinic;
+    private ProgressBar loading_spinner;
+
 
     @Override
     public View onCreateView(
@@ -49,6 +54,8 @@ public class ClinicListFragment extends Fragment {
 
         binding = ClinicListBinding.inflate(inflater, container, false);
         RecyclerView courseRV = binding.idRVCourse;
+        loading_spinner = (ProgressBar)binding.clinicListProgressBar;
+        loading_spinner.setVisibility(View.VISIBLE);
 
 
         db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -92,14 +99,38 @@ public class ClinicListFragment extends Fragment {
 
             }
         });
-
+        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //do what you want
+            }
+        }, 5000);
 
         return binding.getRoot();
 
     }
 
+
+    public void onCreate(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loading_spinner.setVisibility(View.VISIBLE);
+
+
+    }
+
+
+
+    public void on(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loading_spinner.setVisibility(View.GONE);
+
+
+    }
+
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loading_spinner.setVisibility(View.GONE);
 
 
     }
