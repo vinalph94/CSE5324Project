@@ -15,10 +15,10 @@ import com.example.mediassist.databinding.ActivityAcceptAppointmentMainBinding;
 
 public class AcceptAppointmentMainActivity extends AppCompatActivity {
 
+    public static String doctor_id;
     private AppBarConfiguration appBarConfiguration;
     private ActivityAcceptAppointmentMainBinding binding;
     private TextView textTitle;
-    public static String doctor_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

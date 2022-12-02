@@ -15,10 +15,10 @@ import com.example.mediassist.databinding.ActivityDenyAppointmentMainBinding;
 
 public class DenyAppointmentMainActivity extends AppCompatActivity {
 
+    public static String doctor_id;
     private AppBarConfiguration appBarConfiguration;
     private ActivityDenyAppointmentMainBinding binding;
     private TextView textTitle;
-    public static String doctor_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

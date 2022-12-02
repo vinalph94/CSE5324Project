@@ -16,11 +16,11 @@ import com.example.mediassist.databinding.ActivityClinicAdminBinding;
 
 public class ClinicAdminActivity extends AppCompatActivity {
 
+    public Button addBtn;
+    public Button bck;
     private AppBarConfiguration appBarConfiguration;
     private ActivityClinicAdminBinding binding;
     private TextView textTitle;
-    public Button addBtn;
-    public Button bck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
         binding = ActivityClinicAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         textTitle = binding.textTitleClinicAdmin;
-        addBtn=binding.btnAddForClinicAdmin;
+        addBtn = binding.btnAddForClinicAdmin;
         bck = binding.btnBack;
 
         NavController navController = Navigation.findNavController(ClinicAdminActivity.this, R.id.nav_host_fragment_content_clinic_admin);

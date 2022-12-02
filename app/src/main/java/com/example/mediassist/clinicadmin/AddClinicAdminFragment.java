@@ -16,12 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mediassist.R;
-import com.example.mediassist.appointment.models.AppointmentModel;
-import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
@@ -72,7 +68,6 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private String id;
     private FirebaseAuth mAuth;
     private Spinner clinicSpinner;
-    private String clinic_id;
     private ClinicModel clinic;
 
     @Override
@@ -84,16 +79,11 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicadmin = (ClinicAdminModel) (bundle != null ? bundle.getSerializable("clinicadmin") : null);
 
 
-
         clinicSpinner = (Spinner) binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.programming_languages, R.layout.spinner_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         clinicSpinner.setAdapter(adapter);
         ((ClinicAdminActivity) getActivity()).addBtn.setVisibility(View.GONE);
-
-
-
-
 
 
         clinicAdminName = binding.clinicAdminNameText;
@@ -112,7 +102,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             clinicAdminName.setText(clinicadmin.getName());
             clinicAdminPhoneNumber.setText(clinicadmin.getPhone_number());
             clinicAdminEmail.setText(clinicadmin.getEmail());
-            // assign_clinic = clinicadmin.getAssign_clinic().;
+            assign_clinic = clinicadmin.getAssign_clinic();
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
@@ -138,16 +128,13 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
                         details = snapshot.getString("description");
                     }
                     String street = snapshot.getString("street");
-                    String city= snapshot.getString("city");
-                    String county= snapshot.getString("county");
-                    String country= snapshot.getString("country");
+                    String city = snapshot.getString("city");
+                    String county = snapshot.getString("county");
+                    String country = snapshot.getString("country");
                     int zipcode = snapshot.getLong("zipcode").intValue();
 
 
-
-
-
-                    clinic = new ClinicModel(name, details,phoneNumber, street,city,county,country , zipcode);
+                    clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                     clinic.setId(snapshot.getId());
                     clinicsList.add(clinic);
 
@@ -211,9 +198,9 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     private void getDoctorClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {
 
-        if (doctor != null) {
+        if (clinicadmin != null) {
             for (int position = 0; position < clinicSpinnerAdapter.getCount(); position++) {
-                if (((ClinicModel) clinicSpinner.getItemAtPosition(position)).getId().equals(doctor.getClinic_id())) {
+                if (((ClinicModel) clinicSpinner.getItemAtPosition(position)).getId().equals(clinicadmin.getAssign_clinic())) {
                     clinicSpinner.setSelection(position);
                 }
             }
@@ -221,6 +208,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
 
     }
+
 
     private void deleteData(String clinicadminId, ClinicAdminModel clinicadmin) {
         db.collection(("clinicAdmins")).document(clinicadminId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -252,7 +240,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
 
     public void uploadClinicAdmin(ClinicAdminModel clinicadmin) {
 
-        String password = clinicadmin.getName().substring(0,4) + clinicadmin.getPhone_number().substring(clinicadmin.getPhone_number().length() - 4);
+        String password = clinicadmin.getName().substring(0, 4) + clinicadmin.getPhone_number().substring(clinicadmin.getPhone_number().length() - 4);
 
         mAuth.createUserWithEmailAndPassword(clinicadmin.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

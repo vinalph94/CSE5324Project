@@ -73,8 +73,8 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
         if (doctor != null) {
             docNameText.setText(doctor.getDoctor_name());
-            System.out.println("doctor.getCategory : "+doctor.getCategory_id());
-            System.out.println("doctor.getClinic_id() : "+doctor.getClinic_id());
+            System.out.println("doctor.getCategory : " + doctor.getCategory_id());
+            System.out.println("doctor.getClinic_id() : " + doctor.getClinic_id());
             setDocCategoryName(doctor.getCategory_id());
             setClinicName(doctor.getClinic_id());
 
@@ -85,10 +85,10 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
 
             @Override
             public void onClick(View v) {
-                if(CalendarUtils.selectedDate.compareTo(LocalDate.now())>=0) {
+                if (CalendarUtils.selectedDate.compareTo(LocalDate.now()) >= 0) {
                     System.out.println("Selected date is greater than or equal to today");
                     navigateToAddFragment(doctor);
-                }else{
+                } else {
                     System.out.println("Selected date is before day");
                     Toast.makeText(getContext(), "Selected date should be today or latter", Toast.LENGTH_SHORT).show();
                 }
@@ -145,23 +145,23 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         });*/
     }
 
-    private void setClinicName(String clinicid){
-        System.out.println("setClinicName id : "+clinicid);
+    private void setClinicName(String clinicid) {
+        System.out.println("setClinicName id : " + clinicid);
         DocumentReference allClinicRefs = db1.collection("clinics").document(clinicid);
-        System.out.println("allClinicRefs.getId() : " +allClinicRefs.getId());
+        System.out.println("allClinicRefs.getId() : " + allClinicRefs.getId());
         allClinicRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    String clinicName = value.getString("name");
-                    System.out.println("clinicName : " + clinicName);
-                    docSpecialistText.setText(clinicName);
+                String clinicName = value.getString("name");
+                System.out.println("clinicName : " + clinicName);
+                docSpecialistText.setText(clinicName);
             }
         });
     }
 
-    private void setDocCategoryName(String catid){
+    private void setDocCategoryName(String catid) {
         DocumentReference allCategoriesRefs = db1.collection("categories").document(catid);
-        System.out.println("allCategoriesRefs.getId() : " +allCategoriesRefs.getId());
+        System.out.println("allCategoriesRefs.getId() : " + allCategoriesRefs.getId());
         allCategoriesRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -171,7 +171,6 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
             }
         });
     }
-
 
 
     private void setWeekView() {

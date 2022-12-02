@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
-import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.DenyAppointmentAdminSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;

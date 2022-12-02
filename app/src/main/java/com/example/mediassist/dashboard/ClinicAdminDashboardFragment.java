@@ -60,7 +60,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             public void onClick(View view) {
                 clinicAdminClinic_id = DashboardActivity.clinic_id;
                 Intent intent = new Intent(getActivity(), AcceptDenyAppointmentActivity.class);
-                intent.putExtra("clinic_id",clinic_id);
+                intent.putExtra("clinic_id", clinic_id);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AcceptAppointmentClinicAdminSpecificActivity.class);
-                intent.putExtra("clinic_id",clinic_id);
+                intent.putExtra("clinic_id", clinic_id);
                 startActivity(intent);
 
             }
@@ -81,7 +81,7 @@ public class ClinicAdminDashboardFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), DenyAppointmentClinicAdminSpecificMainActivity.class);
-                intent.putExtra("clinic_id",clinic_id);
+                intent.putExtra("clinic_id", clinic_id);
                 startActivity(intent);
 
             }

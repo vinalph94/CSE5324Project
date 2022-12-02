@@ -36,7 +36,6 @@ import com.example.mediassist.appointmentdenystatus.DenyAppointmentMainActivity;
 import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.appointmentstatus.PendingAppointmentFragment;
 import com.example.mediassist.category.CategoriesByDoctorActivity;
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.databinding.FragmentPatientDashboardBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
@@ -84,7 +83,7 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
     private double longitude;
     private LinearLayout linearLayout;
     private TextView categoryPageBtn;
-    private    GridLayoutManager layoutManager;
+    private GridLayoutManager layoutManager;
     private List<CategoryModel> filteredCategories;
     //clinic_doctor_card
 
@@ -126,7 +125,7 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 doctorList.clear();
-                if(value!=null){
+                if (value != null) {
                     for (QueryDocumentSnapshot snapshot : value) {
                         doctor_name = snapshot.getString("doctor_name");
                         doctor_phone_Number = snapshot.getString("doctor_phone_number");
@@ -237,7 +236,7 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 categoriesList.clear();
-                if (value!=null){
+                if (value != null) {
                     for (QueryDocumentSnapshot snapshot : value) {
                         String description = "";
                         String clinic_id;
@@ -278,7 +277,6 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
                     categoriesrv.setLayoutManager(layoutManager);
                     categoriesrv.setAdapter(categoryCardAdapter);
                 }
-
 
 
             }

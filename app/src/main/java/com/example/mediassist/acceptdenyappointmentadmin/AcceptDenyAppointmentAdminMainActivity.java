@@ -1,23 +1,16 @@
 package com.example.mediassist.acceptdenyappointmentadmin;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mediassist.databinding.ActivityAcceptDenyAppointmentAdminMainBinding;
-
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityAcceptDenyAppointmentAdminMainBinding;
 
 public class AcceptDenyAppointmentAdminMainActivity extends AppCompatActivity {
 
@@ -44,6 +37,7 @@ public class AcceptDenyAppointmentAdminMainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

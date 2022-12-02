@@ -1,22 +1,16 @@
 package com.example.mediassist.acceptappointmentadmin;
 
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mediassist.databinding.ActivityAcceptAppointmentAdminMainBinding;
-
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityAcceptAppointmentAdminMainBinding;
 
 public class AcceptAppointmentAdminMainActivity extends AppCompatActivity {
 

@@ -4,7 +4,6 @@ package com.example.mediassist.dashboard;
 import static java.util.Objects.nonNull;
 
 import android.content.Context;
-import android.graphics.drawable.Icon;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
         // to set data to textview and imageview of each card layout
         CategoryModel model = CategoryModelArrayList.get(position);
         if (nonNull(model.getIconId())) {
-            int resId = context.getResources().getIdentifier(model.getIconId(), "drawable",context.getPackageName());
+            int resId = context.getResources().getIdentifier(model.getIconId(), "drawable", context.getPackageName());
             holder.icon.setImageResource(resId);
         }
         if (nonNull(model.getDescription())) {

@@ -18,9 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.category.CategoryActivity;
 import com.example.mediassist.clinic.models.ClinicModel;
-import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.AddClinicBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;

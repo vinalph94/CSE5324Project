@@ -27,13 +27,13 @@ import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    public static String doctor_id = "";
+    public static String clinic_id = "";
     private AppBarConfiguration appBarConfiguration;
     private ActivityDashboardBinding binding;
     private NavController navController;
     private FirebaseFirestore db;
     private Bundle bundle;
-   public static String doctor_id = "";
-    public static  String clinic_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +95,8 @@ public class DashboardActivity extends AppCompatActivity {
                                                     id = snapshot.get("id").toString();
                                                     if (Objects.equals(id, user_id)) {
                                                         doctor_id = snapshot.getId().toString();
-                                                       // bundle = new Bundle();
-                                                       // bundle.putString("doctor_id", doctor_id);
+                                                        // bundle = new Bundle();
+                                                        // bundle.putString("doctor_id", doctor_id);
                                                         navController.navigate(R.id.DoctorDashboard, bundle);
                                                     }
                                                 }

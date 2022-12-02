@@ -9,6 +9,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clinic_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -24,9 +25,7 @@
             android:src="@drawable/empty_clinic" />
 
 
-        <ProgressBar
-            android:id="@+id/clinic_list_progress_bar"
-            style="@style/default_progress_bar" />
+
 
         <TextView
             android:id="@+id/clinic_not_found_text"
@@ -38,10 +37,15 @@
             android:text="@string/empty_clinic"
             android:textColor="@color/white" />
 
+
+        <ProgressBar
+            android:id="@+id/clinic_list_progress_bar"
+            style="@style/default_progress_bar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourse"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

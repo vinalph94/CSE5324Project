@@ -1,5 +1,7 @@
 package com.example.mediassist.clinic;
 
+import static android.view.Gravity.START;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +29,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class ClinicListFragment extends Fragment {
 
@@ -43,6 +49,9 @@ public class ClinicListFragment extends Fragment {
     private Bundle bundle;
     private ClinicModel clinic;
     private ProgressBar loading_spinner;
+    private LinearLayoutCompat layout;
+    private GifImageView emptyImage;
+    private TextView emptyMessage;
 
 
     @Override
@@ -54,58 +63,68 @@ public class ClinicListFragment extends Fragment {
 
         binding = ClinicListBinding.inflate(inflater, container, false);
         RecyclerView courseRV = binding.idRVCourse;
-        loading_spinner = (ProgressBar)binding.clinicListProgressBar;
+        loading_spinner = (ProgressBar) binding.clinicListProgressBar;
+        emptyImage = binding.clinicEmptyGif;
+        emptyMessage = binding.clinicNotFoundText;
+        layout = binding.clinicListLayout;
         loading_spinner.setVisibility(View.VISIBLE);
 
 
-        db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                courseArrayList.clear();
-                if (value != null) {
-                    for (QueryDocumentSnapshot snapshot : value) {
-                        name = snapshot.getString("name");
-                        phoneNumber = snapshot.getString("phone_number");
-                        if (snapshot.getString("description") != null) {
-                            details = snapshot.getString("description");
-                        }
-                        street = snapshot.getString("street");
-                        city = snapshot.getString("city");
-                        county = snapshot.getString("county");
-                        country = snapshot.getString("country");
-
-                        zipcode = snapshot.getLong("zipcode").intValue();
-                        clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
-                        clinic.setId(snapshot.getId());
-                        courseArrayList.add(clinic);
-
-                    }
-                }
-                courseAdapter = new ClinicAdapter(getContext(), courseArrayList, new ClinicAdapter.ClinicItemListener() {
-                    @Override
-                    public void onAdapterItemClick(ClinicModel clinic) {
-                        navigateToAddFragment(clinic);
-                    }
-
-                });
-                courseAdapter.notifyDataSetChanged();
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
-                        LinearLayoutManager.VERTICAL, false);
-
-
-                courseRV.setLayoutManager(linearLayoutManager);
-                courseRV.setAdapter(courseAdapter);
-
-            }
-        });
         new Handler(Looper.myLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                //do what you want
-            }
-        }, 5000);
+                db.collection("clinics").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        courseArrayList.clear();
+                        if (value != null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                name = snapshot.getString("name");
+                                phoneNumber = snapshot.getString("phone_number");
+                                if (snapshot.getString("description") != null) {
+                                    details = snapshot.getString("description");
+                                }
+                                street = snapshot.getString("street");
+                                city = snapshot.getString("city");
+                                county = snapshot.getString("county");
+                                country = snapshot.getString("country");
 
+                                zipcode = snapshot.getLong("zipcode").intValue();
+                                clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
+                                clinic.setId(snapshot.getId());
+                                courseArrayList.add(clinic);
+                            }
+
+                        }
+                        if (courseArrayList.size() == 0) {
+                            emptyImage.setVisibility(View.VISIBLE);
+                            emptyMessage.setVisibility(View.VISIBLE);
+                        } else {
+                            layout.setGravity(START);
+                        }
+                        courseAdapter = new ClinicAdapter(getContext(), courseArrayList, new ClinicAdapter.ClinicItemListener() {
+                            @Override
+                            public void onAdapterItemClick(ClinicModel clinic) {
+                                navigateToAddFragment(clinic);
+                            }
+
+                        });
+                        courseAdapter.notifyDataSetChanged();
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                                LinearLayoutManager.VERTICAL, false);
+
+
+                        courseRV.setLayoutManager(linearLayoutManager);
+                        courseRV.setAdapter(courseAdapter);
+
+                    }
+                });
+                loading_spinner.setVisibility(View.GONE);
+
+
+            }
+        }, 1000);
         return binding.getRoot();
 
     }
@@ -113,16 +132,6 @@ public class ClinicListFragment extends Fragment {
 
     public void onCreate(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loading_spinner.setVisibility(View.VISIBLE);
-
-
-    }
-
-
-
-    public void on(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        loading_spinner.setVisibility(View.GONE);
 
 
     }
@@ -130,8 +139,6 @@ public class ClinicListFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loading_spinner.setVisibility(View.GONE);
-
 
     }
 

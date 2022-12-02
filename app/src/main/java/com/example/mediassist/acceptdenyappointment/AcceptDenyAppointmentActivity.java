@@ -18,7 +18,7 @@ public class AcceptDenyAppointmentActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityAcceptDenyAppointmentBinding binding;
     private TextView textTitle;
-  //  public static String clinic_id;
+    //  public static String clinic_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class AcceptDenyAppointmentActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
         Intent intent = getIntent();
-      //  clinic_id = intent.getStringExtra("doctor_id");
+        //  clinic_id = intent.getStringExtra("doctor_id");
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_accept_deny_appointment);

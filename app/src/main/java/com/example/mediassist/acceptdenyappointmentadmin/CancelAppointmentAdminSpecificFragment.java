@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
-import com.example.mediassist.acceptappointmentadmin.AcceptAppointmentAdminMainActivity;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.databinding.CancelAppointmentAdminSpecificFragmentBinding;

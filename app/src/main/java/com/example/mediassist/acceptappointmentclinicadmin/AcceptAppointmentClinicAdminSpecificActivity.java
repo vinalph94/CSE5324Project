@@ -38,6 +38,7 @@ public class AcceptAppointmentClinicAdminSpecificActivity extends AppCompatActiv
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

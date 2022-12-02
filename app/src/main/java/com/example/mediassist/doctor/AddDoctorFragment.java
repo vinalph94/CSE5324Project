@@ -289,9 +289,6 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         });
 
 
-
-
-
     }
 
     public void updateDoctor(String doctorId, DoctorModel doctor) {

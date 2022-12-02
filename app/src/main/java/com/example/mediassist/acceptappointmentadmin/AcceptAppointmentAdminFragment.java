@@ -9,16 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
-import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.AcceptAppointmentAdminFragmentBinding;
-import com.example.mediassist.databinding.AcceptAppointmentClinicAdminSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -97,7 +94,6 @@ public class AcceptAppointmentAdminFragment extends Fragment {
         return binding.getRoot();
 
     }
-
 
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

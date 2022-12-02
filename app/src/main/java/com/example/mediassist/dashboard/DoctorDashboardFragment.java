@@ -10,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.databinding.DoctorDashboardBinding;
-import com.example.mediassist.doctor.DoctorActivity;
 import com.example.mediassist.scheduleappointmentdoctor.ScheduledAppointmentForDoctorMainActivity;
 
 
@@ -37,7 +35,7 @@ public class DoctorDashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ScheduledAppointmentForDoctorMainActivity.class);
-                intent.putExtra("doctor_id",doctor_id);
+                intent.putExtra("doctor_id", doctor_id);
                 startActivity(intent);
             }
         });

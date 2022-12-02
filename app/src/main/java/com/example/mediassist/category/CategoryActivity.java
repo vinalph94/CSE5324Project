@@ -1,6 +1,5 @@
 package com.example.mediassist.category;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +21,6 @@ public class CategoryActivity extends AppCompatActivity {
     private ActivityCategoryBinding binding;
     private TextView textTitle;
     private Bundle bundle;
-
 
 
     @Override

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
-import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.PendingAppointmentAdminSpecificFragmentBinding;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,7 +41,6 @@ public class PendingAppointmentAdminSpecificFragment extends Fragment {
     private AppointmentModel appointment;
     private PendingAppointmentAdapter courseAdapter;
     private Bundle bundle;
-
 
 
     @Override

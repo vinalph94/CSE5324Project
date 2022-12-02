@@ -2,29 +2,23 @@ package com.example.mediassist.scheduleappointmentdoctor;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mediassist.databinding.ActivityScheduledAppointmentForDoctorMainBinding;
-
 import com.example.mediassist.R;
+import com.example.mediassist.databinding.ActivityScheduledAppointmentForDoctorMainBinding;
 
 public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityScheduledAppointmentForDoctorMainBinding binding;
     private TextView textTitle;
-  //  public static String doctor_id;
+    //  public static String doctor_id;
 
 
     @Override
@@ -33,7 +27,7 @@ public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity
 
         binding = ActivityScheduledAppointmentForDoctorMainBinding.inflate(getLayoutInflater());
         Intent intent = getIntent();
-     ///   doctor_id = intent.getStringExtra("doctor_id");
+        ///   doctor_id = intent.getStringExtra("doctor_id");
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
 
@@ -47,6 +41,7 @@ public class ScheduledAppointmentForDoctorMainActivity extends AppCompatActivity
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }

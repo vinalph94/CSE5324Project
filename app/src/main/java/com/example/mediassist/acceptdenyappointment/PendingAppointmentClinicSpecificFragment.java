@@ -17,7 +17,6 @@ import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.PendingAppointmentAdapter;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.PendingAppointmentClinicSpecificFragmentBinding;
-import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

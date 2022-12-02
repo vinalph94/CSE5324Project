@@ -17,6 +17,7 @@ public class DenyAppointmentClinicAdminSpecificMainActivity extends AppCompatAct
     private AppBarConfiguration appBarConfiguration;
     private ActivityDenyApoointmentClinicAdminSpecificMainBinding binding;
     private TextView textTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class DenyAppointmentClinicAdminSpecificMainActivity extends AppCompatAct
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     public void setActionBarTitle(String title) {
         textTitle.setText(title);
     }
