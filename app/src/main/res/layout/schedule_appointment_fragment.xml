@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".appointment.ScheduleAppointmentFragment">
 
     <RelativeLayout
@@ -12,19 +13,24 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-60dp">
 
-
+<androidx.cardview.widget.CardView
+    android:id="@+id/doc_details_card"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:background="#252525"
+    android:backgroundTint="#252525"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_marginLeft="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_30sdp"
+    android:layout_marginTop="@dimen/_10sdp">
         <TextView
             android:id="@+id/docName"
             android:layout_width="304dp"
             android:layout_height="45dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/img"
-            android:paddingLeft="15px"
-            android:paddingTop="30px"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:textColor="#408E9B"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,12 +38,8 @@
             android:layout_width="304dp"
             android:layout_height="30dp"
             android:layout_below="@id/docName"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/img"
-            android:paddingLeft="30px"
-            android:paddingTop="15px"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="40dp"
             android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -47,27 +49,21 @@
             android:layout_width="304dp"
             android:layout_height="30dp"
             android:layout_alignBottom="@+id/docDetails"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="-2dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="-32dp"
-            android:background="@drawable/img"
-            android:paddingLeft="30px"
-            android:paddingTop="15px"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="70dp"
             android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
 
-
+</androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/workTime"
             android:layout_width="304dp"
             android:layout_height="45dp"
-            android:layout_below="@id/docDetails"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="87dp"
-            android:layout_marginEnd="50dp"
-            android:text="  Working Time"
+            android:layout_below="@id/doc_details_card"
+            android:layout_marginTop="20dp"
+            android:text="Working Time"
+            android:layout_marginLeft="@dimen/_20sdp"
             android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold" />
@@ -77,12 +73,11 @@
             android:layout_width="304dp"
             android:layout_height="45dp"
             android:layout_below="@id/workTime"
-            android:layout_marginStart="20dp"
+           android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="50dp"
-            android:text="  Mon-Fri 10.00 AM-10.00PM"
-            android:textColor="@color/white"
-            android:textSize="11.5dp" />
+            android:text="Mon-Fri 10.00 AM-10.00PM"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12ssp" />
 
 
         <TextView
@@ -90,35 +85,31 @@
             android:layout_width="304dp"
             android:layout_height="45dp"
             android:layout_below="@id/workTimeDetails"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="50dp"
-            android:text="  Make Appointment"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:text="Make Appointment"
             android:textColor="@color/white"
             android:textSize="15dp"
-
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="335dp"
+            android:layout_marginTop="300dp"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
+
             <Button
                 android:id="@+id/previousWeekAction"
-                android:layout_width="0dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment"
-                android:layout_weight="1"
-                android:background="@null"
-                android:onClick="previousWeekAction"
-                android:text="@string/back"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
+                android:backgroundTint="@color/black"
+                android:paddingTop="15dp"
+                app:icon="@drawable/back_arrow"
+                app:iconTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
             <TextView
                 android:id="@+id/monthYearTV"
                 android:layout_width="2dp"
@@ -129,17 +120,18 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
+
+
             <Button
                 android:id="@+id/nextWeekAction"
-                android:layout_width="0dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:onClick="nextWeekAction"
-                android:text="@string/forward"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:backgroundTint="@color/black"
+                android:paddingTop="15dp"
+                app:icon="@drawable/forward_arrow"
+                app:iconTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
@@ -240,11 +232,12 @@
             android:layout_marginTop="515dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/rounded_rectangle_bg"
-            android:backgroundTint="#A9CACF"
+            android:backgroundTint="@color/primary_color"
             android:onClick="bookTimeSlotAction"
             android:padding="10dp"
             android:text="Book Appointment"
             android:textColorHint="@color/white"
+            android:layout_alignParentBottom="true"
             android:textSize="14dp"
             android:textStyle="bold" />
 

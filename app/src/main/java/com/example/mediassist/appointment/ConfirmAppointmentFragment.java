@@ -10,10 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
 import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
@@ -38,7 +40,8 @@ public class ConfirmAppointmentFragment extends Fragment {
     private ArrayList<String> courseArrayList = new ArrayList<String>();
     private TimeSlotsAdapter timeSlotsAdapter;
     private TextView eventDateTV;
-
+    private TextView morning_btn;
+    private TextView evening_btn;
     private Bundle bundle;
 
     private AppointmentModel appointmentModel;
@@ -49,6 +52,8 @@ public class ConfirmAppointmentFragment extends Fragment {
 
         binding = ConfirmAppointmentFragmentBinding.inflate(inflater, container, false);
         RecyclerView courseRV = binding.idTimeSlotsRv;
+        morning_btn=binding.morningBtn;
+        evening_btn=binding.eveningBtn;
         eventDateTV = binding.eventDateTV;
         eventDateTV.setText(CalendarUtils.selectedDate.getDayOfWeek().name() + ", " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         db = FirebaseFirestore.getInstance();

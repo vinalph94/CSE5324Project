@@ -1,5 +1,8 @@
 package com.example.mediassist.doctor;
 
+import static com.example.mediassist.login.LoginActivity.patientUid;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinicadmin.ClinicAdminActivity;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ActivityDoctorBinding;
 
 public class DoctorActivity extends AppCompatActivity {
@@ -20,6 +25,7 @@ public class DoctorActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityDoctorBinding binding;
     private TextView textTitle;
+    public Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,7 @@ public class DoctorActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         textTitle = binding.textTitle;
         btnAddDoctor = binding.btnAdd;
+        btnBack = binding.btnBack;
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
         setActionBarTitle("Doctors");
@@ -37,6 +44,15 @@ public class DoctorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 navController.navigateUp();
                 navController.navigate(R.id.action_DoctorListFragment_to_AddDoctorFragment);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DoctorActivity.this, DashboardActivity.class);
+                intent.putExtra("userId", patientUid);
+                startActivity(intent);
             }
         });
     }

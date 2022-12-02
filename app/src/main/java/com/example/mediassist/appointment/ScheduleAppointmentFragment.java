@@ -52,6 +52,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
     private Bundle bundle;
     private DoctorModel doctor;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -152,9 +153,10 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         allClinicRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
                 String clinicName = value.getString("name");
                 System.out.println("clinicName : " + clinicName);
-                docSpecialistText.setText(clinicName);
+                docSpecialistText.setText(String.format("%s clinic", clinicName));
             }
         });
     }

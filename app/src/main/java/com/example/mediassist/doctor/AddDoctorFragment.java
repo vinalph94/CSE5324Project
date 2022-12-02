@@ -1,5 +1,7 @@
 package com.example.mediassist.doctor;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.clinic.models.ClinicModel;
+import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.signup.RegisterUserModel;
@@ -57,7 +60,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     private Button saveButton;
     private Button editButton;
     private Button deleteButton;
-
+    private String clinic_name;
+    private String category_name;
     private String name;
     private String phone_number;
     private String email;
@@ -106,6 +110,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             doctorPhoneNumber.setText(doctor.getDoctor_phone_number());
             doctorEmail.setText(doctor.getDoctor_email());
             clinic_id = doctor.getClinic_id();
+            clinic_name = doctor.getClinic_name();
+            category_name= doctor.getCategory_name();
             category_id = doctor.getCategory_id();
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
@@ -180,6 +186,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 clinic_id = clinicsList.get(i).getId();
+                clinic_name = clinicsList.get(i).getName();
+
             }
 
             @Override
@@ -193,6 +201,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 category_id = categoryList.get(i).getId();
+                category_name=categoryList.get(i).getName();
             }
 
             @Override
@@ -206,7 +215,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             @Override
             public void onClick(View v) {
                 checkDoctorData();
-                DoctorModel doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id);
+                DoctorModel doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id, clinic_name,category_name);
                 uploadDoctor(doctor);
 
             }
@@ -216,7 +225,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             @Override
             public void onClick(View view) {
                 checkDoctorData();
-                doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id);
+                doctor = new DoctorModel(name, phone_number, email, category_id, clinic_id,clinic_name,category_name);
                 updateDoctor(id, doctor);
             }
         });
@@ -226,7 +235,25 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
             @Override
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
-                deleteData(id);
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                deleteData(id);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do your No progress
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
             }
         });
 
@@ -342,6 +369,8 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((DoctorActivity) getActivity()).setActionBarTitle("Add Doctor");
+        ((DoctorActivity) getActivity()).btnAddDoctor.setVisibility(View.VISIBLE);
     }
 
     private void getDoctorClinicForEdit(ArrayAdapter<ClinicModel> clinicSpinnerAdapter) {

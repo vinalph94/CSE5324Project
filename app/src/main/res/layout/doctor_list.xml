@@ -8,6 +8,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/doctor_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -32,10 +33,14 @@
             android:textColor="@color/white"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/doctor_list_progress_bar"
+            style="@style/default_progress_bar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourseDoctor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

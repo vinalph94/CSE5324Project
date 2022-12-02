@@ -85,6 +85,8 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
     private TextView categoryPageBtn;
     private GridLayoutManager layoutManager;
     private List<CategoryModel> filteredCategories;
+    private String clinic_name;
+    private String category_name;
     //clinic_doctor_card
 
     public PatientDashboardFragment() {
@@ -120,6 +122,8 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
         latitude = 0;
         geocoder = new Geocoder(getContext(), Locale.US);
 
+        getCategories();
+
 
         db.collection("doctors").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -132,7 +136,9 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
                         doctor_email = snapshot.getString("doctor_email");
                         assignspecialization = snapshot.getString("category_id");
                         assignclinic = snapshot.getString("clinic_id");
-                        doctor = (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic));
+                        clinic_name = snapshot.getString("clinic_name");
+                        category_name = snapshot.getString("category_name");
+                        doctor = (new DoctorModel(doctor_name, doctor_phone_Number, doctor_email, assignspecialization, assignclinic, clinic_name, category_name));
                         doctor.setId(snapshot.getId());
                         doctor.setClinic_id(assignclinic);
                         doctor.setCategory_id(assignspecialization);
@@ -162,7 +168,7 @@ public class PatientDashboardFragment extends Fragment implements EnteredTextCal
                         }
 
                         doctorList.add(doctor);
-                        getCategories();
+
                     }
                 }
 

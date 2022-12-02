@@ -33,7 +33,7 @@
 
                 <TextView
                     style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Category" />
             </androidx.cardview.widget.CardView>
 
@@ -47,7 +47,7 @@
 
                 <TextView
                     style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Doctor" />
             </androidx.cardview.widget.CardView>
 
@@ -61,6 +61,7 @@
 
                 <TextView
                     style="@style/dashboard_menu_text"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:text="Pending Appointments" />
             </androidx.cardview.widget.CardView>
@@ -76,6 +77,7 @@
                 <TextView
                     style="@style/dashboard_menu_text"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="Accepted Appointments" />
             </androidx.cardview.widget.CardView>
 
@@ -90,6 +92,7 @@
                 <TextView
                     style="@style/dashboard_menu_text"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="Cancelled Appointments" />
             </androidx.cardview.widget.CardView>
 

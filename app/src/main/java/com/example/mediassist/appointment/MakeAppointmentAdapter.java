@@ -45,12 +45,13 @@ public class MakeAppointmentAdapter extends RecyclerView.Adapter<MakeAppointment
         if (nonNull(model.getDoctor_name())) {
             holder.doctorname.setText(String.format("%s", model.getDoctor_name()));
         }
-//        if (nonNull(model.getClinic_id())) {
-//            holder.assignclinic.setText(String.format("%s", model.getClinic_id()));
-//        }
-//        if (nonNull(model.getCategory_id())) {
-//            holder.assignspecialization.setText(String.format("%s", model.getCategory_id()));
-//        }
+        if (nonNull(model.getCategory_name())) {
+            holder.assignspecialization.setText(String.format("%s", model.getCategory_name()));
+        }
+        if (nonNull(model.getClinic_name())) {
+            holder.assignclinic.setText(String.format("%s clinic", model.getClinic_name()));
+        }
+
         holder.itemView.setOnClickListener(view -> {
             makeAppointmentItemListener.onAdapterItemClick(doctorModelArrayList.get(position));
         });

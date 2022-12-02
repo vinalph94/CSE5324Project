@@ -44,9 +44,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         if (nonNull(model.getDoctor_name())) {
             holder.doctor_name.setText(String.format("%s", model.getDoctor_name()));
         }
-//        if (nonNull(model.getClinic_id())) {
-//            holder.assignclinic.setText(String.format("%s", model.getClinic_id()));
-//        }
+        if (nonNull(model.getCategory_name())) {
+            holder.assignclinic.setText(String.format("%s", model.getCategory_name()));
+        }
+        if (nonNull(model.getClinic_name())) {
+            holder.assignclinic.setText(String.format("%s", model.getClinic_name()));
+        }
         if (nonNull(model.getDoctor_email())) {
             holder.email.setText(String.format("%s", model.getDoctor_email()));
         }

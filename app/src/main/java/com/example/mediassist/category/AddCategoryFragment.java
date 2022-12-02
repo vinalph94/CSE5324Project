@@ -349,7 +349,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
         super.onDestroyView();
         binding = null;
         ((CategoryActivity) getActivity()).setActionBarTitle("Add Category");
-        ((CategoryActivity) getActivity()).btnBack.setVisibility(View.VISIBLE);
+        ((CategoryActivity) getActivity()).btnAdd.setVisibility(View.VISIBLE);
     }
 
     @Override
