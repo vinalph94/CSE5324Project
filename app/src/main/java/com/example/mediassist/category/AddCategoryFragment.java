@@ -2,6 +2,8 @@ package com.example.mediassist.category;
 
 import static com.example.mediassist.util.ToastStatus.SUCCESS;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +26,7 @@ import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.category.models.IconModel;
 import com.example.mediassist.clinic.models.ClinicModel;
+import com.example.mediassist.clinicadmin.ClinicAdminActivity;
 import com.example.mediassist.databinding.AddCategoryBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
@@ -202,7 +205,24 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
             @Override
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
-                deleteData(id);
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                deleteData(id);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do your No progress
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
             }
         });
 
@@ -328,6 +348,8 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((CategoryActivity) getActivity()).setActionBarTitle("Add Category");
+        ((CategoryActivity) getActivity()).btnBack.setVisibility(View.VISIBLE);
     }
 
     @Override

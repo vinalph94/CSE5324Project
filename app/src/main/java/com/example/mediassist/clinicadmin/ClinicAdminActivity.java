@@ -1,5 +1,8 @@
 package com.example.mediassist.clinicadmin;
 
+import static com.example.mediassist.login.LoginActivity.patientUid;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +15,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinic.ClinicActivity;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ActivityClinicAdminBinding;
 
 public class ClinicAdminActivity extends AppCompatActivity {
 
     public Button addBtn;
-    public Button bck;
+    public Button btnBack;
     private AppBarConfiguration appBarConfiguration;
     private ActivityClinicAdminBinding binding;
     private TextView textTitle;
@@ -30,7 +35,7 @@ public class ClinicAdminActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         textTitle = binding.textTitleClinicAdmin;
         addBtn = binding.btnAddForClinicAdmin;
-        bck = binding.btnBack;
+        btnBack = binding.btnBack;
 
         NavController navController = Navigation.findNavController(ClinicAdminActivity.this, R.id.nav_host_fragment_content_clinic_admin);
         setActionBarTitle("Clinic Admins");
@@ -39,6 +44,15 @@ public class ClinicAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_ClinicAdminListFragment_to_AddClinicAdminFragment);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ClinicAdminActivity.this, DashboardActivity.class);
+                intent.putExtra("userId", patientUid);
+                startActivity(intent);
             }
         });
     }

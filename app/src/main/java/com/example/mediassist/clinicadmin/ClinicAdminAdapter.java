@@ -46,8 +46,8 @@ public class ClinicAdminAdapter extends RecyclerView.Adapter<ClinicAdminAdapter.
         if (nonNull(model.getPhone_number())) {
             holder.clinic_admin_phone_number.setText(String.format("%s", model.getPhone_number()));
         }
-        if (nonNull(model.getClinicName())) {
-            holder.clinic_assign.setText(String.format("%s", model.getClinicName()));
+        if (nonNull(model.getClinic_name())) {
+            holder.clinic_assign.setText(String.format("%s", model.getClinic_name()));
         }
         holder.itemView.setOnClickListener(view -> {
             clinicadminItemListener.onAdapterItemClick(ClinicAdminModelArrayList.get(position));

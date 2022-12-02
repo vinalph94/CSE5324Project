@@ -73,7 +73,6 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private String country;
     private String city;
     private String county;
-    private  NavController navController;
 
 
     @Override
@@ -152,10 +151,6 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 
 
         checkClinicData();
-
-
-
-
 
 
         countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

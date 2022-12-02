@@ -6,6 +6,7 @@
     tools:context=".clinicadmin.ClinicAdminListFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+     android:id="@+id/clinicAdminListLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -34,10 +35,15 @@
             android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
+
+        <ProgressBar
+            android:id="@+id/clinic_admin_list_progress_bar"
+            style="@style/default_progress_bar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourseClinicAdmin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.example.mediassist.clinicadmin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinic.ClinicActivity;
 import com.example.mediassist.clinic.models.ClinicModel;
 import com.example.mediassist.clinicadmin.models.ClinicAdminModel;
 import com.example.mediassist.databinding.AddClinicAdminBinding;
@@ -69,6 +72,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private FirebaseAuth mAuth;
     private Spinner clinicSpinner;
     private ClinicModel clinic;
+    private String clinic_name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -153,7 +157,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             @Override
             public void onClick(View v) {
 
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
                 uploadClinicAdmin(clinicadmin);
 
             }
@@ -163,7 +167,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
                 checkClinicAdminData();
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
                 updateClinicAdmin(id, clinicadmin);
             }
         });
@@ -172,9 +176,28 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             @Override
             public void onClick(View view) {
                 checkClinicAdminData();
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
 
-                deleteData(id, clinicadmin);
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                deleteData(id, clinicadmin);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do your No progress
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+
             }
         });
 
@@ -183,6 +206,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 assign_clinic = clinicsList.get(i).getId();
+                clinic_name=clinicsList.get(i).getName();
             }
 
             @Override
@@ -320,6 +344,8 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((ClinicAdminActivity) getActivity()).setActionBarTitle("Add Clinic Admin");
+        ((ClinicAdminActivity) getActivity()).addBtn.setVisibility(View.VISIBLE);
     }
 
     @Override

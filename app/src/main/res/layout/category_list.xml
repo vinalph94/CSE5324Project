@@ -6,6 +6,7 @@
     tools:context=".category.CategoryListFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/categoryListLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -30,10 +31,14 @@
             android:textColor="@color/white"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/category_list_progress_bar"
+            style="@style/default_progress_bar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourseCategory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

@@ -11,14 +11,15 @@ public class ClinicAdminModel implements Serializable {
     private String phone_number;
     private String email;
     private String assign_clinic;
-    private String clinicName;
+    private String clinic_name;
 
 
-    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic) {
+    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic, String clinic_name) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
         this.assign_clinic = assign_clinic;
+        this.clinic_name = clinic_name;
 
     }
 
@@ -65,11 +66,11 @@ public class ClinicAdminModel implements Serializable {
         this.id = id;
     }
 
-    public String getClinicName() {
-        return clinicName;
+    public String getClinic_name() {
+        return clinic_name;
     }
 
-    public void setClinicName(String name) {
-        this.clinicName = name;
+    public void setClinic_name(String name) {
+        this.clinic_name = name;
     }
 }
