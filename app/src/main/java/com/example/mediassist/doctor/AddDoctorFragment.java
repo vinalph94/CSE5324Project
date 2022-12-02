@@ -85,6 +85,7 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         clinicSpinner = (Spinner) binding.ClinicSpinner;
         categorySpinner = (Spinner) binding.SpecializationSpinner;
 
+
         doctorName = binding.doctorNameText;
         doctorPhoneNumber = binding.doctorPhoneNumberText;
         doctorEmail = binding.doctorEmailText;
