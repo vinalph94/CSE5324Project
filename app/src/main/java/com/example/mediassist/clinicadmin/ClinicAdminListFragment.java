@@ -44,6 +44,7 @@ public class ClinicAdminListFragment extends Fragment {
     private String email;
     private String assignClinic;
     private String clinic_name;
+    private String user_id;
     private ClinicAdminAdapter courseAdapter;
     private Bundle bundle;
     private ClinicAdminModel clinicadmin;
@@ -80,7 +81,8 @@ public class ClinicAdminListFragment extends Fragment {
                             email = snapshot.getString("email");
                             assignClinic = snapshot.getString("assign_clinic");
                             clinic_name = snapshot.getString("clinic_name");
-                            clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic,clinic_name);
+                            user_id =snapshot.getString("id");
+                            clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic,clinic_name,user_id);
                             clinicadmin.setId(snapshot.getId());
                             courseArrayList.add(clinicadmin);
                         }
