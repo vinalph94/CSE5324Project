@@ -66,6 +66,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
     private String phone_number;
     private String email;
     private String assign_clinic;
+    private String user_id;
     private Bundle bundle;
     private ClinicAdminModel clinicadmin;
     private String id;
@@ -157,7 +158,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             @Override
             public void onClick(View v) {
 
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name,user_id);
                 uploadClinicAdmin(clinicadmin);
 
             }
@@ -167,7 +168,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             public void onClick(View view) {
                 //phoneNumberEditText.setText("");
                 checkClinicAdminData();
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name,user_id);
                 updateClinicAdmin(id, clinicadmin);
             }
         });
@@ -176,7 +177,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
             @Override
             public void onClick(View view) {
                 checkClinicAdminData();
-                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name);
+                clinicadmin = new ClinicAdminModel(name, phone_number, email, assign_clinic,clinic_name,user_id);
 
 
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

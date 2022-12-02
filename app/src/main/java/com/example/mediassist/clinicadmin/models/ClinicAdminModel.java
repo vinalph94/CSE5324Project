@@ -5,7 +5,7 @@ import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
 
 public class ClinicAdminModel implements Serializable {
-    @Exclude
+
     private String id;
     private String name;
     private String phone_number;
@@ -14,12 +14,13 @@ public class ClinicAdminModel implements Serializable {
     private String clinic_name;
 
 
-    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic, String clinic_name) {
+    public ClinicAdminModel(String name, String phone_number, String email, String assign_clinic, String clinic_name, String id) {
         this.name = name;
         this.phone_number = phone_number;
         this.email = email;
         this.assign_clinic = assign_clinic;
         this.clinic_name = clinic_name;
+        this.id = id;
 
     }
 
