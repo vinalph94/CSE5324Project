@@ -58,6 +58,7 @@ public class DashboardActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot snapshot : value) {
                         if (Objects.equals(snapshot.getId(), userId)) {
                             role = snapshot.get("role").toString();
+
                             if (Objects.equals(role, "1")) {
                                 navController.navigate(R.id.SuperAdminDashboardFragment);
                             } else if (Objects.equals(role, "2")) {
@@ -65,14 +66,11 @@ public class DashboardActivity extends AppCompatActivity {
                                 db.collection("clinicAdmins").addSnapshotListener(new EventListener<QuerySnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-
                                         if (value != null) {
                                             for (QueryDocumentSnapshot snapshot : value) {
                                                 if (Objects.equals(snapshot.get("id"), user_id)) {
                                                     clinic_id = snapshot.get("assign_clinic").toString();//9gOZFM9TuqdKJqqSE8eN
                                                     navController.navigate(R.id.ClinicAdminDashboard, bundle);
-
                                                 }
 
                                             }

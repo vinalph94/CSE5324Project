@@ -37,11 +37,9 @@
         </RelativeLayout>
 
 
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_scheduled_appointment_for_doctor_main" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

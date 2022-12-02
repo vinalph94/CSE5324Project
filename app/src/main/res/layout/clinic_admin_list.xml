@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,15 +11,15 @@
         android:gravity="center"
         android:orientation="vertical">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gif_Clinic_admin"
-        android:layout_width="307dp"
-        android:layout_height="307dp"
-        android:src="@drawable/empty_super_admin"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gif_Clinic_admin"
+            android:layout_width="307dp"
+            android:layout_height="307dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/empty_super_admin"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/clinic_admin_not_found_text"
@@ -29,16 +28,16 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="50dp"
-            android:visibility="gone"
             android:text="No clinic admins found! Try to add by clicking on plus button at the top"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourseClinicAdmin"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-   </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

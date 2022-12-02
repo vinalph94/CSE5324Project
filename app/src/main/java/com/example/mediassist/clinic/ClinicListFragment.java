@@ -29,6 +29,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -88,7 +89,6 @@ public class ClinicListFragment extends Fragment {
                                 city = snapshot.getString("city");
                                 county = snapshot.getString("county");
                                 country = snapshot.getString("country");
-
                                 zipcode = snapshot.getLong("zipcode").intValue();
                                 clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
                                 clinic.setId(snapshot.getId());
@@ -125,6 +125,10 @@ public class ClinicListFragment extends Fragment {
 
             }
         }, 1000);
+
+
+
+
         return binding.getRoot();
 
     }

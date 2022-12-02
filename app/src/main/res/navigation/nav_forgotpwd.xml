@@ -5,7 +5,7 @@
     android:id="@+id/nav_forgotpwd"
     app:startDestination="@id/GetEmailForForgotPwd">
 
-  <fragment
+    <fragment
         android:id="@+id/GetEmailForForgotPwd"
         android:name="com.example.mediassist.resetpassword.GetEmailForForgotPwd"
         android:label="Get Email For Forgot Pwd"

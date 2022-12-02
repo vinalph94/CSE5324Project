@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_ClinicListFragment_to_AddClinicFragment"
             app:destination="@id/AddClinicFragment" />
+
+        <action
+            android:id="@+id/action_ClinicListFragment_to_DashboardFragmenr"
+            app:destination="@id/dashboard" />
     </fragment>
     <fragment
         android:id="@+id/AddClinicFragment"

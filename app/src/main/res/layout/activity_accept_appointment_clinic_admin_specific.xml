@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:theme="@style/Theme.MediAssist.AppBarOverlay">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -39,7 +40,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_accept_appointment_clinic_admin_specific" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

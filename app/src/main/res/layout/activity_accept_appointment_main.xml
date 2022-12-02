@@ -40,5 +40,4 @@
     <include layout="@layout/content_accept_appointment_main" />
 
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

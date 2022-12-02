@@ -23,6 +23,7 @@ public class ClinicModel implements Serializable {
         this.phone_number = phone_number;
         this.street = street;
         this.city = city;
+        this.county = county;
         this.country = country;
         this.zipcode = zipcode;
     }

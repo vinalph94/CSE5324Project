@@ -41,5 +41,4 @@
     <include layout="@layout/content_deny_appointment_clinic_admin_specific_main" />
 
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -49,7 +49,7 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ViewHolder
             holder.clinic_phone_number.setText(String.format("%s", model.getPhone_number()));
         }
         if (nonNull(model.getStreet())) {
-            holder.clinic_address.setText(String.format("%s", model.getStreet()));
+            holder.clinic_address.setText(String.format("%s, %s, %s", model.getStreet(),model.getCity(),model.getCountry()));
         }
 
         holder.itemView.setOnClickListener(view -> {

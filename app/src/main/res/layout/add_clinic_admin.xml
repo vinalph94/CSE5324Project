@@ -108,8 +108,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/clinic_admin_edit_button"
@@ -118,8 +117,8 @@
             android:layout_marginHorizontal="80dp"
             android:maxWidth="35dp"
             android:text="Save"
-            android:visibility="gone"
             android:textAlignment="center"
+            android:visibility="gone"
             app:cornerRadius="100dp" />
 
         <Button
@@ -130,9 +129,9 @@
             android:backgroundTint="@color/secondary_error_color"
             android:maxWidth="35dp"
             android:text="Delete"
-            android:visibility="gone"
             android:textAlignment="center"
             android:textColor="@color/error_text_color"
+            android:visibility="gone"
             app:cornerRadius="100dp" />
 
     </LinearLayout>

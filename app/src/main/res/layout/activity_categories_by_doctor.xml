@@ -12,9 +12,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:theme="@style/Theme.MediAssist.AppBarOverlay">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
                 android:layout_width="60dp"
@@ -39,7 +41,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_categories_by_doctor" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

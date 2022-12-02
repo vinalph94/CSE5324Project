@@ -18,8 +18,6 @@
     </fragment>
 
 
-
-
     <fragment
         android:id="@+id/PatientDashboard"
         android:name="com.example.mediassist.dashboard.PatientDashboardFragment"

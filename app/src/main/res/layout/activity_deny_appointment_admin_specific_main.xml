@@ -37,8 +37,8 @@
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <include layout="@layout/content_deny_appointment_admin_specific_main" />
 
+    <include layout="@layout/content_deny_appointment_admin_specific_main" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

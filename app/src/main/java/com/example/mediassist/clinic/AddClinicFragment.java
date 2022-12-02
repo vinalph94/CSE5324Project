@@ -1,5 +1,8 @@
 package com.example.mediassist.clinic;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,10 +18,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.mediassist.R;
 import com.example.mediassist.clinic.models.ClinicModel;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.AddClinicBinding;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
@@ -68,6 +73,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     private String country;
     private String city;
     private String county;
+    private  NavController navController;
 
 
     @Override
@@ -98,6 +104,20 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
         deleteButton = binding.clinicDeleteButton;
         countrySpinner = (Spinner) binding.spinnerCountry;
 
+
+        countriesNamesList = new ArrayList<String>();
+        String[] isoCountryCodes = Locale.getISOCountries();
+        for (String countryCode : isoCountryCodes) {
+
+            locale = new Locale("", countryCode);
+            countriesNamesList.add(locale.getDisplayCountry());
+        }
+        Collections.sort(countriesNamesList);
+        countrySpinnerAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_items, countriesNamesList);
+        countrySpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
+        countrySpinner.setAdapter(countrySpinnerAdapter);
+
+
         ((ClinicActivity) getActivity()).btnAdd.setVisibility(View.GONE);
         if (clinic != null) {
             id = clinic.getId();
@@ -107,12 +127,19 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
             cityEditText.setText(clinic.getCity());
             countyEditText.setText(clinic.getCounty());
             zipcodeEditText.setText(String.valueOf(clinic.getZipcode()));
+
+            for (int position = 0; position < countrySpinner.getCount(); position++) {
+                if (countrySpinner.getItemAtPosition(position).equals(clinic.getCountry())) {
+                    countrySpinner.setSelection(position);
+                }
+            }
             if (clinic.getDescription() != null) {
                 detailsEditText.setText(clinic.getDescription());
             }
             saveButton.setVisibility(View.GONE);
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
+
 
         }
 
@@ -125,19 +152,10 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
 
 
         checkClinicData();
-        countriesNamesList = new ArrayList<String>();
 
 
-        String[] isoCountryCodes = Locale.getISOCountries();
-        for (String countryCode : isoCountryCodes) {
 
-            locale = new Locale("", countryCode);
-            countriesNamesList.add(locale.getDisplayCountry());
-        }
-        Collections.sort(countriesNamesList);
-        countrySpinnerAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_items, countriesNamesList);
-        countrySpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
-        countrySpinner.setAdapter(countrySpinnerAdapter);
+
 
 
         countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -188,7 +206,25 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
                 //phoneNumberEditText.setText("");
                 checkClinicData();
                 clinic = new ClinicModel(name, details, phoneNumber, street, city, county, country, zipcode);
-                deleteData(id);
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                deleteData(id);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do your No progress
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
             }
         });
 
@@ -288,6 +324,9 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((ClinicActivity) getActivity()).setActionBarTitle("Add Clinic");
+        ((ClinicActivity) getActivity()).btnAdd.setVisibility(View.VISIBLE);
+
     }
 
 
