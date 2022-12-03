@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
 
 
                     } else {
-                        new CustomToast(getApplicationContext(),RegisterActivity.this, "fail" + Objects.requireNonNull(task.getException()).getMessage(), ToastStatus.FAILURE).show();
+//                        new CustomToast(getApplicationContext(),RegisterActivity.this, "fail" + Objects.requireNonNull(task.getException()).getMessage(), ToastStatus.FAILURE).show();
 
                     }
 

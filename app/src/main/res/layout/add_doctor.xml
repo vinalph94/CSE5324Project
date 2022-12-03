@@ -138,6 +138,7 @@
             android:maxWidth="35dp"
             android:text="Save"
             android:textAlignment="center"
+            android:backgroundTint="@color/primary_color"
             android:visibility="gone"
             app:cornerRadius="100dp" />
 
@@ -151,6 +152,7 @@
             android:text="Delete"
             android:textAlignment="center"
             android:textColor="@color/error_text_color"
+
             android:visibility="gone"
             app:cornerRadius="100dp" />
 
