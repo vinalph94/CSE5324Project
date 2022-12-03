@@ -102,7 +102,7 @@ public class ConfirmAppointmentFragment extends Fragment {
                             public void onSuccess(DocumentReference documentReference) {
                                 new CustomToast(getContext(), getActivity(), "Appointment booked successfully", ToastStatus.SUCCESS).show();
                                 // Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
-                                Intent intent = new Intent(getActivity(), AppointmentListActivity.class);
+                                Intent intent = new Intent(getActivity(), ScheduleAppointmentActivity.class);
                                 startActivity(intent);
 
                             }

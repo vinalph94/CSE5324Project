@@ -97,22 +97,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
         <Button
             android:id="@+id/bookAptBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="530dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/rounded_rectangle_bg"
+            style="@style/default_disabled_button"
+            android:layout_width="300dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/primary_color"
-            android:layout_alignParentBottom="true"
-            android:padding="10dp"
-            android:text="Confirm Appointment"
-            android:textColorHint="@color/white"
-            android:textSize="14dp"
-            android:textStyle="bold" />
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Confirm Appointment"/>
+
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

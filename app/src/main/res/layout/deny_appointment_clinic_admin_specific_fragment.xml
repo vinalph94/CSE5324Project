@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="No appointments were accepted! Come Back Later!"
+            android:text="No appointments were declined! Come Back Later!"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:visibility="gone" />

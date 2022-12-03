@@ -170,10 +170,11 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         allCategoriesRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                String description = value.getString("description");
-                System.out.println("description : " + description);
-                docDetailsText.setText(description);
+                if(value!=null) {
+                    String description = value.getString("description");
+                    System.out.println("description : " + description);
+                    docDetailsText.setText(description);
+                }
             }
         });
     }

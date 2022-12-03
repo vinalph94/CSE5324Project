@@ -1,5 +1,8 @@
 package com.example.mediassist.appointmentstatus;
 
+import static com.example.mediassist.login.LoginActivity.patientUid;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mediassist.R;
+import com.example.mediassist.clinic.ClinicActivity;
+import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ActivityAppointmentListBinding;
 
 public class AppointmentListActivity extends AppCompatActivity {
@@ -36,7 +41,14 @@ public class AppointmentListActivity extends AppCompatActivity {
             }
         });
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_appointment_list);
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AppointmentListActivity.this, DashboardActivity.class);
+                intent.putExtra("userId", patientUid);
+                startActivity(intent);
+            }
+        });
 
     }
 
