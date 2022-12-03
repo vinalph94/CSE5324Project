@@ -22,7 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.mediassist.R;
 import com.example.mediassist.category.models.CategoryModel;
 import com.example.mediassist.clinic.models.ClinicModel;
-import com.example.mediassist.clinicadmin.ClinicAdminActivity;
+
 import com.example.mediassist.databinding.AddDoctorBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.signup.RegisterUserModel;
@@ -155,20 +155,21 @@ public class AddDoctorFragment extends Fragment implements CheckForEmptyCallBack
         db.collection("categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+if(value!=null) {
+    for (QueryDocumentSnapshot snapshot : value) {
+        String details = "";
+        String name = snapshot.getString("name");
+        if (snapshot.getString("description") != null) {
+            details = snapshot.getString("description");
+        }
+        String clinic_id = snapshot.getString("clinic_id");
+        String icon_id = snapshot.getString("icon_id");
+        category = new CategoryModel(name, details, clinic_id, icon_id);
+        category.setId(snapshot.getId());
+        categoryList.add(category);
 
-                for (QueryDocumentSnapshot snapshot : value) {
-                    String details = "";
-                    String name = snapshot.getString("name");
-                    if (snapshot.getString("description") != null) {
-                        details = snapshot.getString("description");
-                    }
-                    String clinic_id = snapshot.getString("clinic_id");
-                    String icon_id = snapshot.getString("icon_id");
-                    category = new CategoryModel(name, details, clinic_id, icon_id);
-                    category.setId(snapshot.getId());
-                    categoryList.add(category);
-
-                }
+    }
+}
                 categorySpinnerAdapter = new ArrayAdapter<CategoryModel>(getContext(), R.layout.spinner_items, categoryList);
                 categorySpinnerAdapter.setDropDownViewResource(R.layout.spinner_items);
                 categorySpinner.setAdapter(categorySpinnerAdapter);

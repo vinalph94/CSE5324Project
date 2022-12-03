@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mediassist.R;
 import com.example.mediassist.databinding.ScheduleAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
+import com.example.mediassist.util.CustomToast;
+import com.example.mediassist.util.ToastStatus;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -91,7 +93,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
                     navigateToAddFragment(doctor);
                 } else {
                     System.out.println("Selected date is before day");
-                    Toast.makeText(getContext(), "Selected date should be today or latter", Toast.LENGTH_SHORT).show();
+                    new CustomToast(getContext(), getActivity(), "ASelected date should be today or latter", ToastStatus.FAILURE).show();
                 }
             }
         });
@@ -153,10 +155,11 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         allClinicRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                String clinicName = value.getString("name");
-                System.out.println("clinicName : " + clinicName);
-                docSpecialistText.setText(String.format("%s clinic", clinicName));
+                if (value!=null){
+                    String clinicName = value.getString("name");
+                    System.out.println("clinicName : " + clinicName);
+                    docSpecialistText.setText(String.format("%s clinic", clinicName));
+                }
             }
         });
     }
@@ -167,6 +170,7 @@ public class ScheduleAppointmentFragment extends Fragment implements CalendarAda
         allCategoriesRefs.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
                 String description = value.getString("description");
                 System.out.println("description : " + description);
                 docDetailsText.setText(description);

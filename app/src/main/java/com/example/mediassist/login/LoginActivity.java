@@ -17,8 +17,11 @@ import com.example.mediassist.R;
 import com.example.mediassist.dashboard.DashboardActivity;
 import com.example.mediassist.databinding.ActivityLoginBinding;
 import com.example.mediassist.resetpassword.ForgotPasswordActivity;
+import com.example.mediassist.signup.RegisterActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
+import com.example.mediassist.util.CustomToast;
+import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -110,7 +113,11 @@ public class LoginActivity extends AppCompatActivity implements CheckForEmptyCal
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                new CustomToast(getApplicationContext(), LoginActivity.this, e.getMessage(), ToastStatus.FAILURE).show();
+
+
+
             }
         });
 

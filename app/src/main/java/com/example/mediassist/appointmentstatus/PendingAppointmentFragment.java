@@ -1,12 +1,19 @@
 package com.example.mediassist.appointmentstatus;
 
+import static android.view.Gravity.START;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediassist.R;
 import com.example.mediassist.appointment.models.AppointmentModel;
+import com.example.mediassist.appointmentacceptstatus.AcceptAppointmentAdapter;
 import com.example.mediassist.databinding.PendingAppointmentFragmentBinding;
 import com.example.mediassist.login.LoginActivity;
 import com.google.firebase.firestore.EventListener;
@@ -23,6 +31,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class PendingAppointmentFragment extends Fragment {
 
@@ -41,6 +52,10 @@ public class PendingAppointmentFragment extends Fragment {
     private AppointmentModel appointment;
     private PendingAppointmentAdapter courseAdapter;
     private Bundle bundle;
+    private ProgressBar loading_spinner;
+    private LinearLayoutCompat layout;
+    private GifImageView emptyImage;
+    private TextView emptyMessage;
 
 
     @Override
@@ -55,6 +70,11 @@ public class PendingAppointmentFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         binding = PendingAppointmentFragmentBinding.inflate(inflater, container, false);
+        loading_spinner = (ProgressBar) binding.categoryListProgressBar;
+        emptyImage = binding.clinicEmptyGif;
+        emptyMessage = binding.clinicNotFoundText;
+        layout = binding.linearLayout;
+        loading_spinner.setVisibility(View.VISIBLE);
 
         RecyclerView courseRV = binding.idRVCoursePendingAppointment;
         // Inflate the layout for this fragment
@@ -63,45 +83,62 @@ public class PendingAppointmentFragment extends Fragment {
         //      .child("patient_id").child(LoginActivity.patientUid);
         patient_id = LoginActivity.patientUid;
 
-        db.collection("appointments").whereEqualTo("status", "Pending").whereEqualTo("patient_id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                courseArrayList.clear();
-
-                if (value!=null) {
-                    for (QueryDocumentSnapshot snapshot : value) {
-                        patient_id = snapshot.getString("patient_id");
-                        patient_name = snapshot.getString("patient_name");
-                        doctor_id = snapshot.getString("doctor_id");
-                        doctor_name = snapshot.getString("doctor_name");
-                        clinic_id = snapshot.getString("clinic_id");
-                        category_id = snapshot.getString("category_id");
-                        slot_date = snapshot.getString("slot_date");
-                        slot_time = snapshot.getString("slot_time");
-                        status = snapshot.getString("status");
-                        appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
-                        appointment.setId(snapshot.getId());
-                        courseArrayList.add(appointment);
-
-                    }
-                }
-                courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
+            public void run() {
+                db.collection("appointments").whereEqualTo("status", "Pending").whereEqualTo("patient_id", LoginActivity.patientUid).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onAdapterItemClick(AppointmentModel appointment) {
-                        navigateToAddFragment(appointment);
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        courseArrayList.clear();
 
+                        if (value!=null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                patient_id = snapshot.getString("patient_id");
+                                patient_name = snapshot.getString("patient_name");
+                                doctor_id = snapshot.getString("doctor_id");
+                                doctor_name = snapshot.getString("doctor_name");
+                                clinic_id = snapshot.getString("clinic_id");
+                                category_id = snapshot.getString("category_id");
+                                slot_date = snapshot.getString("slot_date");
+                                slot_time = snapshot.getString("slot_time");
+                                status = snapshot.getString("status");
+                                appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
+                                appointment.setId(snapshot.getId());
+                                courseArrayList.add(appointment);
+
+                            }
+                        }
+                        if (courseArrayList.size() == 0) {
+                            emptyImage.setVisibility(View.VISIBLE);
+                            emptyMessage.setVisibility(View.VISIBLE);
+                        } else {
+                            layout.setGravity(START);
+                        }
+                        courseAdapter = new PendingAppointmentAdapter(getContext(), courseArrayList, new PendingAppointmentAdapter.PendingAppointmentItemListener() {
+                            @Override
+                            public void onAdapterItemClick(AppointmentModel appointment) {
+                                navigateToAddFragment(appointment);
+
+                            }
+
+                        });
+                        courseAdapter.notifyDataSetChanged();
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                                LinearLayoutManager.VERTICAL, false);
+
+                        courseRV.setLayoutManager(linearLayoutManager);
+                        courseRV.setAdapter(courseAdapter);
                     }
-
                 });
-                courseAdapter.notifyDataSetChanged();
+                loading_spinner.setVisibility(View.GONE);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
-                        LinearLayoutManager.VERTICAL, false);
 
-                courseRV.setLayoutManager(linearLayoutManager);
-                courseRV.setAdapter(courseAdapter);
             }
-        });
+        }, 1000);
+
+
 
 
         return binding.getRoot();

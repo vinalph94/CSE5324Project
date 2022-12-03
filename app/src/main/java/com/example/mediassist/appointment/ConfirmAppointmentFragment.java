@@ -21,6 +21,8 @@ import com.example.mediassist.appointmentstatus.AppointmentListActivity;
 import com.example.mediassist.databinding.ConfirmAppointmentFragmentBinding;
 import com.example.mediassist.doctor.models.DoctorModel;
 import com.example.mediassist.login.LoginActivity;
+import com.example.mediassist.util.CustomToast;
+import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -98,7 +100,7 @@ public class ConfirmAppointmentFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getContext(), "Appointment booked successfully", Toast.LENGTH_SHORT).show();
+                                new CustomToast(getContext(), getActivity(), "Appointment booked successfully", ToastStatus.SUCCESS).show();
                                 // Navigation.findNavController(binding.getRoot()).navigate(R.id.PatientDashboard);
                                 Intent intent = new Intent(getActivity(), AppointmentListActivity.class);
                                 startActivity(intent);
@@ -107,9 +109,9 @@ public class ConfirmAppointmentFragment extends Fragment {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NotNull Exception e) {
+                                new CustomToast(getContext(), getActivity(), "Error while booking Appointment", ToastStatus.FAILURE).show();
 
                                 //display a failure message
-                                Toast.makeText(getContext(), "Error while booking Appointment", Toast.LENGTH_SHORT).show();
                                 System.out.println("Error while booking Appointment");
                             }
                         });

@@ -1,12 +1,19 @@
 package com.example.mediassist.acceptappointmentclinicadmin;
 
+import static android.view.Gravity.START;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +31,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class AcceptAppointmentClinicAdminSpecificFragment extends Fragment {
 
@@ -43,6 +52,10 @@ public class AcceptAppointmentClinicAdminSpecificFragment extends Fragment {
     private AppointmentModel appointment;
     private AcceptAppointmentAdapter courseAdapter;
     private String clinicAdminClinic_id;
+    private ProgressBar loading_spinner;
+    private LinearLayoutCompat layout;
+    private GifImageView emptyImage;
+    private TextView emptyMessage;
 
     @Override
     public View onCreateView(
@@ -51,45 +64,68 @@ public class AcceptAppointmentClinicAdminSpecificFragment extends Fragment {
     ) {
         db = FirebaseFirestore.getInstance();
         binding = AcceptAppointmentClinicAdminSpecificFragmentBinding.inflate(inflater, container, false);
+        loading_spinner = (ProgressBar) binding.categoryListProgressBar;
+        emptyImage = binding.clinicEmptyGif;
+        emptyMessage = binding.clinicNotFoundText;
+        layout = binding.linearLayout;
+        loading_spinner.setVisibility(View.VISIBLE);
         RecyclerView courseRV = binding.idRVCourseAcceptAppointmentClinicAdmin;
 
+
         clinicAdminClinic_id = DashboardActivity.clinic_id;
-        db.collection("appointments").whereEqualTo("status", "Accepted").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                courseArrayList.clear();
-                for (QueryDocumentSnapshot snapshot : value) {
-                    patient_id = snapshot.getString("patient_id");
-                    patient_name = snapshot.getString("patient_name");
-                    doctor_id = snapshot.getString("doctor_id");
-                    doctor_name = snapshot.getString("doctor_name");
-                    clinic_id = snapshot.getString("clinic_id");
-                    category_id = snapshot.getString("category_id");
-                    slot_date = snapshot.getString("slot_date");
-                    slot_time = snapshot.getString("slot_time");
-                    status = snapshot.getString("status");
-                    appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
-                    appointment.setId(snapshot.getId());
-                    courseArrayList.add(appointment);
-
-                }
-                courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
+            public void run() {
+                db.collection("appointments").whereEqualTo("status", "Accepted").whereEqualTo("clinic_id", clinicAdminClinic_id).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onAdapterItemClick(AppointmentModel appointment) {
-                        //navigateToAddFragment(appointment);
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        courseArrayList.clear();
+                        if(value!=null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                patient_id = snapshot.getString("patient_id");
+                                patient_name = snapshot.getString("patient_name");
+                                doctor_id = snapshot.getString("doctor_id");
+                                doctor_name = snapshot.getString("doctor_name");
+                                clinic_id = snapshot.getString("clinic_id");
+                                category_id = snapshot.getString("category_id");
+                                slot_date = snapshot.getString("slot_date");
+                                slot_time = snapshot.getString("slot_time");
+                                status = snapshot.getString("status");
+                                appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
+                                appointment.setId(snapshot.getId());
+                                courseArrayList.add(appointment);
+                            }
+                        }
+                        if (courseArrayList.size() == 0) {
+                            emptyImage.setVisibility(View.VISIBLE);
+                            emptyMessage.setVisibility(View.VISIBLE);
+                        } else {
+                            layout.setGravity(START);
+                        }
+                        courseAdapter = new AcceptAppointmentAdapter(getContext(), courseArrayList, new AcceptAppointmentAdapter.AcceptAppointmentItemListener() {
+                            @Override
+                            public void onAdapterItemClick(AppointmentModel appointment) {
+                                //navigateToAddFragment(appointment);
 
+                            }
+
+                        });
+                        courseAdapter.notifyDataSetChanged();
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                                LinearLayoutManager.VERTICAL, false);
+
+                        courseRV.setLayoutManager(linearLayoutManager);
+                        courseRV.setAdapter(courseAdapter);
                     }
-
                 });
-                courseAdapter.notifyDataSetChanged();
+                loading_spinner.setVisibility(View.GONE);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
-                        LinearLayoutManager.VERTICAL, false);
 
-                courseRV.setLayoutManager(linearLayoutManager);
-                courseRV.setAdapter(courseAdapter);
             }
-        });
+        }, 1000);
+
 
 
         return binding.getRoot();

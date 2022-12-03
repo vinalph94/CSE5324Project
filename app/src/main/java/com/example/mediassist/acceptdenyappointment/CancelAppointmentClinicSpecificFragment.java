@@ -1,5 +1,7 @@
 package com.example.mediassist.acceptdenyappointment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,11 +61,31 @@ public class CancelAppointmentClinicSpecificFragment extends Fragment {
 
         }
 
+
+
         binding.cancelAppointmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                updateAppointmentDeclinedStatus(id, appointment);
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                updateAppointmentDeclinedStatus(id, appointment);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do your No progress
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                ab.setMessage("Are you sure to cancel the appointment?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+
             }
         });
 

@@ -19,6 +19,8 @@ import com.example.mediassist.databinding.ActivityRegisterBinding;
 import com.example.mediassist.login.LoginActivity;
 import com.example.mediassist.util.CheckForEmptyCallBack;
 import com.example.mediassist.util.CustomTextWatcher;
+import com.example.mediassist.util.CustomToast;
+import com.example.mediassist.util.ToastStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 
@@ -118,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
 
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(RegisterActivity.this, "user registered", Toast.LENGTH_SHORT).show();
+                                new CustomToast(getApplicationContext(), RegisterActivity.this, "user registered", ToastStatus.SUCCESS).show();
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -126,19 +129,22 @@ public class RegisterActivity extends AppCompatActivity implements CheckForEmpty
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RegisterActivity.this, "fail to register user" + e, Toast.LENGTH_SHORT).show();
+                                new CustomToast(getApplicationContext(),RegisterActivity.this, "fail to register user" + e, ToastStatus.FAILURE).show();
+
                             }
                         });
 
 
                     } else {
-                        Toast.makeText(RegisterActivity.this, "fail" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        new CustomToast(getApplicationContext(),RegisterActivity.this, "fail" + Objects.requireNonNull(task.getException()).getMessage(), ToastStatus.FAILURE).show();
+
                     }
 
                 }
             });
         } else {
-            Toast.makeText(RegisterActivity.this, "please check data again", Toast.LENGTH_SHORT).show();
+            new CustomToast(getApplicationContext(),RegisterActivity.this, "Please check data again", ToastStatus.FAILURE).show();
+
         }
 
     }
