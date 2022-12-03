@@ -1,5 +1,6 @@
 package com.example.mediassist.acceptdenyappointmentadmin;
 
+import static android.view.Gravity.CENTER;
 import static android.view.Gravity.START;
 
 import android.os.Bundle;
@@ -83,24 +84,27 @@ public class PendingAppointmentAdminSpecificFragment extends Fragment {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         courseArrayList.clear();
-                        for (QueryDocumentSnapshot snapshot : value) {
-                            patient_id = snapshot.getString("patient_id");
-                            patient_name = snapshot.getString("patient_name");
-                            doctor_id = snapshot.getString("doctor_id");
-                            doctor_name = snapshot.getString("doctor_name");
-                            clinic_id = snapshot.getString("clinic_id");
-                            category_id = snapshot.getString("category_id");
-                            slot_date = snapshot.getString("slot_date");
-                            slot_time = snapshot.getString("slot_time");
-                            status = snapshot.getString("status");
-                            appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
-                            appointment.setId(snapshot.getId());
-                            courseArrayList.add(appointment);
+                        if(value!=null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                patient_id = snapshot.getString("patient_id");
+                                patient_name = snapshot.getString("patient_name");
+                                doctor_id = snapshot.getString("doctor_id");
+                                doctor_name = snapshot.getString("doctor_name");
+                                clinic_id = snapshot.getString("clinic_id");
+                                category_id = snapshot.getString("category_id");
+                                slot_date = snapshot.getString("slot_date");
+                                slot_time = snapshot.getString("slot_time");
+                                status = snapshot.getString("status");
+                                appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
+                                appointment.setId(snapshot.getId());
+                                courseArrayList.add(appointment);
 
+                            }
                         }
                         if (courseArrayList.size() == 0) {
                             emptyImage.setVisibility(View.VISIBLE);
                             emptyMessage.setVisibility(View.VISIBLE);
+                            layout.setGravity(CENTER);
                         } else {
                             layout.setGravity(START);
                         }

@@ -251,7 +251,7 @@ if(value!=null) {
                         }
                     }
                 };
-                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
                 ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 

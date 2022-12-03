@@ -216,7 +216,7 @@ public class AddClinicFragment extends Fragment implements CheckForEmptyCallBack
                         }
                     }
                 };
-                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
                 ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 

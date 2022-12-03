@@ -1,5 +1,6 @@
 package com.example.mediassist.category;
 
+import static android.view.Gravity.CENTER;
 import static android.view.Gravity.START;
 
 import android.os.Bundle;
@@ -74,23 +75,26 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         courseArrayList.clear();
-                        for (QueryDocumentSnapshot snapshot : value) {
-                            name = snapshot.getString("name");
-                            if (snapshot.getString("description") != null) {
-                                description = snapshot.getString("description");
-                            }
-                            clinic_id = snapshot.getString("clinicId");
-                            icon_id = snapshot.getString("iconId");
-                            category = (new CategoryModel(name, description, icon_id, clinic_id));
-                            category.setId(snapshot.getId());
-                            category.setIconId(icon_id);
-                            category.setClinicId(clinic_id);
-                            courseArrayList.add(category);
+                        if(value!=null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                name = snapshot.getString("name");
+                                if (snapshot.getString("description") != null) {
+                                    description = snapshot.getString("description");
+                                }
+                                clinic_id = snapshot.getString("clinicId");
+                                icon_id = snapshot.getString("iconId");
+                                category = (new CategoryModel(name, description, icon_id, clinic_id));
+                                category.setId(snapshot.getId());
+                                category.setIconId(icon_id);
+                                category.setClinicId(clinic_id);
+                                courseArrayList.add(category);
 
+                            }
                         }
                         if (courseArrayList.size() == 0) {
                             emptyImage.setVisibility(View.VISIBLE);
                             emptyMessage.setVisibility(View.VISIBLE);
+                            layout.setGravity(CENTER);
                         } else {
                             layout.setGravity(START);
                         }

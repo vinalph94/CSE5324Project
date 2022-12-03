@@ -194,7 +194,7 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
                         }
                     }
                 };
-                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
                 ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
@@ -205,9 +205,10 @@ public class AddClinicAdminFragment extends Fragment implements CheckForEmptyCal
         clinicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                assign_clinic = clinicsList.get(i).getId();
-                clinic_name=clinicsList.get(i).getName();
+if(clinicsList.size()!=0) {
+    assign_clinic = clinicsList.get(i).getId();
+    clinic_name = clinicsList.get(i).getName();
+}
             }
 
             @Override

@@ -79,7 +79,7 @@ public class CancelAppointmentFragment extends Fragment {
                         }
                     }
                 };
-                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
                 ab.setMessage("Are you sure to cancel the appointment?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 

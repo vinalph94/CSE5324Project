@@ -1,5 +1,6 @@
 package com.example.mediassist.denyappointmentclinicadmin;
 
+import static android.view.Gravity.CENTER;
 import static android.view.Gravity.START;
 
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class DenyAppointmentClinicAdminSpecificFragment extends Fragment {
                         if (courseArrayList.size() == 0) {
                             emptyImage.setVisibility(View.VISIBLE);
                             emptyMessage.setVisibility(View.VISIBLE);
+                            layout.setGravity(CENTER);
                         } else {
                             layout.setGravity(START);
                         }

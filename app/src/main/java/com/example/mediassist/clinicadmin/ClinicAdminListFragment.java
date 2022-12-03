@@ -1,5 +1,6 @@
 package com.example.mediassist.clinicadmin;
 
+import static android.view.Gravity.CENTER;
 import static android.view.Gravity.START;
 
 import android.os.Bundle;
@@ -75,19 +76,22 @@ public class ClinicAdminListFragment extends Fragment {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         courseArrayList.clear();
-                        for (QueryDocumentSnapshot snapshot : value) {
-                            name = snapshot.getString("name");
-                            phoneNumber = snapshot.getString("phone_number");
-                            email = snapshot.getString("email");
-                            assignClinic = snapshot.getString("assign_clinic");
-                            clinic_name = snapshot.getString("clinic_name");
-                            user_id =snapshot.getString("id");
-                            clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic,clinic_name,user_id);
-                            clinicadmin.setId(snapshot.getId());
-                            courseArrayList.add(clinicadmin);
+                        if(value!=null) {
+                            for (QueryDocumentSnapshot snapshot : value) {
+                                name = snapshot.getString("name");
+                                phoneNumber = snapshot.getString("phone_number");
+                                email = snapshot.getString("email");
+                                assignClinic = snapshot.getString("assign_clinic");
+                                clinic_name = snapshot.getString("clinic_name");
+                                user_id = snapshot.getString("id");
+                                clinicadmin = new ClinicAdminModel(name, phoneNumber, email, assignClinic, clinic_name, user_id);
+                                clinicadmin.setId(snapshot.getId());
+                                courseArrayList.add(clinicadmin);
+                            }
                         }
 
                         if (courseArrayList.size() == 0) {
+                            layout.setGravity(CENTER);
                             emptyImage.setVisibility(View.VISIBLE);
                             emptyMessage.setVisibility(View.VISIBLE);
                         } else {

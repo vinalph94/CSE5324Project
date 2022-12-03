@@ -95,6 +95,8 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
 
         clinicsList = new ArrayList<ClinicModel>();
         iconsList = new ArrayList<IconModel>();
+
+
         db.collection("icons").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -219,7 +221,7 @@ public class AddCategoryFragment extends Fragment implements CheckForEmptyCallBa
                         }
                     }
                 };
-                AlertDialog.Builder ab = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogTheme);
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
                 ab.setMessage("Are you sure to delete?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 

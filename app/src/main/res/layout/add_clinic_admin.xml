@@ -118,6 +118,8 @@
             android:maxWidth="35dp"
             android:text="Save"
             android:textAlignment="center"
+            android:backgroundTint="@color/primary_color"
+            android:textColor="@color/white"
             android:visibility="gone"
             app:cornerRadius="100dp" />
 
