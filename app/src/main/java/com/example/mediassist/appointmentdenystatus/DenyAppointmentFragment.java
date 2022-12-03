@@ -85,6 +85,7 @@ public class DenyAppointmentFragment extends Fragment {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         courseArrayList.clear();
+                        if(value!=null){
                         for (QueryDocumentSnapshot snapshot : value) {
                             patient_id = snapshot.getString("patient_id");
                             patient_name = snapshot.getString("patient_name");
@@ -98,7 +99,7 @@ public class DenyAppointmentFragment extends Fragment {
                             appointment = (new AppointmentModel(patient_id, patient_name, doctor_id, doctor_name, clinic_id, category_id, slot_date, slot_time, status));
                             appointment.setId(snapshot.getId());
                             courseArrayList.add(appointment);
-
+                        }
                         }
                         if (courseArrayList.size() == 0) {
                             emptyImage.setVisibility(View.VISIBLE);
