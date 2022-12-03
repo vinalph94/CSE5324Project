@@ -29,6 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     public static String doctor_id = "";
     public static String clinic_id = "";
+    public static String role = "";
     private AppBarConfiguration appBarConfiguration;
     private ActivityDashboardBinding binding;
     private NavController navController;
@@ -53,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
         db.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                String role = "";
+
                 if (value != null) {
                     for (QueryDocumentSnapshot snapshot : value) {
                         if (Objects.equals(snapshot.getId(), userId)) {
