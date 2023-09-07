@@ -1,6 +1,5 @@
 package com.example.mediassist.resetpassword;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mediassist.R;
 import com.example.mediassist.databinding.FragmentSuccessfulResetPasswordBinding;
 
 
@@ -36,8 +33,8 @@ public class SuccessfulResetPassword extends Fragment {
         binding.HomePageButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SuccessfulResetPassword.this)
-                        .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
+                //NavHostFragment.findNavController(SuccessfulResetPassword.this)
+                //      .navigate(R.id.action_ResetPassword_to_SuccessfulResetPassword);
             }
         });
 

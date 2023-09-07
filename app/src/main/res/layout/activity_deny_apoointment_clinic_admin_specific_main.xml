@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".denyappointmentclinicadmin.DenyAppointmentClinicAdminSpecificMainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:theme="@style/Theme.MediAssist.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:paddingTop="15dp"
+                app:icon="@drawable/ic_baseline_arrow_back_24"
+                app:iconTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textTitle"
+                style="@style/appbar_title"
+                android:layout_marginStart="4dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:paddingTop="22dp"
+                android:text="Declined Appointments" />
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_deny_appointment_clinic_admin_specific_main" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

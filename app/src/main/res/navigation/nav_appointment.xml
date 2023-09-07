@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_appointment"
+    app:startDestination="@id/MakeAppointment">
+
+    <fragment
+        android:id="@+id/MakeAppointment"
+        android:name="com.example.mediassist.appointment.MakeAppoinmentFragment"
+        android:label="Make an Appointment"
+        tools:layout="@layout/fragment_make_appoinment">
+
+        <action
+            android:id="@+id/action_MakeAppointment_to_ScheduleAppointment"
+            app:destination="@id/ScheduleAppointment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ScheduleAppointment"
+        android:name="com.example.mediassist.appointment.ScheduleAppointmentFragment"
+        android:label="Schedule Appointment"
+        tools:layout="@layout/schedule_appointment_fragment">
+
+        <action
+            android:id="@+id/action_ScheduleAppointment_to_ConfirmAppointment"
+            app:destination="@id/ConfirmAppointment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ConfirmAppointment"
+        android:name="com.example.mediassist.appointment.ConfirmAppointmentFragment"
+        android:label="Confirm Appointment"
+        tools:layout="@layout/confirm_appointment_fragment">
+        <action
+            android:id="@+id/action_ConfirmAppointment_to_nav_appointment"
+            app:destination="@id/nav_appointment" />
+
+    </fragment>
+
+</navigation>

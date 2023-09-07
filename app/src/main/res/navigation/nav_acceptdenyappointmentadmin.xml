@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_acceptdenyappointmentadmin"
+    app:startDestination="@id/PendingAppointmentAdminSpecificFragment">
+
+    <fragment
+        android:id="@+id/PendingAppointmentAdminSpecificFragment"
+        android:name="com.example.mediassist.acceptdenyappointmentadmin.PendingAppointmentAdminSpecificFragment"
+        android:label="Pending Appointment Admin Specific Fragment"
+        tools:layout="@layout/pending_appointment_admin_specific_fragment">
+
+        <action
+            android:id="@+id/action_PendingAppointmentAdminSpecificFragment_to_CancelAppointmentAdminSpecificFragment"
+            app:destination="@id/CancelAppointmentAdminSpecificFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CancelAppointmentAdminSpecificFragment"
+        android:name="com.example.mediassist.acceptdenyappointmentadmin.CancelAppointmentAdminSpecificFragment"
+        android:label="Cancel Appointment Clinic Specific Fragment"
+        tools:layout="@layout/cancel_appointment_admin_specific_fragment">
+        <action
+            android:id="@+id/action_cancel_appointment_admin_specific_fragment_to_nav_acceptdenyappointmentadmin"
+            app:destination="@id/nav_acceptdenyappointmentadmin" />
+
+    </fragment>
+</navigation>

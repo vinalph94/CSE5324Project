@@ -2,16 +2,141 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediAssist"
         tools:targetApi="31">
+        <activity
+            android:name=".denyappointmentadmin.DenyAppointmentAdminSpecificMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_deny_appointment_admin_specific_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".acceptappointmentadmin.AcceptAppointmentAdminMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_accept_deny_appointment_admin_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".acceptdenyappointmentadmin.AcceptDenyAppointmentAdminMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_accept_appointment_admin_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".denyappointmentclinicadmin.DenyAppointmentClinicAdminSpecificMainActivity"
+            android:exported="false"
+            android:label="DenyAppointmentClinicAdminSpecificMainActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".acceptappointmentclinicadmin.AcceptAppointmentClinicAdminSpecificActivity"
+            android:exported="false"
+            android:label="AcceptAppointmentClinicAdminSpecificActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".scheduleappointmentdoctor.ScheduledAppointmentForDoctorMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_scheduled_appointment_for_doctor_main"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".category.CategoriesByDoctorActivity"
+            android:exported="false"
+            android:label="@string/title_activity_categories_by_doctor"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".acceptdenyappointment.AcceptDenyAppointmentActivity"
+            android:exported="false"
+            android:label="Accept_Deny_AppointmentActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointmentdenystatus.DenyAppointmentMainActivity"
+            android:exported="false"
+            android:label="Deny_Appointment_MainActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointmentacceptstatus.AcceptAppointmentMainActivity"
+            android:exported="false"
+            android:label="Accept_Appointment_MainActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointmentstatus.AppointmentListActivity"
+            android:exported="false"
+            android:label="appointment_list"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SearchDoctors.SearchDoctorsListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_search_doctors_list"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".appointment.ScheduleAppointmentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_schedule_appointment"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/dropdown_item" />
@@ -55,7 +180,16 @@
         <activity
             android:name=".category.CategoryActivity"
             android:exported="false"
-            android:label="@string/title_activity_category"
+            android:label="CategoryActivity"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".doctor.DoctorActivity"
+            android:exported="false"
+            android:label="DoctorActivity"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -80,6 +214,14 @@
             android:name=".clinic.ClinicActivity"
             android:exported="false"
             android:label="@string/title_activity_clinic"
+            android:theme="@style/Theme.MediAssist.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".signup.RegisterActivity"
+            android:exported="false"
             android:theme="@style/Theme.MediAssist.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"

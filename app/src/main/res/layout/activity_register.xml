@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+    <!--    android:alpha="0.3"-->
+    <!--    >-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        tools:context=".signup.RegisterActivity">
+
+        <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="261dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="Inter"
+            android:gravity="center"
+            android:text="Sign up for free"
+            android:textColor="@color/_bg__signin_page_color"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/register_name_label"
+            style="@style/mandatory_label_text"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/register_name_text"
+            style="@style/default_edit_text"
+            android:hint="Name" />
+
+        <TextView
+            android:id="@+id/register_name_error_text"
+            style="@style/default_error_text"
+            android:text="Name is required"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/register_phone_number_label"
+            style="@style/mandatory_label_text"
+            android:text="Phone Number" />
+
+        <EditText
+            android:id="@+id/register_phone_number_text"
+            style="@style/default_edit_text"
+            android:hint="Phone Number"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/register_phone_number_error_text"
+            style="@style/default_error_text"
+            android:text="Phone Number is required"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/register_phone_number_error_text2"
+            style="@style/default_error_text"
+            android:text="Invalid phone number"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/register_email_label"
+            style="@style/mandatory_label_text"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/register_email_text"
+            style="@style/default_edit_text"
+            android:hint="Email" />
+
+        <TextView
+            android:id="@+id/register_email_error_text"
+            style="@style/default_error_text"
+            android:text="Email is required"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/register_email_error_text2"
+            style="@style/default_error_text"
+            android:text="Invalid Email"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/register_pwd_label"
+            style="@style/mandatory_label_text"
+            android:text="Password" />
+
+        <EditText
+            android:id="@+id/register_pwd_text"
+            style="@style/default_edit_text"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/register_pwd_error_text"
+            style="@style/default_error_text"
+            android:text="Passwords must be of 8 char"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/register_repwd_label"
+            style="@style/mandatory_label_text"
+            android:text="Re-Type Password" />
+
+        <EditText
+            android:id="@+id/register_repwd_text"
+            style="@style/default_edit_text"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/register_repwd_error_text"
+            style="@style/default_error_text"
+            android:text="Passwords must match"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/register_progress_bar"
+        style="@style/default_progress_bar" />
+
+    <Button
+        android:id="@+id/signup_button"
+        style="@style/default_disabled_button"
+        android:layout_width="250dp"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="#A9CACF"
+        android:onClick="onClickSignUpButton"
+        android:text="Sign Up"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>
+
+    <!--   style="@style/default_disabled_button" -->

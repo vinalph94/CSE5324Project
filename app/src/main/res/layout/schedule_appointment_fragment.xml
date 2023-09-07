@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".appointment.ScheduleAppointmentFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-60dp">
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/doc_details_card"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:background="#252525"
+    android:backgroundTint="#252525"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_marginLeft="@dimen/_20sdp"
+    android:layout_marginRight="@dimen/_30sdp"
+    android:layout_marginTop="@dimen/_10sdp">
+        <TextView
+            android:id="@+id/docName"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:textColor="#408E9B"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/docDetails"
+            android:layout_width="304dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/docName"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/docSpecialist"
+            android:layout_width="304dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/docDetails"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="70dp"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/workTime"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/doc_details_card"
+            android:layout_marginTop="20dp"
+            android:text="Working Time"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/workTimeDetails"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/workTime"
+           android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="5dp"
+            android:text="Mon-Fri 10.00 AM-10.00PM"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12ssp" />
+
+
+        <TextView
+            android:id="@+id/appointment"
+            android:layout_width="304dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/workTimeDetails"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:text="Make Appointment"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/previousWeekAction"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:paddingTop="15dp"
+                app:icon="@drawable/back_arrow"
+                app:iconTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/monthYearTV"
+                android:layout_width="2dp"
+                android:layout_height="38dp"
+                android:layout_weight="2"
+                android:text="Nov 2022"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+            <Button
+                android:id="@+id/nextWeekAction"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:paddingTop="15dp"
+                app:icon="@drawable/forward_arrow"
+                app:iconTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="405dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SUN"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MON"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TUE"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="WED"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="THUR"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FRI"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SAT"
+                android:textAlignment="center"
+                android:textColor="#408E9B"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="445dp"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#252525" />
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/bookAptBtn"
+            style="@style/default_disabled_button"
+            android:layout_width="300dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/primary_color"
+            android:clickable="true"
+            android:enabled="true"
+            android:text="Book Appointment"/>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<ImageButton
+                android:id="@+id/searchBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:padding="20dp"
+                android:src="@drawable/img_2" />-->

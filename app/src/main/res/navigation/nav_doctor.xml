@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_doctor"
+    app:startDestination="@id/DoctorListFragment">
+
+    <fragment
+        android:id="@+id/DoctorListFragment"
+        android:name="com.example.mediassist.doctor.DoctorListFragment"
+        android:label="doctorListFragment"
+        tools:layout="@layout/doctor_list">
+
+        <action
+            android:id="@+id/action_DoctorListFragment_to_AddDoctorFragment"
+            app:destination="@id/AddDoctorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AddDoctorFragment"
+        android:name="com.example.mediassist.doctor.AddDoctorFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/add_doctor">
+
+        <action
+            android:id="@+id/action_AddDoctorFragment_to_DoctorActivity"
+            app:destination="@id/DoctorListFragment" />
+    </fragment>
+</navigation>

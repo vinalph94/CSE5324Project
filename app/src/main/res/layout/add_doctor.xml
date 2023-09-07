@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        tools:context=".doctor.AddDoctorFragment">
+
+        <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
+
+        <TextView
+            android:id="@+id/doctor_name_label"
+            style="@style/mandatory_label_text"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/doctor_name_text"
+            style="@style/default_edit_text"
+            android:hint="Name" />
+
+        <TextView
+            android:id="@+id/doctor_name_error_text"
+            style="@style/default_error_text"
+            android:text="doctor name is required"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/doctor_phone_number_label"
+            style="@style/mandatory_label_text"
+            android:text="Phone Number" />
+
+        <EditText
+            android:id="@+id/doctor_phone_number_text"
+            style="@style/default_edit_text"
+            android:hint="Phone Number"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/doctor_phone_number_error_text"
+            style="@style/default_error_text"
+            android:text="Phone Number is required"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/doctor_email_label"
+            style="@style/mandatory_label_text"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/doctor_email_text"
+            style="@style/default_edit_text"
+            android:hint="Email" />
+
+        <TextView
+            android:id="@+id/doctor_email_error_text"
+            style="@style/default_error_text"
+            android:text="Email is required"
+            android:visibility="gone" />
+
+
+        <TextView
+
+            style="@style/mandatory_label_text"
+            android:layout_marginLeft="45dp"
+            android:text="Assign Specialization" />
+
+        <Spinner
+            android:id="@+id/Specialization_spinner"
+            android:layout_width="335dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/doctor_clinic_label"
+            style="@style/mandatory_label_text"
+            android:layout_marginLeft="45dp"
+            android:text="Assign Clinic" />
+
+        <Spinner
+            android:id="@+id/Clinic_spinner"
+            android:layout_width="335dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu">
+
+        </Spinner>
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/doctor_progress_bar"
+        style="@style/default_progress_bar" />
+
+    <Button
+        android:id="@+id/doctor_save_button"
+        style="@style/default_disabled_button"
+        android:text="Save" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/doctor_edit_button"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="80dp"
+            android:maxWidth="35dp"
+            android:text="Save"
+            android:textAlignment="center"
+            android:backgroundTint="@color/primary_color"
+            android:visibility="gone"
+            app:cornerRadius="100dp" />
+
+        <Button
+            android:id="@+id/doctor_delete_button"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="80dp"
+            android:backgroundTint="@color/secondary_error_color"
+            android:maxWidth="35dp"
+            android:text="Delete"
+            android:textAlignment="center"
+            android:textColor="@color/error_text_color"
+
+            android:visibility="gone"
+            app:cornerRadius="100dp" />
+
+    </LinearLayout>
+</RelativeLayout>

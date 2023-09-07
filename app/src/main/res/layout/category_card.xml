@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/clinic_doctor_specialist_card"
+
+    style="@style/doctor_specialist_card"
+    android:layout_width="100dp"
+    android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/category_id"
+        style="@style/dashboard_specialist_menu_image_view" />
+
+    <TextView
+        android:id="@+id/category_name"
+        style="@style/dashboard_menu_text"
+        android:gravity="center"
+
+        android:text="Neurologist" />
+
+    <!--    <TextView-->
+    <!--        style="@style/dashboard_menu_text"-->
+    <!--        android:layout_marginLeft="5dp"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:text="10 doctors" />-->
+</androidx.cardview.widget.CardView>
+

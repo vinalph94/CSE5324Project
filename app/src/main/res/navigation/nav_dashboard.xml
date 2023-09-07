@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard"
-    app:startDestination="@id/SuperAdminDashboardFragment">
+    app:startDestination="@id/PatientDashboard">
 
     <fragment
         android:id="@+id/SuperAdminDashboardFragment"
@@ -12,28 +12,41 @@
         tools:layout="@layout/super_admin_dashboard">
 
         <action
-            android:id="@+id/action_SuperAdminDashboardFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.mediassist.dashboard.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+            android:id="@+id/SuperAdminDashboardFragment_to_PatientDashboard"
+            app:destination="@id/PatientDashboard" />
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
     </fragment>
+
 
     <fragment
         android:id="@+id/PatientDashboard"
         android:name="com.example.mediassist.dashboard.PatientDashboardFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_patient_dashboard">
+        <action
+            android:id="@+id/PatientDashboardFragment_to_welcomeFragment"
+            app:destination="@id/FirstFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/ClinicAdminDashboard"
+        android:name="com.example.mediassist.dashboard.ClinicAdminDashboardFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/clinic_admin_layout">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_ClinicAdminDashboard_to_DoctorDashboard"
+            app:destination="@id/DoctorDashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/DoctorDashboard"
+        android:name="com.example.mediassist.dashboard.DoctorDashboardFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/doctor_dashboard">
+
+        <action
+            android:id="@+id/action_DoctorDashboard_to_SuperAdminDashboardFragment"
+            app:destination="@id/SuperAdminDashboardFragment" />
+
     </fragment>
 </navigation>

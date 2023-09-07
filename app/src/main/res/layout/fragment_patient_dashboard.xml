@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PatientDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".dashboard.PatientDashboardFragment">
 
-    <Button
+    <EditText
+        android:id="@+id/search_text"
         style="@style/default_edit_text"
         android:layout_gravity="top|start"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:width="450dp"
+
         android:backgroundTint="@color/search_box_color"
         android:drawableEnd="@drawable/ic_baseline_search_24"
         android:hint="Search"
         android:textAlignment="textStart" />
 
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_20sdp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
+        android:id="@+id/patient_dashboard_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -29,17 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginTop="30dp"
                 android:text="Specialist Doctor"
                 android:textColor="@color/white"
                 android:textFontWeight="1000"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/category_page_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="30dp"
                 android:text="See all"
                 android:textColor="@color/primary_color"
                 android:textFontWeight="1000"
@@ -53,115 +71,22 @@
             android:layout_weight="0"
             android:fillViewport="true"
             android:measureAllChildren="false"
-            android:scrollbars="none" >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:scrollbars="none">
 
-            android:orientation="horizontal">
-
-            <GridLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:alignmentMode="alignMargins"
-                android:columnCount="4"
-                android:columnOrderPreserved="true"
-                android:orientation="horizontal"
-                android:rowCount="3">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
 
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/clinic_doctor_specialist_card"
-                    style="@style/doctor_specialist_card">
-
-                    <ImageView
-
-                        style="@style/dashboard_specialist_menu_image_view"
-                        android:src="@drawable/neuron" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Neurologist" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="40dp"
-                        android:text="10 doctors" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/clinic_doctor_specialist_card2"
-                    style="@style/doctor_specialist_card">
-
-                    <ImageView
-
-                        style="@style/dashboard_specialist_menu_image_view"
-                        android:src="@drawable/dentistry" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Dentist" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="40dp"
-                        android:text="25 doctors" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/clinic_doctor_specialist_card3"
-                    style="@style/doctor_specialist_card">
-
-                    <ImageView
-
-                        style="@style/dashboard_specialist_menu_image_view"
-                        android:src="@drawable/cardio" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Cardiologist" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="40dp"
-                        android:text="2 doctors" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/clinic_doctor_specialist_card4"
-                    style="@style/doctor_specialist_card">
-
-                    <ImageView
-
-                        style="@style/dashboard_specialist_menu_image_view"
-                        android:src="@drawable/allergies" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Allergist" />
-
-                    <TextView
-                        style="@style/dashboard_menu_text"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="40dp"
-                        android:text="14 doctors" />
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categories_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </HorizontalScrollView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,76 +97,84 @@
             android:textFontWeight="1000"
             android:textStyle="bold" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:columnOrderPreserved="true"
-            android:orientation="horizontal"
-            android:rowCount="3">
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:alignmentMode="alignMargins"
+                android:columnCount="2"
+                android:columnOrderPreserved="true"
+                android:orientation="horizontal"
+                android:rowCount="3">
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/clinic_doctor_card"
-                style="@style/dashboard_card">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clinic_doctor_card"
+                    style="@style/dashboard_card">
 
-                <ImageView
-                    style="@style/dashboard_menu_image_view"
-                    android:src="@drawable/calendar" />
+                    <ImageView
+                        style="@style/dashboard_menu_image_view"
+                        android:src="@drawable/calendar" />
 
-                <TextView
-                    style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="5dp"
-                    android:text="Make an appointment" />
+                    <TextView
+                        style="@style/dashboard_menu_text"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Make an appointment" />
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/clinic_pending_appointments_card"
-                style="@style/dashboard_card">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clinic_pending_appointments_card"
+                    style="@style/dashboard_card">
 
-                <ImageView
-                    style="@style/dashboard_menu_image_view"
-                    android:src="@drawable/view" />
+                    <ImageView
+                        style="@style/dashboard_menu_image_view"
+                        android:src="@drawable/view" />
 
-                <TextView
-                    style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="20dp"
-                    android:text="Pending Appointments" />
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        style="@style/dashboard_menu_text"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Pending Appointments" />
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/clinic_accepted_appointments_card"
-                style="@style/dashboard_card">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clinic_accepted_appointments_card"
+                    style="@style/dashboard_card">
 
-                <ImageView
-                    style="@style/dashboard_menu_image_view"
-                    android:src="@drawable/checked" />
+                    <ImageView
+                        style="@style/dashboard_menu_image_view"
+                        android:src="@drawable/checked" />
 
-                <TextView
-                    style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="20dp"
-                    android:text="Accepted Appointments" />
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        style="@style/dashboard_menu_text"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Accepted Appointments" />
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/clinic_cancelled_appointments_card"
-                style="@style/dashboard_card">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clinic_cancelled_appointments_card"
+                    style="@style/dashboard_card">
 
-                <ImageView
-                    style="@style/dashboard_menu_image_view"
-                    android:src="@drawable/cancelled" />
+                    <ImageView
+                        style="@style/dashboard_menu_image_view"
+                        android:src="@drawable/cancelled" />
 
-                <TextView
-                    style="@style/dashboard_menu_text"
-                    android:layout_marginLeft="20dp"
-                    android:text="Cancelled Appointments" />
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        style="@style/dashboard_menu_text"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Cancelled Appointments" />
+                </androidx.cardview.widget.CardView>
 
-        </GridLayout>
+            </GridLayout>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

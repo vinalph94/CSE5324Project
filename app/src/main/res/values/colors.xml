@@ -31,11 +31,16 @@
     <color name="asterisk_error_color">#FFE50000</color>
     <color name="secondary_error_color">#FF250E13</color>
     <color name="search_box_color">#FF222121</color>
-
+    <color name="success">#3FB664</color>
 
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+
+    <color name="gray">#888</color>
+    <color name="dark_gray">#FF252525</color>
+    <color name="blue">#0000FF</color>
+    <color name="calendarblack">#FF000000</color>
 </resources>

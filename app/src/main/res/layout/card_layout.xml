@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center|top"
     android:layout_margin="20dp"
-    android:minWidth="350dp"
+    android:minWidth="@dimen/_300sdp"
     android:minHeight="80dp"
     app:cardBackgroundColor="@color/disabled_color"
     app:cardCornerRadius="20dp"
@@ -17,16 +17,16 @@
 
 
         <TextView
-            android:id="@+id/clinic_name"
+            android:id="@+id/textview1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/primary_color" />
+            android:textColor="@color/primary_color"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/clinic_phone_number"
+            android:id="@+id/textview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -34,7 +34,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/clinic_address"
+            android:id="@+id/textview3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_acceptdenyappointment"
+    app:startDestination="@id/PendingAppointmentClinicSpecificFragment">
+
+    <fragment
+        android:id="@+id/PendingAppointmentClinicSpecificFragment"
+        android:name="com.example.mediassist.acceptdenyappointment.PendingAppointmentClinicSpecificFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/pending_appointment_clinic_specific_fragment">
+
+        <action
+            android:id="@+id/action_PendingAppointmentClinicSpecificFragment_to_CancelAppointmentClinicSpecificFragment"
+            app:destination="@id/CancelAppointmentClinicSpecificFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CancelAppointmentClinicSpecificFragment"
+        android:name="com.example.mediassist.acceptdenyappointment.CancelAppointmentClinicSpecificFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/cancel_appointment_clinic_specific_fragment">
+        <action
+            android:id="@+id/action_cancel_appointment_clinic_specific_fragment_to_nav_acceptdenyappointment"
+            app:destination="@id/nav_acceptdenyappointment" />
+
+    </fragment>
+</navigation>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "933984857306",
+    "firebase_url": "https://mediassist-d94fe-default-rtdb.firebaseio.com",
+    "project_id": "mediassist-d94fe",
+    "storage_bucket": "mediassist-d94fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933984857306:android:a16ff3870b02b0618d89e3",
+        "android_client_info": {
+          "package_name": "com.example.mediassist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933984857306-i66rueqtvsngtr88j72u0kt6nflctgo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO2UST5q8sRovuf04CZtB__2lT7m6QoSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933984857306-i66rueqtvsngtr88j72u0kt6nflctgo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

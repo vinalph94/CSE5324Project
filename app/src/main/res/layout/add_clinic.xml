@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.3">
+    android:isScrollContainer="true"
+    android:scrollbars="vertical">
+    <!--    android:alpha="0.3"-->
+    <!--    >-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
+
+
         tools:context=".clinic.AddClinicFragment">
 
         <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
@@ -28,6 +33,7 @@
         <TextView
             android:id="@+id/clinic_name_error_text"
             style="@style/default_error_text"
+
             android:text="Clinic name is required" />
 
         <TextView
@@ -55,23 +61,59 @@
         <TextView
             android:id="@+id/clinic_phone_number_error_text"
             style="@style/default_error_text"
+
             android:text="Phone Number is required" />
 
+
         <TextView
-            android:id="@+id/clinic_address_label"
+            android:id="@+id/clinic_street_label"
             style="@style/mandatory_label_text"
-            android:text="Address" />
+            android:text="Street" />
 
         <EditText
-            android:id="@+id/clinic_address_text"
+            android:id="@+id/clinic_street_text"
             style="@style/default_edit_text"
-            android:hint="Address" />
+            android:hint="Street" />
 
         <TextView
-            android:id="@+id/clinic_address_error_text"
+            android:id="@+id/clinic_street_error_text"
             style="@style/default_error_text"
-            android:text="Address is required" />
+            android:text="Street is required" />
 
+
+        <TextView
+            android:id="@+id/clinic_city_label"
+            style="@style/mandatory_label_text"
+            android:text="City" />
+
+
+        <EditText
+            android:id="@+id/clinic_city_text"
+            style="@style/default_edit_text"
+            android:hint="City" />
+
+        <TextView
+            android:id="@+id/clinic_city_error_text"
+            style="@style/default_error_text"
+
+            android:text="City is required" />
+
+        <TextView
+            android:id="@+id/clinic_county_label"
+            style="@style/mandatory_label_text"
+            android:text="County" />
+
+
+        <EditText
+            android:id="@+id/clinic_county_text"
+            style="@style/default_edit_text"
+            android:hint="County" />
+
+        <TextView
+            android:id="@+id/clinic_county_error_text"
+            style="@style/default_error_text"
+
+            android:text="Zipcode is required" />
 
         <TextView
             android:id="@+id/clinic_zipcode_label"
@@ -87,51 +129,71 @@
         <TextView
             android:id="@+id/clinic_zipcode_error_text"
             style="@style/default_error_text"
+
             android:text="Zipcode is required" />
 
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/category_country_label"
+            style="@style/mandatory_label_text"
+            android:text="Select country" />
 
-    <ProgressBar
-        android:id="@+id/clinic_progress_bar"
-        style="@style/default_progress_bar" />
+        <Spinner
+            android:id="@+id/spinner_country"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_spinner_dropdown"
+            android:overlapAnchor="false"
+            app:boxBackgroundColor="@color/disabled_color"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:popupTheme="@style/spinner_menu"></Spinner>
 
-    <Button
-        android:id="@+id/clinic_save_button"
-        style="@style/default_disabled_button"
-        android:text="Save"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/clinic_save_button2"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="80dp"
-            android:maxWidth="35dp"
-            android:text="Save"
-            android:textAlignment="center"
-            app:cornerRadius="100dp" />
+            android:id="@+id/clinic_save_button"
+            style="@style/default_disabled_button"
+            android:text="Save" />
 
-        <Button
-            android:id="@+id/clinic_save_button3"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="80dp"
-            android:maxWidth="35dp"
-            android:text="Delete"
-            android:textAlignment="center"
-            android:backgroundTint="@color/secondary_error_color"
-            android:textColor="@color/error_text_color"
-            app:cornerRadius="100dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
 
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/clinic_edit_button"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="80dp"
+                android:maxWidth="35dp"
+                android:text="Save"
+                android:textAlignment="center"
+                android:backgroundTint="@color/primary_color"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:cornerRadius="100dp" />
+
+            <Button
+                android:id="@+id/clinic_delete_button"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="80dp"
+                android:backgroundTint="@color/secondary_error_color"
+                android:maxWidth="35dp"
+                android:text="Delete"
+                android:textAlignment="center"
+                android:textColor="@color/error_text_color"
+                android:visibility="gone"
+                app:cornerRadius="100dp" />
+
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>
